@@ -1,0 +1,26 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <!-- Headset band -->
+    <path
+        android:fillColor="#000000"
+        android:pathData="M12,3a9,9 0 0 0 -9,9v4a2,2 0 0 0 2,2h1v-6H5a7,7 0 0 1 14,0h-1v6h1a2,2 0 0 0 2,-2v-4a9,9 0 0 0 -9,-9z"/>
+
+    <!-- Left earpiece -->
+    <path
+        android:fillColor="#000000"
+        android:pathData="M4,14v3a1,1 0 0 0 1,1h2v-5H5a1,1 0 0 0 -1,1z"/>
+
+    <!-- Right earpiece -->
+    <path
+        android:fillColor="#000000"
+        android:pathData="M20,14a1,1 0 0 0 -1,-1h-2v5h2a1,1 0 0 0 1,-1v-3z"/>
+
+    <!-- Microphone -->
+    <path
+        android:fillColor="#000000"
+        android:pathData="M12,19h-1a1,1 0 0 0 0,2h1a3,3 0 0 0 3,-3v-1h-2v1a1,1 0 0 1 -1,1z"/>
+</vector>

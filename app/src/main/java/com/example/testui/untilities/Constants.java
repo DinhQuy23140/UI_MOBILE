@@ -1,0 +1,25 @@
+package com.example.testui.untilities;
+
+public class Constants {
+    public static final String KEY_SHARE_PREFERENCE = "TEST_UI_PREFERENCE";
+    public static final String KEY_LOGIN_STATUS = "success";
+    public static final String KEY_MESSAGE = "message";
+    public static final String KEY_TOKEN_TYPE = "token_type";
+    public static final String KEY_ACCESS_TOKEN = "access_token";
+    public static final String KEY_USER_ID = "user_id";
+    public static final String KEY_FULL_NAME = "full_name";
+    public static final String KEY_EMAIL = "email";
+    public static final String KEY_PHONE = "phone";
+    public static final String KEY_ROLE = "role";
+    public static final String KEY_PASSWORD = "password";
+    public static final String KEY_IS_LOGIN = "is_login";
+    public static final String KEY_SAVE_INF = "save_inf";
+    public static final String KEY_DOB = "dob";
+    public static final String KEY_GENDER = "gender";
+    public static final String KEY_IMAGE = "image";
+    public static final String KEY_SUPERVISOR = "supervisor";
+    public static final String KEY_ID_STUDENT = "id_student";
+    public static final String KEY_PROGRESS_LOG = "progress_log";
+    public static final String KEY_PROJECT_ID = "project_id";
+    public static final String KEY_PROJECT_TERM = "project_term";
+}

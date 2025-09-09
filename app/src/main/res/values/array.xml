@@ -1,0 +1,13 @@
+<resources>
+    <string-array name="year_list">
+        <item>2023-2024</item>
+        <item>2024-2025</item>
+        <item>2025-2026</item>
+    </string-array>
+
+    <string-array name="semester_list">
+        <item>Học kì 1</item>
+        <item>Học kì 2</item>
+        <item>Học kì hè</item>
+    </string-array>
+</resources>

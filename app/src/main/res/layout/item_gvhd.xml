@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="12dp"
+        android:gravity="center_vertical">
+
+        <!-- Avatar -->
+        <ImageView
+            android:id="@+id/imgAvatar"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center_horizontal"
+            android:scaleType="centerCrop"
+            android:background="@drawable/ic_user_placeholder"
+            android:layout_marginEnd="12dp" />
+
+        <!-- Thông tin -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvGiangVienName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TS. Nguyễn Văn A"
+                android:textColor="#0A2647"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvHocVi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Học vị: Thạc sĩ"
+                android:textColor="#1A1A1A"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tvDonVi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Khoa Công nghệ thông tin"
+                android:textColor="#1A1A1A"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+
+        <!-- Nút chức năng nhỏ -->
+        <ImageView
+            android:id="@+id/btnDetail"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/baseline_info_outline_24"
+            android:contentDescription="Xem chi tiết" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,728 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    android:orientation="vertical">
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+      <!-- Tiêu đề màn hình -->
+      <TextView
+          android:id="@+id/tv_title"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:gravity="center"
+          android:paddingBottom="12dp"
+          android:text="Chi tiết đợt đồ án"
+          android:textColor="@color/white"
+          android:textSize="22sp"
+          android:textStyle="bold" />
+
+      <!-- Tên đợt -->
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:background="@drawable/bg_info_group"
+          android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_project_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="8dp"
+            android:text="Đợt đồ án: Học kỳ 2 - 2025"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="8dp"
+            android:weightSum="2">
+
+          <TextView
+              android:id="@+id/tv_start_date"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:text="Bắt đầu: 01/03/2025"
+              android:textColor="@color/black"
+              android:textSize="16sp" />
+
+          <TextView
+              android:id="@+id/tv_end_date"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:text="Kết thúc: 20/06/2025"
+              android:textColor="@color/black"
+              android:textSize="16sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="12dp"
+            android:text="Trạng thái: Đang diễn ra"
+            android:textColor="@color/teal_700"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="4dp"
+            android:text="Mô tả:"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="2dp"
+            android:paddingBottom="16dp"
+            android:text="Đợt đồ án này áp dụng cho sinh viên năm cuối thuộc các ngành CNTT, TMĐT, và QTKD."
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+      </LinearLayout>
+
+      <!-- Ngày bắt đầu & kết thúc -->
+
+      <!-- Trạng thái -->
+
+      <!-- Mô tả -->
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:background="@drawable/bg_info_group"
+        android:orientation="vertical">
+
+      <TextView
+          android:id="@+id/textView25"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="5dp"
+          android:text="Tiến độ"
+          android:textSize="16sp"
+          android:textStyle="bold" />
+
+      <androidx.constraintlayout.widget.ConstraintLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="10dp"
+          android:padding="16dp">
+
+        <!-- Số thứ tự -->
+        <TextView
+            android:id="@+id/tvStepNumber1"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_circle_number"
+            android:gravity="center"
+            android:text="1"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Đường dọc timeline -->
+
+        <!-- Nội dung timeline -->
+        <LinearLayout
+            android:id="@+id/timeLineDangKi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tvStepNumber1"
+            app:layout_constraintTop_toTopOf="parent">
+
+          <!-- Tiêu đề -->
+          <TextView
+              android:id="@+id/tvTitle1"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="Đăng kí làm đồ án"
+              android:textColor="@android:color/black"
+              android:textSize="16sp"
+              android:textStyle="bold" />
+
+          <!-- Ngày -->
+          <TextView
+              android:id="@+id/tvDates1"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="01/09/2025 - 10/09/2025"
+              android:textColor="@color/timeline_date"
+              android:textSize="14sp" />
+
+          <!-- Trạng thái -->
+          <TextView
+              android:id="@+id/textView17"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="Nộp đơn đăng kí làm đồ án tốt nghiệp" />
+
+          <TextView
+              android:id="@+id/tvStatus1"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:drawableStart="@drawable/ic_status_inprogress"
+              android:drawablePadding="4dp"
+              android:text="Đang thực hiện"
+              android:textColor="@color/timeline_status_inprogress"
+              android:textSize="14sp"
+              android:textStyle="italic" />
+        </LinearLayout>
+
+      </androidx.constraintlayout.widget.ConstraintLayout>
+
+      <androidx.constraintlayout.widget.ConstraintLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="10dp"
+          android:padding="16dp">
+
+        <!-- Số thứ tự -->
+        <TextView
+            android:id="@+id/tvStepNumber2"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_circle_number"
+            android:gravity="center"
+            android:text="2"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Đường dọc timeline -->
+
+        <!-- Nội dung timeline -->
+        <LinearLayout
+            android:id="@+id/timeLineNopDeCuong"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tvStepNumber2"
+            app:layout_constraintTop_toTopOf="parent">
+
+          <!-- Tiêu đề -->
+          <TextView
+              android:id="@+id/tvTitle2"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="Nộp đề cương đề xuất"
+              android:textColor="@android:color/black"
+              android:textSize="16sp"
+              android:textStyle="bold" />
+
+          <!-- Ngày -->
+          <TextView
+              android:id="@+id/tvDates2"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="01/09/2025 - 10/09/2025"
+              android:textColor="@color/timeline_date"
+              android:textSize="14sp" />
+
+          <!-- Trạng thái -->
+          <TextView
+              android:id="@+id/textView18"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="Nộp đề cương cho đề tài đồ án" />
+
+          <TextView
+              android:id="@+id/tvStatus2"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:drawableStart="@drawable/ic_status_inprogress"
+              android:drawablePadding="4dp"
+              android:text="Đang thực hiện"
+              android:textColor="@color/timeline_status_inprogress"
+              android:textSize="14sp"
+              android:textStyle="italic" />
+        </LinearLayout>
+
+      </androidx.constraintlayout.widget.ConstraintLayout>
+
+      <androidx.constraintlayout.widget.ConstraintLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="10dp"
+          android:padding="16dp">
+
+        <!-- Số thứ tự -->
+        <TextView
+            android:id="@+id/tvStepNumber3"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_circle_number"
+            android:gravity="center"
+            android:text="3"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Đường dọc timeline -->
+
+        <!-- Nội dung timeline -->
+        <LinearLayout
+            android:id="@+id/timeLineThucHienHP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tvStepNumber3"
+            app:layout_constraintTop_toTopOf="parent">
+
+          <!-- Tiêu đề -->
+          <TextView
+              android:id="@+id/tvTitle3"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="Thực hiện học phần tốt nghiệp"
+              android:textColor="@android:color/black"
+              android:textSize="16sp"
+              android:textStyle="bold" />
+
+          <!-- Ngày -->
+          <TextView
+              android:id="@+id/tvDates3"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="01/09/2025 - 10/09/2025"
+              android:textColor="@color/timeline_date"
+              android:textSize="14sp" />
+
+          <!-- Trạng thái -->
+          <TextView
+              android:id="@+id/textView19"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:text="Thực hiện làm đồ án tốt nghiệp" />
+
+          <TextView
+              android:id="@+id/tvStatus3"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:drawableStart="@drawable/ic_status_inprogress"
+              android:drawablePadding="4dp"
+              android:text="Đang thực hiện"
+              android:textColor="@color/timeline_status_inprogress"
+              android:textSize="14sp"
+              android:textStyle="italic" />
+        </LinearLayout>
+
+      </androidx.constraintlayout.widget.ConstraintLayout>
+
+      <androidx.constraintlayout.widget.ConstraintLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="10dp"
+          android:padding="16dp">
+
+        <!-- Số thứ tự -->
+        <TextView
+            android:id="@+id/tvStepNumber4"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_circle_number"
+            android:gravity="center"
+            android:text="4"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Đường dọc timeline -->
+
+        <!-- Nội dung timeline -->
+        <LinearLayout
+            android:id="@+id/timeLineNopBaoCao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tvStepNumber4"
+            app:layout_constraintTop_toTopOf="parent">
+
+          <!-- Tiêu đề -->
+          <TextView
+              android:id="@+id/tvTitle4"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="Nộp báo cáo đồ án"
+              android:textColor="@android:color/black"
+              android:textSize="16sp"
+              android:textStyle="bold" />
+
+          <!-- Ngày -->
+          <TextView
+              android:id="@+id/tvDates4"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="01/09/2025 - 10/09/2025"
+              android:textColor="@color/timeline_date"
+              android:textSize="14sp" />
+
+          <!-- Trạng thái -->
+          <TextView
+              android:id="@+id/textView20"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="Nộp báo cáo đồ án tốt nghiệp" />
+
+          <TextView
+              android:id="@+id/tvStatus4"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:drawableStart="@drawable/ic_status_inprogress"
+              android:drawablePadding="4dp"
+              android:text="Đang thực hiện"
+              android:textColor="@color/timeline_status_inprogress"
+              android:textSize="14sp"
+              android:textStyle="italic" />
+        </LinearLayout>
+
+      </androidx.constraintlayout.widget.ConstraintLayout>
+
+      <androidx.constraintlayout.widget.ConstraintLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="10dp"
+          android:padding="16dp">
+
+        <!-- Số thứ tự -->
+        <TextView
+            android:id="@+id/tvStepNumber5"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_circle_number"
+            android:gravity="center"
+            android:text="5"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Đường dọc timeline -->
+
+        <!-- Nội dung timeline -->
+        <LinearLayout
+            android:id="@+id/timelineContent5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tvStepNumber5"
+            app:layout_constraintTop_toTopOf="parent">
+
+          <!-- Tiêu đề -->
+          <TextView
+              android:id="@+id/tvTitle5"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="Tra cứu hội đồng bảo vệ"
+              android:textColor="@android:color/black"
+              android:textSize="16sp"
+              android:textStyle="bold" />
+
+          <!-- Ngày -->
+          <TextView
+              android:id="@+id/tvDates5"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="01/09/2025 - 10/09/2025"
+              android:textColor="@color/timeline_date"
+              android:textSize="14sp" />
+
+          <!-- Trạng thái -->
+          <TextView
+              android:id="@+id/textView21"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:text="Tra cứu hội đồng chấm phản biện và bảo vệ đồ án" />
+
+          <TextView
+              android:id="@+id/tvStatus5"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:drawableStart="@drawable/ic_status_inprogress"
+              android:drawablePadding="4dp"
+              android:text="Đang thực hiện"
+              android:textColor="@color/timeline_status_inprogress"
+              android:textSize="14sp"
+              android:textStyle="italic" />
+        </LinearLayout>
+
+      </androidx.constraintlayout.widget.ConstraintLayout>
+
+      <androidx.constraintlayout.widget.ConstraintLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="10dp"
+          android:padding="16dp">
+
+        <!-- Số thứ tự -->
+        <TextView
+            android:id="@+id/tvStepNumber6"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_circle_number"
+            android:gravity="center"
+            android:text="6"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Đường dọc timeline -->
+
+        <!-- Nội dung timeline -->
+        <LinearLayout
+            android:id="@+id/timelineContent6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tvStepNumber6"
+            app:layout_constraintTop_toTopOf="parent">
+
+          <!-- Tiêu đề -->
+          <TextView
+              android:id="@+id/tvTitle6"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="Chấm phản biện đồ án"
+              android:textColor="@android:color/black"
+              android:textSize="16sp"
+              android:textStyle="bold" />
+
+          <!-- Ngày -->
+          <TextView
+              android:id="@+id/tvDates6"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="01/09/2025 - 10/09/2025"
+              android:textColor="@color/timeline_date"
+              android:textSize="14sp" />
+
+          <!-- Trạng thái -->
+          <TextView
+              android:id="@+id/textView22"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="Tra cứu thông tin phản biện đồ án" />
+
+          <TextView
+              android:id="@+id/tvStatus6"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:drawableStart="@drawable/ic_status_inprogress"
+              android:drawablePadding="4dp"
+              android:text="Đang thực hiện"
+              android:textColor="@color/timeline_status_inprogress"
+              android:textSize="14sp"
+              android:textStyle="italic" />
+        </LinearLayout>
+
+      </androidx.constraintlayout.widget.ConstraintLayout>
+
+      <androidx.constraintlayout.widget.ConstraintLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="10dp"
+          android:padding="16dp">
+
+        <!-- Số thứ tự -->
+        <TextView
+            android:id="@+id/tvStepNumber7"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_circle_number"
+            android:gravity="center"
+            android:text="7"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Đường dọc timeline -->
+
+        <!-- Nội dung timeline -->
+        <LinearLayout
+            android:id="@+id/timelineContent7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tvStepNumber7"
+            app:layout_constraintTop_toTopOf="parent">
+
+          <!-- Tiêu đề -->
+          <TextView
+              android:id="@+id/tvTitle7"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="Tra cứu kết quả phản biện"
+              android:textColor="@android:color/black"
+              android:textSize="16sp"
+              android:textStyle="bold" />
+
+          <!-- Ngày -->
+          <TextView
+              android:id="@+id/tvDates7"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="01/09/2025 - 10/09/2025"
+              android:textColor="@color/timeline_date"
+              android:textSize="14sp" />
+
+          <!-- Trạng thái -->
+          <TextView
+              android:id="@+id/textView23"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:ellipsize="end"
+              android:maxLines="2"
+              android:text="Tra cứu kết quả phản biện đồ án tốt nghiệp" />
+
+          <TextView
+              android:id="@+id/tvStatus7"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:drawableStart="@drawable/ic_status_inprogress"
+              android:drawablePadding="4dp"
+              android:text="Đang thực hiện"
+              android:textColor="@color/timeline_status_inprogress"
+              android:textSize="14sp"
+              android:textStyle="italic" />
+        </LinearLayout>
+
+      </androidx.constraintlayout.widget.ConstraintLayout>
+
+      <androidx.constraintlayout.widget.ConstraintLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="10dp"
+          android:padding="16dp">
+
+        <!-- Số thứ tự -->
+        <TextView
+            android:id="@+id/tvStepNumber8"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_circle_number"
+            android:gravity="center"
+            android:text="8"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Đường dọc timeline -->
+
+        <!-- Nội dung timeline -->
+        <LinearLayout
+            android:id="@+id/timelineContent8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tvStepNumber8"
+            app:layout_constraintTop_toTopOf="parent">
+
+          <!-- Tiêu đề -->
+          <TextView
+              android:id="@+id/tvTitle"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="Bảo vệ đồ án"
+              android:textColor="@android:color/black"
+              android:textSize="16sp"
+              android:textStyle="bold" />
+
+          <!-- Ngày -->
+          <TextView
+              android:id="@+id/tvDates"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="01/09/2025 - 10/09/2025"
+              android:textColor="@color/timeline_date"
+              android:textSize="14sp" />
+
+          <!-- Trạng thái -->
+          <TextView
+              android:id="@+id/textView24"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="Tra cứu thông tin bảo vệ đồ án" />
+
+          <TextView
+              android:id="@+id/tvStatus"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:drawableStart="@drawable/ic_status_inprogress"
+              android:drawablePadding="4dp"
+              android:text="Đang thực hiện"
+              android:textColor="@color/timeline_status_inprogress"
+              android:textSize="14sp"
+              android:textStyle="italic" />
+        </LinearLayout>
+
+      </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
+  </LinearLayout>
+</ScrollView>

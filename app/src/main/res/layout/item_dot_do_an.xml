@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="12dp">
+
+        <!-- Tên đợt đồ án -->
+        <TextView
+            android:id="@+id/tvTenDot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Đợt đồ án học kỳ 1 - Năm 2025"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"/>
+
+        <!-- Thời gian -->
+        <TextView
+            android:id="@+id/tvThoiGian"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Thời gian: 01/07/2025 - 30/09/2025"
+            android:textSize="14sp"
+            android:textColor="@android:color/darker_gray"
+            android:layout_marginTop="4dp"/>
+
+        <!-- Giai đoạn -->
+        <TextView
+            android:id="@+id/tvStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="4dp"
+            android:text="Trạng thái: "
+            android:textColor="@android:color/holo_blue_dark"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

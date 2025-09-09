@@ -1,0 +1,17 @@
+package com.example.testui.client;
+
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
+public class SupabaseClient {
+    public static Retrofit retrofit;
+    public static Retrofit getInstance(String url) {
+        if (retrofit == null) {
+            retrofit = new Retrofit.Builder()
+                    .baseUrl(url)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+        }
+        return retrofit;
+    }
+}

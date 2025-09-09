@@ -1,0 +1,77 @@
+package com.example.testui.model;
+
+public class Supervisor {
+    String id;
+    String teacher_id;
+    int max_students;
+    String project_term_id;
+    String expertise;
+    Teacher teacher;
+    String status;
+
+    public Supervisor(String id, String expertise, int max_students, String project_term_id, String status, Teacher teacher, String teacher_id) {
+        this.id = id;
+        this.expertise = expertise;
+        this.max_students = max_students;
+        this.project_term_id = project_term_id;
+        this.status = status;
+        this.teacher = teacher;
+        this.teacher_id = teacher_id;
+    }
+
+    public String getExpertise() {
+        return expertise;
+    }
+
+    public void setExpertise(String expertise) {
+        this.expertise = expertise;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public int getMax_students() {
+        return max_students;
+    }
+
+    public void setMax_students(int max_students) {
+        this.max_students = max_students;
+    }
+
+    public String getProject_term_id() {
+        return project_term_id;
+    }
+
+    public void setProject_term_id(String project_term_id) {
+        this.project_term_id = project_term_id;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
+    }
+
+    public String getTeacher_id() {
+        return teacher_id;
+    }
+
+    public void setTeacher_id(String teacher_id) {
+        this.teacher_id = teacher_id;
+    }
+}

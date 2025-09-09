@@ -1,0 +1,19 @@
+<!-- res/drawable/about_us.xml -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <!-- Vòng tròn ngoài -->
+    <path
+        android:fillColor="#ACDFF6"
+        android:pathData="M12,2a10,10 0 1,0 0,20a10,10 0 1,0 0,-20z" />
+
+    <!-- Chữ i -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M12,7a1.2,1.2 0 1,1 0,-2.4a1.2,1.2 0 1,1 0,2.4z
+                          M11,10h2v8h-2v-8z" />
+
+</vector>

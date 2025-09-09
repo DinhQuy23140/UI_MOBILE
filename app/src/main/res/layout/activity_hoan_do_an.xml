@@ -1,0 +1,207 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!-- Tiêu đề -->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/topbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/imageView5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/ic_back_white" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Đơn Hoãn Đồ Án Tốt Nghiệp"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/size_text_title"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <!-- Thông tin sinh viên -->
+                    <LinearLayout
+                        android:id="@+id/thong_tin_sinh_vien"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/bg_info_group"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textView5"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Thông tin sinh viên"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            style="@style/LabelText"
+                            android:text="Mã sinh viên" />
+
+                        <TextView
+                            android:id="@+id/tvStudentId"
+                            style="@style/ValueText"
+                            android:text="B20DCC001" />
+
+                        <TextView
+                            style="@style/LabelText"
+                            android:text="Tên sinh viên" />
+
+                        <TextView
+                            android:id="@+id/tvStudentName"
+                            style="@style/ValueText"
+                            android:text="Nguyễn Văn A" />
+
+                        <TextView
+                            style="@style/LabelText"
+                            android:text="Lớp" />
+
+                        <TextView
+                            android:id="@+id/tvClass"
+                            style="@style/ValueText"
+                            android:text="D20CQCN01-B" />
+
+                        <TextView
+                            style="@style/LabelText"
+                            android:text="Khoa" />
+
+                        <TextView
+                            android:id="@+id/tvFaculty"
+                            style="@style/ValueText"
+                            android:text="Công nghệ thông tin" />
+
+                    </LinearLayout>
+
+                    <!-- Thông tin đồ án -->
+                    <LinearLayout
+                        android:id="@+id/thong_tin_do_an"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/bg_info_group"
+                        android:orientation="vertical">
+
+                        <TextView
+                            style="@style/LabelText"
+                            android:text="Tên đề tài" />
+
+                        <TextView
+                            android:id="@+id/tvThesisTitle"
+                            style="@style/ValueText"
+                            android:text="Xây dựng ứng dụng quản lý điểm sinh viên" />
+
+                        <TextView
+                            style="@style/LabelText"
+                            android:text="Giáo viên hướng dẫn" />
+
+                        <TextView
+                            android:id="@+id/tvSupervisor"
+                            style="@style/ValueText"
+                            android:text="TS. Trần Văn B" />
+
+                        <TextView
+                            style="@style/LabelText"
+                            android:text="Kỳ đồ án tốt nghiệp" />
+
+                        <TextView
+                            android:id="@+id/tvSemester"
+                            style="@style/ValueText"
+                            android:text="Học kỳ 2" />
+
+                        <TextView
+                            style="@style/LabelText"
+                            android:text="Năm học" />
+
+                        <TextView
+                            android:id="@+id/tvAcademicYear"
+                            style="@style/ValueText"
+                            android:text="2024 - 2025" />
+
+                    </LinearLayout>
+
+                    <!-- Lý do hoãn -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/bg_info_group"
+                        android:orientation="vertical">
+
+                        <TextView
+                            style="@style/LabelText"
+                            android:text="Lý do hoãn đồ án tốt nghiệp" />
+
+                        <EditText
+                            android:id="@+id/tvReason"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="16dp"
+                            android:background="#F5F5F5"
+                            android:padding="8dp"
+                            android:text="Sinh viên đang điều trị bệnh dài ngày và có xác nhận của bệnh viện."
+                            android:textColor="#444444"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <!-- Nút xác nhận hoặc quay lại -->
+
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/primaryColor"
+            android:text="Xác nhận"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+</LinearLayout>

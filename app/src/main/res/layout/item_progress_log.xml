@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="12dp">
+
+        <!-- Tiêu đề công việc -->
+        <TextView
+            android:id="@+id/tvTaskTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Thiết kế CSDL"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"/>
+
+        <!-- Ngày bắt đầu và kết thúc -->
+        <TextView
+            android:id="@+id/tvTaskDateRange"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Từ ngày: 25/07/2025 đến 29/07/2025"
+            android:textSize="14sp"
+            android:textColor="@android:color/darker_gray"
+            android:layout_marginTop="2dp"/>
+
+        <!-- Mô tả -->
+        <TextView
+            android:id="@+id/tvTaskDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hoàn thành mô hình ERD và các bảng chính"
+            android:textSize="14sp"
+            android:layout_marginTop="4dp"/>
+
+        <!-- File đính kèm -->
+        <TextView
+            android:id="@+id/tvAttachment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="File: db_schema.pdf"
+            android:textColor="@android:color/holo_blue_dark"
+            android:textStyle="italic"
+            android:layout_marginTop="4dp"
+            android:visibility="gone" />
+
+        <!-- Trạng thái và nhận xét -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="6dp">
+
+            <TextView
+                android:id="@+id/tvTaskStatus"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Trạng thái: Đã hoàn thành"
+                android:textColor="@android:color/holo_green_dark"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/tvFeedback"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="✔ Đạt"
+                android:textColor="@android:color/holo_blue_dark"
+                android:textSize="14sp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

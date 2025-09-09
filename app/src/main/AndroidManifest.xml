@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.TestUI"
+        tools:targetApi="31">
+        <activity
+            android:name=".activities.DangKiGVHDActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.DanhSachDotDoAnActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.NopBaoCaoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.TimeLineActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.HomeActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activities.ErrorStatusActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.SuccessStatusActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ForgotPassActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.LoginActivity"
+            android:exported="true"
+            android:label="@string/title_activity_login">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.StartActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.TraCuuDiemActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.TraCuuHoiDongActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.HoanDoAnActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.GVHDActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ThongTinBaoCaoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.NopDeCuongActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ChiTietDoAnActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ThucHienDoAnActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.DangKiDoAnActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.CapNhapThongTinActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ProgressLogDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.CreateLogActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ProgressLogActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activities.ExamDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.AddExamActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.MainActivity"
+            android:exported="true" />
+    </application>
+
+</manifest>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Lớp 1: hình tròn nền -->
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="#BDBDBD" /> <!-- Màu nền xám nhạt -->
+        </shape>
+    </item>
+
+    <!-- Lớp 2: icon người dùng ở giữa -->
+    <item android:gravity="center">
+        <vector
+            android:width="36dp"
+            android:height="36dp"
+            android:viewportWidth="24"
+            android:viewportHeight="24">
+        <!-- Đầu -->
+        <path
+            android:fillColor="#FFFFFFFF"
+            android:pathData="M12,12a4,4 0 1,0 0,-8a4,4 0 0,0 0,8z" />
+        <!-- Vai và thân -->
+        <path
+            android:fillColor="#FFFFFFFF"
+            android:pathData="M12,14c-4.42,0 -8,1.79 -8,4v2h16v-2c0,-2.21 -3.58,-4 -8,-4z" />
+    </vector>
+</item>
+
+    </layer-list>

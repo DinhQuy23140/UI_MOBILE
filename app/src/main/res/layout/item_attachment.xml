@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    card_view:cardCornerRadius="12dp"
+    card_view:cardElevation="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="12dp"
+        android:gravity="center_vertical">
+
+        <!-- Icon theo file_type -->
+        <ImageView
+            android:id="@+id/imgFileType"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_file" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginStart="12dp">
+
+            <!-- Tên file -->
+            <TextView
+                android:id="@+id/tvFileName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="rerum deleniti.nfo"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="@android:color/black" />
+
+            <!-- Đường dẫn file -->
+            <TextView
+                android:id="@+id/tvFileUrl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="http://trantow.info/"
+                android:textSize="14sp"
+                android:textColor="@android:color/holo_blue_dark" />
+
+            <!-- Thời gian upload -->
+            <TextView
+                android:id="@+id/tvUploadTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="595353676"
+                android:textSize="12sp"
+                android:textColor="@android:color/darker_gray" />
+
+        </LinearLayout>
+
+        <!-- Nút tải xuống -->
+        <ImageButton
+            android:id="@+id/btn_delete"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@drawable/ic_download"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/download" />
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

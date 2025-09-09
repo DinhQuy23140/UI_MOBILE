@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Chi tiết đề cương"
+            android:textColor="@color/white"
+            android:textSize="@dimen/size_text_title"
+            android:textStyle="bold" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <!-- Nhóm 1: Thông tin đề tài -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/bg_info_group"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:id="@+id/tvTitleDeTai"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="📘 Thông tin đề tài"
+                            android:textColor="#1976D2"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvTenDeTai"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Tên đề tài: Ứng dụng quản lý đề tài sinh viên"
+                            android:textColor="#333333"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/bg_info_group"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:id="@+id/tvTitleFile"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="📄 File đề cương"
+                            android:textColor="#1976D2"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/imgFileIcon"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:contentDescription="Biểu tượng tệp"
+                                android:scaleType="centerInside"
+                                android:src="@drawable/ic_file"
+                                android:tint="#1976D2" />
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="12dp"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/tvFileName"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="DeCuongLan2.pdf"
+                                    android:textColor="#222222"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/tvFileDate"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:text="Nộp ngày: 02/08/2025"
+                                    android:textColor="#666666"
+                                    android:textSize="12sp" />
+                            </LinearLayout>
+
+                            <ImageButton
+                                android:id="@+id/btn_delete"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:contentDescription="Tải xuống"
+                                android:src="@drawable/ic_download"
+                                android:tint="#1976D2" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tvTrangThai"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Trạng thái: Đang chờ phản hồi"
+                            android:textColor="#FF9800"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/bg_info_group"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:id="@+id/tvTitleComment"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="8dp"
+                            android:text="📝 Nhận xét từ giảng viên"
+                            android:textColor="#1976D2"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <!-- item_comment.xml -->
+                        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="12dp"
+                            android:background="@drawable/bg_comment_item"
+                            android:elevation="2dp"
+                            android:orientation="vertical"
+                            android:padding="12dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="GV: Nguyễn Văn A"
+                                android:textColor="#0A2647"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/tvCommentContent"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="6dp"
+                                android:text="Cần bổ sung thêm phần mô tả chi tiết về kiến trúc hệ thống."
+                                android:textColor="#1A1A1A"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:id="@+id/tvCommentTime"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="6dp"
+                                android:text="02/08/2025 14:30"
+                                android:textColor="#666666"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+                        <!-- Thêm dưới phần LinearLayout chứa các comment -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="12dp"
+                            android:background="@drawable/bg_comment_item"
+                            android:elevation="2dp"
+                            android:orientation="vertical"
+                            android:padding="12dp">
+
+                            <TextView
+                                android:id="@+id/tvCommentAuthor"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="GV: Trần Thị B"
+                                android:textColor="#0A2647"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="6dp"
+                                android:text="Phần đánh giá chưa làm rõ các tiêu chí kỹ thuật. Cần bổ sung."
+                                android:textColor="#1A1A1A"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="6dp"
+                                android:text="03/08/2025 09:15"
+                                android:textColor="#666666"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="?android:attr/dividerHorizontal"
+        android:dividerPadding="8dp"
+        android:orientation="vertical"
+        android:showDividers="middle">
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/primaryColor"
+            android:icon="@drawable/ic_upload"
+            android:text="Thoát"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            app:cornerRadius="12dp"
+            app:icon="@drawable/success_check_win_done_mark_good_svgrepo_com"
+            app:iconPadding="8dp"
+            app:iconTint="@android:color/white" />
+    </LinearLayout>
+</LinearLayout>

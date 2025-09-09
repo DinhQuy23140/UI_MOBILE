@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:padding="16dp">
+
+    <!-- Nhập nội dung câu trả lời -->
+    <EditText
+        android:id="@+id/edtAnswerContent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@android:color/darker_gray"
+        android:hint="Nhập nội dung câu trả lời"
+        android:inputType="textMultiLine"
+        android:textColor="@android:color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Check đáp án đúng -->
+    <CheckBox
+        android:id="@+id/checkboxIsCorrect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Là đáp án đúng"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edtAnswerContent" />
+
+    <!-- Ảnh minh họa -->
+    <FrameLayout
+        android:id="@+id/frameLayout2"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/checkboxIsCorrect">
+
+        <ImageView
+            android:id="@+id/imgAnswer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#DDDDDD"
+            android:contentDescription="Ảnh câu trả lời"
+            android:scaleType="centerCrop" />
+
+        <ImageButton
+            android:id="@+id/btnRemoveAnswerImage"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="top|end"
+            android:layout_margin="8dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="Xóa ảnh"
+            android:src="@android:drawable/ic_menu_close_clear_cancel"
+            android:tint="@android:color/black"
+            android:visibility="visible" />
+    </FrameLayout>
+
+
+    <!-- Nút chọn ảnh -->
+    <Button
+        android:id="@+id/btnAddAnswerImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Chọn ảnh"
+        android:textAllCaps="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout2" />
+
+    <!-- Nút lưu -->
+    <Button
+        android:id="@+id/btnSaveAnswer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Lưu"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout2" />
+
+    <!-- Nút xóa -->
+    <Button
+        android:id="@+id/btnDeleteAnswer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:backgroundTint="@android:color/holo_red_light"
+        android:text="Xóa câu trả lời"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnSaveAnswer" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
