@@ -76,6 +76,42 @@
                 android:hint="Nhập hoặc chọn giảng viên"
                 android:inputType="textPersonName" />
 
+            <TextView
+                style="@style/FormLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Thứ tự giảng viên" />
+
+            <RadioGroup
+                android:id="@+id/radioGroupLoai"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="15dp"
+                android:padding="8dp"
+                android:background="@drawable/bg_edittext"
+                android:gravity="center_vertical">
+
+                <RadioButton
+                    android:id="@+id/radioMain"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Main"
+                    android:textColor="#0A2647"
+                    android:padding="8dp"/>
+
+                <RadioButton
+                    android:id="@+id/radioCoo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Coo"
+                    android:textColor="#0A2647"
+                    android:padding="8dp"
+                    android:layout_marginStart="16dp"/>
+            </RadioGroup>
+
+
             <!-- Label: Tên đề tài -->
             <TextView
                 style="@style/FormLabel"
@@ -84,32 +120,16 @@
                 android:layout_marginTop="16dp"
                 android:text="Tên đề tài" />
 
-            <EditText
-                android:id="@+id/edtTenDeTai"
-                style="@style/FormInput"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_edittext"
-                android:hint="Nhập tên đề tài" />
-
-            <!-- Label: Mô tả đề tài -->
             <TextView
-                style="@style/FormLabel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Mô tả đề tài" />
-
-            <EditText
-                android:id="@+id/edtMoTaDeTai"
+                android:id="@+id/tvTenDeTai"
                 style="@style/FormInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_edittext"
-                android:gravity="top"
-                android:hint="Nhập mô tả đề tài"
-                android:inputType="textMultiLine"
-                android:minLines="4" />
+                android:padding="12dp"
+                android:layout_marginTop="10dp"
+                android:text="Tên đề tài sẽ hiển thị ở đây"
+                android:textColor="@color/black" />
 
             <!-- Cam kết -->
             <CheckBox

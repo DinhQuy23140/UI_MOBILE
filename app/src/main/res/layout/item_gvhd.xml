@@ -4,15 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
+    android:padding="8dp"
     app:cardCornerRadius="12dp"
     app:cardElevation="4dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="12dp"
-        android:gravity="center_vertical">
+        android:padding="12dp">
 
         <!-- Avatar -->
         <ImageView
@@ -20,9 +21,9 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_gravity="center_horizontal"
-            android:scaleType="centerCrop"
+            android:layout_marginEnd="12dp"
             android:background="@drawable/ic_user_placeholder"
-            android:layout_marginEnd="12dp" />
+            android:scaleType="centerCrop" />
 
         <!-- Thông tin -->
         <LinearLayout
@@ -63,8 +64,8 @@
             android:id="@+id/btnDetail"
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:src="@drawable/baseline_info_outline_24"
-            android:contentDescription="Xem chi tiết" />
+            android:contentDescription="Xem chi tiết"
+            android:src="@drawable/baseline_info_outline_24" />
 
     </LinearLayout>
 

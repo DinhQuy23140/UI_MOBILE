@@ -22,6 +22,7 @@ import com.example.testui.adapter.ProcessLogAdapter;
 import com.example.testui.databinding.ActivityChiTietDoAnBinding;
 import com.example.testui.interfaces.OnClickItem;
 import com.example.testui.model.Assignment;
+import com.example.testui.model.AssignmentSupervisor;
 import com.example.testui.model.Supervisor;
 import com.example.testui.untilities.Constants;
 import com.google.gson.Gson;
@@ -65,7 +66,7 @@ public class ChiTietDoAnActivity extends AppCompatActivity {
             @Override
             public void onClickItem(int position) {
                 Intent intent = new Intent(ChiTietDoAnActivity.this, GVHDActivity.class);
-                intent.putExtra(Constants.KEY_SUPERVISOR, new Gson().toJson(assignment.getSupervisors().get(position)));
+                intent.putExtra(Constants.KEY_SUPERVISOR, new Gson().toJson(assignment.getAssignment_supervisors().get(position).getSupervisor()));
                 startActivity(intent);
             }
         });
@@ -83,9 +84,13 @@ public class ChiTietDoAnActivity extends AppCompatActivity {
                 if (!assignment.getProject().getProgress_logs().isEmpty()) {
                     processLogAdapter.updateData(assignment.getProject().getProgress_logs());
                 }
-                Log.d("Supervisor", String.valueOf(assignment.getSupervisors().size()));
-                if (!assignment.getSupervisors().isEmpty()) {
-                    gvhdAdapter.updateData(assignment.getSupervisors());
+                Log.d("Supervisor", String.valueOf(assignment.getAssignment_supervisors().size()));
+                if (!assignment.getAssignment_supervisors().isEmpty()) {
+                    List<Supervisor> convertSupervisor = new ArrayList<>();
+                    for (AssignmentSupervisor assignmentSupervisor : assignment.getAssignment_supervisors()) {
+                        convertSupervisor.add(assignmentSupervisor.getSupervisor());
+                    }
+                    gvhdAdapter.updateData(convertSupervisor);
                 }
 
             }

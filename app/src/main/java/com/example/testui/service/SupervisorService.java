@@ -10,7 +10,7 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
-public interface Supervisor {
+public interface SupervisorService {
     //supervisor
     @GET("supervisors")
     Call<List<com.example.testui.model.Supervisor>> getAllSuperVisor();
@@ -26,4 +26,7 @@ public interface Supervisor {
 
     @DELETE("supervisors/{supervisorId}")
     Call<com.example.testui.model.Supervisor> deleteSuperVisor(@Path("supervisorId") String supervisorId);
+
+    @GET("supervisors/project-term/{projectTermId}")
+    Call<List<com.example.testui.model.Supervisor>> getSuperVisorByProjectTermId(@Path("projectTermId") String projectTermId);
 }

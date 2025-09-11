@@ -150,7 +150,7 @@
                     android:text="Tên đề tài" />
 
                 <TextView
-                    android:id="@+id/textView36"
+                    android:id="@+id/tvTenDeTai"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
@@ -165,7 +165,7 @@
                     android:text="Mô tả" />
 
                 <TextView
-                    android:id="@+id/textView38"
+                    android:id="@+id/tvDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Mô tả về đề tài" />

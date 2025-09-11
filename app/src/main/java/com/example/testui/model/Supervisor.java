@@ -74,4 +74,13 @@ public class Supervisor {
     public void setTeacher_id(String teacher_id) {
         this.teacher_id = teacher_id;
     }
+
+    @Override
+    public String toString() {
+        if (teacher != null && teacher.getUser() != null) {
+            return teacher.getUser().getFullname(); // tên giảng viên
+        }
+        return super.toString();
+    }
+
 }

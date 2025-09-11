@@ -27,4 +27,7 @@ public interface AssignmentService {
 
     @DELETE("assignments/{assignmentId}")
     Call<Assignment> deleteAssignment(@Path("assignmentId") String assignmentId);
+
+    @GET("assignments/student/{studentId}/project-term/{projectTermId}")
+    Call<Assignment> getAssignmentByStudentIdAndTermId(@Path("studentId") String studentId, @Path("projectTermId") String projectTermId);
 }

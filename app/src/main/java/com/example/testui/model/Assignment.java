@@ -4,39 +4,33 @@ import java.util.List;
 
 public class Assignment {
     String id;
-    String batch_student_id;
+    String student_id;
     String project_id;
+    String project_term_id;
     String status;
     String role;
-    BatchStudent batch_student;
-    List<Supervisor> supervisors;
+    Student student;
+    List<AssignmentSupervisor> assignment_supervisors;
     Project project;
 
-    public Assignment(BatchStudent batch_student, String batch_student_id, String id, Project project, String project_id, String role, String status, List<Supervisor> supervisors) {
-        this.batch_student = batch_student;
-        this.batch_student_id = batch_student_id;
+    public Assignment(List<AssignmentSupervisor> assignment_supervisors, String id, Project project, String project_id, String project_term_id, String role, String status, Student student, String student_id) {
+        this.assignment_supervisors = assignment_supervisors;
         this.id = id;
         this.project = project;
         this.project_id = project_id;
+        this.project_term_id = project_term_id;
         this.role = role;
         this.status = status;
-        this.supervisors = supervisors;
+        this.student = student;
+        this.student_id = student_id;
     }
 
-    public BatchStudent getBatch_student() {
-        return batch_student;
+    public List<AssignmentSupervisor> getAssignment_supervisors() {
+        return assignment_supervisors;
     }
 
-    public void setBatch_student(BatchStudent batch_student) {
-        this.batch_student = batch_student;
-    }
-
-    public String getBatch_student_id() {
-        return batch_student_id;
-    }
-
-    public void setBatch_student_id(String batch_student_id) {
-        this.batch_student_id = batch_student_id;
+    public void setAssignment_supervisors(List<AssignmentSupervisor> assignment_supervisors) {
+        this.assignment_supervisors = assignment_supervisors;
     }
 
     public String getId() {
@@ -63,6 +57,14 @@ public class Assignment {
         this.project_id = project_id;
     }
 
+    public String getProject_term_id() {
+        return project_term_id;
+    }
+
+    public void setProject_term_id(String project_term_id) {
+        this.project_term_id = project_term_id;
+    }
+
     public String getRole() {
         return role;
     }
@@ -79,11 +81,19 @@ public class Assignment {
         this.status = status;
     }
 
-    public List<Supervisor> getSupervisors() {
-        return supervisors;
+    public Student getStudent() {
+        return student;
     }
 
-    public void setSupervisors(List<Supervisor> supervisors) {
-        this.supervisors = supervisors;
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+
+    public String getStudent_id() {
+        return student_id;
+    }
+
+    public void setStudent_id(String student_id) {
+        this.student_id = student_id;
     }
 }
