@@ -5,9 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F9F9F9"
-    tools:context=".activities.DangKiDoAnActivity">
-
+    tools:context=".activities.DangKiDetaiActivity">
     <!-- TopBar -->
     <LinearLayout
         android:id="@+id/topBar"
@@ -35,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Đăng ký đồ án"
+            android:text="Đăng ký đề tài"
             android:textColor="@android:color/black"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -149,31 +147,15 @@
                     android:layout_marginTop="16dp"
                     android:text="Tên đề tài" />
 
-                <LinearLayout
+                <EditText
+                    android:id="@+id/edtTenDeTai"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/tvTenDeTai"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:layout_weight="1"
-                        android:text="Tên của đề tài" />
-
-                    <TextView
-                        android:id="@+id/tv_dkdt"
-                        android:layout_width="80dp"
-                        android:layout_height="30dp"
-                        android:background="@drawable/bg_button"
-                        android:gravity="center"
-                        android:text="Đăng kí đề tài"
-                        android:textColor="@color/white"
-                        android:textSize="10sp"
-                        android:textStyle="bold"
-                        app:cornerRadius="5dp" />
-                </LinearLayout>
+                    android:layout_height="40dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/bg_edittext"
+                    android:hint="Tên của đề tài"
+                    android:paddingStart="10dp"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/textView37"
@@ -183,26 +165,14 @@
                     android:layout_marginTop="10dp"
                     android:text="Mô tả" />
 
-                <TextView
-                    android:id="@+id/tvDescription"
+                <EditText
+                    android:id="@+id/edtDescription"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Mô tả về đề tài" />
-
-                <TextView
-                    android:id="@+id/textView39"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    style="@style/FormLabel"
-                    android:layout_marginTop="10dp"
-                    android:text="Danh sách giảng viên hướng dẫn" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_supervisor"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="5dp"
-                    tools:listitem="@layout/item_gvhd"/>
+                    android:layout_height="80dp"
+                    android:background="@drawable/bg_edittext"
+                    android:hint="Mô tả về đề tài"
+                    android:paddingStart="10dp"
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <!-- Nút Đăng ký -->
@@ -210,34 +180,16 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnDangKyGVHD"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="16dp"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginBottom="32dp"
-                    android:layout_weight="1"
-                    android:backgroundTint="@color/primaryColor"
-                    android:icon="@drawable/ic_check"
-                    android:iconTint="@android:color/white"
-                    android:text="Đăng ký GVHD"
-                    android:textAllCaps="false"
-                    android:textColor="@android:color/white"
-                    android:textSize="16sp"
-                    app:cornerRadius="12dp"
-                    app:iconGravity="textStart" />
+                android:orientation="horizontal"
+                android:gravity="center">
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnDangKyDeTai"
-                    android:layout_width="match_parent"
+                    android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="24dp"
                     android:layout_marginBottom="32dp"
-                    android:layout_weight="1"
                     android:backgroundTint="@color/primaryColor"
                     android:icon="@drawable/ic_check"
                     android:iconTint="@android:color/white"
@@ -247,11 +199,9 @@
                     android:textSize="16sp"
                     app:cornerRadius="12dp"
                     app:iconGravity="textStart" />
-
             </LinearLayout>
 
 
         </LinearLayout>
     </ScrollView>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

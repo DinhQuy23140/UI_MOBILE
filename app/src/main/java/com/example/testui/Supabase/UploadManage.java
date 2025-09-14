@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.example.testui.client.SupabaseClient;
 import com.example.testui.model.Document;
+import com.example.testui.model.ReportFile;
 import com.example.testui.model.UploadFile;
 import com.example.testui.service.SupabaseService;
 
@@ -36,13 +37,13 @@ public class UploadManage {
 
     private void uploadDocument(UploadFile uploadFile, UploadCallback uploadCallback) {
         RequestBody requestBody = RequestBody.create(MediaType.parse("application/octet-stream"), uploadFile.getFile());
-        MultipartBody.Part multipartBody = MultipartBody.Part.createFormData("file", uploadFile.getFileName(), requestBody);
+        MultipartBody.Part multipartBody = MultipartBody.Part.createFormData("file", uploadFile.getReportFile().getFile_name(), requestBody);
         
         Call<ResponseBody> call = supabaseService.uploadDocument(
                 bearerToken,
                 apikey,
                 bucket,
-                uploadFile.getFileName(),
+                uploadFile.getReportFile().getFile_name(),
                 multipartBody
         );
 
@@ -50,8 +51,10 @@ public class UploadManage {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful()) {
-                    String publicUrl = url + "/storage/v1/object/public/" + bucket + "/" + uploadFile.getFileName();
-                    uploadFile.setUrl(publicUrl);
+                    String publicUrl = url + "/storage/v1/object/public/" + bucket + "/" + uploadFile.getReportFile().getFile_name();
+                    ReportFile reportFile = uploadFile.getReportFile();
+                    reportFile.setFile_url(publicUrl);
+                    uploadFile.setReportFile(reportFile);
 
                     // Gọi callback
                     uploadCallback.onUploadSuccess(uploadFile);

@@ -4,24 +4,36 @@ import android.net.Uri;
 
 import java.io.File;
 
-public class UploadFile extends Document {
+public class UploadFile {
     String id;
     File file;
+    ReportFile reportFile;
 
-    public UploadFile(String fileName, String id, String projectId, String timeUpload, TypeDocument typeDocument, String typeFile, String url, File file, String id1) {
-        super(fileName, id, projectId, timeUpload, typeDocument, typeFile, url);
+    public UploadFile(String id, File file, ReportFile reportFile) {
+        this.id = id;
         this.file = file;
-        this.id = id1;
+        this.reportFile = reportFile;
     }
 
-    @Override
+    public UploadFile(File file, ReportFile reportFile) {
+        this.file = file;
+        this.reportFile = reportFile;
+    }
+
     public String getId() {
         return id;
     }
 
-    @Override
     public void setId(String id) {
         this.id = id;
+    }
+
+    public ReportFile getReportFile() {
+        return reportFile;
+    }
+
+    public void setReportFile(ReportFile reportFile) {
+        this.reportFile = reportFile;
     }
 
     public File getFile() {

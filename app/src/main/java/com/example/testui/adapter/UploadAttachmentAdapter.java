@@ -16,6 +16,8 @@ import com.example.testui.R;
 import com.example.testui.interfaces.UploadDocumentClick;
 import com.example.testui.model.Attachment;
 import com.example.testui.model.Document;
+import com.example.testui.model.ReportFile;
+import com.example.testui.model.UploadFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,12 +25,12 @@ import java.util.List;
 public class UploadAttachmentAdapter extends RecyclerView.Adapter<UploadAttachmentAdapter.UploadAttachmentViewHolder> {
 
     Context context;
-    List<Document> listDocument;
+    List<UploadFile> listUploadFile;
     UploadDocumentClick uploadAttachmentClick;
 
-    public UploadAttachmentAdapter(Context context, List<Document> listDocument, UploadDocumentClick uploadAttachmentClick) {
+    public UploadAttachmentAdapter(Context context, List<UploadFile> listUploadFile, UploadDocumentClick uploadAttachmentClick) {
         this.context = context;
-        this.listDocument = listDocument;
+        this.listUploadFile = listUploadFile;
         this.uploadAttachmentClick = uploadAttachmentClick;
     }
 
@@ -41,8 +43,8 @@ public class UploadAttachmentAdapter extends RecyclerView.Adapter<UploadAttachme
 
     @Override
     public void onBindViewHolder(@NonNull UploadAttachmentViewHolder holder, int position) {
-        Document attachment = listDocument.get(position);
-        String fileType = attachment.getTypeFile();
+        UploadFile uploadFile = listUploadFile.get(position);
+        String fileType = uploadFile.getReportFile().getFile_type();
 //        if (fileType == null) {
 //            holder.ivFileType.setImageResource(R.drawable.file_default_ic);
 //        } else if (fileType.equals("application/pdf")) {
@@ -56,8 +58,8 @@ public class UploadAttachmentAdapter extends RecyclerView.Adapter<UploadAttachme
 //        } else {
 //            holder.ivFileType.setImageResource(R.drawable.file_default_ic);
 //        }
-        holder.tvFileName.setText(attachment.getFileName());
-        holder.tvUploadTime.setText(attachment.getTimeUpload());
+        holder.tvFileName.setText(uploadFile.getReportFile().getFile_name());
+//        holder.tvUploadTime.setText(uploadFile.getReportFile().getCreate_at());
         holder.btnDownload.setOnClickListener(click -> {
             uploadAttachmentClick.onDownload(position);
         });
@@ -71,22 +73,22 @@ public class UploadAttachmentAdapter extends RecyclerView.Adapter<UploadAttachme
 
     @Override
     public int getItemCount() {
-        return listDocument.size();
+        return listUploadFile.size();
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    public void updateData(List<Document> newList) {
-        this.listDocument = new ArrayList<>(newList); // tạo list mới
+    public void updateData(List<UploadFile> newList) {
+        this.listUploadFile = new ArrayList<>(newList); // tạo list mới
         notifyDataSetChanged();
     }
 
 
-    public List<Document> getListDocument() {
-        return listDocument;
+    public List<UploadFile> getListDocument() {
+        return listUploadFile;
     }
 
-    public Document getData(int position) {
-        return listDocument.get(position);
+    public UploadFile getData(int position) {
+        return listUploadFile.get(position);
     }
 
     public class UploadAttachmentViewHolder extends RecyclerView.ViewHolder {

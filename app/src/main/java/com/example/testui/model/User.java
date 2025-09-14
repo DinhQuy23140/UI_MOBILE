@@ -1,6 +1,6 @@
 package com.example.testui.model;
 
-public class User {
+public class    User {
     String id;
     String fullname;
     String email;

@@ -7,13 +7,11 @@ public class Teacher {
     private String degree;
     private String department_id;
     private String position;
-    private String faculties_id;
     private User user;
 
-    public Teacher(String degree, String department_id, String faculties_id, int id, String position, String teacher_code, User user, String user_id) {
+    public Teacher(String degree, String department_id, int id, String position, String teacher_code, User user, String user_id) {
         this.degree = degree;
         this.department_id = department_id;
-        this.faculties_id = faculties_id;
         this.id = id;
         this.position = position;
         this.teacher_code = teacher_code;
@@ -35,14 +33,6 @@ public class Teacher {
 
     public void setDepartment_id(String department_id) {
         this.department_id = department_id;
-    }
-
-    public String getFaculties_id() {
-        return faculties_id;
-    }
-
-    public void setFaculties_id(String faculties_id) {
-        this.faculties_id = faculties_id;
     }
 
     public int getId() {

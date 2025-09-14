@@ -1,6 +1,7 @@
 package com.example.testui.repository;
 
 import com.example.testui.client.Client;
+import com.example.testui.model.Document;
 import com.example.testui.service.ApiService;
 
 public class DocumentRepository {
@@ -9,5 +10,7 @@ public class DocumentRepository {
         apiService = Client.getInstance().create(ApiService.class);
     }
 
+    public void uploadDocument(Document document) {
 
+    }
 }

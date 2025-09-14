@@ -16,6 +16,9 @@
         android:theme="@style/Theme.TestUI"
         tools:targetApi="31">
         <activity
+            android:name=".activities.DangKiDetaiActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.DangKiGVHDActivity"
             android:exported="false" />
         <activity

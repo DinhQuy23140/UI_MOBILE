@@ -17,6 +17,7 @@ import com.example.testui.ViewModelFactory.DangKiDoAnViewModelFactory;
 import com.example.testui.adapter.GVHDAdapter;
 import com.example.testui.databinding.ActivityDangKiDoAnBinding;
 import com.example.testui.interfaces.OnClickItem;
+import com.example.testui.model.Assignment;
 import com.example.testui.model.AssignmentSupervisor;
 import com.example.testui.model.ProjectTerm;
 import com.example.testui.model.Supervisor;
@@ -33,6 +34,7 @@ public class DangKiDoAnActivity extends AppCompatActivity {
     DangKiDoAnViewModel dangKiDoAnViewModel;
     String studentId;
     GVHDAdapter gvhdAdapter;
+    Assignment assignmentResult;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,12 +74,19 @@ public class DangKiDoAnActivity extends AppCompatActivity {
         dangKiDoAnViewModel.getAssignmentByStudentIdAndTermId(studentId, projectTerm.getId());
 
         dangKiDoAnViewModel.getAssignmentMutableLiveData().observe(this, assignment-> {
+            assignmentResult = assignment;
             Log.d("Assignment", new Gson().toJson(assignment.getAssignment_supervisors()));
             for (AssignmentSupervisor assignmentSupervisor : assignment.getAssignment_supervisors()) {
                 listSupervisor.add(assignmentSupervisor.getSupervisor());
             }
             gvhdAdapter.updateData(listSupervisor);
             Log.d("Assignment", new Gson().toJson(listSupervisor));
+        });
+
+        binding.btnDangKyDeTai.setOnClickListener(dkdt -> {
+            Intent intent = new Intent(this, DangKiDetaiActivity.class);
+            intent.putExtra(Constants.KEY_ASSIGNMENT, new Gson().toJson(assignmentResult));
+            startActivity(intent);
         });
     }
 

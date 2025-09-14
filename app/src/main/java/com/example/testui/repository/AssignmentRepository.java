@@ -15,6 +15,7 @@ import retrofit2.Response;
 public class AssignmentRepository {
     AssignmentService assignmentService;
     MutableLiveData<Assignment> assignmentMutableLiveData = new MutableLiveData<>();
+    MutableLiveData<Assignment> assignmenUpdatetMutableLiveData = new MutableLiveData<>();
 
     public AssignmentRepository() {
         assignmentService = Client.getInstance().create(AssignmentService.class);
@@ -41,5 +42,34 @@ public class AssignmentRepository {
 
     public MutableLiveData<Assignment> getAssignmentMutableLiveData() {
         return assignmentMutableLiveData;
+    }
+
+    public void updateProjectIdAssignmentByAssIdAndProId(String assignmentId, String projectId) {
+        Call<Assignment> call = assignmentService.updateProjectIdAssignmentByAssIdAndProId(assignmentId, projectId);
+        call.enqueue(new Callback<Assignment>() {
+            @Override
+            public void onResponse(Call<Assignment> call, Response<Assignment> response) {
+                if (response.isSuccessful()) {
+                    assignmenUpdatetMutableLiveData.setValue(response.body());
+                } else {
+                    try{
+                        if (response.errorBody() != null){
+                            Log.e("Failure", "onFailure: " + response.errorBody().string());
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Assignment> call, Throwable throwable) {
+
+            }
+        });
+    }
+
+    public MutableLiveData<Assignment> getAssignmenUpdatetMutableLiveData() {
+        return assignmenUpdatetMutableLiveData;
     }
 }

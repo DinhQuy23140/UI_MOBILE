@@ -8,6 +8,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
+import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
@@ -30,4 +31,7 @@ public interface AssignmentService {
 
     @GET("assignments/student/{studentId}/project-term/{projectTermId}")
     Call<Assignment> getAssignmentByStudentIdAndTermId(@Path("studentId") String studentId, @Path("projectTermId") String projectTermId);
+
+    @PATCH("assignments/{assignmentId}/project/{projectId}")
+    Call<Assignment> updateProjectIdAssignmentByAssIdAndProId(@Path("assignmentId") String assignmentId, @Path("projectId") String projectId);
 }

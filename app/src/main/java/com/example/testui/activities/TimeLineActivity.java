@@ -3,6 +3,7 @@ package com.example.testui.activities;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -34,7 +35,7 @@ public class TimeLineActivity extends AppCompatActivity {
 
         Intent itent = getIntent();
         String strProjectTerm = itent.getStringExtra(Constants.KEY_PROJECT_TERM);
-        Toast.makeText(this, strProjectTerm, Toast.LENGTH_SHORT).show();
+        Log.d("project_term", strProjectTerm);
         ProjectTerm projectTerm = new Gson().fromJson(strProjectTerm, ProjectTerm.class);
         binding.tvProjectName.setText("Đợt đồ án: Kỳ " + projectTerm.getStage() + " năm " + projectTerm.getAcademy_year().getYear_name());
         binding.tvStartDate.setText("Bắt đầu: " + projectTerm.getStart_date());
@@ -52,18 +53,21 @@ public class TimeLineActivity extends AppCompatActivity {
         LinearLayout timeLineNopDeCuong = findViewById(R.id.timeLineNopDeCuong);
         timeLineNopDeCuong.setOnClickListener(v -> {
             Intent intent = new Intent(this, NopDeCuongActivity.class);
+            intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
             startActivity(intent);
         });
 
         LinearLayout timeLineThucHienHP = findViewById(R.id.timeLineThucHienHP);
         timeLineThucHienHP.setOnClickListener(v -> {
             Intent intent = new Intent(this, ProgressLogActivity.class);
+            intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
             startActivity(intent);
         });
 
         LinearLayout timeLineNopBaoCao = findViewById(R.id.timeLineNopBaoCao);
         timeLineNopBaoCao.setOnClickListener(v -> {
             Intent intent = new Intent(this, NopBaoCaoActivity.class);
+            intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
             startActivity(intent);
         });
     }

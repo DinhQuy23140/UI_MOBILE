@@ -6,19 +6,17 @@ public class Student {
     private String student_code;
     private String class_code;
     private String major_id;
-    private String department_id;
     private String course_year;
     private User user;
 
-    public Student(String class_code, String course_year, String department_id, String id, String major_id, String student_code, User user, String user_id) {
-        this.class_code = class_code;
-        this.course_year = course_year;
-        this.department_id = department_id;
+    public Student(String id, String student_code, String user_id, String major_id, String course_year, String class_code, User user) {
         this.id = id;
-        this.major_id = major_id;
         this.student_code = student_code;
-        this.user = user;
         this.user_id = user_id;
+        this.major_id = major_id;
+        this.course_year = course_year;
+        this.class_code = class_code;
+        this.user = user;
     }
 
     public String getClass_code() {
@@ -35,14 +33,6 @@ public class Student {
 
     public void setCourse_year(String course_year) {
         this.course_year = course_year;
-    }
-
-    public String getDepartment_id() {
-        return department_id;
-    }
-
-    public void setDepartment_id(String department_id) {
-        this.department_id = department_id;
     }
 
     public String getId() {

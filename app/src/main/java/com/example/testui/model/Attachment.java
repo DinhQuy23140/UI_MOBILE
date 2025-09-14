@@ -19,6 +19,15 @@ public class Attachment {
         this.uploader_id = uploader_id;
     }
 
+    public Attachment(String file_name, String file_type, String file_url, String progress_log_id, String upload_time, String uploader_id) {
+        this.file_name = file_name;
+        this.file_type = file_type;
+        this.file_url = file_url;
+        this.progress_log_id = progress_log_id;
+        this.upload_time = upload_time;
+        this.uploader_id = uploader_id;
+    }
+
     public String getFile_name() {
         return file_name;
     }

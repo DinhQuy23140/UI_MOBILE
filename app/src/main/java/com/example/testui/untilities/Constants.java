@@ -22,4 +22,7 @@ public class Constants {
     public static final String KEY_PROGRESS_LOG = "progress_log";
     public static final String KEY_PROJECT_ID = "project_id";
     public static final String KEY_PROJECT_TERM = "project_term";
+    public static final String KEY_ASSIGNMENT = "assignment";
+    public static final String KEY_TYPE_REPORT_REPORT = "report";
+    public static final String KEY_TYPE_REPORT_OUTLINE = "outline";
 }
