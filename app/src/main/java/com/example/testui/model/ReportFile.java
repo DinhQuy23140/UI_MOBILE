@@ -1,25 +1,34 @@
 package com.example.testui.model;
 
 public class ReportFile {
-    String id, project_id, file_name, file_url, file_type, type_report, created_at, updated_at;
+    String id, project_id, file_name, file_url, file_type, type_report, created_at, updated_at, status;
 
-    public ReportFile(String id, String file_name, String file_type, String file_url, String project_id, String type_report) {
+    public ReportFile(String id, String file_name, String file_type, String file_url, String project_id, String type_report, String status) {
         this.id = id;
         this.file_name = file_name;
         this.file_type = file_type;
         this.file_url = file_url;
         this.project_id = project_id;
         this.type_report = type_report;
+        this.status = status;
     }
 
-    public ReportFile(String file_name, String file_type, String file_url, String project_id, String type_report) {
+    public ReportFile(String file_name, String file_type, String file_url, String project_id, String type_report, String status) {
         this.file_name = file_name;
         this.file_type = file_type;
         this.file_url = file_url;
         this.type_report = type_report;
         this.project_id = project_id;
+        this.status = status;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public String getFile_name() {
         return file_name;

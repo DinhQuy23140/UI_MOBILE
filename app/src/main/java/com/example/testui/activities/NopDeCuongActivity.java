@@ -193,7 +193,7 @@ public class NopDeCuongActivity extends AppCompatActivity {
                 throw new RuntimeException(e);
             }
             String create_at = formatter.format(now);
-            ReportFile reportFile = new ReportFile(fileName, fileType, "", assignment.getProject_id(), "outline");
+            ReportFile reportFile = new ReportFile(fileName, fileType, "", assignment.getProject_id(), "outline", Constants.KEY_STATUS_REPORT_SUBMITTED);
             UploadFile uploadFile = new UploadFile(file, reportFile);
             listUploadFile.add(uploadFile);
             Log.d("UploadFile", gson.toJson(uploadFile));

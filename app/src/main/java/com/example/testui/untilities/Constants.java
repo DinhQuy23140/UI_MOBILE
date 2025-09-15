@@ -25,4 +25,9 @@ public class Constants {
     public static final String KEY_ASSIGNMENT = "assignment";
     public static final String KEY_TYPE_REPORT_REPORT = "report";
     public static final String KEY_TYPE_REPORT_OUTLINE = "outline";
+    public static final String KEY_STATUS_REPORT_PENDING = "pending";
+    public static final String KEY_STATUS_REPORT_SUBMITTED = "submited";
+    public static final String KEY_STATUS_REPORT_REJECTED = "rejected";
+    public static final String KEY_STATUS_REPORT_APPROVED = "approved";
+
 }
