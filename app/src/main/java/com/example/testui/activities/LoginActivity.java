@@ -60,5 +60,15 @@ public class LoginActivity extends AppCompatActivity {
                 }
             });
         });
+
+        binding.loginTvGoToRegister.setOnClickListener(register->{
+            Intent intent = new Intent(this, RegisterActivity.class);
+            startActivity(intent);
+        });
+
+        binding.loginTvForgotPassword.setOnClickListener(forgotPass -> {
+            Intent intent = new Intent(this, ForgotPassActivity.class);
+            startActivity(intent);
+        });
     }
 }
