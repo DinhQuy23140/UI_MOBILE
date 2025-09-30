@@ -10,16 +10,15 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.testui.R;
-import com.example.testui.databinding.ActivityForgotPassBinding;
+import com.example.testui.databinding.ActivityRegisterBinding;
 
-public class ForgotPassActivity extends AppCompatActivity {
-
-    ActivityForgotPassBinding binding;
+public class RegisterActivity extends AppCompatActivity {
+    ActivityRegisterBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        binding = ActivityForgotPassBinding.inflate(getLayoutInflater());
+        binding = ActivityRegisterBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -27,7 +26,7 @@ public class ForgotPassActivity extends AppCompatActivity {
             return insets;
         });
 
-        binding.tvLogin.setOnClickListener(login -> {
+        binding.registerTvLoginLink.setOnClickListener(login -> {
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
         });
