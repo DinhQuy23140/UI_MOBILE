@@ -86,7 +86,7 @@ public class ProgressLogActivity extends AppCompatActivity {
         progressLogViewModel.getProgressLogByProjectId(projectId);
         progressLogViewModel.getProgressLogByProjectId().observe(this, result -> {
             if (result != null && !result.isEmpty()) {
-                binding.tvLogCount.setText("Tổng số mốc: " + result.size());
+                binding.tvLogCount.setText(Integer.toString(result.size()));
                 processLogAdapter.updateData(result); // thêm hàm update trong adapter
             }
         });

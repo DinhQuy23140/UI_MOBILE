@@ -1,82 +1,274 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="4dp">
+    app:cardCornerRadius="16dp"
+    app:cardElevation="2dp"
+    app:cardBackgroundColor="@android:color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="12dp">
+        android:padding="16dp">
 
-        <!-- Tiêu đề công việc -->
-        <TextView
-            android:id="@+id/tvTaskTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Thiết kế CSDL"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            android:textColor="@android:color/black"/>
-
-        <!-- Ngày bắt đầu và kết thúc -->
-        <TextView
-            android:id="@+id/tvTaskDateRange"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Từ ngày: 25/07/2025 đến 29/07/2025"
-            android:textSize="14sp"
-            android:textColor="@android:color/darker_gray"
-            android:layout_marginTop="2dp"/>
-
-        <!-- Mô tả -->
-        <TextView
-            android:id="@+id/tvTaskDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Hoàn thành mô hình ERD và các bảng chính"
-            android:textSize="14sp"
-            android:layout_marginTop="4dp"/>
-
-        <!-- File đính kèm -->
-        <TextView
-            android:id="@+id/tvAttachment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="File: db_schema.pdf"
-            android:textColor="@android:color/holo_blue_dark"
-            android:textStyle="italic"
-            android:layout_marginTop="4dp"
-            android:visibility="gone" />
-
-        <!-- Trạng thái và nhận xét -->
+        <!-- Header với tiêu đề và trạng thái -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="6dp">
+            android:gravity="center_vertical"
+            android:layout_marginBottom="12dp">
 
-            <TextView
-                android:id="@+id/tvTaskStatus"
+            <!-- Icon công việc -->
+            <LinearLayout
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/bg_task_icon"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_task"
+                    app:tint="@android:color/white" />
+            </LinearLayout>
+
+            <!-- Tiêu đề và trạng thái -->
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Trạng thái: Đã hoàn thành"
-                android:textColor="@android:color/holo_green_dark"
-                android:textSize="14sp"/>
+                android:orientation="vertical"
+                android:layout_marginStart="12dp">
 
-            <TextView
-                android:id="@+id/tvFeedback"
+                <TextView
+                    android:id="@+id/tvTaskTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="3"
+                    android:text="Thiết kế CSDL"
+                    android:textColor="#1A1A1A"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <!-- Badge trạng thái -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="8dp"
+                    app:cardBackgroundColor="#E8F5E9"
+                    app:cardElevation="0dp"
+                    android:layout_marginTop="4dp">
+
+                    <TextView
+                        android:id="@+id/tvTaskStatus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="8dp"
+                        android:paddingVertical="4dp"
+                        android:text="Đã hoàn thành"
+                        android:textColor="#4CAF50"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+            <!-- Đánh giá -->
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="✔ Đạt"
-                android:textColor="@android:color/holo_blue_dark"
-                android:textSize="14sp"/>
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@drawable/bg_rating_good"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="4dp">
+
+                <ImageView
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:src="@drawable/ic_check_circle"
+                    android:layout_marginEnd="4dp"
+                    app:tint="@android:color/white" />
+
+                <TextView
+                    android:id="@+id/tvFeedback"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Đạt"
+                    android:textColor="@android:color/white"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Thời gian -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/bg_time_schedule"
+            android:padding="12dp">
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@drawable/ic_date_range"
+                android:layout_marginEnd="8dp"
+                app:tint="#667EEA" />
+
+            <TextView
+                android:id="@+id/tvTaskDateRange"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="3"
+                android:text="25/07/2025 - 29/07/2025"
+                android:textColor="#667EEA"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="12dp"
+                android:background="#DDDDDD"
+                android:layout_marginHorizontal="8dp" />
+
+            <ImageView
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:src="@drawable/ic_clock"
+                android:layout_marginEnd="4dp"
+                app:tint="#667EEA" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5 ngày"
+                android:textSize="11sp"
+                android:textColor="#666666" />
+
+        </LinearLayout>
+
+        <!-- Mô tả công việc -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@drawable/ic_description"
+                android:layout_marginEnd="8dp"
+                app:tint="#666666" />
+
+            <TextView
+                android:id="@+id/tvTaskDescription"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Hoàn thành mô hình ERD và các bảng chính"
+                android:textSize="13sp"
+                android:textColor="#666666"
+                android:lineSpacingExtra="2dp" />
+
+        </LinearLayout>
+
+        <!-- File đính kèm -->
+        <LinearLayout
+            android:id="@+id/attachmentLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/bg_attachment"
+            android:padding="12dp"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@drawable/ic_attach_file"
+                android:layout_marginEnd="8dp"
+                app:tint="#4ECDC4" />
+
+            <TextView
+                android:id="@+id/tvAttachment"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="db_schema.pdf"
+                android:textColor="#4ECDC4"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:maxLines="1"
+                android:ellipsize="middle" />
+
+            <ImageButton
+                android:id="@+id/btnDownloadAttachment"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_download"
+                android:layout_marginStart="4dp"
+                app:tint="#4ECDC4" />
+
+        </LinearLayout>
+
+        <!-- Progress bar (cho các task chưa hoàn thành) -->
+        <LinearLayout
+            android:id="@+id/progressLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:layout_marginTop="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="4dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Tiến độ"
+                    android:textSize="11sp"
+                    android:textColor="#666666" />
+
+                <TextView
+                    android:id="@+id/tvProgressPercent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="75%"
+                    android:textSize="11sp"
+                    android:textColor="#667EEA"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:id="@+id/progressBar"
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:indeterminate="false"
+                app:trackColor="#E0E0E0"
+                app:trackCornerRadius="2dp"
+                app:indicatorColor="#667EEA" />
+
         </LinearLayout>
 
     </LinearLayout>

@@ -53,8 +53,8 @@ public class DanhSachDotDoAnActivity extends AppCompatActivity {
                 startActivity(intent1);
             }
         });
-        binding.rvDotDoAn.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        binding.rvDotDoAn.setAdapter(projectTermAdapter);
+        binding.rcvDotDoAn.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        binding.rcvDotDoAn.setAdapter(projectTermAdapter);
 
         if (studentId != null) {
             dotDoAnViewModel = new DotDoAnViewModel(this);
