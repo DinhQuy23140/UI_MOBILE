@@ -95,7 +95,7 @@ public class NopBaoCaoActivity extends AppCompatActivity {
             Log.d("Assignment", gson.toJson(assignment));
         });
 
-        binding.btnChonFile.setOnClickListener(selectFile -> {
+        binding.btnNopBaoCao.setOnClickListener(selectFile -> {
             openFilePicker();
         });
 

@@ -43,7 +43,8 @@ public class ProcessLogAdapter extends RecyclerView.Adapter<ProcessLogAdapter.Pr
     public void onBindViewHolder(@NonNull ProcessLogViewHolder holder, int position) {
         ProgressLog progressLog = listProcessLog.get(position);
         holder.tvTaskTitle.setText(progressLog.getTitle());
-        holder.tvTaskDateRange.setText(progressLog.getDateRange());
+//        holder.tvTaskDateRange.setText(progressLog.getDateRange());
+        holder.tvTaskDateRange.setText("10/10/2025 - 10/10/2025");
         holder.tvTaskDescription.setText(progressLog.getDescription());
         holder.tvTaskStatus.setText(convertStudentStatus(progressLog.getStudent_status()));
         holder.tvFeedback.setText(convertInstructorStatus(progressLog.getInstructor_status()));

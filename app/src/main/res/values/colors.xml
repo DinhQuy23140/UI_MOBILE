@@ -25,10 +25,13 @@
     <color name="timeline_status_pending">#FFA000</color>
     <color name="timeline_status_inprogress">#1976D2</color>
     <color name="timeline_status_completed">#388E3C</color>
-    <color name="teal_700">#FF018786</color>
 
     <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
     <color name="lavender">#8692f7</color>
+
+    <color name="gray">#757575</color>
+    <color name="teal_700">#00796B</color>
+    <color name="teal_200">#80CBC4</color>
+
 
 </resources>

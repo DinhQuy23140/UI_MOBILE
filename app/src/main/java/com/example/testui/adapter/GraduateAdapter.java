@@ -37,8 +37,12 @@ public class GraduateAdapter extends RecyclerView.Adapter<GraduateAdapter.Gradua
     @Override
     public void onBindViewHolder(@NonNull GraduateViewHolder holder, int position) {
         ProjectTerm projectTerm = listProjectTerm.get(position);
-        holder.tvTenDot.setText("Đợt đồ án: " + projectTerm.getStage() + " " + projectTerm.getAcademy_year().getYear_name());
-        holder.tvThoiGian.setText(projectTerm.getStart_date() + " - " + projectTerm.getEnd_date());
+        holder.tvTenDot.setText(projectTerm.getStage());
+        holder.tvTgBatDau.setText(projectTerm.getStart_date());
+        holder.tvTgKetThuc.setText(projectTerm.getEnd_date());
+        holder.tvNamHoc.setText(projectTerm.getAcademy_year().getYear_name());
+        holder.tvMoTa.setText(projectTerm.getDescription());
+        holder.tvTrangThai.setText(projectTerm.getStatus());
         holder.itemView.setOnClickListener(click -> {
             onClickItem.onClickItem(position);
         });
@@ -50,11 +54,15 @@ public class GraduateAdapter extends RecyclerView.Adapter<GraduateAdapter.Gradua
     }
 
     public class GraduateViewHolder extends RecyclerView.ViewHolder {
-        TextView tvTenDot, tvThoiGian;
+        TextView tvTenDot, tvTgBatDau, tvTgKetThuc, tvNamHoc, tvMoTa, tvTrangThai;
         public GraduateViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvTenDot = itemView.findViewById(R.id.tvTenDot);
-            tvThoiGian = itemView.findViewById(R.id.tvThoiGian);
+            tvTenDot = itemView.findViewById(R.id.tvDotDoAn);
+            tvTgBatDau = itemView.findViewById(R.id.tvStartDate);
+            tvTgKetThuc = itemView.findViewById(R.id.tvEndDate);
+            tvNamHoc = itemView.findViewById(R.id.tvNamHoc);
+            tvMoTa = itemView.findViewById(R.id.tvMoTa);
+            tvTrangThai = itemView.findViewById(R.id.tvTrangThai);
         }
     }
 }

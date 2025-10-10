@@ -1,26 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    card_view:cardCornerRadius="12dp"
-    card_view:cardElevation="4dp">
+    app:cardCornerRadius="16dp"
+    app:cardElevation="2dp"
+    app:cardBackgroundColor="@android:color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="90dp"
-        android:gravity="center_vertical"
+        android:layout_height="wrap_content"
+        android:gravity="center"
         android:orientation="horizontal"
-        android:padding="12dp">
+        android:padding="16dp">
 
-        <!-- Icon theo file_type -->
-        <ImageView
-            android:id="@+id/imgFileType"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/ic_file" />
+        <!-- Icon file với background -->
+        <LinearLayout
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/bg_file_icon"
+            android:gravity="center">
 
+            <ImageView
+                android:id="@+id/imgFileType"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_file"
+                android:tint="#2196F3" />
+        </LinearLayout>
+
+        <!-- Thông tin file -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -31,43 +41,93 @@
             <!-- Tên file -->
             <TextView
                 android:id="@+id/tvFileName"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="rerum deleniti.nfo"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="project_document.pdf"
                 android:textColor="@android:color/black"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
-
             <!-- Thời gian upload -->
-            <TextView
-                android:id="@+id/tvUploadTime"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="595353676"
-                android:textColor="@android:color/darker_gray"
-                android:textSize="12sp" />
+                android:layout_marginTop="4dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
+                <ImageView
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:layout_marginEnd="4dp"
+                    android:src="@drawable/ic_calendar_start"
+                    android:tint="#757575" />
+
+                <TextView
+                    android:id="@+id/tvUploadTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2 giờ trước"
+                    android:textColor="#757575"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <!-- Kích thước file -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:layout_marginEnd="4dp"
+                    android:src="@drawable/ic_file_size"
+                    android:tint="#757575" />
+
+                <TextView
+                    android:id="@+id/tvFileSize"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2.5 MB"
+                    android:textColor="#757575"
+                    android:textSize="12sp" />
+            </LinearLayout>
         </LinearLayout>
 
-        <!-- Nút tải xuống -->
+        <!-- Action buttons -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-        <ImageView
-            android:id="@+id/btnDowload"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            card_view:srcCompat="@drawable/ic_download" />
+            <!-- Nút tải xuống -->
+            <ImageButton
+                android:id="@+id/btnDowload"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/download"
+                android:src="@drawable/ic_download"
+                android:tint="#2196F3" />
 
-        <ImageButton
-            android:id="@+id/btn_delete"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="@string/download"
-            android:src="@drawable/ic_cancel_24" />
+            <!-- Nút xóa -->
+            <ImageButton
+                android:id="@+id/btn_delete"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="4dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Delete"
+                android:src="@drawable/ic_cancel"
+                android:tint="#F44336" />
+        </LinearLayout>
+
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

@@ -92,7 +92,7 @@ public class NopDeCuongActivity extends AppCompatActivity {
             Log.d("Assignment", gson.toJson(assignment));
         });
 
-        binding.btnChonFile.setOnClickListener(selectFile -> {
+        binding.dragDropArea.setOnClickListener(selectFile -> {
             openFilePicker();
         });
 

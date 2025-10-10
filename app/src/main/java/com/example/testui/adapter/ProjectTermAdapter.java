@@ -39,9 +39,12 @@ public class ProjectTermAdapter extends RecyclerView.Adapter<ProjectTermAdapter.
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
         ProjectTerm projectTerm = projectTerms.get(position);
-        holder.tvTenDot.setText("Đợt đồ án: Kỳ " + projectTerm.getStage() + " năm " + projectTerm.getAcademy_year().getYear_name());
-        holder.tvThoiGian.setText(projectTerm.getStart_date() + " - " + projectTerm.getEnd_date());
-        holder.tvTrangthai.setText(projectTerm.getStatus());
+        holder.tvTenDot.setText(projectTerm.getStage());
+        holder.tvTgBatDau.setText(projectTerm.getStart_date());
+        holder.tvTgKetThuc.setText(projectTerm.getEnd_date());
+        holder.tvNamHoc.setText(projectTerm.getAcademy_year().getYear_name());
+        holder.tvMoTa.setText(projectTerm.getDescription());
+        holder.tvTrangThai.setText(projectTerm.getStatus());
         holder.itemView.setOnClickListener(v -> onClickItem.onClickItem(position));
     }
 
@@ -60,12 +63,15 @@ public class ProjectTermAdapter extends RecyclerView.Adapter<ProjectTermAdapter.
     }
 
     public class RecyclerViewHolder extends RecyclerView.ViewHolder {
-        TextView tvTenDot, tvThoiGian, tvTrangthai;
+        TextView tvTenDot, tvTgBatDau, tvTgKetThuc, tvNamHoc, tvMoTa, tvTrangThai;
         public RecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvTenDot = itemView.findViewById(R.id.tvTenDot);
-            tvThoiGian = itemView.findViewById(R.id.tvThoiGian);
-            tvTrangthai = itemView.findViewById(R.id.tvStatus);
+            tvTenDot = itemView.findViewById(R.id.tvDotDoAn);
+            tvTgBatDau = itemView.findViewById(R.id.tvStartDate);
+            tvTgKetThuc = itemView.findViewById(R.id.tvEndDate);
+            tvNamHoc = itemView.findViewById(R.id.tvNamHoc);
+            tvMoTa = itemView.findViewById(R.id.tvMoTa);
+            tvTrangThai = itemView.findViewById(R.id.tvTrangThai);
         }
     }
 }
