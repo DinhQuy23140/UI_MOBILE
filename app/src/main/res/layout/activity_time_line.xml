@@ -650,16 +650,17 @@
 
         <!-- Timeline item 5: Tra cứu hội đồng bảo vệ -->
         <LinearLayout
+            android:id="@+id/timelineTraCuuHoiDong"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="20dp">
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal">
 
           <LinearLayout
               android:layout_width="40dp"
               android:layout_height="wrap_content"
-              android:orientation="vertical"
-              android:gravity="center_horizontal">
+              android:gravity="center_horizontal"
+              android:orientation="vertical">
 
             <TextView
                 android:id="@+id/tvStepNumber5"
@@ -675,17 +676,17 @@
             <View
                 android:layout_width="2dp"
                 android:layout_height="40dp"
-                android:background="#E0E0E0"
                 android:layout_marginTop="4dp"
-                android:layout_marginBottom="4dp" />
+                android:layout_marginBottom="4dp"
+                android:background="#E0E0E0" />
           </LinearLayout>
 
           <LinearLayout
               android:layout_width="0dp"
               android:layout_height="wrap_content"
+              android:layout_marginStart="16dp"
               android:layout_weight="1"
-              android:orientation="vertical"
-              android:layout_marginStart="16dp">
+              android:orientation="vertical">
 
             <TextView
                 android:id="@+id/tvTitle5"
@@ -700,47 +701,48 @@
                 android:id="@+id/tvDates5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
                 android:text="26/04/2025 - 30/04/2025"
                 android:textColor="#999999"
-                android:textSize="12sp"
-                android:layout_marginTop="2dp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/textView21"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
                 android:text="Tra cứu thông tin hội đồng chấm bảo vệ"
                 android:textColor="#999999"
-                android:textSize="12sp"
-                android:layout_marginTop="4dp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/tvStatus5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:background="@drawable/bg_status_pending"
                 android:paddingHorizontal="8dp"
                 android:paddingVertical="2dp"
                 android:text="Chưa bắt đầu"
                 android:textColor="#FFFFFF"
                 android:textSize="10sp"
-                android:textStyle="bold"
-                android:layout_marginTop="8dp" />
+                android:textStyle="bold" />
           </LinearLayout>
         </LinearLayout>
 
         <!-- Timeline item 6: Chấm phản biện đồ án -->
         <LinearLayout
+            android:id="@+id/timelinePhanBien"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="20dp">
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal">
 
           <LinearLayout
               android:layout_width="40dp"
               android:layout_height="wrap_content"
-              android:orientation="vertical"
-              android:gravity="center_horizontal">
+              android:gravity="center_horizontal"
+              android:orientation="vertical">
 
             <TextView
                 android:id="@+id/tvStepNumber6"
@@ -756,23 +758,23 @@
             <View
                 android:layout_width="2dp"
                 android:layout_height="40dp"
-                android:background="#E0E0E0"
                 android:layout_marginTop="4dp"
-                android:layout_marginBottom="4dp" />
+                android:layout_marginBottom="4dp"
+                android:background="#E0E0E0" />
           </LinearLayout>
 
           <LinearLayout
               android:layout_width="0dp"
               android:layout_height="wrap_content"
+              android:layout_marginStart="16dp"
               android:layout_weight="1"
-              android:orientation="vertical"
-              android:layout_marginStart="16dp">
+              android:orientation="vertical">
 
             <TextView
                 android:id="@+id/tvTitle6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Chấm phản biện đồ án"
+                android:text="Phản biện đồ án"
                 android:textColor="#666666"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -781,47 +783,48 @@
                 android:id="@+id/tvDates6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
                 android:text="01/05/2025 - 10/05/2025"
                 android:textColor="#999999"
-                android:textSize="12sp"
-                android:layout_marginTop="2dp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/textView22"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
                 android:text="Hội đồng tiến hành chấm phản biện đồ án"
                 android:textColor="#999999"
-                android:textSize="12sp"
-                android:layout_marginTop="4dp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/tvStatus6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:background="@drawable/bg_status_pending"
                 android:paddingHorizontal="8dp"
                 android:paddingVertical="2dp"
                 android:text="Chưa bắt đầu"
                 android:textColor="#FFFFFF"
                 android:textSize="10sp"
-                android:textStyle="bold"
-                android:layout_marginTop="8dp" />
+                android:textStyle="bold" />
           </LinearLayout>
         </LinearLayout>
 
         <!-- Timeline item 7: Tra cứu kết quả phản biện -->
         <LinearLayout
+            android:id="@+id/timelineTraCuuPhanBien"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="20dp">
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal">
 
           <LinearLayout
               android:layout_width="40dp"
               android:layout_height="wrap_content"
-              android:orientation="vertical"
-              android:gravity="center_horizontal">
+              android:gravity="center_horizontal"
+              android:orientation="vertical">
 
             <TextView
                 android:id="@+id/tvStepNumber7"
@@ -837,17 +840,17 @@
             <View
                 android:layout_width="2dp"
                 android:layout_height="40dp"
-                android:background="#E0E0E0"
                 android:layout_marginTop="4dp"
-                android:layout_marginBottom="4dp" />
+                android:layout_marginBottom="4dp"
+                android:background="#E0E0E0" />
           </LinearLayout>
 
           <LinearLayout
               android:layout_width="0dp"
               android:layout_height="wrap_content"
+              android:layout_marginStart="16dp"
               android:layout_weight="1"
-              android:orientation="vertical"
-              android:layout_marginStart="16dp">
+              android:orientation="vertical">
 
             <TextView
                 android:id="@+id/tvTitle7"
@@ -862,47 +865,48 @@
                 android:id="@+id/tvDates7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
                 android:text="11/05/2025 - 15/05/2025"
                 android:textColor="#999999"
-                android:textSize="12sp"
-                android:layout_marginTop="2dp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/textView23"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
                 android:text="Xem kết quả chấm phản biện từ hội đồng"
                 android:textColor="#999999"
-                android:textSize="12sp"
-                android:layout_marginTop="4dp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/tvStatus7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:background="@drawable/bg_status_pending"
                 android:paddingHorizontal="8dp"
                 android:paddingVertical="2dp"
                 android:text="Chưa bắt đầu"
                 android:textColor="#FFFFFF"
                 android:textSize="10sp"
-                android:textStyle="bold"
-                android:layout_marginTop="8dp" />
+                android:textStyle="bold" />
           </LinearLayout>
         </LinearLayout>
 
         <!-- Timeline item 8: Bảo vệ đồ án -->
         <LinearLayout
+            android:id="@+id/timelineBaoVe"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="8dp">
+            android:layout_marginBottom="8dp"
+            android:orientation="horizontal">
 
           <LinearLayout
               android:layout_width="40dp"
               android:layout_height="wrap_content"
-              android:orientation="vertical"
-              android:gravity="center_horizontal">
+              android:gravity="center_horizontal"
+              android:orientation="vertical">
 
             <TextView
                 android:id="@+id/tvStepNumber8"
@@ -919,9 +923,9 @@
           <LinearLayout
               android:layout_width="0dp"
               android:layout_height="wrap_content"
+              android:layout_marginStart="16dp"
               android:layout_weight="1"
-              android:orientation="vertical"
-              android:layout_marginStart="16dp">
+              android:orientation="vertical">
 
             <TextView
                 android:id="@+id/tvTitle8"
@@ -936,32 +940,32 @@
                 android:id="@+id/tvDates8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
                 android:text="16/05/2025 - 20/06/2025"
                 android:textColor="#999999"
-                android:textSize="12sp"
-                android:layout_marginTop="2dp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/textView24"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
                 android:text="Bảo vệ đồ án trước hội đồng chấm thi"
                 android:textColor="#999999"
-                android:textSize="12sp"
-                android:layout_marginTop="4dp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/tvStatus8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:background="@drawable/bg_status_pending"
                 android:paddingHorizontal="8dp"
                 android:paddingVertical="2dp"
                 android:text="Chưa bắt đầu"
                 android:textColor="#FFFFFF"
                 android:textSize="10sp"
-                android:textStyle="bold"
-                android:layout_marginTop="8dp" />
+                android:textStyle="bold" />
           </LinearLayout>
         </LinearLayout>
 

@@ -67,5 +67,9 @@ public class DanhSachDotDoAnActivity extends AppCompatActivity {
                 }
             });
         }
+
+        binding.btnBack.setOnClickListener(back -> {
+            finish();
+        });
     }
 }

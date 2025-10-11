@@ -12,6 +12,7 @@ import com.example.testui.model.Supervisor;
 import com.example.testui.service.ApiService;
 import com.example.testui.service.AuthService;
 import com.example.testui.sharepreference.SharePreferenceManage;
+import com.google.gson.Gson;
 
 import java.util.HashMap;
 import java.util.List;
@@ -140,12 +141,15 @@ public class SinhVienRepository {
                 if (response.isSuccessful()) {
                     Student result = (Student) response.body();
                     student.setValue(result);
+                    Log.d("Student", new Gson().toJson(result));
+                } else {
+                    Log.e("API_ERROR", "Response not successful: " + response.code());
                 }
             }
 
             @Override
             public void onFailure(Call call, Throwable throwable) {
-
+                Log.e("API_ERROR", "Failed to get student", throwable);
             }
         });
     }
