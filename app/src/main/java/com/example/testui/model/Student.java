@@ -8,15 +8,17 @@ public class Student {
     private String major_id;
     private String course_year;
     private User user;
+    private Marjor marjor;
 
-    public Student(String id, String student_code, String user_id, String major_id, String course_year, String class_code, User user) {
-        this.id = id;
-        this.student_code = student_code;
-        this.user_id = user_id;
-        this.major_id = major_id;
-        this.course_year = course_year;
+    public Student(String class_code, String course_year, String id, String major_id, Marjor marjor, String student_code, User user, String user_id) {
         this.class_code = class_code;
+        this.course_year = course_year;
+        this.id = id;
+        this.major_id = major_id;
+        this.marjor = marjor;
+        this.student_code = student_code;
         this.user = user;
+        this.user_id = user_id;
     }
 
     public String getClass_code() {
@@ -73,5 +75,13 @@ public class Student {
 
     public void setUser_id(String user_id) {
         this.user_id = user_id;
+    }
+
+    public Marjor getMarjor() {
+        return marjor;
+    }
+
+    public void setMarjor(Marjor marjor) {
+        this.marjor = marjor;
     }
 }

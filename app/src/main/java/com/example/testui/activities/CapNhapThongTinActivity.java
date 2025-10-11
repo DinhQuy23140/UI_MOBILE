@@ -1,7 +1,9 @@
 package com.example.testui.activities;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -17,11 +19,13 @@ import com.example.testui.ViewModelFactory.HomeViewModelFactory;
 import com.example.testui.databinding.ActivityCapNhapThongTinBinding;
 import com.example.testui.model.Student;
 import com.example.testui.untilities.Constants;
+import com.google.gson.Gson;
 
 public class CapNhapThongTinActivity extends AppCompatActivity {
 
     HomeViewModel homeViewModel;
     ActivityCapNhapThongTinBinding binding;
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +44,7 @@ public class CapNhapThongTinActivity extends AppCompatActivity {
         String studentId = intent.getStringExtra(Constants.KEY_ID_STUDENT);
         homeViewModel.getStudentById();
         homeViewModel.getGetStudent().observe(this, result -> {
+            Log.d("Student", new Gson().toJson(result));
             if (result != null) {
                 Student student = result;
                 Toast.makeText(this, student.getUser().getFullname(), Toast.LENGTH_SHORT).show();
@@ -51,7 +56,14 @@ public class CapNhapThongTinActivity extends AppCompatActivity {
                 String address = student.getUser().getAddress();
                 binding.tvSvAddress.setText(address);
                 binding.tvSvCourse.setText(student.getCourse_year());
+                binding.tvSvClass.setText(student.getClass_code() );
+                binding.tvSvMajor.setText(student.getMarjor().getCode() + " - " + student.getMarjor().getName());
+                binding.tvSvDepartment.setText(student.getMarjor().getFaculties().getCode() + " - " + student.getMarjor().getFaculties().getName());
             }
+        });
+
+        binding.btnBack.setOnClickListener(back -> {
+            finish();
         });
     }
 }

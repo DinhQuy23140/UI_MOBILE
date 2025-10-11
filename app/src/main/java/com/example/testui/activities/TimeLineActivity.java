@@ -43,30 +43,56 @@ public class TimeLineActivity extends AppCompatActivity {
         binding.tvStatus.setText("Trạng thái: " + projectTerm.getStatus());
         binding.tvDescription.setText(projectTerm.getDescription());
 
-        LinearLayout timeLineDangKiDoAn = findViewById(R.id.timeLineDangKi);
-        timeLineDangKiDoAn.setOnClickListener(v -> {
+        binding.btnViewTopicDetail.setOnClickListener(viewTopic -> {
+            Intent intent = new Intent(this, ChiTietDoAnActivity.class);
+            intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
+            startActivity(intent);
+        });
+
+        binding.timeLineDangKi.setOnClickListener(v -> {
             Intent intent = new Intent(this, DangKiDoAnActivity.class);
             intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
             startActivity(intent);
         });
 
-        LinearLayout timeLineNopDeCuong = findViewById(R.id.timeLineNopDeCuong);
-        timeLineNopDeCuong.setOnClickListener(v -> {
+        binding.timeLineNopDeCuong.setOnClickListener(v -> {
             Intent intent = new Intent(this, NopDeCuongActivity.class);
             intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
             startActivity(intent);
         });
 
-        LinearLayout timeLineThucHienHP = findViewById(R.id.timeLineThucHienHP);
-        timeLineThucHienHP.setOnClickListener(v -> {
+        binding.timeLineThucHienHP.setOnClickListener(v -> {
             Intent intent = new Intent(this, ProgressLogActivity.class);
             intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
             startActivity(intent);
         });
 
-        LinearLayout timeLineNopBaoCao = findViewById(R.id.timeLineNopBaoCao);
-        timeLineNopBaoCao.setOnClickListener(v -> {
+        binding.timeLineNopBaoCao.setOnClickListener(v -> {
             Intent intent = new Intent(this, NopBaoCaoActivity.class);
+            intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
+            startActivity(intent);
+        });
+
+        binding.timelineTraCuuHoiDong.setOnClickListener(timeline5 -> {
+            Intent intent = new Intent(this, TraCuuHoiDongActivity.class);
+            intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
+            startActivity(intent);
+        });
+
+        binding.timelinePhanBien.setOnClickListener(timeline6 -> {
+            Intent intent = new Intent(this, TraCuuDiemActivity.class);
+            intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
+            startActivity(intent);
+        });
+
+        binding.timelineTraCuuPhanBien.setOnClickListener(timeline7 -> {
+            Intent intent = new Intent(this, TraCuuDiemActivity.class);
+            intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
+            startActivity(intent);
+        });
+
+        binding.timelineBaoVe.setOnClickListener(timeline8 -> {
+            Intent intent = new Intent(this, TraCuuDiemActivity.class);
             intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
             startActivity(intent);
         });

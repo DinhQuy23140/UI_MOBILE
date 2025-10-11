@@ -1,14 +1,15 @@
 package com.example.testui.model;
 
 public class Marjor {
-    String id, code, name, description, faculty_id;
+    String id, code, name, description;
+    Faculties faculties;
 
-    public Marjor(String id, String name, String code, String description, String faculty_id) {
+    public Marjor(String id, String name, String code, String description, Faculties faculties) {
         this.id = id;
         this.name = name;
         this.code = code;
         this.description = description;
-        this.faculty_id = faculty_id;
+        this.faculties = faculties;
     }
 
     public String getCode() {
@@ -27,12 +28,12 @@ public class Marjor {
         this.description = description;
     }
 
-    public String getFaculty_id() {
-        return faculty_id;
+    public Faculties getFaculties() {
+        return faculties;
     }
 
-    public void setFaculty_id(String faculty_id) {
-        this.faculty_id = faculty_id;
+    public void setFaculties(Faculties faculties) {
+        this.faculties = faculties;
     }
 
     public String getId() {
