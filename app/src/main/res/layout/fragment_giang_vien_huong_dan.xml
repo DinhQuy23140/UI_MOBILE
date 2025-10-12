@@ -1,42 +1,299 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_gradient"
     android:orientation="vertical"
-    android:background="#ACDFF6"
-    android:padding="16dp"
     tools:context=".fragment.GiangVienHuongDanFragment">
 
-    <!-- Tiêu đề -->
-    <TextView
-        android:id="@+id/tvTitle"
+    <!-- Header hiện đại với glassmorphism effect -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Danh sách Giảng viên hướng dẫn"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="#000000"
-        android:gravity="center"
-        android:padding="8dp" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <!-- Ô tìm kiếm -->
-    <EditText
-        android:id="@+id/etSearch"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Tìm kiếm giảng viên..."
-        android:padding="12dp"
-        android:background="@android:drawable/edit_text"
-        android:drawableStart="@android:drawable/ic_menu_search"
-        android:drawablePadding="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="12dp" />
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:backgroundTint="@android:color/transparent"
+            app:cardCornerRadius="0dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="0dp">
 
-    <!-- Danh sách giảng viên -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvGiangVien"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_header_gradient"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="20dp">
 
-</LinearLayout>
+                <!-- Avatar/Logo -->
+                <ImageView
+                    android:id="@+id/ivFilter"
+                    style="@style/ModernIconButton"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:src="@drawable/ic_back_white"
+                    app:tint="#FFFFFF" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:letterSpacing="0.03"
+                        android:text="Giảng Viên Hướng Dẫn"
+                        android:textColor="#FFFFFF"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:letterSpacing="0.02"
+                        android:text="Tìm kiếm và kết nối với giảng viên"
+                        android:textColor="#E3F2FD"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/bg_circle_accent"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_person"
+                    app:tint="#FFFFFF" />
+
+                <!-- Action buttons -->
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="#FFFFFF"
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="4dp">
+
+                <!-- Search input hiện đại -->
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etSearch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:hint="🔍 Tìm kiếm giảng viên..."
+                    android:padding="18dp"
+                    android:textSize="15sp" />
+
+                <!-- Filter button với hiệu ứng -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnAdvancedFilter"
+                    style="@style/Widget.Material3.Button.Icon"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="8dp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:text=""
+                    app:backgroundTint="#2196F3"
+                    app:cornerRadius="20dp"
+                    app:elevation="6dp"
+                    app:icon="@drawable/ic_search"
+                    app:iconGravity="textStart"
+                    app:iconPadding="0dp"
+                    app:iconTint="@android:color/white" />
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="16dp"
+            android:orientation="horizontal">
+
+            <!-- Total Stat -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                app:strokeColor="#E3F2FD"
+                app:strokeWidth="0dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_circle_accent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="15"
+                                android:textColor="@color/white"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+                            <ImageView
+                                android:id="@+id/imageView3"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="5dp"
+                                android:src="@drawable/ic_person" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Tổng số GV"
+                            android:textColor="@color/white"
+                            android:textSize="11sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Available Stat -->
+
+            <!-- Active Stat -->
+
+        </LinearLayout>
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:paddingVertical="4dp">
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbarSize="0dp"
+                android:scrollbars="none">
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chipGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="4dp"
+                    app:singleSelection="false">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipAll"
+                        style="@style/ModernFilterChip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tất cả"
+                        app:chipBackgroundColor="@color/chip_state_modern"
+                        app:chipIcon="@drawable/ic_all_modern" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipProfessor"
+                        style="@style/ModernFilterChip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Giáo sư"
+                        app:chipBackgroundColor="@color/chip_state_modern"
+                        app:chipIcon="@drawable/ic_professor_modern" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipPhD"
+                        style="@style/ModernFilterChip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tiến sĩ"
+                        app:chipBackgroundColor="@color/chip_state_modern"
+                        app:chipIcon="@drawable/ic_phd_modern" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipAvailable"
+                        style="@style/ModernFilterChip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Còn slot"
+                        app:chipBackgroundColor="@color/chip_state_modern"
+                        app:chipIcon="@drawable/ic_available_modern" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipPopular"
+                        style="@style/ModernFilterChip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Phổ biến"
+                        app:chipBackgroundColor="@color/chip_state_modern"
+                        app:chipIcon="@drawable/ic_trending" />
+
+                </com.google.android.material.chip.ChipGroup>
+
+            </HorizontalScrollView>
+
+        </HorizontalScrollView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvGiangVien"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/bg_info_group"
+            android:clipToPadding="false"
+            android:scrollbarSize="0dp"
+            android:scrollbars="none"
+            tools:itemCount="2"
+            tools:listitem="@layout/item_gvhd" />
+    </LinearLayout>
+
+    <!-- Search section nổi bật -->
+
+    <!-- Quick stats với design hiện đại -->
+
+    <!-- Filter chips section hiện đại -->
+
+</androidx.core.widget.NestedScrollView>

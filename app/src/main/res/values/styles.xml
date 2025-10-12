@@ -43,4 +43,54 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
     </style>
+
+    <style name="ModernSearchStyle2" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusBottomEnd">16dp</item>
+        <item name="boxCornerRadiusBottomStart">16dp</item>
+        <item name="boxCornerRadiusTopEnd">16dp</item>
+        <item name="boxCornerRadiusTopStart">16dp</item>
+        <item name="boxStrokeColor">#E3E3E3</item>
+        <item name="hintTextColor">#999999</item>
+        <item name="boxBackgroundColor">#F8F9FA</item>
+    </style>
+
+    <style name="ModernFilterChip" parent="Widget.Material3.Chip.Filter">
+        <item name="chipMinTouchTargetSize">0dp</item>
+        <item name="chipStartPadding">12dp</item>
+        <item name="chipEndPadding">12dp</item>
+        <item name="chipCornerRadius">12dp</item>
+    </style>
+
+    <style name="ModernIconButton">
+        <item name="android:foreground">?attr/selectableItemBackgroundBorderless</item>
+    </style>
+
+    <!-- Chip style cho môn học -->
+    <style name="SubjectChip" parent="Widget.Material3.Chip.Assist">
+        <item name="chipBackgroundColor">@color/subject_chip_background</item>
+        <item name="chipStrokeColor">@color/subject_chip_stroke</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="chipCornerRadius">16dp</item>
+        <item name="android:textColor">@color/subject_chip_text</item>
+        <item name="chipMinTouchTargetSize">0dp</item>
+        <item name="chipStartPadding">12dp</item>
+        <item name="chipEndPadding">12dp</item>
+        <item name="chipIconSize">18dp</item>
+        <item name="chipMinHeight">32dp</item>
+        <item name="android:layout_marginEnd">8dp</item>
+        <item name="android:layout_marginBottom">8dp</item>
+    </style>
+
+    <!-- Alternative chip styles for variety -->
+    <style name="SubjectChip.Secondary" parent="SubjectChip">
+        <item name="chipBackgroundColor">@color/subject_chip_background_secondary</item>
+        <item name="chipStrokeColor">@color/subject_chip_stroke_secondary</item>
+        <item name="android:textColor">@color/subject_chip_text_secondary</item>
+    </style>
+
+    <style name="SubjectChip.Tertiary" parent="SubjectChip">
+        <item name="chipBackgroundColor">@color/subject_chip_background_tertiary</item>
+        <item name="chipStrokeColor">@color/subject_chip_stroke_tertiary</item>
+        <item name="android:textColor">@color/subject_chip_text_tertiary</item>
+    </style>
 </resources>

@@ -52,69 +52,69 @@ public class ChiTietDoAnActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        chiTietDoAnViewModel = new ViewModelProvider(this, new ChiTietDoAnViewModelFactory(this)).get(ChiTietDoAnViewModel.class);
-        processLogAdapter = new ProcessLogAdapter(this, new ArrayList<>(), position -> {
-            Intent intent = new Intent(ChiTietDoAnActivity.this, ProgressLogDetailActivity.class);
-            intent.putExtra(Constants.KEY_PROGRESS_LOG, gson.toJson(processLogAdapter.getItem(position)));
-            startActivity(intent);
-        });
-
-        binding.rvProgressLog.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        binding.rvProgressLog.setAdapter(processLogAdapter);
-
-        gvhdAdapter = new GVHDAdapter(this, new ArrayList<>(), new OnClickItem() {
-            @Override
-            public void onClickItem(int position) {
-                Intent intent = new Intent(ChiTietDoAnActivity.this, GVHDActivity.class);
-                intent.putExtra(Constants.KEY_SUPERVISOR, new Gson().toJson(assignment.getAssignment_supervisors().get(position).getSupervisor()));
-                startActivity(intent);
-            }
-        });
-        binding.rvGvhd.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        binding.rvGvhd.setAdapter(gvhdAdapter);
-
-        String studentId = chiTietDoAnViewModel.getIdStudent();
-        chiTietDoAnViewModel.getChiTietDoAn(studentId);
-        chiTietDoAnViewModel.getAssignmentMutableLiveData().observe(this, result -> {
-            if (result != null) {
-                assignment = result;
-                binding.tvMaDeTai.setText("Mã đề tài: " + assignment.getId());
-                binding.tvTenDeTai.setText("Tên đề tài: " + assignment.getProject().getName());
-                binding.tvMoTa.setText("Mô tả: " + assignment.getProject().getDescription());
-                if (!assignment.getProject().getProgress_logs().isEmpty()) {
-                    processLogAdapter.updateData(assignment.getProject().getProgress_logs());
-                }
-                Log.d("Supervisor", String.valueOf(assignment.getAssignment_supervisors().size()));
-                if (!assignment.getAssignment_supervisors().isEmpty()) {
-                    List<Supervisor> convertSupervisor = new ArrayList<>();
-                    for (AssignmentSupervisor assignmentSupervisor : assignment.getAssignment_supervisors()) {
-                        convertSupervisor.add(assignmentSupervisor.getSupervisor());
-                    }
-                    gvhdAdapter.updateData(convertSupervisor);
-                }
-
-            }
-        });
-
-        binding.btnDetailProgress.setOnClickListener(detailProgress -> {
-            Intent intent = new Intent(this, ProgressLogActivity.class);
-            intent.putExtra(Constants.KEY_PROGRESS_LOG, new Gson().toJson(assignment.getProject().getProgress_logs()));
-            startActivity(intent);
-        });
-
-        binding.btnNopDeCuong.setOnClickListener(nopedcuong -> {
-            Intent intent = new Intent(ChiTietDoAnActivity.this, NopDeCuongActivity.class);
-            startActivity(intent);
-        });
-
-        binding.btnNopBaoCao.setOnClickListener(nopbaocao -> {
-            Intent intent = new Intent(ChiTietDoAnActivity.this, NopBaoCaoActivity.class);
-            startActivity(intent);
-        });
-
-        binding.btnTraCuuDiem.setOnClickListener(tracuudiem -> {
-            Intent intent = new Intent(ChiTietDoAnActivity.this, TraCuuDiemActivity.class);
-            startActivity(intent);
-        });
+//        chiTietDoAnViewModel = new ViewModelProvider(this, new ChiTietDoAnViewModelFactory(this)).get(ChiTietDoAnViewModel.class);
+//        processLogAdapter = new ProcessLogAdapter(this, new ArrayList<>(), position -> {
+//            Intent intent = new Intent(ChiTietDoAnActivity.this, ProgressLogDetailActivity.class);
+//            intent.putExtra(Constants.KEY_PROGRESS_LOG, gson.toJson(processLogAdapter.getItem(position)));
+//            startActivity(intent);
+//        });
+//
+//        binding.rvProgressLog.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+//        binding.rvProgressLog.setAdapter(processLogAdapter);
+//
+//        gvhdAdapter = new GVHDAdapter(this, new ArrayList<>(), new OnClickItem() {
+//            @Override
+//            public void onClickItem(int position) {
+//                Intent intent = new Intent(ChiTietDoAnActivity.this, GVHDActivity.class);
+//                intent.putExtra(Constants.KEY_SUPERVISOR, new Gson().toJson(assignment.getAssignment_supervisors().get(position).getSupervisor()));
+//                startActivity(intent);
+//            }
+//        });
+//        binding.rvGvhd.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+//        binding.rvGvhd.setAdapter(gvhdAdapter);
+//
+//        String studentId = chiTietDoAnViewModel.getIdStudent();
+//        chiTietDoAnViewModel.getChiTietDoAn(studentId);
+//        chiTietDoAnViewModel.getAssignmentMutableLiveData().observe(this, result -> {
+//            if (result != null) {
+//                assignment = result;
+//                binding.tvMaDeTai.setText("Mã đề tài: " + assignment.getId());
+//                binding.tvTenDeTai.setText("Tên đề tài: " + assignment.getProject().getName());
+//                binding.tvMoTa.setText("Mô tả: " + assignment.getProject().getDescription());
+//                if (!assignment.getProject().getProgress_logs().isEmpty()) {
+//                    processLogAdapter.updateData(assignment.getProject().getProgress_logs());
+//                }
+//                Log.d("Supervisor", String.valueOf(assignment.getAssignment_supervisors().size()));
+//                if (!assignment.getAssignment_supervisors().isEmpty()) {
+//                    List<Supervisor> convertSupervisor = new ArrayList<>();
+//                    for (AssignmentSupervisor assignmentSupervisor : assignment.getAssignment_supervisors()) {
+//                        convertSupervisor.add(assignmentSupervisor.getSupervisor());
+//                    }
+//                    gvhdAdapter.updateData(convertSupervisor);
+//                }
+//
+//            }
+//        });
+//
+//        binding.btnDetailProgress.setOnClickListener(detailProgress -> {
+//            Intent intent = new Intent(this, ProgressLogActivity.class);
+//            intent.putExtra(Constants.KEY_PROGRESS_LOG, new Gson().toJson(assignment.getProject().getProgress_logs()));
+//            startActivity(intent);
+//        });
+//
+//        binding.btnNopDeCuong.setOnClickListener(nopedcuong -> {
+//            Intent intent = new Intent(ChiTietDoAnActivity.this, NopDeCuongActivity.class);
+//            startActivity(intent);
+//        });
+//
+//        binding.btnNopBaoCao.setOnClickListener(nopbaocao -> {
+//            Intent intent = new Intent(ChiTietDoAnActivity.this, NopBaoCaoActivity.class);
+//            startActivity(intent);
+//        });
+//
+//        binding.btnTraCuuDiem.setOnClickListener(tracuudiem -> {
+//            Intent intent = new Intent(ChiTietDoAnActivity.this, TraCuuDiemActivity.class);
+//            startActivity(intent);
+//        });
     }
 }
