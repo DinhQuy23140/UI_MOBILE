@@ -3,6 +3,7 @@ package com.example.testui.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -30,6 +31,9 @@ public class DanhSachDotDoAnActivity extends AppCompatActivity {
     DotDoAnViewModel dotDoAnViewModel;
     ProjectTermAdapter projectTermAdapter;
     List<ProjectTerm> listProjectTerm;
+    Intent intent;
+    String studentId = "";
+    Gson gson;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,35 +45,56 @@ public class DanhSachDotDoAnActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        Intent intent = getIntent();
-        String studentId = intent.getStringExtra(Constants.KEY_ID_STUDENT);
+        init();
+        studentId = intent.getStringExtra(Constants.KEY_ID_STUDENT);
+        setupClick();
+        createRecyclerView();
+        fetchDataRecyclerView();
+    }
+
+    void init(){
+        dotDoAnViewModel = new DotDoAnViewModel(this);
+        intent = getIntent();
+        gson = new Gson();
+    }
+
+    void setupClick() {
+        binding.btnBack.setOnClickListener(back -> {
+            finish();
+        });
+    }
+
+    void createRecyclerView() {
         projectTermAdapter = new ProjectTermAdapter(this, new ArrayList<>(), new OnClickItem() {
             @Override
             public void onClickItem(int position) {
                 Intent intent1 = new Intent(DanhSachDotDoAnActivity.this, TimeLineActivity.class);
-                intent1.putExtra(Constants.KEY_PROJECT_TERM, new Gson().toJson(listProjectTerm.get(position)));
-                //Toast.makeText(DanhSachDotDoAnActivity.this, new Gson().toJson(listProjectTerm.get(position)), Toast.LENGTH_SHORT).show();
+                intent1.putExtra(Constants.KEY_PROJECT_TERM, gson.toJson(listProjectTerm.get(position)));
                 Log.d("ProjectTerm", new Gson().toJson(listProjectTerm.get(position)));
                 startActivity(intent1);
             }
         });
         binding.rcvDotDoAn.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         binding.rcvDotDoAn.setAdapter(projectTermAdapter);
+    }
 
+    void fetchDataRecyclerView() {
         if (studentId != null) {
-            dotDoAnViewModel = new DotDoAnViewModel(this);
             dotDoAnViewModel.getListDoAnByStudentId(studentId);
             Toast.makeText(this, studentId, Toast.LENGTH_SHORT).show();
             dotDoAnViewModel.getListDotDoAn().observe(this, result -> {
                 if (result != null) {
                     listProjectTerm = result;
                     projectTermAdapter.updateData(listProjectTerm);
+                    binding.tvCount.setText(String.valueOf(listProjectTerm.size()));
+                    binding.layoutDotDoAn.setVisibility(View.VISIBLE);
+                    binding.progressBarIc.setVisibility(View.GONE);
                 }
             });
+        } else {
+            binding.rcvDotDoAn.setVisibility(View.GONE);
+            binding.emptyStateView.setVisibility(View.VISIBLE);
+            binding.progressBarIc.setVisibility(View.GONE);
         }
-
-        binding.btnBack.setOnClickListener(back -> {
-            finish();
-        });
     }
 }

@@ -139,7 +139,7 @@
                 android:background="@drawable/bg_badge_count"
                 android:paddingHorizontal="12dp"
                 android:paddingVertical="4dp"
-                android:text="6"
+                android:text="0"
                 android:textColor="#FFFFFF"
                 android:textSize="14sp"
                 android:textStyle="bold" />
@@ -162,9 +162,10 @@
 
         <!-- Danh sách đợt trong card -->
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/layout_dot_do_an"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:visibility="gone"
             app:cardBackgroundColor="#FFFFFF"
             app:cardCornerRadius="16dp"
             app:cardElevation="4dp">
@@ -240,6 +241,13 @@
             </FrameLayout>
 
         </com.google.android.material.card.MaterialCardView>
+
+        <ProgressBar
+            android:id="@+id/progressBarIc"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp" />
 
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

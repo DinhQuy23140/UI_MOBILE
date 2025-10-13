@@ -45,7 +45,8 @@ public class HomeFragment extends Fragment {
     HomeViewModel homeViewModel;
     ActivityHomeBinding homeBinding;
     FragmentHomeBinding fragmentHomeBinding;
-    String projectTermId = "";
+    String projectTermId = "", studentId = "";
+    Gson gson;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -95,8 +96,17 @@ public class HomeFragment extends Fragment {
         init();
         loadInfStudent();
         loadRecentAssignment();
-        String studentId = homeViewModel.getStudentId();
+        studentId = homeViewModel.getStudentId();
+        setupClick();
+    }
 
+    void init() {
+        homeBinding = ActivityHomeBinding.inflate(getLayoutInflater());
+        homeViewModel = new ViewModelProvider(this, new HomeViewModelFactory(requireContext())).get(HomeViewModel.class);
+        gson = new Gson();
+    }
+
+    void setupClick() {
         fragmentHomeBinding.layoutSinhVien.setOnClickListener(click -> {
             Intent intent = new Intent(getContext(), CapNhapThongTinActivity.class);
             intent.putExtra(Constants.KEY_ID_STUDENT, studentId);
@@ -134,11 +144,6 @@ public class HomeFragment extends Fragment {
         });
     }
 
-    void init() {
-        homeBinding = ActivityHomeBinding.inflate(getLayoutInflater());
-        homeViewModel = new ViewModelProvider(this, new HomeViewModelFactory(requireContext())).get(HomeViewModel.class);
-    }
-
     void loadInfStudent() {
         homeViewModel.getStudentById();
         homeViewModel.getGetStudent().observe(getViewLifecycleOwner(), student -> {
@@ -155,10 +160,11 @@ public class HomeFragment extends Fragment {
         homeViewModel.getRecentAssignment().observe(getViewLifecycleOwner(), assignment -> {
             if (assignment != null) {
                 //de tai
-                projectTermId = new Gson().toJson(assignment.getProject_term());
+                projectTermId = gson.toJson(assignment.getProject_term());
                 fragmentHomeBinding.tvProjectStatus.setText(assignment.getStatus());
                 fragmentHomeBinding.tvTenDeTai.setText(assignment.getProject().getName());
                 fragmentHomeBinding.tvMaDeTai.setText(assignment.getProject().getId());
+
                 Map<Integer, Integer> colorStatus = homeViewModel.getBackGroundStatusAssignment();
                 int backgroundColor = colorStatus.keySet().iterator().next();
                 int textColor = colorStatus.get(backgroundColor);
