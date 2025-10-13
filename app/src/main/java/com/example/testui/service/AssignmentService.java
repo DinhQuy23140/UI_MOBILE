@@ -34,4 +34,7 @@ public interface AssignmentService {
 
     @PATCH("assignments/{assignmentId}/project/{projectId}")
     Call<Assignment> updateProjectIdAssignmentByAssIdAndProId(@Path("assignmentId") String assignmentId, @Path("projectId") String projectId);
+
+    @GET("assignment/recent/student/{studentId}")
+    Call<Assignment> getRecentAssignmentByStudentId(@Path("studentId") String studentId);
 }

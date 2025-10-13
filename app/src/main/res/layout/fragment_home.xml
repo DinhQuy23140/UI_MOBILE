@@ -162,13 +162,13 @@
 
             <!-- Banner tin tức nổi bật -->
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
                 android:text="Tin tức nổi bật"
                 android:textColor="#1A237E"
                 android:textSize="18sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="12dp" />
+                android:textStyle="bold" />
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
@@ -515,13 +515,13 @@
 
             <!-- Tiến độ đồ án (Tính năng mới) -->
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/layout_recent_assignment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="30dp"
                 app:cardBackgroundColor="#FFFFFF"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="2dp">
-
 
 
                 <LinearLayout
@@ -531,13 +531,25 @@
                     android:padding="16dp">
 
                     <!-- Thông tin đề tài - Compact Design -->
+                    <TextView
+                        android:id="@+id/textView6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="15dp"
+                        android:text="Đồ án tốt nghiệp gần đây"
+                        android:textColor="@color/primaryColor"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
                     <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/layout_topic"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:cardCornerRadius="16dp"
-                        app:cardElevation="4dp"
+                        android:layout_marginBottom="12dp"
                         app:cardBackgroundColor="#FFFFFF"
-                        android:layout_marginBottom="12dp">
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="4dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -549,9 +561,9 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal"
+                                android:layout_marginBottom="12dp"
                                 android:gravity="center_vertical"
-                                android:layout_marginBottom="12dp">
+                                android:orientation="horizontal">
 
                                 <ImageView
                                     android:layout_width="20dp"
@@ -562,8 +574,8 @@
                                 <TextView
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="1"
                                     android:layout_marginStart="8dp"
+                                    android:layout_weight="1"
                                     android:text="Đề tài đồ án"
                                     android:textColor="#1A237E"
                                     android:textSize="14sp"
@@ -573,7 +585,7 @@
                                     android:id="@+id/chipTrangThai"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Đang thực hiện" />
+                                    android:text="Text" />
                             </LinearLayout>
 
                             <!-- Tên đề tài -->
@@ -581,13 +593,13 @@
                                 android:id="@+id/tvTenDeTai"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_marginBottom="12dp"
+                                android:ellipsize="end"
+                                android:maxLines="2"
                                 android:text="Xây dựng hệ thống quản lý đồ án tốt nghiệp"
                                 android:textColor="#2D3748"
                                 android:textSize="15sp"
-                                android:textStyle="bold"
-                                android:maxLines="2"
-                                android:ellipsize="end"
-                                android:layout_marginBottom="12dp" />
+                                android:textStyle="bold" />
 
                             <!-- Thông tin grid compact -->
                             <LinearLayout
@@ -604,10 +616,10 @@
                                     <TextView
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
+                                        android:layout_marginBottom="2dp"
                                         android:text="Mã đề tài"
                                         android:textColor="#718096"
-                                        android:textSize="11sp"
-                                        android:layout_marginBottom="2dp" />
+                                        android:textSize="11sp" />
 
                                     <TextView
                                         android:id="@+id/tvMaDeTai"
@@ -628,10 +640,10 @@
                                     <TextView
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
+                                        android:layout_marginBottom="2dp"
                                         android:text="Loại"
                                         android:textColor="#718096"
-                                        android:textSize="11sp"
-                                        android:layout_marginBottom="2dp" />
+                                        android:textSize="11sp" />
 
                                     <TextView
                                         android:id="@+id/tvLoaiDeTai"
@@ -650,10 +662,10 @@
                     <com.google.android.material.card.MaterialCardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:cardCornerRadius="16dp"
-                        app:cardElevation="4dp"
+                        android:layout_marginBottom="16dp"
                         app:cardBackgroundColor="#FFFFFF"
-                        android:layout_marginBottom="16dp">
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="4dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -665,9 +677,9 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal"
+                                android:layout_marginBottom="16dp"
                                 android:gravity="center_vertical"
-                                android:layout_marginBottom="16dp">
+                                android:orientation="horizontal">
 
                                 <ImageView
                                     android:layout_width="20dp"
@@ -678,14 +690,15 @@
                                 <TextView
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="1"
                                     android:layout_marginStart="8dp"
+                                    android:layout_weight="1"
                                     android:text="Đợt đồ án"
                                     android:textColor="#1A237E"
                                     android:textSize="14sp"
                                     android:textStyle="bold" />
 
                                 <TextView
+                                    android:id="@+id/tv_stage_project_term"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/bg_file_icon"
@@ -701,15 +714,15 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                android:layout_marginBottom="16dp">
+                                android:layout_marginBottom="16dp"
+                                android:orientation="vertical">
 
                                 <!-- Dòng timeline 1 -->
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:orientation="horizontal"
-                                    android:layout_marginBottom="12dp">
+                                    android:layout_marginBottom="12dp"
+                                    android:orientation="horizontal">
 
                                     <TextView
                                         android:layout_width="0dp"
@@ -733,32 +746,32 @@
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:orientation="horizontal"
-                                    android:layout_marginBottom="12dp">
+                                    android:layout_marginBottom="12dp"
+                                    android:orientation="horizontal">
 
                                     <TextView
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
-                                        android:text="Hạn đăng ký"
+                                        android:text="Ngày đăng ký"
                                         android:textColor="#718096"
                                         android:textSize="12sp" />
 
                                     <LinearLayout
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:orientation="horizontal"
-                                        android:gravity="center_vertical">
+                                        android:gravity="center_vertical"
+                                        android:orientation="horizontal">
 
                                         <TextView
-                                            android:id="@+id/tvHanDangKy"
+                                            android:id="@+id/tvNgayDangKy"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
+                                            android:layout_marginEnd="4dp"
                                             android:text="15/03/2024"
                                             android:textColor="#4A5568"
                                             android:textSize="12sp"
-                                            android:textStyle="bold"
-                                            android:layout_marginEnd="4dp" />
+                                            android:textStyle="bold" />
 
                                         <View
                                             android:layout_width="6dp"
@@ -802,9 +815,9 @@
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:orientation="horizontal"
+                                    android:layout_marginBottom="6dp"
                                     android:gravity="center_vertical"
-                                    android:layout_marginBottom="6dp">
+                                    android:orientation="horizontal">
 
                                     <TextView
                                         android:layout_width="0dp"
@@ -815,6 +828,7 @@
                                         android:textSize="11sp" />
 
                                     <TextView
+                                        android:id="@+id/tv_progress"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="40%"
@@ -824,6 +838,7 @@
                                 </LinearLayout>
 
                                 <ProgressBar
+                                    android:id="@+id/progress_bar"
                                     style="@android:style/Widget.ProgressBar.Horizontal"
                                     android:layout_width="match_parent"
                                     android:layout_height="4dp"
@@ -834,10 +849,11 @@
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:orientation="horizontal"
-                                    android:layout_marginTop="4dp">
+                                    android:layout_marginTop="4dp"
+                                    android:orientation="horizontal">
 
                                     <TextView
+                                        android:id="@+id/tv_range_date"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
@@ -846,6 +862,7 @@
                                         android:textSize="10sp" />
 
                                     <TextView
+                                        android:id="@+id/tv_assignment_detail"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="Chi tiết"

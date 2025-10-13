@@ -50,4 +50,5 @@
     <color name="subject_chip_background_accent">#F3E5F5</color>
     <color name="subject_chip_stroke_accent">#9C27B0</color>
     <color name="subject_chip_text_accent">#9C27B0</color>
+    <color name="red_color">#ED2020</color>
 </resources>

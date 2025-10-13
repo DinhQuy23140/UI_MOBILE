@@ -10,6 +10,7 @@ import com.example.testui.model.LoginResponse;
 import com.example.testui.model.Student;
 import com.example.testui.model.Supervisor;
 import com.example.testui.service.ApiService;
+import com.example.testui.service.AssignmentService;
 import com.example.testui.service.AuthService;
 import com.example.testui.sharepreference.SharePreferenceManage;
 import com.google.gson.Gson;
@@ -29,16 +30,19 @@ import retrofit2.Response;
 public class SinhVienRepository {
     ApiService apiService;
     AuthService authService;
+    AssignmentService assignmentService;
     private static volatile SinhVienRepository instance;
     MutableLiveData<Boolean> loginResult = new MutableLiveData<>(false);
     MutableLiveData<Student> student = new MutableLiveData<>();
     MutableLiveData<List<Supervisor>> listSupervisor = new MutableLiveData<>();
     MutableLiveData<Assignment> assignmentByIdStudent = new MutableLiveData<>();
+    MutableLiveData<Assignment> recentAssignment = new MutableLiveData<>();
     SharePreferenceManage sharePreferenceManage;
     // private constructor : singleton access
     public SinhVienRepository(Context context) {
         apiService = Client.getInstance().create(ApiService.class);
         authService = Client.getInstance().create(AuthService.class);
+        assignmentService = Client.getInstance().create(AssignmentService.class);
         sharePreferenceManage = new SharePreferenceManage(context);
     }
 
@@ -197,5 +201,30 @@ public class SinhVienRepository {
 
     public MutableLiveData<Assignment> getAssignmentByIdStudent() {
         return assignmentByIdStudent;
+    }
+
+    public MutableLiveData<Assignment> getRecentAssignment(String studentId) {
+        Call<Assignment> call = assignmentService.getRecentAssignmentByStudentId(studentId);
+        call.enqueue(new Callback<Assignment>() {
+            @Override
+            public void onResponse(Call<Assignment> call, Response<Assignment> response) {
+                if (response.isSuccessful()) {
+                    Assignment assignment = response.body();
+                    recentAssignment.setValue(assignment);
+                } else {
+                    Log.e("API_ERROR", "Response not successful: " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Assignment> call, Throwable throwable) {
+                Log.e("API_ERROR", "Failed to get assignment", throwable);
+            }
+        });
+        return recentAssignment;
+    }
+
+    public MutableLiveData<Assignment> getRecentAssignment() {
+        return recentAssignment;
     }
 }

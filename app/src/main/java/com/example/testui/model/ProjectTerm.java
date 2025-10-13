@@ -1,5 +1,7 @@
 package com.example.testui.model;
 
+import java.util.List;
+
 public class ProjectTerm {
     private String id;
     private String academy_year_id;
@@ -9,16 +11,26 @@ public class ProjectTerm {
     private String end_date;
     private String status;
     private AcademyYear academy_year;
+    private List<StageTimeline> stage_timelines;
 
-    public ProjectTerm(AcademyYear academy_year, String academy_year_id, String description, String end_date, String id, String stage, String start_date, String status) {
+    public ProjectTerm(AcademyYear academy_year, String academy_year_id, String description, String end_date, String id, String stage, List<StageTimeline> stage_timelines, String start_date, String status) {
         this.academy_year = academy_year;
         this.academy_year_id = academy_year_id;
         this.description = description;
         this.end_date = end_date;
         this.id = id;
         this.stage = stage;
+        this.stage_timelines = stage_timelines;
         this.start_date = start_date;
         this.status = status;
+    }
+
+    public List<StageTimeline> getStage_timelines() {
+        return stage_timelines;
+    }
+
+    public void setStage_timelines(List<StageTimeline> stage_timelines) {
+        this.stage_timelines = stage_timelines;
     }
 
     public String getAcademy_year_id() {
