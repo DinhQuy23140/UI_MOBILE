@@ -72,7 +72,7 @@
                         android:paddingHorizontal="8dp"
                         android:paddingVertical="4dp"
                         android:text="Đã hoàn thành"
-                        android:textColor="#4CAF50"
+                        android:textColor="@color/white"
                         android:textSize="10sp"
                         android:textStyle="bold" />
                 </com.google.android.material.card.MaterialCardView>
@@ -81,19 +81,20 @@
 
             <!-- Đánh giá -->
             <LinearLayout
+                android:id="@+id/background_instructor_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
                 android:background="@drawable/bg_rating_good"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
                 android:paddingHorizontal="8dp"
                 android:paddingVertical="4dp">
 
                 <ImageView
                     android:layout_width="14dp"
                     android:layout_height="14dp"
-                    android:src="@drawable/ic_check_circle"
                     android:layout_marginEnd="4dp"
+                    android:src="@drawable/ic_check_circle"
                     app:tint="@android:color/white" />
 
                 <TextView
@@ -150,11 +151,12 @@
                 app:tint="#667EEA" />
 
             <TextView
+                android:id="@+id/tv_count_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5 ngày"
-                android:textSize="11sp"
-                android:textColor="#666666" />
+                android:textColor="#666666"
+                android:textSize="11sp" />
 
         </LinearLayout>
 

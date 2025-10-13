@@ -2,6 +2,8 @@ package com.example.testui.model;
 
 import androidx.annotation.NonNull;
 
+import com.example.testui.R;
+
 import java.util.List;
 
 public class Assignment {
@@ -19,6 +21,7 @@ public class Assignment {
     Project project;
     ProjectTerm project_term;
     String created_at, updated_at;
+    int background;
 
     public Assignment(List<AssignmentSupervisor> assignment_supervisors, String council_id, String counter_argument_id, String counter_argument_status, String created_at, String id, Project project, String project_id, ProjectTerm project_term, String project_term_id, String role, String status, Student student, String student_id, String updated_at) {
         this.assignment_supervisors = assignment_supervisors;
@@ -158,6 +161,14 @@ public class Assignment {
         this.student_id = student_id;
     }
 
+    public int getBackground() {
+        return background;
+    }
+
+    public void setBackground(int background) {
+        this.background = background;
+    }
+
     @NonNull
     @Override
     public String toString() {
@@ -165,18 +176,23 @@ public class Assignment {
         switch(status) {
             case "pending":
                 convertStatus = "Đang chờ";
+                background = R.drawable.bg_circle_pending;
                 break;
             case "cancel":
                 convertStatus = "Đã hủy";
+                background = R.drawable.bg_badge_modern;
                 break;
             case "stopped":
                 convertStatus = "Đã dừng";
+                background = R.drawable.bg_icon_success;
                 break;
             case "actived":
                 convertStatus = "Đang thực hiện";
+                background = R.drawable.bg_rating_good;
                 break;
             default:
                 convertStatus = "Đang chờ";
+                background = R.drawable.bg_status_pending;
                 break;
         }
         return convertStatus;

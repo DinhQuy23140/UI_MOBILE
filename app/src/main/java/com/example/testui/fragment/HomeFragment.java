@@ -183,7 +183,7 @@ public class HomeFragment extends Fragment {
                 int progress = homeViewModel.getProcess();
                 fragmentHomeBinding.progressBar.setProgress(progress);
                 fragmentHomeBinding.tvProgress.setText(progress + "%");
-                fragmentHomeBinding.tvRangeDate.setText("Còn " + homeViewModel.getRangeDate() + " ngày");
+                fragmentHomeBinding.tvCountDate.setText("Còn " + homeViewModel.getRangeDate() + " ngày");
             } else {
                 fragmentHomeBinding.layoutRecentAssignment.setVisibility(View.GONE);
             }
