@@ -94,6 +94,8 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         init();
+        homeViewModel.getStudentById();
+        homeViewModel.loadRecentAssignment();
         loadInfStudent();
         loadRecentAssignment();
         studentId = homeViewModel.getStudentId();
@@ -145,7 +147,6 @@ public class HomeFragment extends Fragment {
     }
 
     void loadInfStudent() {
-        homeViewModel.getStudentById();
         homeViewModel.getGetStudent().observe(getViewLifecycleOwner(), student -> {
             if (student != null) {
                 String studentName = student.getUser().getFullname() + " - " + student.getClass_code();
@@ -156,7 +157,6 @@ public class HomeFragment extends Fragment {
 
     @SuppressLint("SetTextI18n")
     void loadRecentAssignment() {
-        homeViewModel.loadRecentAssignment();
         homeViewModel.getRecentAssignment().observe(getViewLifecycleOwner(), assignment -> {
             if (assignment != null) {
                 //de tai

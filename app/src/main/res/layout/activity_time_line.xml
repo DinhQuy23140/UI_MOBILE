@@ -274,8 +274,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:orientation="vertical">
 
           <TextView
               android:layout_width="wrap_content"
@@ -284,14 +284,23 @@
               android:textColor="#666666"
               android:textSize="12sp" />
 
+          <androidx.recyclerview.widget.RecyclerView
+              android:id="@+id/rv_supervisor"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layout_marginTop="5dp"
+              tools:itemCount="2"
+              tools:listitem="@layout/item_base_supervisor" />
+
           <TextView
-              android:id="@+id/tv_supervisor"
-              android:layout_width="wrap_content"
+              android:id="@+id/tv_notify_empty"
+              android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:text="TS. Nguyễn Văn A"
-              android:textColor="#333333"
-              android:textSize="12sp"
-              android:textStyle="bold" />
+              android:layout_marginTop="10dp"
+              android:gravity="center"
+              android:text="Chưa có giảng viên hướng dẫn"
+              android:textStyle="bold"
+              android:visibility="gone" />
         </LinearLayout>
 
       </LinearLayout>
@@ -346,6 +355,7 @@
                 android:textStyle="bold" />
 
             <View
+                android:id="@+id/tv_range_stage1"
                 android:layout_width="2dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="4dp"
@@ -428,6 +438,7 @@
                 android:textStyle="bold" />
 
             <View
+                android:id="@+id/tv_range_stage2"
                 android:layout_width="2dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="4dp"
@@ -510,6 +521,7 @@
                 android:textStyle="bold" />
 
             <View
+                android:id="@+id/tv_range_stage3"
                 android:layout_width="2dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="4dp"
@@ -592,6 +604,7 @@
                 android:textStyle="bold" />
 
             <View
+                android:id="@+id/tv_range_stage4"
                 android:layout_width="2dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="4dp"
@@ -674,6 +687,7 @@
                 android:textStyle="bold" />
 
             <View
+                android:id="@+id/tv_range_stage5"
                 android:layout_width="2dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="4dp"
@@ -756,6 +770,7 @@
                 android:textStyle="bold" />
 
             <View
+                android:id="@+id/tv_range_stage6"
                 android:layout_width="2dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="4dp"
@@ -838,6 +853,7 @@
                 android:textStyle="bold" />
 
             <View
+                android:id="@+id/tv_range_stage7"
                 android:layout_width="2dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="4dp"
@@ -918,6 +934,14 @@
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"
                 android:textStyle="bold" />
+
+            <View
+                android:id="@+id/tv_range_stage8"
+                android:layout_width="2dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:background="#E0E0E0" />
           </LinearLayout>
 
           <LinearLayout

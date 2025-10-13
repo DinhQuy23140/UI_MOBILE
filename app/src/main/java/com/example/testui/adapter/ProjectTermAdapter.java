@@ -35,7 +35,7 @@ public class ProjectTermAdapter extends RecyclerView.Adapter<ProjectTermAdapter.
         return new RecyclerViewHolder(view);
     }
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint({"SetTextI18n", "UseCompatLoadingForDrawables"})
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
         ProjectTerm projectTerm = projectTerms.get(position);
@@ -44,7 +44,8 @@ public class ProjectTermAdapter extends RecyclerView.Adapter<ProjectTermAdapter.
         holder.tvTgKetThuc.setText(projectTerm.getEnd_date());
         holder.tvNamHoc.setText(projectTerm.getAcademy_year().getYear_name());
         holder.tvMoTa.setText(projectTerm.getDescription());
-        holder.tvTrangThai.setText(projectTerm.getStatus());
+        holder.tvTrangThai.setText(projectTerm.toString());
+        holder.tvTrangThai.setBackground(context.getDrawable(projectTerm.getBackgroundColor()));
         holder.itemView.setOnClickListener(v -> onClickItem.onClickItem(position));
     }
 

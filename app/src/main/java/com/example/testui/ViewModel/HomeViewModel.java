@@ -24,6 +24,7 @@ import java.util.Map;
 public class HomeViewModel extends ViewModel {
     MutableLiveData<Student> getStudent = new MutableLiveData<>();
     MutableLiveData<String> studentId = new MutableLiveData<>();
+    MutableLiveData<Assignment> recentAssignment = new MutableLiveData<>();
     private SinhVienRepository sinhVienRepository;
     public HomeViewModel(Context context) {
         this.sinhVienRepository = new SinhVienRepository(context);
@@ -44,17 +45,18 @@ public class HomeViewModel extends ViewModel {
 
     public void loadRecentAssignment() {
         sinhVienRepository.getRecentAssignment(getStudentId());
+        recentAssignment = sinhVienRepository.getRecentAssignment();
     }
 
     public MutableLiveData<Assignment> getRecentAssignment() {
-        return sinhVienRepository.getRecentAssignment(getStudentId());
+        return recentAssignment;
     }
 
     public int getProcess() {
         float count = 0;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate today = LocalDate.now();
-        Assignment assignment = sinhVienRepository.getRecentAssignment(getStudentId()).getValue();
+        Assignment assignment = recentAssignment.getValue();
         List<StageTimeline> listStage = assignment.getProject_term().getStage_timelines();
         for (StageTimeline stageTimeline : listStage) {
             LocalDate startDate = LocalDate.parse(stageTimeline.getStart_date());
@@ -73,7 +75,7 @@ public class HomeViewModel extends ViewModel {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate today = LocalDate.now();
 
-        Assignment assignment = sinhVienRepository.getRecentAssignment(getStudentId()).getValue();
+        Assignment assignment = recentAssignment.getValue();
         if (assignment == null || assignment.getProject_term() == null) return 0;
 
         LocalDate endDate = LocalDate.parse(assignment.getProject_term().getEnd_date(), formatter);
@@ -84,7 +86,7 @@ public class HomeViewModel extends ViewModel {
 
     public Map<Integer, Integer> getBackGroundStatusAssignment() {
         Map<Integer, Integer> backgroundStatus = new HashMap<>();
-        Assignment assignment = sinhVienRepository.getRecentAssignment(getStudentId()).getValue();
+        Assignment assignment = recentAssignment.getValue();
         switch (assignment.getStatus()) {
             case "pending":
                 backgroundStatus.put(R.color.timeline_line, Color.WHITE);
