@@ -1,5 +1,6 @@
 package com.example.testui.service;
 
+import com.example.testui.model.Assignment;
 import com.example.testui.model.ProjectTerm;
 
 import java.util.List;
@@ -30,4 +31,7 @@ public interface ProjectTermService {
 
     @GET("project-terms/student/{studentId}")
     Call<List<ProjectTerm>> getProjectTermsByStudentId(@Path("studentId") String studentId);
+
+    @GET("assignments/student/{studentId}/project-term/{projectTermId}")
+    Call<Assignment> getAssignmentByStudentIdAndTermId(@Path("studentId") String studentId, @Path("projectTermId") String projectTermId);
 }

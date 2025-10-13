@@ -14,20 +14,20 @@ import retrofit2.Response;
 
 public class AssignmentRepository {
     AssignmentService assignmentService;
-    MutableLiveData<Assignment> assignmentMutableLiveData = new MutableLiveData<>();
     MutableLiveData<Assignment> assignmenUpdatetMutableLiveData = new MutableLiveData<>();
+    MutableLiveData<Assignment> assignmentByStudentIdAndTermIdMutableLiveData = new MutableLiveData<>();
 
     public AssignmentRepository() {
         assignmentService = Client.getInstance().create(AssignmentService.class);
     }
 
-    public void getAssignmentByStudentIdAndTermId(String studentId, String termId){
+    public void loadAssignmentByStudentIdAndTermId(String studentId, String termId){
         Call<Assignment> call = assignmentService.getAssignmentByStudentIdAndTermId(studentId, termId);
         call.enqueue(new Callback<Assignment>() {
             @Override
             public void onResponse(Call<Assignment> call, Response<Assignment> response) {
                 if (response.isSuccessful()) {
-                    assignmentMutableLiveData.setValue(response.body());
+                    assignmentByStudentIdAndTermIdMutableLiveData.setValue(response.body());
                 } else {
                     Log.e("AssignmentRepository", "onResponse: " + response.errorBody().toString());
                 }
@@ -40,8 +40,8 @@ public class AssignmentRepository {
         });
     }
 
-    public MutableLiveData<Assignment> getAssignmentMutableLiveData() {
-        return assignmentMutableLiveData;
+    public MutableLiveData<Assignment> getAssignmentByStudentIdAndTermId() {
+        return assignmentByStudentIdAndTermIdMutableLiveData;
     }
 
     public void updateProjectIdAssignmentByAssIdAndProId(String assignmentId, String projectId) {

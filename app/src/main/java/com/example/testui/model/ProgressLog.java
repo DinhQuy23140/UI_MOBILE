@@ -1,5 +1,7 @@
 package com.example.testui.model;
 
+import com.example.testui.R;
+
 import java.util.Date;
 import java.util.List;
 
@@ -17,6 +19,7 @@ public class ProgressLog {
     private String instructor_comment;          // Nhận xét của giảng viên
     private String student_status;    // Trạng thái từ sinh viên
     private String instructor_status; // Trạng thái đánh giá từ giảng viên
+    private int backgroundInstructor, backgroundStudent;
 
     public ProgressLog(String id, String process_id, String title, String description, String start_date_time, String end_date_time, List<Attachment> attachments, String instructor_comment, String student_status, String instructor_status) {
         this.id = id;
@@ -125,5 +128,71 @@ public class ProgressLog {
 
     public String getStatus() {
         return "Trang thái: " + student_status;
+    }
+
+    public int getBackgroundInstructor() {
+        return backgroundInstructor;
+    }
+
+    public void setBackgroundInstructor(int backgroundInstructor) {
+        this.backgroundInstructor = backgroundInstructor;
+    }
+
+    public int getBackgroundStudent() {
+        return backgroundStudent;
+    }
+
+    public void setBackgroundStudent(int backgroundStudent) {
+        this.backgroundStudent = backgroundStudent;
+    }
+
+    public String instructorStatusToString() {
+        String status = "";
+        switch (instructor_status) {
+            case "pending":
+                status = "Chưa duyệt";
+                backgroundInstructor = R.drawable.bg_circle_pending;
+                break;
+            case "approved":
+                status = "Đạt";
+                backgroundInstructor = R.drawable.bg_status_completed;
+                break;
+            case "need_editing":
+                status = "Cần chỉnh sửa";
+                backgroundInstructor = R.drawable.bg_icon_primary;
+                break;
+            case "not_achieved":
+                status = "Chưa đạt";
+                backgroundInstructor = R.drawable.bg_icon_success;
+                break;
+            default:
+                status = "Chưa duyệt";
+                backgroundInstructor = R.drawable.bg_circle_pending;
+                break;
+        }
+        return status;
+    }
+
+    public String studentStatusToString() {
+        String status = "";
+        switch (student_status) {
+            case "in_progress":
+                status = "Đang thực hiện";
+                backgroundStudent = R.drawable.bg_circle_pending;
+                break;
+            case "completed":
+                status = "Hoàn thành";
+                backgroundStudent = R.drawable.bg_status_completed;
+                break;
+            case "not_completed":
+                status = "Chưa hoàn thành";
+                backgroundStudent = R.drawable.bg_badge_modern;
+                break;
+            default:
+                status = "Chưa bắt đầu";
+                backgroundStudent = R.drawable.bg_icon_primary;
+                break;
+        }
+        return status;
     }
 }

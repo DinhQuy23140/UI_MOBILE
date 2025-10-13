@@ -27,11 +27,11 @@ public class NopBaoCaoViewModel extends ViewModel {
     }
 
     public void getAssignmentByStudentIdAndTermId(String studentId, String termId) {
-        assignmentRepository.getAssignmentByStudentIdAndTermId(studentId, termId);
+        assignmentRepository.loadAssignmentByStudentIdAndTermId(studentId, termId);
     }
 
     public MutableLiveData<Assignment> getAssignmentMutableLiveData() {
-        return assignmentRepository.getAssignmentMutableLiveData();
+        return assignmentRepository.getAssignmentByStudentIdAndTermId();
     }
 
     public String getStudentId(){

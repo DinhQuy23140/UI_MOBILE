@@ -4,22 +4,43 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.LinearLayout;
-import android.widget.Toast;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import com.example.testui.R;
+import com.example.testui.ViewModel.TimeLineViewModel;
+import com.example.testui.ViewModelFactory.TimeLineViewModelFactory;
+import com.example.testui.adapter.BaseGVHDAdapter;
 import com.example.testui.databinding.ActivityTimeLineBinding;
+import com.example.testui.model.Assignment;
 import com.example.testui.model.ProjectTerm;
+import com.example.testui.model.StageTimeline;
+import com.example.testui.model.Supervisor;
 import com.example.testui.untilities.Constants;
 import com.google.gson.Gson;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TimeLineActivity extends AppCompatActivity {
     ActivityTimeLineBinding binding;
+    String strProjectTerm = "";
+    Intent intent;
+    TimeLineViewModel timeLineViewModel;
+    String studentId = "", projectTermId = "";
+    BaseGVHDAdapter baseGVHDAdapter;
+    List<Supervisor> listSupervisor;
+    Assignment assignment;
+    Gson gson;
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,16 +54,140 @@ public class TimeLineActivity extends AppCompatActivity {
             return insets;
         });
 
-        Intent itent = getIntent();
-        String strProjectTerm = itent.getStringExtra(Constants.KEY_PROJECT_TERM);
+        init();
+        setUpRecyclerView();
+        loadProjectTerm();
+        loadAssignment();
+        setupClick();
+
+    }
+
+    void init() {
+        intent = getIntent();
+        timeLineViewModel = new ViewModelProvider(this, new TimeLineViewModelFactory(this)).get(TimeLineViewModel.class);
+        listSupervisor = new ArrayList<>();
+        gson = new Gson();
+    }
+
+    void loadAssignment() {
+        studentId = timeLineViewModel.getStudentId();
+        timeLineViewModel.loadAssignmentByStudentIdAndTermId(studentId, projectTermId);
+        timeLineViewModel.getAssignmentByStudentIdAndTermId().observe(this, result -> {
+            if (result != null) {
+                assignment = result;
+                Log.d("timeline", new Gson().toJson(result));
+                binding.tvCurrentTopic.setText(result.getProject().getName());
+                if (result.getAssignment_supervisors().isEmpty()) {
+                    binding.rvSupervisor.setVisibility(View.GONE);
+                    binding.tvNotifyEmpty.setVisibility(View.VISIBLE);
+                } else {
+                    listSupervisor = timeLineViewModel.getSupervisor(result.getAssignment_supervisors());
+                    baseGVHDAdapter.updateData(listSupervisor);
+                    binding.rvSupervisor.setVisibility(View.VISIBLE);
+                    binding.tvNotifyEmpty.setVisibility(View.GONE);
+                }
+            }
+        });
+    }
+
+    void setUpRecyclerView() {
+        binding.rvSupervisor.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        baseGVHDAdapter = new BaseGVHDAdapter(this, new ArrayList<>(), position -> {
+            Intent intent1 = new Intent(TimeLineActivity.this, GVHDActivity.class);
+            intent1.putExtra(Constants.KEY_SUPERVISOR, new Gson().toJson(listSupervisor.get(position)));
+            startActivity(intent1);
+        });
+        binding.rvSupervisor.setAdapter(baseGVHDAdapter);
+    }
+
+    @SuppressLint({"SetTextI18n", "UseCompatLoadingForDrawables"})
+    void loadProjectTerm() {
+        strProjectTerm = intent.getStringExtra(Constants.KEY_PROJECT_TERM);
         Log.d("project_term", strProjectTerm);
         ProjectTerm projectTerm = new Gson().fromJson(strProjectTerm, ProjectTerm.class);
-        binding.tvProjectName.setText("Đợt đồ án: Kỳ " + projectTerm.getStage() + " năm " + projectTerm.getAcademy_year().getYear_name());
+        projectTermId = projectTerm.getId();
+        binding.tvProjectName.setText("Đợt đồ án: Đợt " + projectTerm.getStage() + " năm " + projectTerm.getAcademy_year().getYear_name());
         binding.tvStartDate.setText("Bắt đầu: " + projectTerm.getStart_date());
         binding.tvEndDate.setText("Kết thúc: " + projectTerm.getEnd_date());
         binding.tvStatus.setText("Trạng thái: " + projectTerm.getStatus());
         binding.tvDescription.setText(projectTerm.getDescription());
 
+        List<StageTimeline> listStage = projectTerm.getStage_timelines();
+
+        // Kiểm tra null và size để tránh IndexOutOfBoundsException
+        if (listStage != null && !listStage.isEmpty()) {
+            // Tạo danh sách TextView tương ứng
+            TextView[] tvDates = {
+                    binding.tvDates1, binding.tvDates2, binding.tvDates3,
+                    binding.tvDates4, binding.tvDates5, binding.tvDates6,
+                    binding.tvDates7, binding.tvDates8
+            };
+
+            TextView[] tvStageNumbers = {
+                    binding.tvStepNumber1, binding.tvStepNumber2, binding.tvStepNumber3,
+                    binding.tvStepNumber4, binding.tvStepNumber5, binding.tvStepNumber6,
+                    binding.tvStepNumber7, binding.tvStepNumber8
+            };
+
+            TextView[] tvStageStatus = {
+                    binding.tvStatus1, binding.tvStatus2, binding.tvStatus3,
+                    binding.tvStatus4, binding.tvStatus5, binding.tvStatus6,
+                    binding.tvStatus7, binding.tvStatus8
+            };
+
+            View[] viewStageRanges = {
+                    binding.tvRangeStage1, binding.tvRangeStage2, binding.tvRangeStage3, binding.tvRangeStage4,
+                    binding.tvRangeStage5, binding.tvRangeStage6, binding.tvRangeStage7, binding.tvRangeStage8
+            };
+
+            // Giới hạn theo số stage và số textview có
+            int limit = Math.min(listStage.size(), tvDates.length);
+
+            for (int i = 0; i < limit; i++) {
+                StageTimeline stage = listStage.get(i);
+
+                DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+                // Parse chuỗi thành LocalDate
+                LocalDate startDate = LocalDate.parse(stage.getStart_date(), inputFormatter);
+                LocalDate endDate = LocalDate.parse(stage.getEnd_date(), inputFormatter);
+                LocalDate now = LocalDate.now();
+
+                // Format lại dạng mong muốn
+                String start = startDate.format(outputFormatter);
+                String end = endDate.format(outputFormatter);
+
+                // Set text
+                tvDates[i].setText(start + " - " + end);
+                tvDates[i].setVisibility(View.VISIBLE);
+                if (startDate.isAfter(now) && endDate.isBefore(now)) {
+                    tvStageStatus[i].setText("Đang diễn ra");
+                    tvStageStatus[i].setBackground(getDrawable(R.drawable.bg_circle_inprogress));
+                    tvStageNumbers[i].setBackground(getDrawable(R.drawable.bg_circle_inprogress));
+                    viewStageRanges[i].setBackground(getDrawable(R.drawable.bg_circle_inprogress));
+                } else if(startDate.isBefore(now)) {
+                    tvStageNumbers[i].setBackground(getDrawable(R.drawable.bg_circle_completed));
+                    tvStageStatus[i].setBackground(getDrawable(R.drawable.bg_circle_completed));
+                    viewStageRanges[i].setBackground(getDrawable(R.drawable.bg_circle_completed));
+                    tvStageStatus[i].setText("Hoàn thành");
+                } else {
+                    tvStageNumbers[i].setBackground(getDrawable(R.drawable.bg_circle_pending));
+                    tvStageStatus[i].setBackground(getDrawable(R.drawable.bg_circle_pending));
+                    viewStageRanges[i].setBackground(getDrawable(R.drawable.bg_circle_pending));
+                    tvStageStatus[i].setText("Chưa diễn ra");
+                }
+            }
+
+            // Ẩn những TextView dư
+            for (int i = limit; i < tvDates.length; i++) {
+                tvDates[i].setVisibility(View.GONE);
+            }
+        }
+
+    }
+
+    void setupClick() {
         binding.btnViewTopicDetail.setOnClickListener(viewTopic -> {
             Intent intent = new Intent(this, ChiTietDoAnActivity.class);
             intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
@@ -94,6 +239,13 @@ public class TimeLineActivity extends AppCompatActivity {
         binding.timelineBaoVe.setOnClickListener(timeline8 -> {
             Intent intent = new Intent(this, TraCuuDiemActivity.class);
             intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
+            startActivity(intent);
+        });
+
+        binding.btnViewTopicDetail.setOnClickListener(v -> {
+            Intent intent = new Intent(this, ChiTietDoAnActivity.class);
+            intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
+            intent.putExtra(Constants.KEY_ASSIGNMENT, gson.toJson(assignment));
             startActivity(intent);
         });
     }

@@ -326,7 +326,7 @@
                                 android:paddingHorizontal="8dp"
                                 android:paddingVertical="4dp"
                                 android:text="Đã chấp nhận"
-                                android:textColor="#4CAF50"
+                                android:textColor="@color/white"
                                 android:textSize="10sp"
                                 android:textStyle="bold" />
                         </com.google.android.material.card.MaterialCardView>
@@ -399,6 +399,17 @@
                         android:layout_height="wrap_content"
                         tools:itemCount="2"
                         tools:listitem="@layout/item_gvhd" />
+
+                    <TextView
+                        android:id="@+id/tv_empty_notify"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="15dp"
+                        android:gravity="center"
+                        android:text="Chưa có giảng viên hướng dẫn"
+                        android:textStyle="bold"
+                        android:visibility="gone" />
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -518,18 +529,19 @@
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="6dp"
                             android:layout_weight="1"
+                            app:cardBackgroundColor="@android:color/transparent"
                             app:cardCornerRadius="12dp"
                             app:cardElevation="1dp">
 
                             <com.google.android.material.button.MaterialButton
                                 android:id="@+id/btnXemHoiDong"
-                                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="Xem hội đồng"
                                 android:textColor="@color/primaryColor"
                                 android:textSize="14sp"
                                 android:textStyle="bold"
+                                app:backgroundTint="@android:color/transparent"
                                 app:cornerRadius="12dp"
                                 app:icon="@drawable/ic_committee"
                                 app:iconPadding="4dp"
@@ -629,6 +641,17 @@
                         android:nestedScrollingEnabled="false"
                         tools:itemCount="2"
                         tools:listitem="@layout/item_progress_log" />
+
+                    <TextView
+                        android:id="@+id/tv_empty_progress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:gravity="center"
+                        android:text="Chưa có nhật ký"
+                        android:textStyle="bold"
+                        android:visibility="gone" />
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>

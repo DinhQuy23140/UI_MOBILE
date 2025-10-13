@@ -32,7 +32,7 @@
             android:backgroundTint="#FFFFFF"
             android:contentDescription="Back"
             android:padding="12dp"
-            android:src="@drawable/ic_back"
+            android:src="@drawable/ic_back_white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -49,8 +49,10 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.523" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -138,7 +140,6 @@
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/bg_info_field"
                                 android:padding="8dp"
-                                android:text="Nguyễn Văn A"
                                 android:textColor="#333333"
                                 android:textSize="14sp" />
                         </LinearLayout>
@@ -165,7 +166,6 @@
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/bg_info_field"
                                 android:padding="8dp"
-                                android:text="123456789"
                                 android:textColor="#333333"
                                 android:textSize="14sp" />
                         </LinearLayout>
@@ -199,7 +199,6 @@
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/bg_info_field"
                                 android:padding="8dp"
-                                android:text="D21CNTT01"
                                 android:textColor="#333333"
                                 android:textSize="14sp" />
                         </LinearLayout>
@@ -226,7 +225,6 @@
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/bg_info_field"
                                 android:padding="8dp"
-                                android:text="Công nghệ thông tin"
                                 android:textColor="#333333"
                                 android:textSize="14sp" />
                         </LinearLayout>
@@ -260,7 +258,6 @@
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/bg_info_field"
                                 android:padding="8dp"
-                                android:text="0123456789"
                                 android:textColor="#333333"
                                 android:textSize="14sp" />
                         </LinearLayout>
@@ -288,7 +285,6 @@
                                 android:background="@drawable/bg_info_field"
                                 android:gravity="center"
                                 android:padding="8dp"
-                                android:text="sinhvien@truong.edu.vn"
                                 android:textColor="#333333"
                                 android:textSize="14sp" />
                         </LinearLayout>
@@ -414,6 +410,14 @@
                         android:layout_marginTop="8dp"
                         tools:itemCount="1"
                         tools:listitem="@layout/item_gvhd" />
+
+                    <TextView
+                        android:id="@+id/tv_empty_supervisor"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Chưa có giảng viên hướng dẫn"
+                        android:visibility="gone" />
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
