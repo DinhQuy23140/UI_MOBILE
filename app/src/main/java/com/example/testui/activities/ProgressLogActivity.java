@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
@@ -22,6 +23,7 @@ import com.example.testui.adapter.ProcessLogAdapter;
 import com.example.testui.databinding.ActivityProgressLogBinding;
 import com.example.testui.interfaces.OnClickItem;
 import com.example.testui.model.ProgressLog;
+import com.example.testui.model.ProjectTerm;
 import com.example.testui.untilities.Constants;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -34,7 +36,12 @@ public class ProgressLogActivity extends AppCompatActivity {
     ProgressLogViewModel progressLogViewModel;
     ProcessLogAdapter processLogAdapter;
     Gson gson;
-    String projectId;
+    Intent getIntent;
+    AlertDialog dialog;
+    View view;
+    AlertDialog.Builder builder;
+    ProjectTerm projectTerm;
+    String strProjectTerm = "", projectId = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,22 +55,8 @@ public class ProgressLogActivity extends AppCompatActivity {
         });
 
         serialize();
-        Intent getIntent = getIntent();
-        projectId = getIntent.getStringExtra(Constants.KEY_PROJECT_ID);
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(ProgressLogActivity.this);
-        View view = LayoutInflater.from(ProgressLogActivity.this).inflate(R.layout.add_item_log, null);
-        builder.setView(view);
-
-        AlertDialog dialog = builder.create();
-
-        binding.btnAddEntry.setOnClickListener(addEntry -> {
-            dialog.show();
-        });
-
-        view.findViewById(R.id.btnSave).setOnClickListener(cancel -> {
-            dialog.dismiss();
-        });
+        createDialog();
+        setupClick();
 
         processLogAdapter = new ProcessLogAdapter(this, new ArrayList<>(), position -> {
             Intent intent = new Intent(this, ProgressLogDetailActivity.class);
@@ -73,12 +66,37 @@ public class ProgressLogActivity extends AppCompatActivity {
         binding.rvProgressLogs.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         binding.rvProgressLogs.setAdapter(processLogAdapter);
 
-        loadProgressLog("49", this);
+        loadProgressLog(projectId, this);
     }
 
     void serialize() {
         progressLogViewModel = new ProgressLogViewModel();
         gson = new Gson();
+        getIntent = getIntent();
+        strProjectTerm = getIntent.getStringExtra(Constants.KEY_PROJECT_TERM);
+        projectTerm = gson.fromJson(strProjectTerm, ProjectTerm.class);
+        projectId = getIntent.getStringExtra(Constants.KEY_PROJECT_ID);
+    }
+
+    void createDialog() {
+        builder = new AlertDialog.Builder(ProgressLogActivity.this, R.style.FullScreenDialogTheme);
+        // Inflate layout
+        view = LayoutInflater.from(this).inflate(R.layout.add_item_log, null);
+        builder.setView(view);
+        // Tạo dialog
+        dialog = builder.create();
+        // Cho phép tắt khi bấm ngoài (tuỳ chọn)
+        dialog.setCanceledOnTouchOutside(true);
+    }
+
+    void setupClick() {
+        binding.btnAddEntry.setOnClickListener(addEntry -> {
+            dialog.show();
+        });
+
+        view.findViewById(R.id.btnSave).setOnClickListener(cancel -> {
+            dialog.dismiss();
+        });
     }
 
     @SuppressLint("SetTextI18n")
@@ -86,9 +104,14 @@ public class ProgressLogActivity extends AppCompatActivity {
         progressLogViewModel.getProgressLogByProjectId(projectId);
         progressLogViewModel.getProgressLogByProjectId().observe(this, result -> {
             if (result != null && !result.isEmpty()) {
+                Log.d("Progress", gson.toJson(result));
                 binding.tvLogCount.setText(Integer.toString(result.size()));
                 processLogAdapter.updateData(result); // thêm hàm update trong adapter
             }
+            int countProcess = progressLogViewModel.countProgressProcess(result);
+            int countComplete = progressLogViewModel.countProgressComplete(result);
+            binding.tvInProgressCount.setText(Integer.toString(countProcess));
+            binding.tvCompletedCount.setText(Integer.toString(countComplete));
         });
     }
 }

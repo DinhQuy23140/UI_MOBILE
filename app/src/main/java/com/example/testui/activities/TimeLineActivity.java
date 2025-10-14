@@ -193,6 +193,7 @@ public class TimeLineActivity extends AppCompatActivity {
         binding.timeLineThucHienHP.setOnClickListener(v -> {
             Intent intent = new Intent(this, ProgressLogActivity.class);
             intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
+            intent.putExtra(Constants.KEY_PROJECT_ID, assignment.getProject_id());
             startActivity(intent);
         });
 
@@ -205,6 +206,7 @@ public class TimeLineActivity extends AppCompatActivity {
         binding.timelineTraCuuHoiDong.setOnClickListener(timeline5 -> {
             Intent intent = new Intent(this, TraCuuHoiDongActivity.class);
             intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
+            intent.putExtra(Constants.KEY_ASSIGNMENT_ID, assignment.getId());
             startActivity(intent);
         });
 

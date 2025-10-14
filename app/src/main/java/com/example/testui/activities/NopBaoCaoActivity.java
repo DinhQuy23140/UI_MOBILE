@@ -1,17 +1,12 @@
 package com.example.testui.activities;
 
 import android.annotation.SuppressLint;
-import android.app.ComponentCaller;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.graphics.pdf.LoadParams;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.OpenableColumns;
 import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -28,29 +23,21 @@ import com.example.testui.R;
 import com.example.testui.Supabase.UploadManage;
 import com.example.testui.ViewModel.NopBaoCaoViewModel;
 import com.example.testui.ViewModelFactory.NopBaoCaoViewModelFactory;
-import com.example.testui.adapter.AttachmentAdapter;
 import com.example.testui.adapter.ReportFileAdapter;
 import com.example.testui.adapter.UploadAttachmentAdapter;
 import com.example.testui.databinding.ActivityNopBaoCaoBinding;
-import com.example.testui.interfaces.OnClickItem;
 import com.example.testui.interfaces.UploadDocumentClick;
 import com.example.testui.model.Assignment;
-import com.example.testui.model.Attachment;
-import com.example.testui.model.Document;
 import com.example.testui.model.ProjectTerm;
 import com.example.testui.model.ReportFile;
-import com.example.testui.model.TypeDocument;
 import com.example.testui.model.UploadFile;
 import com.example.testui.untilities.Constants;
+import com.example.testui.untilities.DateFormatter;
 import com.google.gson.Gson;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class NopBaoCaoActivity extends AppCompatActivity {
@@ -70,6 +57,7 @@ public class NopBaoCaoActivity extends AppCompatActivity {
     Assignment assignment;
     NopBaoCaoViewModel nopBaoCaoViewModel;
     String studentId;
+    Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,59 +71,26 @@ public class NopBaoCaoActivity extends AppCompatActivity {
         });
 
         init();
-        Intent intent = getIntent();
+        setupClick();
+        setupRecyclerViewReportFile();
+        setupRecyclerViewAttachment();
+        fetchDataRecyclerView();
+    }
+
+    void init() {
+        context = this;
+        listUploadFile = new ArrayList<>();
+        uploadManage = new UploadManage();
+        listReportFile = new ArrayList<>();
+        nopBaoCaoViewModel = new ViewModelProvider(this, new NopBaoCaoViewModelFactory(this)).get(NopBaoCaoViewModel.class);
+        intent = getIntent();
         strProjectTerm = intent.getStringExtra(Constants.KEY_PROJECT_TERM);
         projectTerm = gson.fromJson(strProjectTerm, ProjectTerm.class);
-
         studentId = nopBaoCaoViewModel.getStudentId();
-        nopBaoCaoViewModel.getAssignmentByStudentIdAndTermId(studentId, projectTerm.getId());
-        nopBaoCaoViewModel.getAssignmentMutableLiveData().observe(this, result -> {
-            assignment = result;
-            nopBaoCaoViewModel.getListReportFileByProjectId(assignment.getProject_id(), "report");
-            Log.d("Assignment", gson.toJson(assignment));
-        });
+    }
 
-        binding.btnNopBaoCao.setOnClickListener(selectFile -> {
-            openFilePicker();
-        });
-
-        reportFileAdapter = new ReportFileAdapter(this, listReportFile, new OnClickItem() {
-            @Override
-            public void onClickItem(int position) {
-
-            }
-        });
-
-        binding.rvDocumentUpload.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        binding.rvDocumentUpload.setAdapter(reportFileAdapter);
-
-
-        nopBaoCaoViewModel.getListReportFileByProjectIdMutableLiveData().observe(this, result -> {
-            listReportFile = result;
-            Log.d("ReportFileSize", String.valueOf(listReportFile.size()));
-            reportFileAdapter.updateData(listReportFile);
-        });
-
-        uploadAttachmentAdapter = new UploadAttachmentAdapter(this, listUploadFile, new UploadDocumentClick() {
-            @Override
-            public void onClick(int position) {
-                
-            }
-
-            @Override
-            public void onDelete(int position) {
-                listUploadFile.remove(position);
-                uploadAttachmentAdapter.updateData(listUploadFile);
-            }
-
-            @Override
-            public void onDownload(int position) {
-
-            }
-        });
-
-        binding.rvDocument.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        binding.rvDocument.setAdapter(uploadAttachmentAdapter);
+    void setupClick() {
+        binding.btnNopBaoCao.setOnClickListener(selectFile -> openFilePicker());
 
         binding.btnNopBaoCao.setOnClickListener(nopbaocao -> {
             if (!listUploadFile.isEmpty()) {
@@ -163,14 +118,6 @@ public class NopBaoCaoActivity extends AppCompatActivity {
         });
     }
 
-    void init() {
-        context = this;
-        listUploadFile = new ArrayList<>();
-        uploadManage = new UploadManage();
-        listReportFile = new ArrayList<>();
-        nopBaoCaoViewModel = new ViewModelProvider(this, new NopBaoCaoViewModelFactory(this)).get(NopBaoCaoViewModel.class);
-    }
-
     private void openFilePicker() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("*/*");
@@ -182,20 +129,14 @@ public class NopBaoCaoActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PICK_FILE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             fileUri = data.getData();
-            String fileName = safeFileName(getFileName(fileUri));
+            String fileName = nopBaoCaoViewModel.safeFileName(nopBaoCaoViewModel.getFileName(fileUri));
             String fileType = context.getContentResolver().getType(fileUri);
-            Date now = new Date();
-            SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-            String formattedDateTime = formatter.format(now);
-//            Document document = new Document(fileName, "", "", formattedDateTime,
-//                    TypeDocument.REPORT, fileType, "");
             File file = null;
             try {
-                file = getFileFromUri(fileUri);
+                file = nopBaoCaoViewModel.getFileFromUri(fileUri);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            String create_at = formatter.format(now);
             ReportFile reportFile = new ReportFile(fileName, fileType, "", assignment.getProject_id(), Constants.KEY_TYPE_REPORT_REPORT, Constants.KEY_STATUS_REPORT_SUBMITTED);
             UploadFile uploadFile = new UploadFile(file, reportFile);
             listUploadFile.add(uploadFile);
@@ -203,21 +144,6 @@ public class NopBaoCaoActivity extends AppCompatActivity {
             uploadAttachmentAdapter.updateData(listUploadFile);
             Log.d("SizeAdapter", String.valueOf(uploadAttachmentAdapter.getListDocument().size()));
         }
-    }
-
-    private File getFileFromUri(Uri uri) throws IOException {
-        InputStream inputStream = getContentResolver().openInputStream(uri);
-        File tempFile = File.createTempFile("upload", ".tmp", getCacheDir());
-        FileOutputStream out = new FileOutputStream(tempFile);
-
-        byte[] buffer = new byte[1024];
-        int len;
-        while ((len = inputStream.read(buffer)) != -1) {
-            out.write(buffer, 0, len);
-        }
-        out.close();
-        inputStream.close();
-        return tempFile;
     }
 
     @Override
@@ -243,29 +169,57 @@ public class NopBaoCaoActivity extends AppCompatActivity {
         }
     }
 
-    private String getFileName(Uri uri) {
-        String result = null;
-        if (uri.getScheme().equals("content")) {
-            try (Cursor cursor = context.getContentResolver().query(uri, null, null, null, null)) {
-                if (cursor != null && cursor.moveToFirst()) {
-                    int nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
-                    if (nameIndex >= 0) {
-                        result = cursor.getString(nameIndex);
-                    }
-                }
-            }
-        }
-        if (result == null) {
-            result = uri.getPath();
-            int cut = result.lastIndexOf('/');
-            if (cut != -1) {
-                result = result.substring(cut + 1);
-            }
-        }
-        return result;
+    void setupRecyclerViewReportFile() {
+        reportFileAdapter = new ReportFileAdapter(this, listReportFile, position -> {
+
+        });
+        binding.rvDocumentUpload.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        binding.rvDocumentUpload.setAdapter(reportFileAdapter);
     }
 
-    private String safeFileName(String fileName) {
-        return fileName.replaceAll("\\s+", "_").toLowerCase().replaceAll("[^a-zA-Z0-9._-]", "");
+    void setupRecyclerViewAttachment() {
+        uploadAttachmentAdapter = new UploadAttachmentAdapter(this, listUploadFile, new UploadDocumentClick() {
+            @Override
+            public void onClick(int position) {
+
+            }
+
+            @Override
+            public void onDelete(int position) {
+                listUploadFile.remove(position);
+                uploadAttachmentAdapter.updateData(listUploadFile);
+            }
+
+            @Override
+            public void onDownload(int position) {
+
+            }
+        });
+        binding.rvDocument.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        binding.rvDocument.setAdapter(uploadAttachmentAdapter);
+    }
+
+    void fetchDataRecyclerView() {
+        nopBaoCaoViewModel.getAssignmentByStudentIdAndTermId(studentId, projectTerm.getId());
+        nopBaoCaoViewModel.getAssignmentMutableLiveData().observe(this, result -> {
+            assignment = result;
+            nopBaoCaoViewModel.getListReportFileByProjectId(assignment.getProject_id(), "report");
+            Log.d("Assignment", gson.toJson(assignment));
+            loadData();
+        });
+
+        nopBaoCaoViewModel.getListReportFileByProjectIdMutableLiveData().observe(this, result -> {
+            listReportFile = result;
+            Log.d("ReportFileSize", String.valueOf(listReportFile.size()));
+            reportFileAdapter.updateData(listReportFile);
+        });
+    }
+
+    void loadData() {
+        binding.tvTenDeTai.setText(assignment.getProject().getName());
+        binding.tvMoTaDeTai.setText(assignment.getProject().getDescription());
+        String startDate = DateFormatter.formatDate(projectTerm.getStage_timelines().get(1).getStart_date());
+        String endDate = DateFormatter.formatDate(projectTerm.getStage_timelines().get(1).getEnd_date());
+        binding.tvThoiGianNop.setText(startDate + " - " + endDate);
     }
 }

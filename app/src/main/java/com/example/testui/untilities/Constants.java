@@ -23,6 +23,7 @@ public class Constants {
     public static final String KEY_PROJECT_ID = "project_id";
     public static final String KEY_PROJECT_TERM = "project_term";
     public static final String KEY_ASSIGNMENT = "assignment";
+    public static final String KEY_ASSIGNMENT_ID = "assignment_id";
     public static final String KEY_TYPE_REPORT_REPORT = "report";
     public static final String KEY_TYPE_REPORT_OUTLINE = "outline";
     public static final String KEY_STATUS_REPORT_PENDING = "pending";

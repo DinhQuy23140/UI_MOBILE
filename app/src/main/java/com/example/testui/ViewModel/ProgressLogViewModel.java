@@ -34,4 +34,20 @@ public class ProgressLogViewModel extends ViewModel {
     public MutableLiveData<List<ProgressLog>> getProgressLogByProjectId() {
         return progressLogByProjectId;
     }
+
+    public int countProgressProcess(List<ProgressLog> listProgress) {
+        int count = 0;
+        for (ProgressLog progressLog : listProgress) {
+            if (progressLog.getStudent_status().equals("in_progress")) count ++;
+        }
+        return  count;
+    }
+
+    public int countProgressComplete(List<ProgressLog> listProgress) {
+        int count = 0;
+        for (ProgressLog progressLog : listProgress) {
+            if (progressLog.getStudent_status().equals("completed")) count ++;
+        }
+        return  count;
+    }
 }

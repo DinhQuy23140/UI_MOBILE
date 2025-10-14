@@ -93,4 +93,35 @@
         <item name="chipStrokeColor">@color/subject_chip_stroke_tertiary</item>
         <item name="android:textColor">@color/subject_chip_text_tertiary</item>
     </style>
+
+    <style name="LightTextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusBottomEnd">12dp</item>
+        <item name="boxCornerRadiusBottomStart">12dp</item>
+        <item name="boxCornerRadiusTopEnd">12dp</item>
+        <item name="boxCornerRadiusTopStart">12dp</item>
+        <item name="boxStrokeColor">#E0E0E0</item>
+        <item name="boxBackgroundColor">#FAFAFA</item>
+        <item name="hintTextColor">#999999</item>
+        <item name="android:textColorHint">#999999</item>
+    </style>
+
+    <style name="LightTextInputLayout.Compact" parent="LightTextInputLayout">
+        <item name="boxBackgroundColor">#FFFFFF</item>
+    </style>
+
+    <style name="FullScreenDialogTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Không tiêu đề -->
+        <item name="windowNoTitle">true</item>
+
+        <!-- Chiếm toàn màn hình -->
+        <item name="android:windowFullscreen">true</item>
+
+        <!-- Cho phép nền tùy chỉnh -->
+        <item name="android:windowIsTranslucent">false</item>
+
+        <!-- Nền trắng (hoặc trong suốt nếu bạn muốn) -->
+        <item name="android:windowBackground">@android:color/white</item>
+    </style>
+
+
 </resources>
