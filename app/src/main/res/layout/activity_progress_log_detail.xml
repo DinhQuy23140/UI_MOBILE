@@ -301,12 +301,69 @@
                                 android:textSize="12sp"
                                 android:textStyle="bold" />
                         </LinearLayout>
+
+                        <!-- Trạng thái sinh viên -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:gravity="center_vertical|end"
+                            android:orientation="horizontal">
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:cardCornerRadius="8dp"
+                                app:cardElevation="0dp">
+
+                                <TextView
+                                    android:id="@+id/tvStudentStatus"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="#E3F2FD"
+                                    android:paddingHorizontal="8dp"
+                                    android:paddingVertical="4dp"
+                                    android:text="Đang xử lý"
+                                    android:textColor="@color/white"
+                                    android:textSize="10sp"
+                                    android:textStyle="bold" />
+                            </com.google.android.material.card.MaterialCardView>
+                        </LinearLayout>
                     </LinearLayout>
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
             <!-- Card: Trạng thái & Nhận xét (Gộp lại) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="20dp"
+                android:gravity="end"
+                android:orientation="vertical">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_upload_attachment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="52dp"
+                    android:letterSpacing="0.02"
+                    android:paddingStart="32dp"
+                    android:paddingEnd="32dp"
+                    android:text="Nộp báo cáo"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:backgroundTint="@color/lavender"
+                    app:cornerRadius="26dp"
+                    app:elevation="8dp"
+                    app:icon="@drawable/ic_upload_modern"
+                    app:iconGravity="textStart"
+                    app:iconPadding="12dp"
+                    app:iconTint="#FFFFFF" />
+
+            </LinearLayout>
+
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -359,49 +416,6 @@
                         android:orientation="vertical"
                         android:padding="16dp">
 
-                        <!-- Trạng thái sinh viên -->
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="12dp"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
-                                android:layout_marginEnd="12dp"
-                                android:src="@drawable/ic_status_base"
-                                app:tint="#FF6B35" />
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="Trạng thái nhật ký"
-                                android:textColor="#666666"
-                                android:textSize="12sp" />
-
-                            <com.google.android.material.card.MaterialCardView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                app:cardBackgroundColor="#E3F2FD"
-                                app:cardCornerRadius="8dp"
-                                app:cardElevation="0dp">
-
-                                <TextView
-                                    android:id="@+id/tvStudentStatus"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:paddingHorizontal="8dp"
-                                    android:paddingVertical="4dp"
-                                    android:text="Đang xử lý"
-                                    android:textColor="#2196F3"
-                                    android:textSize="10sp"
-                                    android:textStyle="bold" />
-                            </com.google.android.material.card.MaterialCardView>
-                        </LinearLayout>
-
                         <!-- Trạng thái giảng viên -->
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -421,9 +435,10 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Trạng thái giảng viên"
+                                android:text="Đánh giá của giảng viên"
                                 android:textColor="#666666"
-                                android:textSize="12sp" />
+                                android:textSize="12sp"
+                                android:textStyle="bold" />
 
                             <com.google.android.material.card.MaterialCardView
                                 android:layout_width="wrap_content"
@@ -439,7 +454,7 @@
                                     android:paddingHorizontal="8dp"
                                     android:paddingVertical="4dp"
                                     android:text="Cần chỉnh sửa"
-                                    android:textColor="#FF9800"
+                                    android:textColor="@color/white"
                                     android:textSize="10sp"
                                     android:textStyle="bold" />
                             </com.google.android.material.card.MaterialCardView>
@@ -486,11 +501,11 @@
                                 android:textSize="11sp" />
 
                             <TextView
+                                android:id="@+id/tv_supervisor_comment"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="6dp"
                                 android:gravity="end"
-                                android:text="— TS. Nguyễn Văn A"
                                 android:textColor="#999999"
                                 android:textSize="9sp"
                                 android:textStyle="italic" />
@@ -503,7 +518,7 @@
             <!-- Card: Tệp đính kèm -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginBottom="24dp"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="2dp">
@@ -552,7 +567,7 @@
                             android:background="@drawable/bg_badge_blue"
                             android:paddingHorizontal="8dp"
                             android:paddingVertical="4dp"
-                            android:text="3 files"
+                            android:text="0 files"
                             android:textColor="@android:color/white"
                             android:textSize="10sp"
                             android:textStyle="bold" />
@@ -565,6 +580,17 @@
                         android:nestedScrollingEnabled="false"
                         tools:itemCount="1"
                         tools:listitem="@layout/item_upload_attachment" />
+
+                    <TextView
+                        android:id="@+id/tv_empty_attachment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:gravity="center"
+                        android:text="Chưa có file đính kèm"
+                        android:textStyle="bold"
+                        android:visibility="gone" />
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>

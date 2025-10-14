@@ -26,9 +26,16 @@ import com.example.testui.activities.DanhSachDotDoAnActivity;
 import com.example.testui.activities.TimeLineActivity;
 import com.example.testui.databinding.ActivityHomeBinding;
 import com.example.testui.databinding.FragmentHomeBinding;
+import com.example.testui.model.Assignment;
+import com.example.testui.model.ProjectTerm;
 import com.example.testui.untilities.Constants;
+import com.example.testui.untilities.DateFormatter;
 import com.google.gson.Gson;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
 /**
@@ -45,8 +52,9 @@ public class HomeFragment extends Fragment {
     HomeViewModel homeViewModel;
     ActivityHomeBinding homeBinding;
     FragmentHomeBinding fragmentHomeBinding;
-    String projectTermId = "", studentId = "";
+    String strProjectTerm = "", studentId = "";
     Gson gson;
+    Assignment assignment;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -131,17 +139,21 @@ public class HomeFragment extends Fragment {
 
         fragmentHomeBinding.lnProgress.setOnClickListener(click -> {
             Intent intent = new Intent(getContext(), ChiTietDoAnActivity.class);
+            intent.putExtra(Constants.KEY_ASSIGNMENT, gson.toJson(assignment));
+            intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
             startActivity(intent);
         });
 
         fragmentHomeBinding.layoutTopic.setOnClickListener(topicDetail -> {
             Intent intent = new Intent(getContext(), ChiTietDoAnActivity.class);
+            intent.putExtra(Constants.KEY_ASSIGNMENT, gson.toJson(assignment));
+            intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
             startActivity(intent);
         });
 
         fragmentHomeBinding.tvAssignmentDetail.setOnClickListener(assignmentDetail -> {
             Intent intent = new Intent(getContext(), TimeLineActivity.class);
-            intent.putExtra(Constants.KEY_PROJECT_TERM, projectTermId);
+            intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
             startActivity(intent);
         });
     }
@@ -157,13 +169,14 @@ public class HomeFragment extends Fragment {
 
     @SuppressLint("SetTextI18n")
     void loadRecentAssignment() {
-        homeViewModel.getRecentAssignment().observe(getViewLifecycleOwner(), assignment -> {
-            if (assignment != null) {
+        homeViewModel.getRecentAssignment().observe(getViewLifecycleOwner(), result -> {
+            if (result != null) {
                 //de tai
-                projectTermId = gson.toJson(assignment.getProject_term());
-                fragmentHomeBinding.tvProjectStatus.setText(assignment.getStatus());
-                fragmentHomeBinding.tvTenDeTai.setText(assignment.getProject().getName());
-                fragmentHomeBinding.tvMaDeTai.setText(assignment.getProject().getId());
+                assignment = result;
+                strProjectTerm = gson.toJson(result.getProject_term());
+                fragmentHomeBinding.tvProjectStatus.setText(result.getStatus());
+                fragmentHomeBinding.tvTenDeTai.setText(result.getProject().getName());
+                fragmentHomeBinding.tvMaDeTai.setText(result.getProject().getId());
 
                 Map<Integer, Integer> colorStatus = homeViewModel.getBackGroundStatusAssignment();
                 int backgroundColor = colorStatus.keySet().iterator().next();
@@ -172,14 +185,21 @@ public class HomeFragment extends Fragment {
                         ContextCompat.getColorStateList(requireContext(), backgroundColor)
                 );
                 fragmentHomeBinding.chipTrangThai.setTextColor(textColor);
-                fragmentHomeBinding.chipTrangThai.setText(assignment.toString());
+                fragmentHomeBinding.chipTrangThai.setText(result.toString());
                 fragmentHomeBinding.tvLoaiDeTai.setText("Chưa có");
 
                 //dot do an
-                fragmentHomeBinding.tvStageProjectTerm.setText("Đợt " + assignment.getProject_term().getStage() + "/" + assignment.getProject_term().getAcademy_year().getYear_name());
-                fragmentHomeBinding.tvNgayBatDau.setText(assignment.getProject_term().getStart_date());
-                fragmentHomeBinding.tvNgayDangKy.setText(assignment.getCreated_at());
-                fragmentHomeBinding.tvNgayKetThuc.setText(assignment.getProject_term().getEnd_date());
+                fragmentHomeBinding.tvStageProjectTerm.setText("Đợt " + result.getProject_term().getStage() + "/" + result.getProject_term().getAcademy_year().getYear_name());
+
+                String formattedDateStart = DateFormatter.formatDate(result.getProject_term().getStart_date());
+                fragmentHomeBinding.tvNgayBatDau.setText(formattedDateStart);
+
+                String formattedDateRegister = DateFormatter.formatDate(result.getCreated_at());
+                fragmentHomeBinding.tvNgayDangKy.setText(formattedDateRegister);
+
+                String formattedDateEnd = DateFormatter.formatDate(result.getProject_term().getEnd_date());
+                fragmentHomeBinding.tvNgayKetThuc.setText(formattedDateEnd);
+
                 int progress = homeViewModel.getProcess();
                 fragmentHomeBinding.progressBar.setProgress(progress);
                 fragmentHomeBinding.tvProgress.setText(progress + "%");

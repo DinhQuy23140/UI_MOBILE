@@ -23,8 +23,10 @@ import com.example.testui.databinding.ActivityTimeLineBinding;
 import com.example.testui.model.Assignment;
 import com.example.testui.model.ProjectTerm;
 import com.example.testui.model.StageTimeline;
+import com.example.testui.model.Status;
 import com.example.testui.model.Supervisor;
 import com.example.testui.untilities.Constants;
+import com.example.testui.untilities.DateFormatter;
 import com.google.gson.Gson;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -107,9 +109,12 @@ public class TimeLineActivity extends AppCompatActivity {
         ProjectTerm projectTerm = new Gson().fromJson(strProjectTerm, ProjectTerm.class);
         projectTermId = projectTerm.getId();
         binding.tvProjectName.setText("Đợt đồ án: Đợt " + projectTerm.getStage() + " năm " + projectTerm.getAcademy_year().getYear_name());
-        binding.tvStartDate.setText("Bắt đầu: " + projectTerm.getStart_date());
-        binding.tvEndDate.setText("Kết thúc: " + projectTerm.getEnd_date());
-        binding.tvStatus.setText("Trạng thái: " + projectTerm.getStatus());
+        binding.tvStartDate.setText("Bắt đầu: " + DateFormatter.formatDate(projectTerm.getStart_date()));
+        binding.tvEndDate.setText("Kết thúc: " + DateFormatter.formatDate(projectTerm.getEnd_date()));
+        Status status = timeLineViewModel.loadStatusAssignment(projectTerm.getStatus());
+        binding.tvStatus.setText("Trạng thái: " + status.getStrStatus());
+        binding.tvStatus.setBackground(getDrawable(status.getBackgroundColor()));
+        binding.tvStatus.setTextColor(getColor(status.getTextColor()));
         binding.tvDescription.setText(projectTerm.getDescription());
 
         List<StageTimeline> listStage = projectTerm.getStage_timelines();
@@ -146,37 +151,16 @@ public class TimeLineActivity extends AppCompatActivity {
             for (int i = 0; i < limit; i++) {
                 StageTimeline stage = listStage.get(i);
 
-                DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
-                // Parse chuỗi thành LocalDate
-                LocalDate startDate = LocalDate.parse(stage.getStart_date(), inputFormatter);
-                LocalDate endDate = LocalDate.parse(stage.getEnd_date(), inputFormatter);
-                LocalDate now = LocalDate.now();
-
-                // Format lại dạng mong muốn
-                String start = startDate.format(outputFormatter);
-                String end = endDate.format(outputFormatter);
-
-                // Set text
+                String start = DateFormatter.formatDate(stage.getStart_date());
+                String end = DateFormatter.formatDate(stage.getEnd_date());
                 tvDates[i].setText(start + " - " + end);
                 tvDates[i].setVisibility(View.VISIBLE);
-                if (startDate.isAfter(now) && endDate.isBefore(now)) {
-                    tvStageStatus[i].setText("Đang diễn ra");
-                    tvStageStatus[i].setBackground(getDrawable(R.drawable.bg_circle_inprogress));
-                    tvStageNumbers[i].setBackground(getDrawable(R.drawable.bg_circle_inprogress));
-                    viewStageRanges[i].setBackground(getDrawable(R.drawable.bg_circle_inprogress));
-                } else if(startDate.isBefore(now)) {
-                    tvStageNumbers[i].setBackground(getDrawable(R.drawable.bg_circle_completed));
-                    tvStageStatus[i].setBackground(getDrawable(R.drawable.bg_circle_completed));
-                    viewStageRanges[i].setBackground(getDrawable(R.drawable.bg_circle_completed));
-                    tvStageStatus[i].setText("Hoàn thành");
-                } else {
-                    tvStageNumbers[i].setBackground(getDrawable(R.drawable.bg_circle_pending));
-                    tvStageStatus[i].setBackground(getDrawable(R.drawable.bg_circle_pending));
-                    viewStageRanges[i].setBackground(getDrawable(R.drawable.bg_circle_pending));
-                    tvStageStatus[i].setText("Chưa diễn ra");
-                }
+
+                Status statusStage = timeLineViewModel.loadStatusStage(stage);
+                tvStageStatus[i].setText(statusStage.getStrStatus());
+                tvStageStatus[i].setBackground(getDrawable(statusStage.getBackgroundColor()));
+                tvStageNumbers[i].setBackground(getDrawable(statusStage.getBackgroundColor()));
+                viewStageRanges[i].setBackground(getDrawable(statusStage.getBackgroundColor()));
             }
 
             // Ẩn những TextView dư
@@ -209,6 +193,7 @@ public class TimeLineActivity extends AppCompatActivity {
         binding.timeLineThucHienHP.setOnClickListener(v -> {
             Intent intent = new Intent(this, ProgressLogActivity.class);
             intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
+            intent.putExtra(Constants.KEY_PROJECT_ID, assignment.getProject_id());
             startActivity(intent);
         });
 
@@ -221,6 +206,7 @@ public class TimeLineActivity extends AppCompatActivity {
         binding.timelineTraCuuHoiDong.setOnClickListener(timeline5 -> {
             Intent intent = new Intent(this, TraCuuHoiDongActivity.class);
             intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
+            intent.putExtra(Constants.KEY_ASSIGNMENT, gson.toJson(assignment));
             startActivity(intent);
         });
 

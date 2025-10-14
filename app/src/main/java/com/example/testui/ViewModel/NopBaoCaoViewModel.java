@@ -1,6 +1,9 @@
 package com.example.testui.ViewModel;
 
 import android.content.Context;
+import android.database.Cursor;
+import android.net.Uri;
+import android.provider.OpenableColumns;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -11,6 +14,10 @@ import com.example.testui.repository.AssignmentRepository;
 import com.example.testui.repository.ReportFileRepository;
 import com.example.testui.repository.SinhVienRepository;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 public class NopBaoCaoViewModel extends ViewModel {
@@ -54,4 +61,44 @@ public class NopBaoCaoViewModel extends ViewModel {
         return reportFileRepository.getListReportFileByProjectIdMutableLiveData();
     }
 
+    public String safeFileName(String fileName) {
+        return fileName.replaceAll("\\s+", "_").toLowerCase().replaceAll("[^a-zA-Z0-9._-]", "");
+    }
+
+    public String getFileName(Uri uri) {
+        String result = null;
+        if (uri.getScheme().equals("content")) {
+            try (Cursor cursor = context.getContentResolver().query(uri, null, null, null, null)) {
+                if (cursor != null && cursor.moveToFirst()) {
+                    int nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
+                    if (nameIndex >= 0) {
+                        result = cursor.getString(nameIndex);
+                    }
+                }
+            }
+        }
+        if (result == null) {
+            result = uri.getPath();
+            int cut = result.lastIndexOf('/');
+            if (cut != -1) {
+                result = result.substring(cut + 1);
+            }
+        }
+        return result;
+    }
+
+    public File getFileFromUri(Uri uri) throws IOException {
+        InputStream inputStream = context.getContentResolver().openInputStream(uri);
+        File tempFile = File.createTempFile("upload", ".tmp", context.getCacheDir());
+        FileOutputStream out = new FileOutputStream(tempFile);
+
+        byte[] buffer = new byte[1024];
+        int len;
+        while ((len = inputStream.read(buffer)) != -1) {
+            out.write(buffer, 0, len);
+        }
+        out.close();
+        inputStream.close();
+        return tempFile;
+    }
 }

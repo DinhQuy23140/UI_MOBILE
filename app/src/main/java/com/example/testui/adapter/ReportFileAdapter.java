@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.testui.R;
@@ -48,6 +49,7 @@ public class ReportFileAdapter extends RecyclerView.Adapter<ReportFileAdapter.Re
         OffsetDateTime odt = OffsetDateTime.parse(reportFile.getCreated_at());
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss dd-MM-yyyy");
         String formatted = odt.format(formatter);
+        holder.tvFileUrl.setText(reportFile.getFile_url());
         holder.tvUploadTime.setText(formatted);
         holder.btnDownload.setOnClickListener(click -> {
             onClickItem.onClickItem(position);
@@ -75,14 +77,16 @@ public class ReportFileAdapter extends RecyclerView.Adapter<ReportFileAdapter.Re
     }
 
     public class ReportFileViewHolder extends RecyclerView.ViewHolder {
-        TextView tvFileName, tvUploadTime;
-        ImageView btnDownload, ivFileType;
+        TextView tvFileName, tvUploadTime, tvFileUrl;
+        ImageView ivFileType;
+        CardView btnDownload;
         public ReportFileViewHolder(@NonNull View itemView) {
             super(itemView);
             ivFileType = itemView.findViewById(R.id.imgFileType);
             tvFileName = itemView.findViewById(R.id.tvFileName);
+            tvFileUrl = itemView.findViewById(R.id.tvFileUrl);
             tvUploadTime = itemView.findViewById(R.id.tvUploadTime);
-            btnDownload = itemView.findViewById(R.id.btnDowload);
+            btnDownload = itemView.findViewById(R.id.btn_download);
         }
     }
 }

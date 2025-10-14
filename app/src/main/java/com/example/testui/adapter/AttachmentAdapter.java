@@ -13,7 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.testui.R;
 import com.example.testui.interfaces.OnClickItem;
 import com.example.testui.model.Attachment;
+import com.example.testui.untilities.DateFormatter;
 
+import java.util.Date;
 import java.util.List;
 
 public class AttachmentAdapter extends RecyclerView.Adapter<AttachmentAdapter.AttachmentViewHolder> {
@@ -40,7 +42,7 @@ public class AttachmentAdapter extends RecyclerView.Adapter<AttachmentAdapter.At
         Attachment attachment = listAttachment.get(position);
         holder.tvFileName.setText(attachment.getFile_name());
         holder.tvFileUrl.setText(attachment.getFile_url());
-        holder.tvUploadTime.setText(attachment.getUpload_time());
+        holder.tvUploadTime.setText(DateFormatter.formatDate(attachment.getCreated_at()));
         holder.itemView.setOnClickListener(click -> {
             onClickItem.onClickItem(position);
         });
@@ -52,7 +54,6 @@ public class AttachmentAdapter extends RecyclerView.Adapter<AttachmentAdapter.At
     }
     @SuppressLint("NotifyDataSetChanged")
     public void updateData(List<Attachment> listAttachment) {
-        listAttachment.clear();
         this.listAttachment = listAttachment;
         notifyDataSetChanged();
     }
