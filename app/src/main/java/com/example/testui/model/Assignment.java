@@ -20,6 +20,7 @@ public class Assignment {
     List<AssignmentSupervisor> assignment_supervisors;
     Project project;
     ProjectTerm project_term;
+    CouncilProject council_project;
     String created_at, updated_at;
     int background;
 
@@ -39,6 +40,14 @@ public class Assignment {
         this.student = student;
         this.student_id = student_id;
         this.updated_at = updated_at;
+    }
+
+    public CouncilProject getCouncil_project() {
+        return council_project;
+    }
+
+    public void setCouncil_project(CouncilProject council_project) {
+        this.council_project = council_project;
     }
 
     public String getCreated_at() {

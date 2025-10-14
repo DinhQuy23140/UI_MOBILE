@@ -206,7 +206,7 @@ public class TimeLineActivity extends AppCompatActivity {
         binding.timelineTraCuuHoiDong.setOnClickListener(timeline5 -> {
             Intent intent = new Intent(this, TraCuuHoiDongActivity.class);
             intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
-            intent.putExtra(Constants.KEY_ASSIGNMENT_ID, assignment.getId());
+            intent.putExtra(Constants.KEY_ASSIGNMENT, gson.toJson(assignment));
             startActivity(intent);
         });
 
