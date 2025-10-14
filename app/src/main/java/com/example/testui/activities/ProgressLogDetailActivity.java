@@ -17,9 +17,11 @@ import com.example.testui.databinding.ActivityProgressLogDetailBinding;
 import com.example.testui.interfaces.OnClickItem;
 import com.example.testui.model.ProgressLog;
 import com.example.testui.untilities.Constants;
+import com.example.testui.untilities.DateFormatter;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class ProgressLogDetailActivity extends AppCompatActivity {
     ActivityProgressLogDetailBinding binding;
@@ -41,8 +43,8 @@ public class ProgressLogDetailActivity extends AppCompatActivity {
         ProgressLog progressLog = new Gson().fromJson(progressLogJson, ProgressLog.class);
         binding.tvTitle.setText(progressLog.getTitle());
         binding.tvDescription.setText("Mô tả: " + progressLog.getDescription());
-        binding.tvStartTime.setText("Ngày bắt đầu: " + progressLog.getStart_date_time());
-        binding.tvEndTime.setText("Ngày kết thúc: " + progressLog.getEnd_date_time());
+        binding.tvStartTime.setText("Ngày bắt đầu: " + DateFormatter.formatDate(progressLog.getStart_date_time()));
+        binding.tvEndTime.setText("Ngày kết thúc: " + DateFormatter.formatDate(progressLog.getEnd_date_time()));
         binding.tvStudentStatus.setText("Trạng thái: " + progressLog.getStudent_status());
         binding.rvAttachments.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         adapter = new AttachmentAdapter(this, progressLog.getAttachments(), new OnClickItem() {

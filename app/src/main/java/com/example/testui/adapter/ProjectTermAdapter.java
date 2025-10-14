@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.testui.R;
 import com.example.testui.interfaces.OnClickItem;
 import com.example.testui.model.ProjectTerm;
+import com.example.testui.untilities.DateFormatter;
 
 import java.util.List;
 
@@ -40,8 +41,13 @@ public class ProjectTermAdapter extends RecyclerView.Adapter<ProjectTermAdapter.
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
         ProjectTerm projectTerm = projectTerms.get(position);
         holder.tvTenDot.setText(projectTerm.getStage());
-        holder.tvTgBatDau.setText(projectTerm.getStart_date());
-        holder.tvTgKetThuc.setText(projectTerm.getEnd_date());
+
+        String startDate = DateFormatter.formatDate(projectTerm.getStart_date());
+        holder.tvTgBatDau.setText(startDate);
+
+        String endDate = DateFormatter.formatDate(projectTerm.getEnd_date());
+        holder.tvTgKetThuc.setText(endDate);
+
         holder.tvNamHoc.setText(projectTerm.getAcademy_year().getYear_name());
         holder.tvMoTa.setText(projectTerm.getDescription());
         holder.tvTrangThai.setText(projectTerm.toString());

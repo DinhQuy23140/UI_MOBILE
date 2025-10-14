@@ -24,8 +24,10 @@ import com.example.testui.databinding.ActivityChiTietDoAnBinding;
 import com.example.testui.interfaces.OnClickItem;
 import com.example.testui.model.Assignment;
 import com.example.testui.model.AssignmentSupervisor;
+import com.example.testui.model.ProjectTerm;
 import com.example.testui.model.Supervisor;
 import com.example.testui.untilities.Constants;
+import com.example.testui.untilities.DateFormatter;
 import com.google.gson.Gson;
 
 import java.time.Instant;
@@ -39,12 +41,13 @@ import java.util.List;
 public class ChiTietDoAnActivity extends AppCompatActivity {
     ProcessLogAdapter processLogAdapter;
     Assignment assignment;
+    ProjectTerm projectTerm;
     ChiTietDoAnViewModel chiTietDoAnViewModel;
     ActivityChiTietDoAnBinding binding;
     List<Supervisor> listSuperVisor;
     GVHDAdapter gvhdAdapter;
     Gson gson;
-    String studentId = "", strAssignment;
+    String studentId = "", strAssignment = "", strProjectTerm = "";
     Intent intent;
 
     @SuppressLint("SetTextI18n")
@@ -72,7 +75,9 @@ public class ChiTietDoAnActivity extends AppCompatActivity {
         chiTietDoAnViewModel = new ViewModelProvider(this, new ChiTietDoAnViewModelFactory(this)).get(ChiTietDoAnViewModel.class);
         intent = getIntent();
         strAssignment = intent.getStringExtra(Constants.KEY_ASSIGNMENT);
+        strProjectTerm = intent.getStringExtra(Constants.KEY_PROJECT_TERM);
         assignment = gson.fromJson(strAssignment, Assignment.class);
+        projectTerm = gson.fromJson(strProjectTerm, ProjectTerm.class);
     }
 
     void setupClick() {
@@ -124,69 +129,47 @@ public class ChiTietDoAnActivity extends AppCompatActivity {
 
     @SuppressLint({"SetTextI18n", "UseCompatLoadingForDrawables"})
     void loadData() {
+        studentId = chiTietDoAnViewModel.getIdStudent();
+        chiTietDoAnViewModel.loadAssignmentByStudentIdAndTermId(studentId, projectTerm.getId());
+        chiTietDoAnViewModel.getAssignmentByStudentIdAndTermId().observe(this, result -> {
+            if (result != null) {
+                assignment = result;
 
-        if (assignment != null) {
-            binding.tvMaDeTai.setText(assignment.getId());
-            String name = (assignment != null && assignment.getProject() != null && assignment.getProject().getName() != null)
-                    ? assignment.getProject().getName()
-                    : "—";
-            binding.tvTenDeTai.setText("Tên đề tài: " + name);
-            binding.tvMoTa.setText("Mô tả: " + assignment.getProject().getDescription());
-            binding.tvThongTinHocKy.setText("Đợt " + assignment.getProject_term().getStage() + " - " + assignment.getProject_term().getAcademy_year().getYear_name());
+                Log.d("CHITIETDOAN", new Gson().toJson(result));
+                binding.tvMaDeTai.setText(result.getId());
+                String name = (assignment != null && assignment.getProject() != null && assignment.getProject().getName() != null)
+                        ? assignment.getProject().getName()
+                        : "—";
+                binding.tvTenDeTai.setText("Tên đề tài: " + name);
+                binding.tvMoTa.setText("Mô tả: " + assignment.getProject().getDescription());
+                binding.tvThongTinHocKy.setText("Đợt " + assignment.getProject_term().getStage() + " - " + assignment.getProject_term().getAcademy_year().getYear_name());
 
-            String createdAt = assignment.getCreated_at();
-            Instant instant = Instant.parse(createdAt);
-            LocalDate localDate = instant.atZone(ZoneId.systemDefault()).toLocalDate();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            String formattedDate = localDate.format(formatter);
 
-            binding.tvNgayDangKy.setText(formattedDate);
+                String createdAt = assignment.getCreated_at();
+                String formattedDate = DateFormatter.formatDate(createdAt);
+                binding.tvNgayDangKy.setText(formattedDate);
 
-            binding.tvTrangThai.setText(assignment.toString());
-            binding.tvTrangThai.setBackground(getDrawable(assignment.getBackground()));
+                binding.tvTrangThai.setText(assignment.toString());
+                binding.tvTrangThai.setBackground(getDrawable(assignment.getBackground()));
 
-            if (!assignment.getProject().getProgress_logs().isEmpty()) {
-                processLogAdapter.updateData(assignment.getProject().getProgress_logs());
-            } else {
-                binding.tvEmptyProgress.setVisibility(View.VISIBLE);
-            }
-            Log.d("Supervisor", String.valueOf(assignment.getAssignment_supervisors().size()));
-
-            binding.tvTeacherCount.setText(assignment.getAssignment_supervisors().size() + " GV");
-            if (!assignment.getAssignment_supervisors().isEmpty()) {
-                List<Supervisor> convertSupervisor = new ArrayList<>();
-                for (AssignmentSupervisor assignmentSupervisor : assignment.getAssignment_supervisors()) {
-                    convertSupervisor.add(assignmentSupervisor.getSupervisor());
+                if (!assignment.getProject().getProgress_logs().isEmpty()) {
+                    processLogAdapter.updateData(assignment.getProject().getProgress_logs());
+                } else {
+                    binding.tvEmptyProgress.setVisibility(View.VISIBLE);
                 }
-                gvhdAdapter.updateData(convertSupervisor);
-            } else {
-                binding.tvEmptyNotify.setVisibility(View.VISIBLE);
-            }
-        }
+                Log.d("Supervisor", String.valueOf(assignment.getAssignment_supervisors().size()));
+                binding.tvTeacherCount.setText(assignment.getAssignment_supervisors().size() + " GV");
 
-//        studentId = chiTietDoAnViewModel.getIdStudent();
-//        chiTietDoAnViewModel.getChiTietDoAn(studentId);
-//        chiTietDoAnViewModel.getAssignmentMutableLiveData().observe(this, result -> {
-//            if (result != null) {
-//                assignment = result;
-//                String name = (assignment != null && assignment.getProject() != null && assignment.getProject().getName() != null)
-//                        ? assignment.getProject().getName()
-//                        : "—";
-//                binding.tvTenDeTai.setText("Tên đề tài: " + name);
-//                binding.tvMoTa.setText("Mô tả: " + assignment.getProject().getDescription());
-//                if (!assignment.getProject().getProgress_logs().isEmpty()) {
-//                    processLogAdapter.updateData(assignment.getProject().getProgress_logs());
-//                }
-//                Log.d("Supervisor", String.valueOf(assignment.getAssignment_supervisors().size()));
-//                if (!assignment.getAssignment_supervisors().isEmpty()) {
-//                    List<Supervisor> convertSupervisor = new ArrayList<>();
-//                    for (AssignmentSupervisor assignmentSupervisor : assignment.getAssignment_supervisors()) {
-//                        convertSupervisor.add(assignmentSupervisor.getSupervisor());
-//                    }
-//                    gvhdAdapter.updateData(convertSupervisor);
-//                }
-//
-//            }
-//        });
+                if (!assignment.getAssignment_supervisors().isEmpty()) {
+                    List<Supervisor> convertSupervisor = new ArrayList<>();
+                    for (AssignmentSupervisor assignmentSupervisor : assignment.getAssignment_supervisors()) {
+                        convertSupervisor.add(assignmentSupervisor.getSupervisor());
+                    }
+                    gvhdAdapter.updateData(convertSupervisor);
+                } else {
+                    binding.tvEmptyNotify.setVisibility(View.VISIBLE);
+                }
+            }
+        });
     }
 }
