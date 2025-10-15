@@ -1,7 +1,11 @@
 package com.example.testui.model;
 
+import java.util.List;
+
 public class Council {
-    String id, name, project_term_id, description, date, address, status;
+    String id, name, project_term_id, description, date, address, status, code, department_id, created_at, updated_at;
+    Department department;
+    List<CouncilsMember> council_members;
 
     public Council(String id, String address, String date, String description, String name, String project_term_id, String status) {
         this.id = id;
@@ -11,6 +15,54 @@ public class Council {
         this.name = name;
         this.project_term_id = project_term_id;
         this.status = status;
+    }
+
+    public List<CouncilsMember> getCouncil_members() {
+        return council_members;
+    }
+
+    public void setCouncil_members(List<CouncilsMember> council_members) {
+        this.council_members = council_members;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getCreated_at() {
+        return created_at;
+    }
+
+    public void setCreated_at(String created_at) {
+        this.created_at = created_at;
+    }
+
+    public String getDepartment_id() {
+        return department_id;
+    }
+
+    public void setDepartment_id(String department_id) {
+        this.department_id = department_id;
+    }
+
+    public String getUpdated_at() {
+        return updated_at;
+    }
+
+    public void setUpdated_at(String updated_at) {
+        this.updated_at = updated_at;
     }
 
     public String getAddress() {

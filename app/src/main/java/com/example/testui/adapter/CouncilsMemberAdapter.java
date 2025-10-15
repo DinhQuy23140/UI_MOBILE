@@ -15,28 +15,31 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.testui.R;
 import com.example.testui.interfaces.OnClickItem;
+import com.example.testui.model.CouncilsMember;
+import com.example.testui.model.Status;
 import com.example.testui.model.Supervisor;
+import com.example.testui.untilities.formatter.CouncilMemberFormatter;
 
 import java.util.List;
 
 public class CouncilsMemberAdapter extends RecyclerView.Adapter<CouncilsMemberAdapter.CouncilsMemberViewHolder> {
     Context context;
-    List<Supervisor> listSupervisor;
+    List<CouncilsMember> listSupervisor;
     OnClickItem onClickItem;
 
-    public CouncilsMemberAdapter(Context context, List<Supervisor> listSupervisor, OnClickItem onClickItem) {
+    public CouncilsMemberAdapter(Context context, List<CouncilsMember> listSupervisor, OnClickItem onClickItem) {
         this.context = context;
         this.listSupervisor = listSupervisor;
         this.onClickItem = onClickItem;
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    public void updateData(List<Supervisor> listSupervisor) {
+    public void updateData(List<CouncilsMember> listSupervisor) {
         this.listSupervisor = listSupervisor;
         notifyDataSetChanged();
     }
 
-    public Supervisor getSupervisor(int position) {
+    public CouncilsMember getSupervisor(int position) {
         return listSupervisor.get(position);
     }
 
@@ -47,18 +50,26 @@ public class CouncilsMemberAdapter extends RecyclerView.Adapter<CouncilsMemberAd
         return new CouncilsMemberViewHolder(view);
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     public void onBindViewHolder(@NonNull CouncilsMemberViewHolder holder, int position) {
-        Supervisor supervisor = listSupervisor.get(position);
+        CouncilsMember councilsMember = listSupervisor.get(position);
+        Supervisor supervisor = councilsMember.getSupervisor();
         holder.tvName.setText(supervisor.getTeacher().getUser().getFullname());
-        holder.tvPosition.setText(supervisor.getTeacher().getPosition());
+
+        Status statusRole = CouncilMemberFormatter.formatRole(councilsMember.getRole());
+        holder.tvPosition.setText(statusRole.getStrStatus());
+        holder.tvPosition.setBackground(context.getDrawable(statusRole.getBackgroundColor()));
+
         holder.tvDegree.setText(supervisor.getTeacher().getDegree());
+        Status statusDegree = CouncilMemberFormatter.formatDegree(supervisor.getTeacher().getDegree());
+        holder.tvDegree.setBackground(context.getDrawable(statusDegree.getBackgroundColor()));
         holder.btnView.setOnClickListener(v -> onClickItem.onClickItem(position));
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return listSupervisor.size();
     }
 
     public static class CouncilsMemberViewHolder extends RecyclerView.ViewHolder {

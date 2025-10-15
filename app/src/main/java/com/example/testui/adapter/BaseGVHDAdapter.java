@@ -13,7 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.testui.R;
 import com.example.testui.interfaces.OnClickItem;
+import com.example.testui.model.Status;
 import com.example.testui.model.Supervisor;
+import com.example.testui.untilities.formatter.CouncilMemberFormatter;
 
 import java.util.List;
 
@@ -49,7 +51,8 @@ public class BaseGVHDAdapter extends RecyclerView.Adapter<BaseGVHDAdapter.BaseGV
     @Override
     public void onBindViewHolder(@NonNull BaseGVHDViewHolder holder, int position) {
         Supervisor supervisor = listSupervisor.get(position);
-        holder.tvSupervisorName.setText(supervisor.getTeacher().getDegree() + "." + supervisor.getTeacher().getUser().getFullname());
+        Status statusDegree = CouncilMemberFormatter.formatDegree(supervisor.getTeacher().getDegree());
+        holder.tvSupervisorName.setText(statusDegree.getStrStatus() + "." + supervisor.getTeacher().getUser().getFullname());
         holder.itemView.setOnClickListener(click -> {
             onClickItem.onClickItem(position);
         });

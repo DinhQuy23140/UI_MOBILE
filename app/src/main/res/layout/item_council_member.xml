@@ -3,20 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
+    android:layout_marginVertical="8dp"
     android:padding="4dp"
+    app:cardBackgroundColor="@android:color/white"
     app:cardCornerRadius="16dp"
     app:cardElevation="2dp"
-    app:cardBackgroundColor="@android:color/white"
     app:strokeColor="#E3F2FD"
     app:strokeWidth="1dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="16dp"
-        android:gravity="center_vertical">
+        android:padding="16dp">
 
         <!-- Avatar với border -->
         <LinearLayout
@@ -31,8 +31,8 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:background="@drawable/ic_user_placeholder"
-                android:scaleType="centerCrop"
                 android:contentDescription="Avatar thành viên hội đồng"
+                android:scaleType="centerCrop"
                 app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.CornerSize50Percent" />
 
         </LinearLayout>
@@ -49,49 +49,49 @@
                 android:id="@+id/tvThanhVienName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:letterSpacing="0.02"
                 android:text="GS.TS. Nguyễn Văn A"
                 android:textColor="#1A237E"
                 android:textSize="17sp"
-                android:textStyle="bold"
-                android:letterSpacing="0.02"
-                android:layout_marginBottom="6dp" />
+                android:textStyle="bold" />
 
             <!-- Vai trò trong hội đồng -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:layout_marginBottom="8dp"
                 android:gravity="center_vertical"
-                android:layout_marginBottom="8dp">
+                android:orientation="horizontal">
 
                 <!-- Vai trò badge -->
                 <TextView
                     android:id="@+id/tvVaiTro"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/bg_badge_default"
+                    android:gravity="center"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="2dp"
                     android:text="Chủ tịch HĐ"
                     android:textColor="#FFFFFF"
                     android:textSize="11sp"
-                    android:textStyle="bold"
-                    android:background="@drawable/bg_badge_default"
-                    android:paddingHorizontal="8dp"
-                    android:paddingVertical="2dp"
-                    android:gravity="center"
-                    android:layout_marginEnd="8dp" />
+                    android:textStyle="bold" />
 
                 <!-- Học vị badge -->
                 <TextView
                     android:id="@+id/tvHocVi"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/bg_badge_default"
+                    android:gravity="center"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="2dp"
                     android:text="Giáo sư"
                     android:textColor="#FFFFFF"
                     android:textSize="11sp"
-                    android:textStyle="bold"
-                    android:background="@drawable/bg_badge_default"
-                    android:paddingHorizontal="8dp"
-                    android:paddingVertical="2dp"
-                    android:gravity="center" />
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -99,15 +99,15 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:layout_marginBottom="4dp"
                 android:gravity="center_vertical"
-                android:layout_marginBottom="4dp">
+                android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="14dp"
                     android:layout_height="14dp"
-                    android:src="@drawable/ic_department"
                     android:layout_marginEnd="4dp"
+                    android:src="@drawable/ic_department"
                     app:tint="#666666" />
 
                 <TextView
@@ -128,11 +128,12 @@
             android:id="@+id/btnDetail"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:layout_marginStart="8dp"
             android:background="@drawable/bg_circle_button"
-            android:src="@drawable/ic_visibility"
             android:contentDescription="Xem chi tiết"
+            android:padding="8dp"
             android:scaleType="center"
-            android:padding="8dp"/>
+            android:src="@drawable/ic_visibility" />
 
     </LinearLayout>
 

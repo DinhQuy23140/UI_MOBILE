@@ -8,6 +8,8 @@ public class Supervisor {
     String expertise;
     Teacher teacher;
     String status;
+    String created_at;
+    String updated_at;
 
     public Supervisor(String id, String expertise, int max_students, String project_term_id, String status, Teacher teacher, String teacher_id) {
         this.id = id;
@@ -17,6 +19,22 @@ public class Supervisor {
         this.status = status;
         this.teacher = teacher;
         this.teacher_id = teacher_id;
+    }
+
+    public String getCreated_at() {
+        return created_at;
+    }
+
+    public void setCreated_at(String created_at) {
+        this.created_at = created_at;
+    }
+
+    public String getUpdated_at() {
+        return updated_at;
+    }
+
+    public void setUpdated_at(String updated_at) {
+        this.updated_at = updated_at;
     }
 
     public String getExpertise() {
