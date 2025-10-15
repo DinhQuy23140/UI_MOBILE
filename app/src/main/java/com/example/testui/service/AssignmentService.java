@@ -20,7 +20,7 @@ public interface AssignmentService {
     @POST("assignments")
     Call<Assignment> createAssignment(@Body Assignment assignment);
 
-    @GET("assignments/{assignmentId}")
+    @GET("assignment/{assignmentId}")
     Call<Assignment> getAssignmentById(@Path("assignmentId") String assignmentId);
 
     @PUT("assignments/{assignmentId}")

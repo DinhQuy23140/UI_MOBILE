@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.LinearLayout;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,14 +26,9 @@ import com.example.testui.model.AssignmentSupervisor;
 import com.example.testui.model.ProjectTerm;
 import com.example.testui.model.Supervisor;
 import com.example.testui.untilities.Constants;
-import com.example.testui.untilities.DateFormatter;
+import com.example.testui.untilities.formatter.DateFormatter;
 import com.google.gson.Gson;
 
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -83,17 +77,20 @@ public class ChiTietDoAnActivity extends AppCompatActivity {
     void setupClick() {
         binding.btnDetailProgress.setOnClickListener(detailProgress -> {
             Intent intent = new Intent(this, ProgressLogActivity.class);
-            intent.putExtra(Constants.KEY_PROGRESS_LOG, new Gson().toJson(assignment.getProject().getProgress_logs()));
+            intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
+            intent.putExtra(Constants.KEY_PROJECT_ID, assignment.getProject_id());
             startActivity(intent);
         });
 
         binding.btnNopDeCuong.setOnClickListener(nopedcuong -> {
             Intent intent = new Intent(ChiTietDoAnActivity.this, NopDeCuongActivity.class);
+            intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
             startActivity(intent);
         });
 
         binding.btnNopBaoCao.setOnClickListener(nopbaocao -> {
             Intent intent = new Intent(ChiTietDoAnActivity.this, NopBaoCaoActivity.class);
+            intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
             startActivity(intent);
         });
 

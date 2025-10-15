@@ -1,4 +1,4 @@
-package com.example.testui.untilities;
+package com.example.testui.untilities.formatter;
 
 import java.time.Instant;
 import java.time.LocalDate;

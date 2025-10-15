@@ -32,7 +32,7 @@ import com.example.testui.model.ProjectTerm;
 import com.example.testui.model.ReportFile;
 import com.example.testui.model.UploadFile;
 import com.example.testui.untilities.Constants;
-import com.example.testui.untilities.DateFormatter;
+import com.example.testui.untilities.formatter.DateFormatter;
 import com.google.gson.Gson;
 
 import java.io.File;

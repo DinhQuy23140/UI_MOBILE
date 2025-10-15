@@ -15,7 +15,6 @@ import androidx.lifecycle.ViewModelProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import com.example.testui.R;
 import com.example.testui.ViewModel.HomeViewModel;
@@ -27,15 +26,10 @@ import com.example.testui.activities.TimeLineActivity;
 import com.example.testui.databinding.ActivityHomeBinding;
 import com.example.testui.databinding.FragmentHomeBinding;
 import com.example.testui.model.Assignment;
-import com.example.testui.model.ProjectTerm;
 import com.example.testui.untilities.Constants;
-import com.example.testui.untilities.DateFormatter;
+import com.example.testui.untilities.formatter.DateFormatter;
 import com.google.gson.Gson;
 
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
 /**

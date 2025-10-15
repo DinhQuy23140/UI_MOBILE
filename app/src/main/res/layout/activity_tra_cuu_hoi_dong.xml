@@ -204,7 +204,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Ngành"
+                            android:text="Bộ môn"
                             android:textColor="#666666"
                             android:textSize="14sp" />
 
@@ -326,7 +326,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         tools:itemCount="3"
-                        tools:listitem="@layout/item_gvhd" />
+                        tools:listitem="@layout/item_council_member" />
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>

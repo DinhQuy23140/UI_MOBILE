@@ -13,9 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.testui.R;
 import com.example.testui.interfaces.OnClickItem;
 import com.example.testui.model.Attachment;
-import com.example.testui.untilities.DateFormatter;
+import com.example.testui.untilities.formatter.DateFormatter;
 
-import java.util.Date;
 import java.util.List;
 
 public class AttachmentAdapter extends RecyclerView.Adapter<AttachmentAdapter.AttachmentViewHolder> {

@@ -20,11 +20,10 @@ import com.example.testui.interfaces.OnClickItem;
 import com.example.testui.model.ProgressLog;
 import com.example.testui.model.Status;
 import com.example.testui.untilities.Constants;
-import com.example.testui.untilities.DateFormatter;
+import com.example.testui.untilities.formatter.DateFormatter;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class ProgressLogDetailActivity extends AppCompatActivity {
     ActivityProgressLogDetailBinding binding;
