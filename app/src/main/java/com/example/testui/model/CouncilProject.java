@@ -1,17 +1,19 @@
 package com.example.testui.model;
 
+import java.util.List;
+
 public class CouncilProject {
     String id, council_id, assignment_id, council_member_id, room, date, time, review_score, created_at, updated_at;
     Council council;
     Assignment assignment;
     CouncilsMember council_member;
-    CouncilProjectDefence council_project_defences;
+    List<CouncilProjectDefence> council_project_defences;
 
-    public CouncilProjectDefence getCouncil_project_defences() {
+    public List<CouncilProjectDefence> getCouncil_project_defences() {
         return council_project_defences;
     }
 
-    public void setCouncil_project_defences(CouncilProjectDefence council_project_defences) {
+    public void setCouncil_project_defences(List<CouncilProjectDefence> council_project_defences) {
         this.council_project_defences = council_project_defences;
     }
 

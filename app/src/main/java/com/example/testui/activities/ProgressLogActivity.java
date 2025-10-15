@@ -67,6 +67,7 @@ public class ProgressLogActivity extends AppCompatActivity {
         binding.rvProgressLogs.setAdapter(processLogAdapter);
 
         loadProgressLog(projectId, this);
+        Log.d("assignmentId", projectId);
     }
 
     void serialize() {

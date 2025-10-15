@@ -26,10 +26,9 @@ import com.example.testui.model.StageTimeline;
 import com.example.testui.model.Status;
 import com.example.testui.model.Supervisor;
 import com.example.testui.untilities.Constants;
-import com.example.testui.untilities.DateFormatter;
+import com.example.testui.untilities.formatter.DateFormatter;
 import com.google.gson.Gson;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -211,20 +210,23 @@ public class TimeLineActivity extends AppCompatActivity {
         });
 
         binding.timelinePhanBien.setOnClickListener(timeline6 -> {
-            Intent intent = new Intent(this, TraCuuDiemActivity.class);
+            Intent intent = new Intent(this, TraCuuHoiDongActivity.class);
             intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
+            intent.putExtra(Constants.KEY_ASSIGNMENT, gson.toJson(assignment));
             startActivity(intent);
         });
 
         binding.timelineTraCuuPhanBien.setOnClickListener(timeline7 -> {
-            Intent intent = new Intent(this, TraCuuDiemActivity.class);
+            Intent intent = new Intent(this, TraCuuPhanBienActivity.class);
             intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
+            intent.putExtra(Constants.KEY_ASSIGNMENT, gson.toJson(assignment));
             startActivity(intent);
         });
 
         binding.timelineBaoVe.setOnClickListener(timeline8 -> {
-            Intent intent = new Intent(this, TraCuuDiemActivity.class);
+            Intent intent = new Intent(this, TraCuuBaoVeActivity.class);
             intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
+            intent.putExtra(Constants.KEY_ASSIGNMENT, gson.toJson(assignment));
             startActivity(intent);
         });
 

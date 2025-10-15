@@ -1,57 +1,140 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="2dp"
-    android:layout_marginTop="10dp"
-    android:padding="6dp">
+    android:layout_marginVertical="8dp"
+    android:padding="4dp"
+    app:cardBackgroundColor="@android:color/white"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="2dp"
+    app:strokeColor="#E3F2FD"
+    app:strokeWidth="1dp">
 
-<!-- Tên giảng viên -->
-<TextView
-    android:id="@+id/textView27"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="10dp"
-    android:layout_marginTop="5dp"
-    android:text="Nguyễn Văn A"
-    android:textColor="#000000"
-    android:textSize="16sp"
-    android:textStyle="bold"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="16dp">
 
-<!-- Chức vụ trong hội đồng -->
+        <!-- Avatar với border -->
+        <LinearLayout
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="center"
+            android:padding="3dp">
 
-<!-- Button xem thông tin -->
-<TextView
-    android:id="@+id/tvCouncilRole2"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="10dp"
-    android:layout_marginTop="5dp"
-    android:layout_marginBottom="5dp"
-    android:text="Chức vụ: Chủ tịch hội đồng"
-    android:textColor="#666666"
-    android:textSize="14sp"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/textView27" />
+            <ImageView
+                android:id="@+id/imgAvatar"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/ic_user_placeholder"
+                android:contentDescription="Avatar thành viên hội đồng"
+                android:scaleType="centerCrop"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.CornerSize50Percent" />
 
-<TextView
-    android:id="@+id/btnViewInfo3"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginEnd="10dp"
-    android:background="@drawable/bg_button"
-    android:gravity="center"
-    android:minHeight="36dp"
-    android:paddingStart="16dp"
-    android:paddingEnd="16dp"
-    android:text="Xem thông tin"
-    android:textColor="#FFFFFF"
-    android:textSize="12sp"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+
+        <!-- Thông tin thành viên hội đồng -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <!-- Tên thành viên -->
+            <TextView
+                android:id="@+id/tvThanhVienName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:letterSpacing="0.02"
+                android:text="GS.TS. Nguyễn Văn A"
+                android:textColor="#1A237E"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+            <!-- Vai trò trong hội đồng -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <!-- Vai trò badge -->
+                <TextView
+                    android:id="@+id/tvVaiTro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/bg_badge_default"
+                    android:gravity="center"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="2dp"
+                    android:text="Chủ tịch HĐ"
+                    android:textColor="#FFFFFF"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+
+                <!-- Học vị badge -->
+                <TextView
+                    android:id="@+id/tvHocVi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_badge_default"
+                    android:gravity="center"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="2dp"
+                    android:text="Giáo sư"
+                    android:textColor="#FFFFFF"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <!-- Đơn vị công tác -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:layout_marginEnd="4dp"
+                    android:src="@drawable/ic_department"
+                    app:tint="#666666" />
+
+                <TextView
+                    android:id="@+id/tvDonVi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Khoa Công nghệ thông tin"
+                    android:textColor="#666666"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <!-- Chuyên môn -->
+
+        </LinearLayout>
+
+        <!-- Nút chức năng -->
+        <ImageButton
+            android:id="@+id/btnDetail"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/bg_circle_button"
+            android:contentDescription="Xem chi tiết"
+            android:padding="8dp"
+            android:scaleType="center"
+            android:src="@drawable/ic_visibility" />
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>
