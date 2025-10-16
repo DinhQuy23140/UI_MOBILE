@@ -30,7 +30,7 @@
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 android:src="@drawable/ic_assignment"
-                app:tint="@color/teal_700" />
+                app:tint="#2196F3" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -62,7 +62,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:src="@drawable/ic_calendar_start"
-                app:tint="@color/gray" />
+                app:tint="#4CAF50" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -93,7 +93,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:src="@drawable/ic_calendar_end"
-                app:tint="@color/gray" />
+                app:tint="#FF9800" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -124,7 +124,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:src="@drawable/ic_school"
-                app:tint="@color/gray" />
+                app:tint="#9C27B0" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -148,31 +148,41 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_marginBottom="5dp"
             android:gravity="top"
+            android:orientation="vertical"
             android:paddingBottom="4dp">
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/ic_description"
-                android:layout_marginTop="2dp"
-                app:tint="@color/gray" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_description"
+                    app:tint="#607D8B" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="8dp"
+                    android:text="Mô tả:"
+                    android:textColor="@color/gray"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingStart="8dp"
-                android:text="Mô tả:"
-                android:textColor="@color/gray"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-            <TextView
                 android:id="@+id/tvMoTa"
-                android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Đợt đồ án tốt nghiệp cho sinh viên năm cuối, bao gồm hướng dẫn, chấm và phản biện."
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
                 android:paddingStart="4dp"
+                android:text="Đợt đồ án tốt nghiệp cho sinh viên năm cuối, bao gồm hướng dẫn, chấm và phản biện."
                 android:textColor="@color/black"
                 android:textSize="14sp" />
         </LinearLayout>
@@ -187,8 +197,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:src="@drawable/ic_status"
-                android:tint="@color/gray"
-                tools:ignore="UseAppTint" />
+                app:tint="#F44336" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -204,8 +213,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:backgroundTint="#9E4444"
-                android:padding="7dp"
+                android:background="@drawable/bg_circle_completed"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="6dp"
                 android:text="Đang diễn ra"
                 android:textColor="@color/white"
                 android:textSize="13sp"

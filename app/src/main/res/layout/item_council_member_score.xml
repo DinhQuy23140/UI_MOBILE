@@ -16,15 +16,15 @@
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="16dp">
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="16dp">
 
         <!-- Avatar với border -->
         <LinearLayout
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:layout_marginEnd="16dp"
-            android:gravity="center"
-            android:padding="3dp">
+            android:layout_marginEnd="8dp"
+            android:gravity="center">
 
             <ImageView
                 android:id="@+id/imgAvatar"
@@ -53,7 +53,7 @@
                 android:letterSpacing="0.02"
                 android:text="GS.TS. Nguyễn Văn A"
                 android:textColor="#1A237E"
-                android:textSize="17sp"
+                android:textSize="15sp"
                 android:textStyle="bold" />
 
             <!-- Vai trò và học vị -->
@@ -99,22 +99,22 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginBottom="4dp">
+                android:layout_marginBottom="4dp"
+                android:orientation="vertical">
 
                 <!-- Điểm số -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
                     android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="4dp">
+                    android:orientation="horizontal">
 
                     <ImageView
                         android:layout_width="14dp"
                         android:layout_height="14dp"
                         android:layout_marginEnd="4dp"
-                        android:src="@drawable/ic_score"
+                        android:src="@drawable/score"
                         app:tint="#666666" />
 
                     <TextView
@@ -128,11 +128,11 @@
                         android:id="@+id/tvDiemSo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="2dp"
                         android:text="8.5"
                         android:textColor="#2196F3"
                         android:textSize="14sp"
-                        android:textStyle="bold"
-                        android:layout_marginStart="2dp" />
+                        android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -160,11 +160,11 @@
                         android:id="@+id/tvNhanXet"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="1"
                         android:text="Bài làm tốt, có tính ứng dụng cao"
                         android:textColor="#666666"
-                        android:textSize="12sp"
-                        android:maxLines="1"
-                        android:ellipsize="end" />
+                        android:textSize="12sp" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -175,23 +175,23 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:layout_marginStart="5dp"
+            android:gravity="center"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/tvTrangThai"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
                 android:background="@drawable/bg_status_approved"
                 android:gravity="center"
                 android:paddingHorizontal="8dp"
                 android:paddingVertical="4dp"
                 android:text="ĐÃ CHẤM"
                 android:textColor="#FFFFFF"
-                android:textSize="10sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="4dp" />
+                android:textSize="8sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tvThoiGian"
@@ -199,7 +199,7 @@
                 android:layout_height="wrap_content"
                 android:text="10:30 AM"
                 android:textColor="#999999"
-                android:textSize="10sp" />
+                android:textSize="8sp" />
 
         </LinearLayout>
 

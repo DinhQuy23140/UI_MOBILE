@@ -26,6 +26,17 @@
             android:background="@drawable/bg_header_gradient"
             android:padding="20dp">
 
+            <ImageButton
+                android:id="@+id/ivBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Back"
+                android:src="@drawable/ic_back_white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <TextView
                 android:id="@+id/textView7"
                 android:layout_width="0dp"
@@ -55,15 +66,14 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_weight="1"
         android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <!-- Thông tin cơ bản -->
@@ -267,13 +277,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
+                android:layout_weight="1"
                 app:cardBackgroundColor="@android:color/transparent"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="2dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:background="@drawable/bg_info_group"
                     android:orientation="vertical"
                     android:padding="20dp">
@@ -324,7 +335,10 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rvCouncilMembers"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
+                        android:nestedScrollingEnabled="false"
+                        android:overScrollMode="never"
+                        android:scrollbars="none"
                         tools:itemCount="5"
                         tools:listitem="@layout/item_council_member" />
 
@@ -436,7 +450,7 @@
                                 android:textSize="10sp"
                                 app:cornerRadius="8dp"
                                 app:icon="@drawable/ic_visibility"
-                                app:iconSize="14dp" />
+                                app:iconSize="12dp" />
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
 
@@ -827,7 +841,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:layout_weight="2"
-                                    tools:listitem="@layout/item_base_supervisor"/>
+                                    tools:listitem="@layout/item_base_supervisor" />
                             </LinearLayout>
                         </LinearLayout>
 
@@ -840,15 +854,15 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_marginBottom="8dp"
                                 android:gravity="center_vertical"
-                                android:orientation="horizontal"
-                                android:layout_marginBottom="8dp">
+                                android:orientation="horizontal">
 
                                 <ImageView
                                     android:layout_width="18dp"
                                     android:layout_height="18dp"
-                                    android:src="@drawable/ic_description"
                                     android:layout_marginEnd="8dp"
+                                    android:src="@drawable/ic_description"
                                     app:tint="#667EEA" />
 
                                 <TextView

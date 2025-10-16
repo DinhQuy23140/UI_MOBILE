@@ -350,7 +350,7 @@
                                 android:textSize="10sp"
                                 app:cornerRadius="8dp"
                                 app:icon="@drawable/ic_visibility"
-                                app:iconSize="14dp" />
+                                app:iconSize="12dp" />
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
 
@@ -699,6 +699,7 @@
                         android:id="@+id/rvCouncilMembers"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="false"
                         tools:itemCount="5"
                         tools:listitem="@layout/item_council_member" />
 

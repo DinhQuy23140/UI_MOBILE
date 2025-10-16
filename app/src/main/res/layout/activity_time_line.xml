@@ -275,7 +275,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
           <TextView
               android:layout_width="wrap_content"
@@ -288,7 +288,7 @@
               android:id="@+id/rv_supervisor"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:layout_marginTop="5dp"
+              android:layout_marginStart="5dp"
               tools:itemCount="2"
               tools:listitem="@layout/item_base_supervisor" />
 

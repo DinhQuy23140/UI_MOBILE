@@ -106,4 +106,12 @@ public class HomeViewModel extends ViewModel {
         }
         return backgroundStatus;
     }
+
+    public String getRangeDate(String startDate, String endDate) {
+        LocalDate localStartDate, localEndDate;
+        localStartDate = LocalDate.parse(startDate);
+        localEndDate = LocalDate.parse(endDate);
+        long days = ChronoUnit.DAYS.between(localStartDate, localEndDate);
+        return days + " ngày"; // nếu âm => trả 0
+    }
 }
