@@ -35,4 +35,12 @@ public class CouncilMemberFormatter {
                 return new Status(R.drawable.bg_badge_hoc_vi_cu_nhan, "Cn");
         }
     }
+
+    public static Status formatScore(String score) {
+        if (score != null) {
+            return new Status(R.drawable.bg_circle_completed, "Đã chấm");
+        } else {
+            return  new Status(R.drawable.bg_circle_pending, "Chưa chấm");
+        }
+    }
 }

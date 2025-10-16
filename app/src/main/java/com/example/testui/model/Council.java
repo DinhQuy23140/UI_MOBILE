@@ -7,6 +7,9 @@ public class Council {
     Department department;
     List<CouncilsMember> council_members;
 
+    public Council() {
+    }
+
     public Council(String id, String address, String date, String description, String name, String project_term_id, String status) {
         this.id = id;
         this.address = address;

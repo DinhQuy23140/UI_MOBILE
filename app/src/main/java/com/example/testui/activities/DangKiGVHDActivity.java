@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -12,12 +13,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.example.testui.R;
 import com.example.testui.ViewModel.DangKiGVHDViewModel;
 import com.example.testui.ViewModelFactory.DangKiGVHDViewModelFactory;
-import com.example.testui.adapter.SupervisorAutocomplete;
+import com.example.testui.adapter.SupervisorAutoAdapter;
 import com.example.testui.databinding.ActivityDangKiGvhdactivityBinding;
 import com.example.testui.model.AssignmentSupervisor;
 import com.example.testui.model.ProjectTerm;
@@ -29,11 +29,19 @@ import java.util.List;
 
 public class DangKiGVHDActivity extends AppCompatActivity {
     ActivityDangKiGvhdactivityBinding binding;
-    SupervisorAutocomplete supervisorAutocomplete;
+    SupervisorAutoAdapter supervisorAutoAdapter;
     List<Supervisor> supervisors;
     Supervisor supervisor;
     String assignmentID, role = "main";
     DangKiGVHDViewModel dangKiGVHDViewModel;
+    String[] testdata = {
+            "Nguyễn Văn An",
+            "Trần Thị Bình",
+            "Lê Quang Huy",
+            "Phạm Minh Tuấn",
+            "Ngô Thị Hoa",
+            "Vũ Thanh Sơn"
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,24 +70,38 @@ public class DangKiGVHDActivity extends AppCompatActivity {
 
         dangKiGVHDViewModel.getAllSupervisorByProjectTermId(projectTerm.getId());
         dangKiGVHDViewModel.getListSupervisor().observe(this, listSupervisor -> {
-           supervisorAutocomplete = new SupervisorAutocomplete(this, listSupervisor);
+            supervisorAutoAdapter = new SupervisorAutoAdapter(this, listSupervisor);
             Log.d("SetAdapter", new Gson().toJson(listSupervisor));
             supervisors = listSupervisor;
-           binding.autoCompleteGiangVien.setAdapter(supervisorAutocomplete);
+           binding.autoCompleteGiangVien.setAdapter(supervisorAutoAdapter);
            binding.autoCompleteGiangVien.setThreshold(1);
         });
 
-        binding.autoCompleteGiangVien.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                supervisor = supervisors.get(position);
+//        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+//                this,
+//                android.R.layout.simple_dropdown_item_1line,
+//                testdata
+//        );
+//
+//        binding.autoCompleteGiangVien.setAdapter(adapter);
+//        binding.autoCompleteGiangVien.setThreshold(1);
+
+        binding.autoCompleteGiangVien.setOnItemClickListener((parent, view, position, id) -> {
+            Supervisor selected = (Supervisor) parent.getItemAtPosition(position);
+            if (selected != null &&
+                    selected.getTeacher() != null &&
+                    selected.getTeacher().getUser() != null) {
+
+                String name = selected.getTeacher().getUser().getFullname();
+                binding.autoCompleteGiangVien.setText(name, false);  // hiển thị text mà không kích hoạt filter lại
+                binding.autoCompleteGiangVien.dismissDropDown();     // đóng dropdown thủ công
             }
         });
 
         binding.autoCompleteGiangVien.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus && supervisorAutocomplete != null) {
+                if (hasFocus && supervisorAutoAdapter != null) {
                     binding.autoCompleteGiangVien.showDropDown();
                 }
             }
@@ -98,6 +120,8 @@ public class DangKiGVHDActivity extends AppCompatActivity {
             if (assignmentID != null && supervisor != null) {
                 AssignmentSupervisor assignmentSupervisor = new AssignmentSupervisor(assignmentID, supervisor.getId(), role, "pending");
                 dangKiGVHDViewModel.createAssignmentSupervisor(assignmentSupervisor);
+            } else {
+                Toast.makeText(this, "Supervisor null", Toast.LENGTH_SHORT).show();
             }
         });
     }

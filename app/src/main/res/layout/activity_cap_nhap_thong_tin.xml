@@ -682,30 +682,25 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Logout Button -->
-            <com.google.android.material.card.MaterialCardView
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnLogout"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="1dp">
+                android:backgroundTint="#FF6B6B"
+                android:gravity="center"
+                android:paddingVertical="14dp"
+                android:text="Đăng xuất"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:cornerRadius="12dp"
+                app:icon="@drawable/ic_logout"
+                app:iconPadding="8dp"
+                app:iconSize="20dp"
+                app:elevation="0dp"
+                app:rippleColor="@android:color/transparent" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnLogout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="#FF6B6B"
-                    android:gravity="center"
-                    android:paddingVertical="14dp"
-                    android:text="Đăng xuất"
-                    android:textColor="@android:color/white"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    app:cornerRadius="12dp"
-                    app:icon="@drawable/ic_logout"
-                    app:iconPadding="8dp"
-                    app:iconSize="20dp" />
-            </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
     </ScrollView>

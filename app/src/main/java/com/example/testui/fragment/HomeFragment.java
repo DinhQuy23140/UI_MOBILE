@@ -26,7 +26,9 @@ import com.example.testui.activities.TimeLineActivity;
 import com.example.testui.databinding.ActivityHomeBinding;
 import com.example.testui.databinding.FragmentHomeBinding;
 import com.example.testui.model.Assignment;
+import com.example.testui.model.Status;
 import com.example.testui.untilities.Constants;
+import com.example.testui.untilities.formatter.AssignmentFormatter;
 import com.example.testui.untilities.formatter.DateFormatter;
 import com.google.gson.Gson;
 
@@ -131,13 +133,6 @@ public class HomeFragment extends Fragment {
             startActivity(intent);
         });
 
-        fragmentHomeBinding.lnProgress.setOnClickListener(click -> {
-            Intent intent = new Intent(getContext(), ChiTietDoAnActivity.class);
-            intent.putExtra(Constants.KEY_ASSIGNMENT, gson.toJson(assignment));
-            intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
-            startActivity(intent);
-        });
-
         fragmentHomeBinding.layoutTopic.setOnClickListener(topicDetail -> {
             Intent intent = new Intent(getContext(), ChiTietDoAnActivity.class);
             intent.putExtra(Constants.KEY_ASSIGNMENT, gson.toJson(assignment));
@@ -148,6 +143,7 @@ public class HomeFragment extends Fragment {
         fragmentHomeBinding.tvAssignmentDetail.setOnClickListener(assignmentDetail -> {
             Intent intent = new Intent(getContext(), TimeLineActivity.class);
             intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
+            intent.putExtra(Constants.KEY_ASSIGNMENT, gson.toJson(assignment));
             startActivity(intent);
         });
     }
@@ -168,8 +164,7 @@ public class HomeFragment extends Fragment {
                 //de tai
                 assignment = result;
                 strProjectTerm = gson.toJson(result.getProject_term());
-                fragmentHomeBinding.tvProjectStatus.setText(result.getStatus());
-                fragmentHomeBinding.tvTenDeTai.setText(result.getProject().getName());
+                fragmentHomeBinding.tvTenDeTai.setText("Đề tài: " + result.getProject().getName());
                 fragmentHomeBinding.tvMaDeTai.setText(result.getProject().getId());
 
                 Map<Integer, Integer> colorStatus = homeViewModel.getBackGroundStatusAssignment();
