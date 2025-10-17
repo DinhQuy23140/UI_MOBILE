@@ -4,6 +4,15 @@ public class CouncilsMember {
     String id, council_id, supervisor_id, created_at, updated_at;
     String role;
     Supervisor supervisor;
+    Council council;
+
+    public Council getCouncil() {
+        return council;
+    }
+
+    public void setCouncil(Council council) {
+        this.council = council;
+    }
 
     public String getCouncil_id() {
         return council_id;
