@@ -5,11 +5,13 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.testui.R;
+import com.example.testui.interfaces.OnClickItem;
 import com.example.testui.model.Assignment;
 
 import java.util.List;
@@ -17,10 +19,12 @@ import java.util.List;
 public class AssignmentAdapter extends RecyclerView.Adapter<AssignmentAdapter.AssignmentViewHolder> {
     Context context;
     List<Assignment> listAssignment;
+    OnClickItem onClickItem;
 
-    public AssignmentAdapter(Context context, List<Assignment> listAssignment) {
+    public AssignmentAdapter(Context context, List<Assignment> listAssignment, OnClickItem onClickItem) {
         this.context = context;
         this.listAssignment = listAssignment;
+        this.onClickItem = onClickItem;
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -28,7 +32,6 @@ public class AssignmentAdapter extends RecyclerView.Adapter<AssignmentAdapter.As
         this.listAssignment = listAssignment;
         notifyDataSetChanged();
     }
-
 
     @NonNull
     @Override
@@ -39,7 +42,12 @@ public class AssignmentAdapter extends RecyclerView.Adapter<AssignmentAdapter.As
 
     @Override
     public void onBindViewHolder(@NonNull AssignmentViewHolder holder, int position) {
-
+        Assignment assignment = listAssignment.get(position);
+        holder.tvName.setText(assignment.getStudent().getUser().getFullname());
+        holder.tvStudentId.setText(assignment.getStudent().getStudent_code());
+        holder.tvProjectTerm.setText("Đợt " + assignment.getProject_term().getStage() + "/" + assignment.getProject_term().getAcademy_year().getYear_name());
+        holder.tvTopic.setText(assignment.getProject().getName());
+        holder.tvScore.setText("9");
     }
 
     @Override
@@ -48,9 +56,14 @@ public class AssignmentAdapter extends RecyclerView.Adapter<AssignmentAdapter.As
     }
 
     public class AssignmentViewHolder extends RecyclerView.ViewHolder {
-
+        TextView tvName, tvStudentId, tvProjectTerm, tvTopic, tvScore;
         public AssignmentViewHolder(@NonNull View itemView) {
             super(itemView);
+            tvName = itemView.findViewById(R.id.tvTenSinhVien);
+            tvStudentId = itemView.findViewById(R.id.tvMaSinhVien);
+            tvProjectTerm = itemView.findViewById(R.id.tvDotDoAn);
+            tvTopic = itemView.findViewById(R.id.tvTenDeTai);
+            tvScore = itemView.findViewById(R.id.tvDiemSo);
         }
     }
 }
