@@ -8,6 +8,9 @@ public class Project {
     String description;
     List<ProgressLog> progress_logs;
 
+    public Project() {
+    }
+
     public Project(String id, String name, String description, List<ProgressLog> progress_logs) {
         this.id = id;
         this.name = name;

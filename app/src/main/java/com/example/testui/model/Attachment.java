@@ -11,6 +11,9 @@ public class Attachment {
     private String created_at;
     private String updated_at;
 
+    public Attachment() {
+    }
+
     public Attachment(String id, String progress_log_id, String file_name, String file_url, String file_type, String upload_time, String uploader_id) {
         this.id = id;
         this.progress_log_id = progress_log_id;
