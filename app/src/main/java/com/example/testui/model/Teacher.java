@@ -1,7 +1,7 @@
 package com.example.testui.model;
 
 public class Teacher {
-    private int id;
+    private String id;
     private String user_id;
     private String teacher_code;
     private String degree;
@@ -9,7 +9,10 @@ public class Teacher {
     private String position;
     private User user;
 
-    public Teacher(String degree, String department_id, int id, String position, String teacher_code, User user, String user_id) {
+    public Teacher() {
+    }
+
+    public Teacher(String degree, String department_id, String id, String position, String teacher_code, User user, String user_id) {
         this.degree = degree;
         this.department_id = department_id;
         this.id = id;
@@ -35,11 +38,11 @@ public class Teacher {
         this.department_id = department_id;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

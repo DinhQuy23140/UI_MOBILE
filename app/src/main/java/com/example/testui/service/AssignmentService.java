@@ -37,4 +37,7 @@ public interface AssignmentService {
 
     @GET("assignment/recent/student/{studentId}")
     Call<Assignment> getRecentAssignmentByStudentId(@Path("studentId") String studentId);
+
+    @GET("assignments/teacher/{teacherId}")
+    Call<List<Assignment>> getAssignmentsByTeacherId(@Path("teacherId") String teacherId);
 }

@@ -8,6 +8,9 @@ public class AssignmentSupervisor {
     String status;
     Supervisor supervisor;
 
+    public AssignmentSupervisor() {
+    }
+
     public AssignmentSupervisor(String assignment_id, String id, String role, String status, Supervisor supervisor, String supervisor_id) {
         this.assignment_id = assignment_id;
         this.id = id;

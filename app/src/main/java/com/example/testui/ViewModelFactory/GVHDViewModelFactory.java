@@ -14,6 +14,7 @@ public class GVHDViewModelFactory implements ViewModelProvider.Factory {
     public GVHDViewModelFactory(Context context) {
         this.context = context;
     }
+
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass, @NonNull CreationExtras extras) {

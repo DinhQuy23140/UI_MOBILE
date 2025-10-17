@@ -24,6 +24,9 @@ public class Assignment {
     String created_at, updated_at;
     int background;
 
+    public Assignment() {
+    }
+
     public Assignment(List<AssignmentSupervisor> assignment_supervisors, String council_id, String counter_argument_id, String counter_argument_status, String created_at, String id, Project project, String project_id, ProjectTerm project_term, String project_term_id, String role, String status, Student student, String student_id, String updated_at) {
         this.assignment_supervisors = assignment_supervisors;
         this.council_id = council_id;

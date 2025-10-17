@@ -15,23 +15,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="12dp">
 
         <!-- Header với thông tin sinh viên -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_marginBottom="12dp"
             android:gravity="center_vertical"
-            android:layout_marginBottom="12dp">
+            android:orientation="horizontal">
 
             <!-- Avatar sinh viên -->
             <LinearLayout
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginEnd="12dp"
-                android:gravity="center"
-                android:background="@drawable/bg_circle_accent">
+                android:background="@drawable/bg_circle_accent"
+                android:gravity="center">
 
                 <ImageView
                     android:layout_width="24dp"
@@ -51,11 +52,11 @@
                     android:id="@+id/tvTenSinhVien"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
                     android:text="Nguyễn Văn A"
                     android:textColor="#1A237E"
                     android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:layout_marginBottom="2dp" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvMaSinhVien"
@@ -69,16 +70,16 @@
 
             <!-- Năm tốt nghiệp -->
             <TextView
-                android:id="@+id/tvNamTotNghiep"
+                android:id="@+id/tvDotDoAn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/bg_badge_count"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="4dp"
                 android:text="2024"
                 android:textColor="@color/white"
                 android:textSize="12sp"
-                android:textStyle="bold"
-                android:background="@drawable/bg_badge_count"
-                android:paddingHorizontal="8dp"
-                android:paddingVertical="4dp" />
+                android:textStyle="bold" />
 
         </LinearLayout>
 
@@ -86,29 +87,29 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_marginBottom="12dp"
-            android:padding="12dp"
-            android:background="@drawable/bg_info_light">
+            android:background="@drawable/bg_info_light"
+            android:orientation="vertical"
+            android:padding="12dp">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
                 android:text="Đề tài đồ án"
                 android:textColor="#2196F3"
                 android:textSize="12sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="4dp" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tvTenDeTai"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:lineSpacingExtra="2dp"
                 android:text="Xây dựng hệ thống quản lý học tập sử dụng AI"
                 android:textColor="#333333"
                 android:textSize="14sp"
-                android:textStyle="bold"
-                android:lineSpacingExtra="2dp" />
+                android:textStyle="bold" />
 
         </LinearLayout>
 
@@ -116,8 +117,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="12dp">
+            android:layout_marginBottom="6dp"
+            android:orientation="horizontal">
 
             <!-- Cột 1: Loại đồ án -->
             <LinearLayout
@@ -129,10 +130,10 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
                     android:text="Loại đồ án"
                     android:textColor="#666666"
-                    android:textSize="10sp"
-                    android:layout_marginBottom="2dp" />
+                    android:textSize="10sp" />
 
                 <TextView
                     android:id="@+id/tvLoaiDoAn"
@@ -154,10 +155,10 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
                     android:text="Điểm"
                     android:textColor="#666666"
-                    android:textSize="10sp"
-                    android:layout_marginBottom="2dp" />
+                    android:textSize="10sp" />
 
                 <TextView
                     android:id="@+id/tvDiemSo"
@@ -167,36 +168,34 @@
                     android:textColor="#4CAF50"
                     android:textSize="12sp"
                     android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:orientation="horizontal">
+
+                <!-- Nút hành động -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnChiTiet"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:paddingHorizontal="12dp"
+                    android:text="Chi tiết"
+                    android:textColor="#2196F3"
+                    android:textSize="11sp"
+                    app:cornerRadius="8dp"
+                    app:strokeColor="#2196F3"
+                    app:strokeWidth="1dp" />
+
             </LinearLayout>
 
         </LinearLayout>
 
         <!-- Footer với trạng thái và hành động -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="end">
-
-            <!-- Trạng thái -->
-
-            <!-- Khoảng cách -->
-
-            <!-- Nút hành động -->
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnChiTiet"
-                style="@style/Widget.Material3.Button.OutlinedButton"
-                android:layout_width="wrap_content"
-                android:layout_height="36dp"
-                android:text="Chi tiết"
-                android:textSize="11sp"
-                app:strokeColor="#2196F3"
-                app:strokeWidth="1dp"
-                app:cornerRadius="8dp"
-                android:textColor="#2196F3"
-                android:paddingHorizontal="12dp" />
-
-        </LinearLayout>
 
     </LinearLayout>
 

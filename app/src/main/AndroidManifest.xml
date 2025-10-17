@@ -16,6 +16,9 @@
         android:theme="@style/Theme.TestUI"
         tools:targetApi="31">
         <activity
+            android:name=".activities.ViewAllAssignmentActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.TraCuuBaoVeActivity"
             android:exported="false" />
         <activity

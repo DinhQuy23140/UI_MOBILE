@@ -3,6 +3,9 @@ package com.example.testui.model;
 public class StageTimeline {
     String id, project_id, number_of_rounds, start_date, end_date, description, status;
 
+    public StageTimeline() {
+    }
+
     public StageTimeline(String id, String number_of_rounds, String project_id, String start_date, String end_date, String status, String description) {
         this.id = id;
         this.number_of_rounds = number_of_rounds;

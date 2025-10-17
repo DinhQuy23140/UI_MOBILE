@@ -3,15 +3,19 @@ package com.example.testui.model;
 public class Supervisor {
     String id;
     String teacher_id;
-    int max_students;
+    String max_students;
     String project_term_id;
     String expertise;
     Teacher teacher;
     String status;
     String created_at;
     String updated_at;
+    ProjectTerm projectTerm;
 
-    public Supervisor(String id, String expertise, int max_students, String project_term_id, String status, Teacher teacher, String teacher_id) {
+    public Supervisor() {
+    }
+
+    public Supervisor(String id, String expertise, String max_students, String project_term_id, String status, Teacher teacher, String teacher_id) {
         this.id = id;
         this.expertise = expertise;
         this.max_students = max_students;
@@ -19,6 +23,14 @@ public class Supervisor {
         this.status = status;
         this.teacher = teacher;
         this.teacher_id = teacher_id;
+    }
+
+    public ProjectTerm getProjectTerm() {
+        return projectTerm;
+    }
+
+    public void setProjectTerm(ProjectTerm projectTerm) {
+        this.projectTerm = projectTerm;
     }
 
     public String getCreated_at() {
@@ -53,11 +65,11 @@ public class Supervisor {
         this.id = id;
     }
 
-    public int getMax_students() {
+    public String getMax_students() {
         return max_students;
     }
 
-    public void setMax_students(int max_students) {
+    public void setMax_students(String max_students) {
         this.max_students = max_students;
     }
 

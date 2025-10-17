@@ -96,13 +96,13 @@ public class TraCuuBaoVeActivity extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     void loadData() {
         binding.tvProjectName.setText(assignment.getProject().getName());
-//        Council council = traCuuBaoVeViewModel.getCouncilSafe(assignment);
-//        binding.txtCouncilName.setText(council.getName());
-//        binding.txtCouncilId.setText(council.getId());
-//        binding.txtMajor.setText(council.getDepartment().getName());
-//        binding.txtCouncilDescription.setText(council.getDescription());
-//        binding.tvBvRoom.setText(council.getAddress());
-//        binding.tvBvTime.setText(DateFormatter.formatDate(council.getDate()));
+        Council council = traCuuBaoVeViewModel.getCouncilSafe(assignment);
+        binding.txtCouncilName.setText(council.getName());
+        binding.txtCouncilId.setText(council.getId());
+        binding.txtMajor.setText(council.getDepartment().getName());
+        binding.txtCouncilDescription.setText(council.getDescription());
+        binding.tvBvRoom.setText(council.getAddress());
+        binding.tvBvTime.setText(DateFormatter.formatDate(council.getDate()));
         traCuuBaoVeViewModel.councilDisplay.observe(this, model -> {
             binding.txtCouncilName.setText(model.getName());
             binding.txtCouncilId.setText(model.getId());
