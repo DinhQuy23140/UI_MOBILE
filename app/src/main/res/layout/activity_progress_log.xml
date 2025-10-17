@@ -144,7 +144,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:text="12"
+                            android:text="0"
                             android:textColor="#1A1A1A"
                             android:textSize="20sp"
                             android:textStyle="bold" />
@@ -183,7 +183,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:text="8"
+                            android:text="0"
                             android:textColor="#1A1A1A"
                             android:textSize="20sp"
                             android:textStyle="bold" />
@@ -222,7 +222,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:text="4"
+                            android:text="0"
                             android:textColor="#1A1A1A"
                             android:textSize="20sp"
                             android:textStyle="bold" />
@@ -271,7 +271,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:lineSpacingExtra="2dp"
-                        android:text="Ghi lại chi tiết quá trình thực hiện đồ án. Mỗi mốc gồm: thời gian, nhiệm vụ, báo cáo và nhận xét của GV (nếu có)."
+                        android:text="-"
                         android:textColor="#666666"
                         android:textSize="13sp" />
                 </LinearLayout>

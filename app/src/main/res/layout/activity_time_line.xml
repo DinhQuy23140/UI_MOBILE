@@ -47,7 +47,7 @@
             android:id="@+id/tv_project_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Đợt đồ án: Học kỳ 2 - 2025"
+            android:text="Đợt đồ án: -"
             android:textColor="#333333"
             android:textSize="18sp"
             android:textStyle="bold"
@@ -90,7 +90,7 @@
                   android:id="@+id/tv_start_date"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:text="01/03/2025"
+                  android:text="-"
                   android:textColor="#333333"
                   android:textSize="14sp"
                   android:textStyle="bold" />
@@ -127,7 +127,7 @@
                   android:id="@+id/tv_end_date"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:text="20/06/2025"
+                  android:text="-"
                   android:textColor="#333333"
                   android:textSize="14sp"
                   android:textStyle="bold" />
@@ -191,7 +191,7 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:lineSpacingExtra="4dp"
-              android:text="Đợt đồ án này áp dụng cho sinh viên năm cuối thuộc các ngành CNTT, TMĐT, và QTKD. Sinh viên cần hoàn thành tất cả các bước theo timeline dưới đây."
+              android:text="-"
               android:textColor="#666666"
               android:textSize="14sp" />
         </LinearLayout>
@@ -265,7 +265,7 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:layout_marginBottom="8dp"
-              android:text="Hệ thống quản lý đồ án tốt nghiệp trực tuyến"
+              android:text="Đề tài: -"
               android:textColor="#333333"
               android:textSize="14sp"
               android:textStyle="bold" />

@@ -353,7 +353,7 @@
                         android:layout_marginBottom="16dp"
                         android:background="@drawable/bg_edittext"
                         android:padding="12dp"
-                        android:text="Tên của đề tài"
+                        android:text="-"
                         android:textColor="#333333"
                         android:textSize="16sp" />
 
@@ -375,7 +375,7 @@
                         android:lineSpacingExtra="4dp"
                         android:minHeight="80dp"
                         android:padding="12dp"
-                        android:text="Mô tả về đề tài"
+                        android:text="-"
                         android:textColor="#333333"
                         android:textSize="14sp" />
 
