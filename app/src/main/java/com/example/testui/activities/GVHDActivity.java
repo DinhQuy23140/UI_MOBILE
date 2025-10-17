@@ -56,6 +56,7 @@ public class GVHDActivity extends AppCompatActivity {
         loadData();
         setupRecycler();
         loadDataRecyclerView();
+        setupClick();
     }
 
     void init() {
@@ -97,6 +98,14 @@ public class GVHDActivity extends AppCompatActivity {
             listAssignment = result;
             binding.tvSoLuongSV.setText(listAssignment.size() + " sinh viên");
             assignmentAdapter.updateDate(listAssignment);
+        });
+    }
+
+    void setupClick() {
+        binding.tvViewAllAsignment.setOnClickListener(assignments -> {
+            Intent intent = new Intent(this, ViewAllAssignmentActivity.class);
+            intent.putExtra(Constants.KEY_SUPERVISOR, strSupervisor);
+            startActivity(intent);
         });
     }
 }

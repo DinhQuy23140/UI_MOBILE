@@ -31,4 +31,5 @@ public class Constants {
     public static final String KEY_STATUS_REPORT_REJECTED = "rejected";
     public static final String KEY_STATUS_REPORT_APPROVED = "approved";
 
+    public static final String KEY_TEACHER_ID = "teacher_id";
 }
