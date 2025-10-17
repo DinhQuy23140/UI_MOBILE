@@ -2,7 +2,7 @@ package com.example.testui.untilities.formatter;
 
 import com.example.testui.model.User;
 
-public class userFormatter {
+public class UserFormatter {
     public static User format(User user) {
         if (user == null) {
             user = new User();

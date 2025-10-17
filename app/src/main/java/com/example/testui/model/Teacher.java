@@ -9,6 +9,9 @@ public class Teacher {
     private String position;
     private User user;
 
+    public Teacher() {
+    }
+
     public Teacher(String degree, String department_id, String id, String position, String teacher_code, User user, String user_id) {
         this.degree = degree;
         this.department_id = department_id;

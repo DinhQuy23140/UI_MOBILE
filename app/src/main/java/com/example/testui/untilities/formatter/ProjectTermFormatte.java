@@ -1,5 +1,6 @@
 package com.example.testui.untilities.formatter;
 
+import com.example.testui.model.AcademyYear;
 import com.example.testui.model.ProjectTerm;
 import com.example.testui.model.StageTimeline;
 
@@ -17,15 +18,20 @@ public class ProjectTermFormatte {
         if (projectTerm.getDescription() == null) projectTerm.setDescription("Chưa có");
         if (projectTerm.getStart_date() == null) projectTerm.setStart_date("-");
         if (projectTerm.getEnd_date() == null) projectTerm.setEnd_date("-");
-        if (projectTerm.getAcademy_year() == null) projectTerm.setAcademy_year(AcademyYearFormatter.format(projectTerm.getAcademy_year()));
-        if (projectTerm.getStage_timelines() == null) {
-            List<StageTimeline> listStage = new ArrayList<>();
-            for (StageTimeline stageTimeline : listStage) {
-                StageTimelineFormatter.format(stageTimeline);
-                listStage.add(stageTimeline);
-            }
-            projectTerm.setStage_timelines(listStage);
+
+        AcademyYear academyYear = AcademyYearFormatter.format(projectTerm.getAcademy_year());
+        projectTerm.setAcademy_year(academyYear);
+
+        List<StageTimeline> listStage = projectTerm.getStage_timelines();
+        if (listStage == null) {
+            listStage = new ArrayList<>();
         }
+        for (StageTimeline stageTimeline : listStage) {
+            StageTimelineFormatter.format(stageTimeline);
+            listStage.add(stageTimeline);
+        }
+        projectTerm.setStage_timelines(listStage);
+
         return  projectTerm;
     }
 }
