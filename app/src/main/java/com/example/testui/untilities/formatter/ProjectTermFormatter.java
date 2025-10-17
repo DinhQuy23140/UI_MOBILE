@@ -7,7 +7,7 @@ import com.example.testui.model.StageTimeline;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProjectTermFormatte {
+public class ProjectTermFormatter {
     public static ProjectTerm format(ProjectTerm projectTerm) {
         if (projectTerm == null) {
             projectTerm = new ProjectTerm();

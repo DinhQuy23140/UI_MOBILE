@@ -21,6 +21,9 @@ public class ProgressLog {
     private String instructor_status; // Trạng thái đánh giá từ giảng viên
     private int backgroundInstructor, backgroundStudent;
 
+    public ProgressLog() {
+    }
+
     public ProgressLog(String id, String process_id, String title, String description, String start_date_time, String end_date_time, List<Attachment> attachments, String instructor_comment, String student_status, String instructor_status) {
         this.id = id;
         this.process_id = process_id;

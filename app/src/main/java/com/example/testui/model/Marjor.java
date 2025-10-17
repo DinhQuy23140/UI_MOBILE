@@ -4,6 +4,9 @@ public class Marjor {
     String id, code, name, description;
     Faculties faculties;
 
+    public Marjor() {
+    }
+
     public Marjor(String id, String name, String code, String description, Faculties faculties) {
         this.id = id;
         this.name = name;

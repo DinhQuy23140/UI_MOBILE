@@ -3,6 +3,9 @@ package com.example.testui.model;
 public class Faculties {
     String id, code, name, description;
 
+    public Faculties() {
+    }
+
     public Faculties(String id, String code, String name, String description) {
         this.id = id;
         this.code = code;
