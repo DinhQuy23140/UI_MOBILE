@@ -2,6 +2,9 @@ package com.example.testui.model;
 
 public class Department {
     String id, code, name, description, faculty_id;
+    Faculties faculties;
+    public Department() {
+    }
 
     public Department(String id, String code, String description, String faculty_id, String name) {
         this.id = id;
@@ -9,6 +12,14 @@ public class Department {
         this.description = description;
         this.faculty_id = faculty_id;
         this.name = name;
+    }
+
+    public Faculties getFaculties() {
+        return faculties;
+    }
+
+    public void setFaculties(Faculties faculties) {
+        this.faculties = faculties;
     }
 
     public String getCode() {

@@ -1,6 +1,7 @@
 package com.example.testui.untilities.formatter;
 
 import com.example.testui.R;
+import com.example.testui.model.CouncilsMember;
 import com.example.testui.model.Status;
 
 public class CouncilMemberFormatter {
@@ -42,5 +43,14 @@ public class CouncilMemberFormatter {
         } else {
             return  new Status(R.drawable.bg_circle_pending, "Chưa chấm");
         }
+    }
+
+    public static CouncilsMember format(CouncilsMember councilsMember) {
+        if (councilsMember == null) {
+            councilsMember = new CouncilsMember();
+        }
+        if (councilsMember.getRole() == null) councilsMember.setRole("5");
+        councilsMember.setSupervisor(SupervisorFormatter.format(councilsMember.getSupervisor()));
+        return councilsMember;
     }
 }
