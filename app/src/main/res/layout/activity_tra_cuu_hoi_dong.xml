@@ -152,7 +152,7 @@
                             android:id="@+id/txtCouncilName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Hội đồng CNTT Khóa 2025"
+                            android:text="-"
                             android:textColor="#1A1A1A"
                             android:textSize="14sp"
                             android:textStyle="bold" />
@@ -187,7 +187,7 @@
                             android:id="@+id/txtCouncilId"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="HD001"
+                            android:text="-"
                             android:textColor="#1A1A1A"
                             android:textSize="14sp"
                             android:textStyle="bold" />
@@ -222,7 +222,7 @@
                             android:id="@+id/txtMajor"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Công nghệ thông tin"
+                            android:text="-"
                             android:textColor="#1A1A1A"
                             android:textSize="14sp"
                             android:textStyle="bold" />
@@ -264,7 +264,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:lineSpacingExtra="4dp"
-                            android:text="Hội đồng chấm đồ án tốt nghiệp cho sinh viên ngành Công nghệ thông tin khóa 2025. Hội đồng bao gồm các giảng viên có chuyên môn cao và kinh nghiệm trong lĩnh vực CNTT."
+                            android:text="-"
                             android:textColor="#666666"
                             android:textSize="13sp" />
                     </LinearLayout>
@@ -426,7 +426,7 @@
                                     android:id="@+id/tv_pb_name"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="Nguyễn Văn A"
+                                    android:text="Giảng viên"
                                     android:textColor="#1A1A1A"
                                     android:textSize="16sp"
                                     android:textStyle="bold" />
@@ -435,7 +435,7 @@
                                     android:id="@+id/tv_pb_role"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="Chủ tịch hội đồng"
+                                    android:text="Chức vụ"
                                     android:textColor="#666666"
                                     android:textSize="12sp" />
                             </LinearLayout>
@@ -490,7 +490,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="end"
-                                android:text="Phòng A101"
+                                android:text="-"
                                 android:textColor="#1A1A1A"
                                 android:textSize="12sp"
                                 android:textStyle="bold" />
@@ -523,7 +523,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="end"
-                                android:text="08:00 - 10/09/2025"
+                                android:text="-"
                                 android:textColor="#1A1A1A"
                                 android:textSize="12sp"
                                 android:textStyle="bold" />
@@ -554,7 +554,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="end"
-                                android:text="2"
+                                android:text="-"
                                 android:textColor="#1A1A1A"
                                 android:textSize="12sp"
                                 android:textStyle="bold" />
@@ -645,7 +645,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="end"
-                                android:text="Phòng A102"
+                                android:text="-"
                                 android:textColor="#1A1A1A"
                                 android:textSize="12sp"
                                 android:textStyle="bold" />
@@ -678,7 +678,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="end"
-                                android:text="14:00 - 12/09/2025"
+                                android:text="-"
                                 android:textColor="#1A1A1A"
                                 android:textSize="12sp"
                                 android:textStyle="bold" />
@@ -709,7 +709,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="end"
-                                android:text="3"
+                                android:text="-"
                                 android:textColor="#1A1A1A"
                                 android:textSize="12sp"
                                 android:textStyle="bold" />
@@ -802,7 +802,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="2"
                                 android:gravity="end"
-                                android:text="Ứng dụng AI trong nhận diện thực phẩm"
+                                android:text="-"
                                 android:textColor="#1A1A1A"
                                 android:textSize="12sp"
                                 android:textStyle="bold" />
@@ -879,7 +879,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:lineSpacingExtra="4dp"
-                                android:text="Xây dựng ứng dụng di động sử dụng trí tuệ nhân tạo để nhận diện các loại thực phẩm từ hình ảnh, cung cấp thông tin dinh dưỡng, calo và gợi ý công thức nấu ăn phù hợp. Ứng dụng hỗ trợ đa ngôn ngữ và tích hợp cơ sở dữ liệu ẩm thực phong phú."
+                                android:text="-"
                                 android:textColor="#666666"
                                 android:textSize="13sp" />
                         </LinearLayout>

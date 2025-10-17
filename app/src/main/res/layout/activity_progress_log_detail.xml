@@ -130,7 +130,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
-                            android:text="Thiết kế cơ sở dữ liệu và mô hình ERD"
+                            android:text="-"
                             android:textColor="#1A1A1A"
                             android:textSize="16sp"
                             android:textStyle="bold" />
@@ -172,7 +172,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:lineSpacingExtra="4dp"
-                            android:text="Thiết kế cơ sở dữ liệu cho hệ thống quản lý đồ án tốt nghiệp, bao gồm các bảng: sinh viên, giảng viên, đề tài, hội đồng, tiến độ. Xây dựng mô hình ERD chi tiết và các quan hệ giữa các thực thể."
+                            android:text="-"
                             android:textColor="#666666"
                             android:textSize="13sp" />
                     </LinearLayout>
@@ -262,7 +262,7 @@
                                 android:layout_marginStart="7dp"
                                 android:ellipsize="end"
                                 android:maxLines="2"
-                                android:text="01/01/2025 08:00"
+                                android:text="-"
                                 android:textColor="#1A1A1A"
                                 android:textSize="12sp"
                                 android:textStyle="bold" />
@@ -296,7 +296,7 @@
                                 android:layout_marginStart="7dp"
                                 android:ellipsize="end"
                                 android:maxLines="2"
-                                android:text="01/01/2025 10:00"
+                                android:text="-"
                                 android:textColor="#1A1A1A"
                                 android:textSize="12sp"
                                 android:textStyle="bold" />
@@ -323,7 +323,7 @@
                                     android:background="#E3F2FD"
                                     android:paddingHorizontal="8dp"
                                     android:paddingVertical="4dp"
-                                    android:text="Đang xử lý"
+                                    android:text="-"
                                     android:textColor="@color/white"
                                     android:textSize="10sp"
                                     android:textStyle="bold" />
@@ -453,7 +453,7 @@
                                     android:layout_height="wrap_content"
                                     android:paddingHorizontal="8dp"
                                     android:paddingVertical="4dp"
-                                    android:text="Cần chỉnh sửa"
+                                    android:text="-"
                                     android:textColor="@color/white"
                                     android:textSize="10sp"
                                     android:textStyle="bold" />
@@ -496,7 +496,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:lineSpacingExtra="2dp"
-                                android:text="Bạn cần nộp báo cáo chi tiết hơn về mô hình ERD, bao gồm cả các quan hệ và ràng buộc. Hãy bổ sung thêm giải thích cho các lựa chọn thiết kế cơ sở dữ liệu."
+                                android:text="-"
                                 android:textColor="#666666"
                                 android:textSize="11sp" />
 

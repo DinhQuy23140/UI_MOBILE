@@ -130,7 +130,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:paddingStart="4dp"
-                                android:text="Đợt 1 - Tốt nghiệp"
+                                android:text="-"
                                 android:textColor="@color/black"
                                 android:textSize="15sp"
                                 android:textStyle="bold" />
@@ -164,7 +164,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:paddingStart="4dp"
-                                android:text="01/04/2025"
+                                android:text="-"
                                 android:textColor="@color/black"
                                 android:textSize="14sp" />
                         </LinearLayout>
@@ -197,7 +197,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:paddingStart="4dp"
-                                android:text="30/06/2025"
+                                android:text="-"
                                 android:textColor="@color/black"
                                 android:textSize="14sp" />
                         </LinearLayout>
@@ -230,7 +230,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:paddingStart="4dp"
-                                android:text="2024 - 2025"
+                                android:text="-"
                                 android:textColor="@color/black"
                                 android:textSize="14sp" />
                         </LinearLayout>
@@ -273,7 +273,7 @@
                                 android:layout_marginTop="5dp"
                                 android:layout_weight="1"
                                 android:paddingStart="4dp"
-                                android:text="Đợt đồ án tốt nghiệp cho sinh viên năm cuối, bao gồm hướng dẫn, chấm và phản biện."
+                                android:text="-"
                                 android:textColor="@color/black"
                                 android:textSize="14sp" />
                         </LinearLayout>
@@ -308,7 +308,7 @@
                                 android:background="@drawable/bg_circle_completed"
                                 android:paddingHorizontal="12dp"
                                 android:paddingVertical="6dp"
-                                android:text="Đang diễn ra"
+                                android:text="-"
                                 android:textColor="@color/white"
                                 android:textSize="13sp"
                                 android:textStyle="bold" />
@@ -401,7 +401,7 @@
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Nguyễn Văn A"
+                                    android:text="-"
                                     android:textColor="#333333"
                                     android:textSize="14sp" />
                             </LinearLayout>
@@ -443,7 +443,7 @@
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="123456789"
+                                    android:text="-"
                                     android:textColor="#333333"
                                     android:textSize="14sp" />
                             </LinearLayout>
@@ -492,7 +492,7 @@
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="D21CNTT01"
+                                    android:text="-"
                                     android:textColor="#333333"
                                     android:textSize="14sp" />
                             </LinearLayout>
@@ -583,7 +583,7 @@
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="0123456789"
+                                    android:text="-"
                                     android:textColor="#333333"
                                     android:textSize="14sp" />
                             </LinearLayout>
@@ -625,7 +625,7 @@
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="sinhvien@truong.edu.vn"
+                                    android:text="-"
                                     android:textColor="#333333"
                                     android:textSize="14sp" />
                             </LinearLayout>
@@ -707,7 +707,7 @@
                             android:layout_height="48dp"
                             android:layout_weight="1"
                             android:background="@null"
-                            android:hint="Nhập tên đề tài"
+                            android:hint="-"
                             android:paddingVertical="8dp"
                             android:textColor="#333333"
                             android:textSize="16sp" />
@@ -760,7 +760,7 @@
                             android:layout_height="120dp"
                             android:background="@null"
                             android:gravity="top"
-                            android:hint="Nhập mô tả chi tiết về đề tài của bạn..."
+                            android:hint="-"
                             android:inputType="textMultiLine"
                             android:lineSpacingExtra="4dp"
                             android:padding="4dp"

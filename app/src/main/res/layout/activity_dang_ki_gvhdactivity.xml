@@ -116,7 +116,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:paddingStart="4dp"
-                                android:text="Đợt 1 - Tốt nghiệp"
+                                android:text="-"
                                 android:textColor="@color/black"
                                 android:textSize="15sp"
                                 android:textStyle="bold" />
@@ -150,7 +150,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:paddingStart="4dp"
-                                android:text="01/04/2025"
+                                android:text="-"
                                 android:textColor="@color/black"
                                 android:textSize="14sp" />
                         </LinearLayout>
@@ -183,7 +183,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:paddingStart="4dp"
-                                android:text="30/06/2025"
+                                android:text="-"
                                 android:textColor="@color/black"
                                 android:textSize="14sp" />
                         </LinearLayout>
@@ -216,7 +216,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:paddingStart="4dp"
-                                android:text="2024 - 2025"
+                                android:text="-"
                                 android:textColor="@color/black"
                                 android:textSize="14sp" />
                         </LinearLayout>
@@ -259,7 +259,7 @@
                                 android:layout_marginTop="5dp"
                                 android:layout_weight="1"
                                 android:paddingStart="4dp"
-                                android:text="Đợt đồ án tốt nghiệp cho sinh viên năm cuối, bao gồm hướng dẫn, chấm và phản biện."
+                                android:text="-"
                                 android:textColor="@color/black"
                                 android:textSize="14sp" />
                         </LinearLayout>

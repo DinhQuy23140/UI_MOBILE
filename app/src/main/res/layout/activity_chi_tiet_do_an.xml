@@ -141,7 +141,7 @@
                             android:id="@+id/tvMaDeTai"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="DATN001"
+                            android:text="-"
                             android:textColor="#1A1A1A"
                             android:textSize="14sp"
                             android:textStyle="bold" />
@@ -169,7 +169,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
-                            android:text="Ứng dụng AI trong nhận diện ảnh món ăn"
+                            android:text="-"
                             android:textColor="#1A1A1A"
                             android:textSize="16sp"
                             android:textStyle="bold" />
@@ -212,7 +212,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:lineSpacingExtra="4dp"
-                            android:text="Hệ thống sử dụng TensorFlow để nhận diện món ăn từ ảnh chụp, cung cấp thông tin dinh dưỡng và gợi ý công thức nấu ăn. Ứng dụng hỗ trợ đa ngôn ngữ và tích hợp cơ sở dữ liệu ẩm thực phong phú."
+                            android:text="-"
                             android:textColor="#666666"
                             android:textSize="13sp" />
                     </LinearLayout>
@@ -252,7 +252,7 @@
                                 android:id="@+id/tvThongTinHocKy"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Kỳ 1 - 2025"
+                                android:text="-"
                                 android:textColor="#1A1A1A"
                                 android:textSize="12sp"
                                 android:textStyle="bold" />
@@ -284,7 +284,7 @@
                                 android:id="@+id/tvNgayDangKy"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="20/07/2025"
+                                android:text="-"
                                 android:textColor="#1A1A1A"
                                 android:textSize="12sp"
                                 android:textStyle="bold" />
@@ -329,7 +329,7 @@
                                 android:layout_height="wrap_content"
                                 android:paddingHorizontal="8dp"
                                 android:paddingVertical="4dp"
-                                android:text="Đã chấp nhận"
+                                android:text="-"
                                 android:textColor="@color/white"
                                 android:textSize="10sp"
                                 android:textStyle="bold" />
@@ -392,7 +392,7 @@
                             android:background="@drawable/bg_icon_accent"
                             android:paddingHorizontal="8dp"
                             android:paddingVertical="4dp"
-                            android:text="1 GV"
+                            android:text="-"
                             android:textColor="@android:color/white"
                             android:textSize="10sp"
                             android:textStyle="bold" />

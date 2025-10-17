@@ -98,7 +98,7 @@
                         android:layout_marginStart="16dp"
                         android:layout_weight="1"
                         android:lineSpacingExtra="4dp"
-                        android:text="Ứng dụng AI nhận diện món ăn"
+                        android:text="Đề tài:"
                         android:textColor="#1A1A1A"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -143,7 +143,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:lineSpacingExtra="4dp"
-                        android:text="Xây dựng ứng dụng di động sử dụng AI để nhận diện món ăn từ hình ảnh, cung cấp thông tin dinh dưỡng và công thức nấu ăn. Ứng dụng hỗ trợ đa ngôn ngữ và tích hợp cơ sở dữ liệu ẩm thực phong phú."
+                        android:text="-"
                         android:textColor="#666666"
                         android:textSize="13sp" />
 
@@ -194,7 +194,7 @@
                             android:id="@+id/tvThoiGianNop"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="01/08/2025 - 15/08/2025"
+                            android:text="-"
                             android:textColor="#FF6B35"
                             android:textSize="14sp"
                             android:textStyle="bold" />

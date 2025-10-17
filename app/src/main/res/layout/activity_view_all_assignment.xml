@@ -63,7 +63,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
                     android:letterSpacing="0.02"
-                    android:text="TS. Nguyễn Văn A"
+                    android:text="Giảng viên"
                     android:textColor="#E3F2FD"
                     android:textSize="14sp" />
 
@@ -114,7 +114,7 @@
                     android:id="@+id/tvGiangVienNameMain"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="TS. Nguyễn Văn A"
+                    android:text="Giảng viên"
                     android:textColor="#2196F3"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -124,7 +124,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:text="Giảng viên chính"
+                    android:text="Chức vụ"
                     android:textColor="#666666"
                     android:textSize="14sp" />
 
@@ -234,7 +234,7 @@
                 android:id="@+id/tvSoLuongSinhVien"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="15 sinh viên"
+                android:text="0 sinh viên"
                 android:textColor="#2196F3"
                 android:textSize="14sp"
                 android:textStyle="bold" />
