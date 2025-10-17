@@ -10,6 +10,9 @@ public class Student {
     private User user;
     private Marjor marjor;
 
+    public Student() {
+    }
+
     public Student(String class_code, String course_year, String id, String major_id, Marjor marjor, String student_code, User user, String user_id) {
         this.class_code = class_code;
         this.course_year = course_year;
