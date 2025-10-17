@@ -21,6 +21,9 @@ public class ProjectTerm {
     private List<StageTimeline> stage_timelines;
     private int backgroundColor;
 
+    public ProjectTerm() {
+    }
+
     public ProjectTerm(AcademyYear academy_year, String academy_year_id, String description, String end_date, String id, String stage, List<StageTimeline> stage_timelines, String start_date, String status) {
         this.academy_year = academy_year;
         this.academy_year_id = academy_year_id;

@@ -4,6 +4,9 @@ public class AcademyYear {
     private String id;
     private String year_name;
 
+    public AcademyYear() {
+    }
+
     public AcademyYear(String id, String year_name) {
         this.id = id;
         this.year_name = year_name;
