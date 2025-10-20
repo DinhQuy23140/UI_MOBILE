@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -84,29 +85,45 @@ public class ChiTietDoAnActivity extends AppCompatActivity {
 
     void setupClick() {
         binding.btnDetailProgress.setOnClickListener(detailProgress -> {
-            Intent intent = new Intent(this, ProgressLogActivity.class);
-            intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
-            intent.putExtra(Constants.KEY_PROJECT_ID, assignment.getProject_id());
-            startActivity(intent);
+            if (project != null) {
+                Intent intent = new Intent(this, ProgressLogActivity.class);
+                intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
+                intent.putExtra(Constants.KEY_PROJECT_ID, assignment.getProject_id());
+                startActivity(intent);
+            } else {
+                Toast.makeText(this, "Chưa có đề tài, vui lòng đăng ký đề tài", Toast.LENGTH_SHORT).show();
+            }
         });
 
         binding.btnNopDeCuong.setOnClickListener(nopedcuong -> {
-            Intent intent = new Intent(ChiTietDoAnActivity.this, NopDeCuongActivity.class);
-            intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
-            startActivity(intent);
+            if(project != null) {
+                Intent intent = new Intent(ChiTietDoAnActivity.this, NopDeCuongActivity.class);
+                intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
+                startActivity(intent);
+            } else {
+                Toast.makeText(this, "Chưa có đề tài, vui lòng đăng ký đề tài", Toast.LENGTH_SHORT).show();
+            }
         });
 
         Log.d("Chitietdoan", gson.toJson(gson.toJson(project)));
 
         binding.btnNopBaoCao.setOnClickListener(nopbaocao -> {
-            Intent intent = new Intent(ChiTietDoAnActivity.this, NopBaoCaoActivity.class);
-            intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
-            startActivity(intent);
+            if (project != null) {
+                Intent intent = new Intent(ChiTietDoAnActivity.this, NopBaoCaoActivity.class);
+                intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
+                startActivity(intent);
+            } else {
+                Toast.makeText(this, "Chưa có đề tài, vui lòng đăng ký đề tài", Toast.LENGTH_SHORT).show();
+            }
         });
 
         binding.btnTraCuuDiem.setOnClickListener(tracuudiem -> {
-            Intent intent = new Intent(ChiTietDoAnActivity.this, TraCuuDiemActivity.class);
-            startActivity(intent);
+            if (project != null) {
+                Intent intent = new Intent(ChiTietDoAnActivity.this, TraCuuDiemActivity.class);
+                startActivity(intent);
+            } else {
+                Toast.makeText(this, "Chưa có đề tài, vui lòng đăng ký đề tài", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 

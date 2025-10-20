@@ -1,5 +1,6 @@
 package com.example.testui.activities;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -14,8 +15,18 @@ import com.example.testui.R;
 import com.example.testui.ViewModel.DangKiDeTaiViewModel;
 import com.example.testui.ViewModelFactory.DangKiDeTaiViewModelFactory;
 import com.example.testui.databinding.ActivityDangKiDetaiBinding;
+import com.example.testui.model.AcademyYear;
 import com.example.testui.model.Assignment;
+import com.example.testui.model.ProjectTerm;
+import com.example.testui.model.Status;
+import com.example.testui.model.Student;
+import com.example.testui.model.User;
 import com.example.testui.untilities.Constants;
+import com.example.testui.untilities.formatter.AcademyYearFormatter;
+import com.example.testui.untilities.formatter.AssignmentFormatter;
+import com.example.testui.untilities.formatter.ProjectTermFormatter;
+import com.example.testui.untilities.formatter.StudentFormatter;
+import com.example.testui.untilities.formatter.UserFormatter;
 import com.google.gson.Gson;
 
 import java.util.HashMap;
@@ -26,6 +37,9 @@ public class DangKiDetaiActivity extends AppCompatActivity {
     ActivityDangKiDetaiBinding binding;
     DangKiDeTaiViewModel dangKiDeTaiViewModel;
     Assignment assignment;
+    String strAssignment;
+    Intent intent;
+    Student student;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,10 +54,18 @@ public class DangKiDetaiActivity extends AppCompatActivity {
         });
 
         init();
-        Intent intent = getIntent();
-        String strAssignment = intent.getStringExtra(Constants.KEY_ASSIGNMENT);
-        assignment = new Gson().fromJson(strAssignment, Assignment.class);
+        setupClick();
+        loadData();
+    }
 
+    void init() {
+        intent = getIntent();
+        strAssignment = intent.getStringExtra(Constants.KEY_ASSIGNMENT);
+        assignment = AssignmentFormatter.format(new Gson().fromJson(strAssignment, Assignment.class));
+        dangKiDeTaiViewModel = new ViewModelProvider(this, new DangKiDeTaiViewModelFactory(this)).get(DangKiDeTaiViewModel.class);
+    }
+
+    void setupClick() {
         binding.btnBack.setOnClickListener(back -> {
             finish();
         });
@@ -57,13 +79,34 @@ public class DangKiDetaiActivity extends AppCompatActivity {
             projectBody.put("description", mota);
             dangKiDeTaiViewModel.createProject(projectBody);
         });
+    }
+
+    @SuppressLint("UseCompatLoadingForDrawables")
+    void loadData() {
+        ProjectTerm projectTerm = assignment.getProject_term();
+        binding.tvDotDoAn.setText(projectTerm.getStage());
+        binding.tvStartDate.setText(projectTerm.getStart_date());
+        binding.tvEndDate.setText(projectTerm.getEnd_date());
+        AcademyYear academyYear = AcademyYearFormatter.format(projectTerm.getAcademy_year());
+        binding.tvNamHoc.setText(academyYear.getYear_name());
+        binding.tvMoTa.setText(projectTerm.getDescription());
+        Status status = ProjectTermFormatter.getStatus(projectTerm);
+        binding.tvTrangThai.setText(status.getStrStatus());
+        binding.tvTrangThai.setBackground(getDrawable(status.getBackgroundColor()));
 
         dangKiDeTaiViewModel.getResponseCreateProject().observe(this, result -> {
             dangKiDeTaiViewModel.updateProjectIdAssignmentByAssIdAndProId(assignment.getId(), result.getId());
         });
-    }
 
-    void init() {
-        dangKiDeTaiViewModel = new ViewModelProvider(this, new DangKiDeTaiViewModelFactory(this)).get(DangKiDeTaiViewModel.class);
+        dangKiDeTaiViewModel.loadStudentByStudentId();
+        dangKiDeTaiViewModel.getStudent().observe(this, result -> {
+            student = StudentFormatter.format(result);
+            User user = UserFormatter.format(student.getUser());
+            binding.tvTenSinhVien.setText(user.getFullname());
+            binding.tvMaSinhVien.setText(student.getStudent_code());
+            binding.tvLop.setText(student.getClass_code());
+            binding.tvSoDienThoai.setText(user.getPhone());
+            binding.tvEmail.setText(user.getEmail());
+        });
     }
 }
