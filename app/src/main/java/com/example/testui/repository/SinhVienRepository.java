@@ -9,9 +9,11 @@ import com.example.testui.model.Assignment;
 import com.example.testui.model.LoginResponse;
 import com.example.testui.model.Student;
 import com.example.testui.model.Supervisor;
+import com.example.testui.model.User;
 import com.example.testui.service.ApiService;
 import com.example.testui.service.AssignmentService;
 import com.example.testui.service.AuthService;
+import com.example.testui.service.UserService;
 import com.example.testui.sharepreference.SharePreferenceManage;
 import com.google.gson.Gson;
 
@@ -31,18 +33,21 @@ public class SinhVienRepository {
     ApiService apiService;
     AuthService authService;
     AssignmentService assignmentService;
+    UserService userService;
     private static volatile SinhVienRepository instance;
     MutableLiveData<Boolean> loginResult = new MutableLiveData<>(false);
     MutableLiveData<Student> student = new MutableLiveData<>();
     MutableLiveData<List<Supervisor>> listSupervisor = new MutableLiveData<>();
     MutableLiveData<Assignment> assignmentByIdStudent = new MutableLiveData<>();
     MutableLiveData<Assignment> recentAssignment = new MutableLiveData<>();
+    MutableLiveData<Boolean> registerResult = new MutableLiveData<Boolean>(false);
     SharePreferenceManage sharePreferenceManage;
     // private constructor : singleton access
     public SinhVienRepository(Context context) {
         apiService = Client.getInstance().create(ApiService.class);
         authService = Client.getInstance().create(AuthService.class);
         assignmentService = Client.getInstance().create(AssignmentService.class);
+        userService = Client.getInstance().create(UserService.class);
         sharePreferenceManage = new SharePreferenceManage(context);
     }
 
@@ -226,5 +231,38 @@ public class SinhVienRepository {
 
     public MutableLiveData<Assignment> getRecentAssignment() {
         return recentAssignment;
+    }
+
+    public void logout() {
+        sharePreferenceManage.saveIsLogin(false);
+    }
+
+    public void register(User user) {
+        Call<User> call = userService.register(user);
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.isSuccessful()) {
+                    registerResult.setValue(true);
+                } else {
+                    registerResult.setValue(false);
+                    Log.e("API_ERROR", "Response not successful: " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable throwable) {
+                registerResult.setValue(false);
+                Log.e("API_ERROR", "Failed to register", throwable);
+            }
+        });
+    }
+
+    public MutableLiveData<Boolean> getRegisterResult() {
+        return registerResult;
+    }
+
+    public void setRegisterResult(MutableLiveData<Boolean> registerResult) {
+        this.registerResult = registerResult;
     }
 }

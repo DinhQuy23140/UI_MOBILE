@@ -10,7 +10,6 @@ public class DepartmentFormatter {
         if  (department.getCode() == null) department.setCode("-");
         if (department.getDescription() == null) department.setDescription("-");
         if (department.getName() == null) department.setName("-");
-        department.setFaculties(FacultiesFormatter.format(department.getFaculties()));
         return department;
     }
 }

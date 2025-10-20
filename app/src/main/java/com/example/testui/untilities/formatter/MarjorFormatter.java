@@ -11,7 +11,6 @@ public class MarjorFormatter {
         if (marjor.getCode() == null) marjor.setCode("-");
         if (marjor.getDescription() == null) marjor.setDescription("-");
         if (marjor.getName() == null) marjor.setName("-");
-        marjor.setFaculties(FacultiesFormatter.format(marjor.getFaculties()));
         return marjor;
     }
 }

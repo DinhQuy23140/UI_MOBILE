@@ -9,8 +9,6 @@ public class CouncilsMemberFormatter {
         }
 
         if (councilsMember.getRole() == null) councilsMember.setRole("1");
-        councilsMember.setSupervisor(SupervisorFormatter.format(councilsMember.getSupervisor()));
-        councilsMember.setCouncil(CouncilFormatter.format(councilsMember.getCouncil()));
 
         return councilsMember;
     }

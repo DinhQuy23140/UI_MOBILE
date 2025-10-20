@@ -22,15 +22,6 @@ public class ProjectFormatter {
             project.setDescription("-");
         }
 
-        // Format danh sách progress_logs
-        List<ProgressLog> formattedLogs = new ArrayList<>();
-        if (project.getProgress_logs() != null && !project.getProgress_logs().isEmpty()) {
-            for (ProgressLog log : project.getProgress_logs()) {
-                formattedLogs.add(ProgressLogFormatter.format(log));
-            }
-        }
-
-        project.setProgress_logs(formattedLogs);
         return project;
     }
 }

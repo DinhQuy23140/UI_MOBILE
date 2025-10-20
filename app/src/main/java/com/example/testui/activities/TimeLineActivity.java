@@ -21,12 +21,17 @@ import com.example.testui.ViewModelFactory.TimeLineViewModelFactory;
 import com.example.testui.adapter.BaseGVHDAdapter;
 import com.example.testui.databinding.ActivityTimeLineBinding;
 import com.example.testui.model.Assignment;
+import com.example.testui.model.Project;
 import com.example.testui.model.ProjectTerm;
 import com.example.testui.model.StageTimeline;
 import com.example.testui.model.Status;
 import com.example.testui.model.Supervisor;
 import com.example.testui.untilities.Constants;
+import com.example.testui.untilities.formatter.AssignmentFormatter;
 import com.example.testui.untilities.formatter.DateFormatter;
+import com.example.testui.untilities.formatter.ProjectFormatter;
+import com.example.testui.untilities.formatter.ProjectTermFormatter;
+import com.example.testui.untilities.formatter.StageTimelineFormatter;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -75,9 +80,10 @@ public class TimeLineActivity extends AppCompatActivity {
         timeLineViewModel.loadAssignmentByStudentIdAndTermId(studentId, projectTermId);
         timeLineViewModel.getAssignmentByStudentIdAndTermId().observe(this, result -> {
             if (result != null) {
-                assignment = result;
+                assignment = AssignmentFormatter.format(result);
                 Log.d("timeline", new Gson().toJson(result));
-                binding.tvCurrentTopic.setText(result.getProject().getName());
+                Project project = ProjectFormatter.format(assignment.getProject());
+                binding.tvCurrentTopic.setText(project.getName());
                 if (result.getAssignment_supervisors().isEmpty()) {
                     binding.rvSupervisor.setVisibility(View.GONE);
                     binding.tvNotifyEmpty.setVisibility(View.VISIBLE);
@@ -105,7 +111,7 @@ public class TimeLineActivity extends AppCompatActivity {
     void loadProjectTerm() {
         strProjectTerm = intent.getStringExtra(Constants.KEY_PROJECT_TERM);
         Log.d("project_term", strProjectTerm);
-        ProjectTerm projectTerm = new Gson().fromJson(strProjectTerm, ProjectTerm.class);
+        ProjectTerm projectTerm = ProjectTermFormatter.format(new Gson().fromJson(strProjectTerm, ProjectTerm.class));
         projectTermId = projectTerm.getId();
         binding.tvProjectName.setText("Đợt đồ án: Đợt " + projectTerm.getStage() + " năm " + projectTerm.getAcademy_year().getYear_name());
         binding.tvStartDate.setText("Bắt đầu: " + DateFormatter.formatDate(projectTerm.getStart_date()));
@@ -148,7 +154,7 @@ public class TimeLineActivity extends AppCompatActivity {
             int limit = Math.min(listStage.size(), tvDates.length);
 
             for (int i = 0; i < limit; i++) {
-                StageTimeline stage = listStage.get(i);
+                StageTimeline stage = StageTimelineFormatter.format(listStage.get(i));
 
                 String start = DateFormatter.formatDate(stage.getStart_date());
                 String end = DateFormatter.formatDate(stage.getEnd_date());

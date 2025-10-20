@@ -19,19 +19,6 @@ public class ProjectTermFormatter {
         if (projectTerm.getStart_date() == null) projectTerm.setStart_date("-");
         if (projectTerm.getEnd_date() == null) projectTerm.setEnd_date("-");
 
-        AcademyYear academyYear = AcademyYearFormatter.format(projectTerm.getAcademy_year());
-        projectTerm.setAcademy_year(academyYear);
-
-        List<StageTimeline> listStage = projectTerm.getStage_timelines();
-        if (listStage == null) {
-            listStage = new ArrayList<>();
-        }
-        for (StageTimeline stageTimeline : listStage) {
-            StageTimelineFormatter.format(stageTimeline);
-            listStage.add(stageTimeline);
-        }
-        projectTerm.setStage_timelines(listStage);
-
         return  projectTerm;
     }
 }

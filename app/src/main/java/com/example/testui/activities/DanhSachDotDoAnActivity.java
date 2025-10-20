@@ -83,11 +83,17 @@ public class DanhSachDotDoAnActivity extends AppCompatActivity {
             dotDoAnViewModel.getListDoAnByStudentId(studentId);
             Toast.makeText(this, studentId, Toast.LENGTH_SHORT).show();
             dotDoAnViewModel.getListDotDoAn().observe(this, result -> {
-                if (result != null) {
+                Log.d("Danhsachdotdoan", gson.toJson(result));
+                if (result != null && !result.isEmpty()) {
                     listProjectTerm = result;
                     projectTermAdapter.updateData(listProjectTerm);
                     binding.tvCount.setText(String.valueOf(listProjectTerm.size()));
                     binding.layoutDotDoAn.setVisibility(View.VISIBLE);
+                    binding.progressBarIc.setVisibility(View.GONE);
+                    binding.rcvDotDoAn.setVisibility(View.VISIBLE);
+                } else {
+                    binding.rcvDotDoAn.setVisibility(View.GONE);
+                    binding.emptyStateView.setVisibility(View.VISIBLE);
                     binding.progressBarIc.setVisibility(View.GONE);
                 }
             });

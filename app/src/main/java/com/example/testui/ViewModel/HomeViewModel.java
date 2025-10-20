@@ -24,7 +24,7 @@ import java.util.Map;
 public class HomeViewModel extends ViewModel {
     MutableLiveData<Student> getStudent = new MutableLiveData<>();
     MutableLiveData<String> studentId = new MutableLiveData<>();
-    MutableLiveData<Assignment> recentAssignment = new MutableLiveData<>();
+    MutableLiveData<Assignment> recentAssignment;
     private SinhVienRepository sinhVienRepository;
     public HomeViewModel(Context context) {
         this.sinhVienRepository = new SinhVienRepository(context);
@@ -113,5 +113,9 @@ public class HomeViewModel extends ViewModel {
         localEndDate = LocalDate.parse(endDate);
         long days = ChronoUnit.DAYS.between(localStartDate, localEndDate);
         return days + " ngày"; // nếu âm => trả 0
+    }
+
+    public void logout() {
+        sinhVienRepository.logout();
     }
 }

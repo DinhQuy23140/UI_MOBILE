@@ -22,7 +22,6 @@ public class Assignment {
     ProjectTerm project_term;
     CouncilProject council_project;
     String created_at, updated_at;
-    int background;
 
     public Assignment() {
     }
@@ -171,42 +170,5 @@ public class Assignment {
 
     public void setStudent_id(String student_id) {
         this.student_id = student_id;
-    }
-
-    public int getBackground() {
-        return background;
-    }
-
-    public void setBackground(int background) {
-        this.background = background;
-    }
-
-    @NonNull
-    @Override
-    public String toString() {
-        String convertStatus;
-        switch(status) {
-            case "pending":
-                convertStatus = "Đang chờ";
-                background = R.drawable.bg_circle_pending;
-                break;
-            case "cancel":
-                convertStatus = "Đã hủy";
-                background = R.drawable.bg_badge_modern;
-                break;
-            case "stopped":
-                convertStatus = "Đã dừng";
-                background = R.drawable.bg_icon_success;
-                break;
-            case "actived":
-                convertStatus = "Đang thực hiện";
-                background = R.drawable.bg_rating_good;
-                break;
-            default:
-                convertStatus = "Đang chờ";
-                background = R.drawable.bg_status_pending;
-                break;
-        }
-        return convertStatus;
     }
 }

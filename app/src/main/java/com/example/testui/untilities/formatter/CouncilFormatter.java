@@ -17,16 +17,7 @@ public class CouncilFormatter {
         if (council.getDate() == null) council.setDate("-");
         if (council.getAddress() == null) council.setAddress("-");
         if (council.getDescription() == null) council.setDescription("-");
-        if (council.getDate() == null) council.setDate("-");
         if (council.getStatus() == null) council.setStatus("pending");
-        council.setDepartment(DepartmentFormatter.format(council.getDepartment()));
-        List<CouncilsMember> listCouncilMember = new ArrayList<>();
-        if (council.getCouncil_members() == null) {
-            for (CouncilsMember councilsMember : council.getCouncil_members()) {
-                listCouncilMember.add(CouncilsMemberFormatter.format(councilsMember));
-            }
-        }
-        council.setCouncil_members(listCouncilMember);
         return council;
     }
 }

@@ -16,15 +16,6 @@ public class ProgressLogFormatter {
         if (progressLog.getStart_date_time() == null) progressLog.setStart_date_time("-");
         if (progressLog.getEnd_date_time() == null) progressLog.setEnd_date_time("-");
 
-        List<Attachment> listAttachment = new ArrayList<>();
-        if (progressLog.getAttachments() != null) {
-            for (Attachment attachment : listAttachment) {
-                attachment = AttachmentFormatter.format(attachment);
-                listAttachment.add(attachment);
-            }
-        }
-        progressLog.setAttachments(listAttachment);
-
         if (progressLog.getInstructor_comment() == null) progressLog.setInstructor_comment("-");
         if (progressLog.getStudent_status() == null) progressLog.setStudent_status("pending");
         if (progressLog.getInstructor_status() == null) progressLog.setInstructor_status("pending");

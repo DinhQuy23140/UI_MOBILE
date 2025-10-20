@@ -7,9 +7,7 @@ public class AssignmentSupervisorFormatter {
         if (assignmentSupervisor == null) {
             assignmentSupervisor = new AssignmentSupervisor();
         }
-
         if (assignmentSupervisor.getRole() == null) assignmentSupervisor.setRole("main");
-        assignmentSupervisor.setSupervisor(SupervisorFormatter.format(assignmentSupervisor.getSupervisor()));
 
         return  assignmentSupervisor;
     }

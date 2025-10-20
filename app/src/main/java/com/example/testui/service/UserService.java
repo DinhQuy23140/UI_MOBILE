@@ -34,4 +34,6 @@ public interface UserService {
     @DELETE("users/{userId}")
     Call<User> deleteUser(@Path("userId") String userId);
 
+    @POST("auth/register")
+    Call<User> register(@Body User user);
 }
