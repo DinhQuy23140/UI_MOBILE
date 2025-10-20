@@ -19,6 +19,7 @@ import com.example.testui.ViewModelFactory.HomeViewModelFactory;
 import com.example.testui.databinding.ActivityCapNhapThongTinBinding;
 import com.example.testui.model.Student;
 import com.example.testui.untilities.Constants;
+import com.example.testui.untilities.formatter.StudentFormatter;
 import com.google.gson.Gson;
 
 public class CapNhapThongTinActivity extends AppCompatActivity {
@@ -46,7 +47,7 @@ public class CapNhapThongTinActivity extends AppCompatActivity {
         homeViewModel.getGetStudent().observe(this, result -> {
             Log.d("Student", new Gson().toJson(result));
             if (result != null) {
-                Student student = result;
+                Student student = StudentFormatter.format(result);
                 Toast.makeText(this, student.getUser().getFullname(), Toast.LENGTH_SHORT).show();
                 binding.tvSvMsv.setText(student.getStudent_code());
                 binding.tvSvFullname.setText(student.getUser().getFullname());

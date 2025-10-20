@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,12 +22,19 @@ import com.example.testui.adapter.GVHDAdapter;
 import com.example.testui.adapter.ProcessLogAdapter;
 import com.example.testui.databinding.ActivityChiTietDoAnBinding;
 import com.example.testui.interfaces.OnClickItem;
+import com.example.testui.model.AcademyYear;
 import com.example.testui.model.Assignment;
 import com.example.testui.model.AssignmentSupervisor;
+import com.example.testui.model.Project;
 import com.example.testui.model.ProjectTerm;
+import com.example.testui.model.Status;
 import com.example.testui.model.Supervisor;
 import com.example.testui.untilities.Constants;
+import com.example.testui.untilities.formatter.AcademyYearFormatter;
+import com.example.testui.untilities.formatter.AssignmentFormatter;
 import com.example.testui.untilities.formatter.DateFormatter;
+import com.example.testui.untilities.formatter.ProjectFormatter;
+import com.example.testui.untilities.formatter.ProjectTermFormatter;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -43,6 +51,7 @@ public class ChiTietDoAnActivity extends AppCompatActivity {
     Gson gson;
     String studentId = "", strAssignment = "", strProjectTerm = "";
     Intent intent;
+    Project project;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -70,33 +79,51 @@ public class ChiTietDoAnActivity extends AppCompatActivity {
         intent = getIntent();
         strAssignment = intent.getStringExtra(Constants.KEY_ASSIGNMENT);
         strProjectTerm = intent.getStringExtra(Constants.KEY_PROJECT_TERM);
-        assignment = gson.fromJson(strAssignment, Assignment.class);
-        projectTerm = gson.fromJson(strProjectTerm, ProjectTerm.class);
+        assignment = AssignmentFormatter.format(gson.fromJson(strAssignment, Assignment.class));
+        projectTerm = ProjectTermFormatter.format(gson.fromJson(strProjectTerm, ProjectTerm.class));
     }
 
     void setupClick() {
         binding.btnDetailProgress.setOnClickListener(detailProgress -> {
-            Intent intent = new Intent(this, ProgressLogActivity.class);
-            intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
-            intent.putExtra(Constants.KEY_PROJECT_ID, assignment.getProject_id());
-            startActivity(intent);
+            if (project != null) {
+                Intent intent = new Intent(this, ProgressLogActivity.class);
+                intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
+                intent.putExtra(Constants.KEY_PROJECT_ID, assignment.getProject_id());
+                startActivity(intent);
+            } else {
+                Toast.makeText(this, "Chưa có đề tài, vui lòng đăng ký đề tài", Toast.LENGTH_SHORT).show();
+            }
         });
 
         binding.btnNopDeCuong.setOnClickListener(nopedcuong -> {
-            Intent intent = new Intent(ChiTietDoAnActivity.this, NopDeCuongActivity.class);
-            intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
-            startActivity(intent);
+            if(project != null) {
+                Intent intent = new Intent(ChiTietDoAnActivity.this, NopDeCuongActivity.class);
+                intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
+                startActivity(intent);
+            } else {
+                Toast.makeText(this, "Chưa có đề tài, vui lòng đăng ký đề tài", Toast.LENGTH_SHORT).show();
+            }
         });
 
+        Log.d("Chitietdoan", gson.toJson(gson.toJson(project)));
+
         binding.btnNopBaoCao.setOnClickListener(nopbaocao -> {
-            Intent intent = new Intent(ChiTietDoAnActivity.this, NopBaoCaoActivity.class);
-            intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
-            startActivity(intent);
+            if (project != null) {
+                Intent intent = new Intent(ChiTietDoAnActivity.this, NopBaoCaoActivity.class);
+                intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
+                startActivity(intent);
+            } else {
+                Toast.makeText(this, "Chưa có đề tài, vui lòng đăng ký đề tài", Toast.LENGTH_SHORT).show();
+            }
         });
 
         binding.btnTraCuuDiem.setOnClickListener(tracuudiem -> {
-            Intent intent = new Intent(ChiTietDoAnActivity.this, TraCuuDiemActivity.class);
-            startActivity(intent);
+            if (project != null) {
+                Intent intent = new Intent(ChiTietDoAnActivity.this, TraCuuDiemActivity.class);
+                startActivity(intent);
+            } else {
+                Toast.makeText(this, "Chưa có đề tài, vui lòng đăng ký đề tài", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 
@@ -130,27 +157,27 @@ public class ChiTietDoAnActivity extends AppCompatActivity {
         chiTietDoAnViewModel.loadAssignmentByStudentIdAndTermId(studentId, projectTerm.getId());
         chiTietDoAnViewModel.getAssignmentByStudentIdAndTermId().observe(this, result -> {
             if (result != null) {
-                assignment = result;
+                assignment = AssignmentFormatter.format(result);
 
-                Log.d("CHITIETDOAN", new Gson().toJson(result));
-                binding.tvMaDeTai.setText(result.getId());
-                String name = (assignment != null && assignment.getProject() != null && assignment.getProject().getName() != null)
-                        ? assignment.getProject().getName()
-                        : "—";
-                binding.tvTenDeTai.setText("Tên đề tài: " + name);
-                binding.tvMoTa.setText("Mô tả: " + assignment.getProject().getDescription());
-                binding.tvThongTinHocKy.setText("Đợt " + assignment.getProject_term().getStage() + " - " + assignment.getProject_term().getAcademy_year().getYear_name());
+                binding.tvMaDeTai.setText(assignment.getId());
+                project = ProjectFormatter.format(assignment.getProject());
+                binding.tvTenDeTai.setText("Tên đề tài: " + project.getName());
+                binding.tvMoTa.setText("Mô tả: " + project.getDescription());
+                ProjectTerm getProjectTerm = ProjectTermFormatter.format(assignment.getProject_term());
+                AcademyYear academyYear = AcademyYearFormatter.format(projectTerm.getAcademy_year());
+                binding.tvThongTinHocKy.setText("Đợt " + getProjectTerm.getStage() + " - " + academyYear.getYear_name());
 
 
                 String createdAt = assignment.getCreated_at();
                 String formattedDate = DateFormatter.formatDate(createdAt);
                 binding.tvNgayDangKy.setText(formattedDate);
 
-                binding.tvTrangThai.setText(assignment.toString());
-                binding.tvTrangThai.setBackground(getDrawable(assignment.getBackground()));
+                Status status = AssignmentFormatter.statusFormat(assignment.getStatus());
+                binding.tvTrangThai.setText(status.getStrStatus());
+                binding.tvTrangThai.setBackground(getDrawable(status.getBackgroundColor()));
 
-                if (!assignment.getProject().getProgress_logs().isEmpty()) {
-                    processLogAdapter.updateData(assignment.getProject().getProgress_logs());
+                if (project.getProgress_logs() != null && !project.getProgress_logs().isEmpty()) {
+                    processLogAdapter.updateData(project.getProgress_logs());
                 } else {
                     binding.tvEmptyProgress.setVisibility(View.VISIBLE);
                 }

@@ -10,9 +10,6 @@ public class CouncilProjectDefenceFormatter {
         if (councilProjectDefence.getScore() == null) councilProjectDefence.setScore("-");
         if (councilProjectDefence.getComments() == null) councilProjectDefence.setComments("-");
 
-        councilProjectDefence.setCouncil_member(CouncilMemberFormatter.format(councilProjectDefence.getCouncil_member()));
-        councilProjectDefence.setCouncil_project(CouncilProjectFormatter.format(councilProjectDefence.getCouncil_project()));
-
         return councilProjectDefence;
     }
 }

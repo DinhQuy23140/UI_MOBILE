@@ -11,8 +11,6 @@ public class SupervisorFormatter {
         if (supervisor.getMax_students() == null) supervisor.setMax_students("0");
         if (supervisor.getStatus() == null) supervisor.setStatus("pending");
         if (supervisor.getExpertise() == null) supervisor.setExpertise("-");
-        supervisor.setTeacher(TeacherFormatter.format(supervisor.getTeacher()));
-        supervisor.setProjectTerm(ProjectTermFormatter.format(supervisor.getProjectTerm()));
         return supervisor;
     }
 }

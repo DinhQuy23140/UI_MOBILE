@@ -19,9 +19,20 @@ import com.example.testui.adapter.GVHDAdapter;
 import com.example.testui.databinding.ActivityDangKiDoAnBinding;
 import com.example.testui.model.Assignment;
 import com.example.testui.model.AssignmentSupervisor;
+import com.example.testui.model.Faculties;
+import com.example.testui.model.Marjor;
+import com.example.testui.model.Project;
 import com.example.testui.model.ProjectTerm;
+import com.example.testui.model.Student;
 import com.example.testui.model.Supervisor;
+import com.example.testui.model.User;
 import com.example.testui.untilities.Constants;
+import com.example.testui.untilities.formatter.AssignmentFormatter;
+import com.example.testui.untilities.formatter.FacultiesFormatter;
+import com.example.testui.untilities.formatter.MarjorFormatter;
+import com.example.testui.untilities.formatter.ProjectFormatter;
+import com.example.testui.untilities.formatter.StudentFormatter;
+import com.example.testui.untilities.formatter.UserFormatter;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -39,6 +50,8 @@ public class DangKiDoAnActivity extends AppCompatActivity {
     Intent projectTermIntent;
     ProjectTerm projectTerm;
     Gson gson;
+    Student student;
+    User user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +69,6 @@ public class DangKiDoAnActivity extends AppCompatActivity {
         setupRecyclerView();
         fetchData();
         loadInfStudent();
-        loadAssignment();
     }
 
     void init() {
@@ -96,7 +108,10 @@ public class DangKiDoAnActivity extends AppCompatActivity {
         dangKiDoAnViewModel.getAssignmentByStudentIdAndTermId(studentId, projectTerm.getId());
 
         dangKiDoAnViewModel.getAssignmentMutableLiveData().observe(this, assignment-> {
-            assignmentResult = assignment;
+            assignmentResult = AssignmentFormatter.format(assignment);
+            Project project = ProjectFormatter.format(assignmentResult.getProject());
+            binding.tvTenDeTai.setText(project.getName());
+            binding.tvDescription.setText(project.getDescription());
             if (assignment.getAssignment_supervisors().isEmpty()) {
                 binding.tvEmptySupervisor.setVisibility(View.VISIBLE);
             } else {
@@ -112,21 +127,17 @@ public class DangKiDoAnActivity extends AppCompatActivity {
 
     void loadInfStudent() {
         dangKiDoAnViewModel.loadInfStudent();
-        dangKiDoAnViewModel.getStudentById().observe(this, student -> {
+        dangKiDoAnViewModel.getStudentById().observe(this, result -> {
+            student = StudentFormatter.format(result);
             binding.tvMaSinhVien.setText(student.getStudent_code());
-            binding.tvTenSinhVien.setText(student.getUser().getFullname());
+            user = UserFormatter.format(student.getUser());
+            binding.tvTenSinhVien.setText(user.getFullname());
             binding.tvLop.setText(student.getClass_code());
-            binding.tvKhoa.setText(student.getMarjor().getFaculties().getName());
-            binding.tvSoDienThoai.setText(student.getUser().getPhone());
-            binding.tvEmail.setText(student.getUser().getEmail());
-        });
-    }
-    
-    void loadAssignment() {
-        dangKiDoAnViewModel.getAssignmentByStudentIdAndTermId(studentId, projectTerm.getId());
-        dangKiDoAnViewModel.getAssignmentMutableLiveData().observe(this, assignment -> {
-            binding.tvTenDeTai.setText(assignment.getProject().getName());
-            binding.tvDescription.setText(assignment.getProject().getDescription());
+            Marjor marjor = MarjorFormatter.format(student.getMarjor());
+            Faculties faculties = FacultiesFormatter.format(marjor.getFaculties());
+            binding.tvKhoa.setText(faculties.getName());
+            binding.tvSoDienThoai.setText(user.getPhone());
+            binding.tvEmail.setText(user.getEmail());
         });
     }
 }

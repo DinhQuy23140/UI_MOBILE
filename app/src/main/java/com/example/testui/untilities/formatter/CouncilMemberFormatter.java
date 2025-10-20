@@ -50,7 +50,6 @@ public class CouncilMemberFormatter {
             councilsMember = new CouncilsMember();
         }
         if (councilsMember.getRole() == null) councilsMember.setRole("5");
-        councilsMember.setSupervisor(SupervisorFormatter.format(councilsMember.getSupervisor()));
         return councilsMember;
     }
 }

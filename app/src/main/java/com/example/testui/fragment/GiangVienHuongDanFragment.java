@@ -93,17 +93,15 @@ public class GiangVienHuongDanFragment extends Fragment {
         gvhdViewModel.getGVHD();
         gvhdViewModel.getListSupervisor().observe(getViewLifecycleOwner(), result -> {
             List<Supervisor> listSupervisor = result;
+            binding.tvCountSupervisor.setText(String.valueOf(listSupervisor.size()));
             Log.d("Supervisor", result.size() + "");
-            GVHDAdapter gvhdAdapter = new GVHDAdapter(requireContext(), listSupervisor, new OnClickItem() {
-                @Override
-                public void onClickItem(int position) {
-                    Intent intent = new Intent(getContext(), GVHDActivity.class);
-                    Gson gson = new Gson();
-                    Supervisor supervisor = listSupervisor.get(position);
-                    String strGVHD = gson.toJson(supervisor);
-                    intent.putExtra(Constants.KEY_SUPERVISOR, strGVHD);
-                    startActivity(intent);
-                }
+            GVHDAdapter gvhdAdapter = new GVHDAdapter(requireContext(), listSupervisor, position -> {
+                Intent intent = new Intent(getContext(), GVHDActivity.class);
+                Gson gson = new Gson();
+                Supervisor supervisor = listSupervisor.get(position);
+                String strGVHD = gson.toJson(supervisor);
+                intent.putExtra(Constants.KEY_SUPERVISOR, strGVHD);
+                startActivity(intent);
             });
             binding.rvGiangVien.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
             binding.rvGiangVien.setAdapter(gvhdAdapter);

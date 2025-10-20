@@ -23,10 +23,23 @@ import com.example.testui.model.Assignment;
 import com.example.testui.model.Council;
 import com.example.testui.model.CouncilProject;
 import com.example.testui.model.CouncilsMember;
+import com.example.testui.model.Department;
+import com.example.testui.model.Project;
 import com.example.testui.model.Status;
 import com.example.testui.model.Supervisor;
+import com.example.testui.model.Teacher;
+import com.example.testui.model.User;
 import com.example.testui.untilities.Constants;
+import com.example.testui.untilities.formatter.AssignmentFormatter;
+import com.example.testui.untilities.formatter.CouncilFormatter;
+import com.example.testui.untilities.formatter.CouncilProjectFormatter;
+import com.example.testui.untilities.formatter.CouncilsMemberFormatter;
 import com.example.testui.untilities.formatter.DateFormatter;
+import com.example.testui.untilities.formatter.DepartmentFormatter;
+import com.example.testui.untilities.formatter.ProjectFormatter;
+import com.example.testui.untilities.formatter.SupervisorFormatter;
+import com.example.testui.untilities.formatter.TeacherFormatter;
+import com.example.testui.untilities.formatter.UserFormatter;
 import com.google.gson.Gson;
 
 import java.util.List;
@@ -40,6 +53,8 @@ public class TraCuuHoiDongActivity extends AppCompatActivity {
     CouncilsMemberAdapter councilsMemberAdapter;
     BaseGVHDAdapter baseGVHDAdapter;
     TraCuuHoiDongViewModel traCuuHoiDongViewModel;
+    Council council;
+    List<CouncilsMember> listCouncilMember;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,41 +77,46 @@ public class TraCuuHoiDongActivity extends AppCompatActivity {
         gson = new Gson();
         traCuuHoiDongViewModel = new TraCuuHoiDongViewModelFactory(this).create(TraCuuHoiDongViewModel.class);
         strAssignment = intent.getStringExtra(Constants.KEY_ASSIGNMENT);
-        assignment = gson.fromJson(strAssignment, Assignment.class);
-        Log.d("Assignment_id", gson.toJson(assignment.getCouncil_project().getCouncil().getDepartment()));
+        assignment = AssignmentFormatter.format(gson.fromJson(strAssignment, Assignment.class));
     }
 
     @SuppressLint("SetTextI18n")
     void loadData() {
-        Council council = assignment.getCouncil_project().getCouncil();
+        CouncilProject councilProject = CouncilProjectFormatter.format(assignment.getCouncil_project());
+        council = CouncilFormatter.format(councilProject.getCouncil());
         binding.txtCouncilName.setText(council.getName());
         binding.txtCouncilId.setText(council.getId());
-        binding.txtMajor.setText(council.getDepartment().getName());
+        Department department = DepartmentFormatter.format(council.getDepartment());
+        binding.txtMajor.setText(department.getName());
         binding.txtCouncilDescription.setText(council.getDescription());
-        List<CouncilsMember> listCouncilMember = council.getCouncil_members();
-        binding.tvMemberCount.setText(listCouncilMember.size() + " thành viên");
+        listCouncilMember = council.getCouncil_members();
+        String text = (listCouncilMember != null ? listCouncilMember.size() : 0) + " thành viên";
+        binding.tvMemberCount.setText(text);
 
-        CouncilsMember counterArgumentMember = assignment.getCouncil_project().getCouncil_member();
-        binding.tvPbName.setText(counterArgumentMember.getSupervisor().getTeacher().getUser().getFullname());
+        CouncilsMember counterArgumentMember = CouncilsMemberFormatter.format(councilProject.getCouncil_member());
+        Supervisor supervisor = SupervisorFormatter.format(counterArgumentMember.getSupervisor());
+        Teacher teacher = TeacherFormatter.format(supervisor.getTeacher());
+        User user = UserFormatter.format(teacher.getUser());
+        binding.tvPbName.setText(user.getFullname());
         Status status = traCuuHoiDongViewModel.getRole(counterArgumentMember.getRole());
         binding.tvPbRole.setText(status.getStrStatus());
 
-        CouncilProject councilProject = assignment.getCouncil_project();
         binding.tvPbRoom.setText(councilProject.getRoom());
         binding.tvPbTime.setText(councilProject.getTime() + " " + DateFormatter.formatDate(councilProject.getDate()));
 
         binding.tvBvRoom.setText(council.getAddress());
         binding.tvBvTime.setText(DateFormatter.formatDate(council.getDate()));
 
-        binding.txtTopicName.setText(assignment.getProject().getName());
-        binding.txtTopicDescription.setText(assignment.getProject().getDescription());
+        Project project = ProjectFormatter.format(assignment.getProject());
+        binding.txtTopicName.setText(project.getName());
+        binding.txtTopicDescription.setText(project.getDescription());
 
     }
 
     void setupRecyclerView() {
         binding.rvCouncilMembers.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        List<Supervisor> listSupervisor = traCuuHoiDongViewModel.convertListSupervisor(assignment.getCouncil_project().getCouncil().getCouncil_members());
-        councilsMemberAdapter = new CouncilsMemberAdapter(this, assignment.getCouncil_project().getCouncil().getCouncil_members(), position -> {
+        List<Supervisor> listSupervisor = traCuuHoiDongViewModel.convertListSupervisor(council.getCouncil_members());
+        councilsMemberAdapter = new CouncilsMemberAdapter(this, listCouncilMember, position -> {
 
         });
         binding.rvCouncilMembers.setAdapter(councilsMemberAdapter);

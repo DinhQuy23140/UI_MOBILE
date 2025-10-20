@@ -1,5 +1,6 @@
 package com.example.testui.sharepreference;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 
@@ -77,8 +78,9 @@ public class SharePreferenceManage {
         return sharedPreferences.getString(Constants.KEY_PASSWORD, "");
     }
 
+    @SuppressLint("ApplySharedPref")
     public void saveIsLogin(boolean isLogin) {
-        sharedPreferences.edit().putBoolean(Constants.KEY_IS_LOGIN, isLogin).apply();
+        sharedPreferences.edit().putBoolean(Constants.KEY_IS_LOGIN, isLogin).commit();
     }
 
     public boolean getIsLogin() {

@@ -14,7 +14,7 @@ public class DotDoAnViewModel extends ViewModel {
 
     Context context;
     DotDoAnRepository dotDoAnRepository;
-    MutableLiveData<List<ProjectTerm>> listDotDoAn;
+    MutableLiveData<List<ProjectTerm>> listDotDoAn = new MutableLiveData<>();
     public DotDoAnViewModel(Context context) {
         this.context = context;
         this.dotDoAnRepository = new DotDoAnRepository();

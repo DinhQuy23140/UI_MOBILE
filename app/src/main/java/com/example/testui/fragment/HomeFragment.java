@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,10 +27,15 @@ import com.example.testui.activities.TimeLineActivity;
 import com.example.testui.databinding.ActivityHomeBinding;
 import com.example.testui.databinding.FragmentHomeBinding;
 import com.example.testui.model.Assignment;
+import com.example.testui.model.Project;
+import com.example.testui.model.ProjectTerm;
 import com.example.testui.model.Status;
 import com.example.testui.untilities.Constants;
 import com.example.testui.untilities.formatter.AssignmentFormatter;
 import com.example.testui.untilities.formatter.DateFormatter;
+import com.example.testui.untilities.formatter.ProjectFormatter;
+import com.example.testui.untilities.formatter.ProjectTermFormatter;
+import com.example.testui.untilities.formatter.StudentFormatter;
 import com.google.gson.Gson;
 
 import java.util.Map;
@@ -151,7 +157,8 @@ public class HomeFragment extends Fragment {
     void loadInfStudent() {
         homeViewModel.getGetStudent().observe(getViewLifecycleOwner(), student -> {
             if (student != null) {
-                String studentName = student.getUser().getFullname() + " - " + student.getClass_code();
+                student = StudentFormatter.format(student);
+                String studentName = student.getUser().getFullname() + " - Lớp: " + student.getClass_code();
                 fragmentHomeBinding.tvStudentName.setText(studentName);
             }
         });
@@ -160,12 +167,14 @@ public class HomeFragment extends Fragment {
     @SuppressLint("SetTextI18n")
     void loadRecentAssignment() {
         homeViewModel.getRecentAssignment().observe(getViewLifecycleOwner(), result -> {
-            if (result != null) {
+            if (result.getId() != null) {
+                Log.d("Result", gson.toJson(result));
                 //de tai
-                assignment = result;
+                assignment = AssignmentFormatter.format(result);
                 strProjectTerm = gson.toJson(result.getProject_term());
-                fragmentHomeBinding.tvTenDeTai.setText("Đề tài: " + result.getProject().getName());
-                fragmentHomeBinding.tvMaDeTai.setText(result.getProject().getId());
+                Project project = ProjectFormatter.format(result.getProject());
+                fragmentHomeBinding.tvTenDeTai.setText("Đề tài: " + project.getName());
+                fragmentHomeBinding.tvMaDeTai.setText(project.getId());
 
                 Map<Integer, Integer> colorStatus = homeViewModel.getBackGroundStatusAssignment();
                 int backgroundColor = colorStatus.keySet().iterator().next();
@@ -174,25 +183,28 @@ public class HomeFragment extends Fragment {
                         ContextCompat.getColorStateList(requireContext(), backgroundColor)
                 );
                 fragmentHomeBinding.chipTrangThai.setTextColor(textColor);
-                fragmentHomeBinding.chipTrangThai.setText(result.toString());
+                Status status = AssignmentFormatter.statusFormat(assignment.getStatus());
+                fragmentHomeBinding.chipTrangThai.setText(status.getStrStatus());
                 fragmentHomeBinding.tvLoaiDeTai.setText("Chưa có");
 
                 //dot do an
-                fragmentHomeBinding.tvStageProjectTerm.setText("Đợt " + result.getProject_term().getStage() + "/" + result.getProject_term().getAcademy_year().getYear_name());
+                ProjectTerm projectTerm = ProjectTermFormatter.format(result.getProject_term());
+                fragmentHomeBinding.tvStageProjectTerm.setText("Đợt " + projectTerm.getStage() + "/" + projectTerm.getAcademy_year().getYear_name());
 
-                String formattedDateStart = DateFormatter.formatDate(result.getProject_term().getStart_date());
+                String formattedDateStart = DateFormatter.formatDate(projectTerm.getStart_date());
                 fragmentHomeBinding.tvNgayBatDau.setText(formattedDateStart);
 
-                String formattedDateRegister = DateFormatter.formatDate(result.getCreated_at());
+                String formattedDateRegister = DateFormatter.formatDate(assignment.getCreated_at());
                 fragmentHomeBinding.tvNgayDangKy.setText(formattedDateRegister);
 
-                String formattedDateEnd = DateFormatter.formatDate(result.getProject_term().getEnd_date());
+                String formattedDateEnd = DateFormatter.formatDate(projectTerm.getEnd_date());
                 fragmentHomeBinding.tvNgayKetThuc.setText(formattedDateEnd);
 
                 int progress = homeViewModel.getProcess();
                 fragmentHomeBinding.progressBar.setProgress(progress);
                 fragmentHomeBinding.tvProgress.setText(progress + "%");
                 fragmentHomeBinding.tvCountDate.setText("Còn " + homeViewModel.getRangeDate() + " ngày");
+                fragmentHomeBinding.layoutRecentAssignment.setVisibility(View.VISIBLE);
             } else {
                 fragmentHomeBinding.layoutRecentAssignment.setVisibility(View.GONE);
             }

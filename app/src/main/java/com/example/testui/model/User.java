@@ -5,6 +5,7 @@ public class    User {
     String fullname;
     String email;
     String phone;
+    String password;
     String dob;
     String gender;
     String image;
@@ -12,6 +13,12 @@ public class    User {
     String address;
 
     public User() {
+    }
+
+    public User(String email, String password, String fullname) {
+        this.email = email;
+        this.password = password;
+        this.fullname = fullname;
     }
 
     public User(String address, String dob, String email, String fullname, String gender, String id, String phone, String image, String role) {
@@ -24,6 +31,14 @@ public class    User {
         this.phone = phone;
         this.image = image;
         this.role = role;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getAddress() {

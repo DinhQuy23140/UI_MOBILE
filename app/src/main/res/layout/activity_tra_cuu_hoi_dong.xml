@@ -336,11 +336,22 @@
                         android:id="@+id/rvCouncilMembers"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_weight="1"
                         android:nestedScrollingEnabled="false"
                         android:overScrollMode="never"
                         android:scrollbars="none"
-                        tools:itemCount="5"
+                        android:visibility="gone"
+                        tools:itemCount="1"
                         tools:listitem="@layout/item_council_member" />
+
+                    <TextView
+                        android:id="@+id/tv_empty_council_member"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Chưa có thành viên trong hội đồng"
+                        android:textStyle="bold"
+                        android:visibility="gone" />
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>

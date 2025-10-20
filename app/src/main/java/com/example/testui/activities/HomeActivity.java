@@ -14,9 +14,11 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.testui.R;
 import com.example.testui.ViewModel.HomeViewModel;
+import com.example.testui.ViewModelFactory.HomeViewModelFactory;
 import com.example.testui.fragment.DotDoAnFragment;
 import com.example.testui.fragment.HomeFragment;
 import com.google.android.material.navigation.NavigationView;
@@ -38,7 +40,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, 0);
             return insets;
         });
-
+        homeViewModel = new ViewModelProvider(this, new HomeViewModelFactory(this)).get(HomeViewModel.class);
         drawerLayout = findViewById(R.id.main);
         ivNavBar = findViewById(R.id.iv_nav_bar);
         nav = findViewById(R.id.nav_view); // thêm dòng này
@@ -83,6 +85,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             startActivity(intent);
         } else if (item.getItemId() == R.id.nav_person) {
             Intent intent = new Intent(this, CapNhapThongTinActivity.class);
+            startActivity(intent);
+        } else if(item.getItemId() == R.id.nav_logout) {
+            homeViewModel.logout();
+            Intent intent = new Intent(this, LoginActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK |Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         }
         drawerLayout.closeDrawer(GravityCompat.END);
