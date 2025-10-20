@@ -5,7 +5,9 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_gradient">
+    android:background="@drawable/bg_gradient"
+    android:scrollbarSize="0dp"
+    android:scrollbars="none">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -353,7 +355,7 @@
                     android:layout_height="wrap_content"
                     android:scrollbars="none"
                     tools:itemCount="1"
-                    tools:listitem="@layout/item_upload_attachment"/>
+                    tools:listitem="@layout/item_upload_attachment" />
 
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
@@ -431,7 +433,7 @@
                         android:background="@drawable/bg_badge_modern"
                         android:paddingHorizontal="12dp"
                         android:paddingVertical="6dp"
-                        android:text="3"
+                        android:text="0"
                         android:textColor="@android:color/white"
                         android:textSize="12sp"
                         android:textStyle="bold" />
@@ -444,7 +446,7 @@
                     android:layout_height="wrap_content"
                     android:scrollbars="none"
                     tools:itemCount="1"
-                    tools:listitem="@layout/item_attachment"/>
+                    tools:listitem="@layout/item_attachment" />
 
                 <LinearLayout
                     android:id="@+id/emptyStateLayout"

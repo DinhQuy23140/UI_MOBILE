@@ -135,7 +135,7 @@ public class DangKiGVHDActivity extends AppCompatActivity {
             if (selected != null &&
                     selected.getTeacher() != null &&
                     selected.getTeacher().getUser() != null) {
-
+                supervisor = selected;
                 String name = selected.getTeacher().getUser().getFullname();
                 binding.autoCompleteGiangVien.setText(name, false);  // hiển thị text mà không kích hoạt filter lại
                 binding.autoCompleteGiangVien.dismissDropDown();     // đóng dropdown thủ công

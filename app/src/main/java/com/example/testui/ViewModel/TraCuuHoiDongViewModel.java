@@ -17,16 +17,20 @@ public class TraCuuHoiDongViewModel extends ViewModel {
 
     public List<Supervisor> convertListSupervisor(List<CouncilsMember> listCouncilMember) {
         List<Supervisor> listSupervisor = new ArrayList<>();
-        for (CouncilsMember councilsMember : listCouncilMember) {
-            listSupervisor.add(councilsMember.getSupervisor());
+        if (listCouncilMember != null && listCouncilMember.isEmpty()) {
+            for (CouncilsMember councilsMember : listCouncilMember) {
+                listSupervisor.add(councilsMember.getSupervisor());
+            }
         }
         return listSupervisor;
     }
 
     public List<Supervisor> convertListBaseSupervisor(List<AssignmentSupervisor> listAssignmentSupervisor) {
         List<Supervisor> listSupervisor = new ArrayList<>();
-        for (AssignmentSupervisor assignmentSupervisor : listAssignmentSupervisor) {
-            listSupervisor.add(assignmentSupervisor.getSupervisor());
+        if (listAssignmentSupervisor != null && !listAssignmentSupervisor.isEmpty()) {
+            for (AssignmentSupervisor assignmentSupervisor : listAssignmentSupervisor) {
+                listSupervisor.add(assignmentSupervisor.getSupervisor());
+            }
         }
         return listSupervisor;
     }

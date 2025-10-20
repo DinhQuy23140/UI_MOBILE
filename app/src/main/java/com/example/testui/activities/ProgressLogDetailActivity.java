@@ -21,6 +21,7 @@ import com.example.testui.model.ProgressLog;
 import com.example.testui.model.Status;
 import com.example.testui.untilities.Constants;
 import com.example.testui.untilities.formatter.DateFormatter;
+import com.example.testui.untilities.formatter.ProgressLogFormatter;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -57,7 +58,7 @@ public class ProgressLogDetailActivity extends AppCompatActivity {
         intent = getIntent();
         gson = new Gson();
         progressLogJson = intent.getStringExtra(Constants.KEY_PROGRESS_LOG);
-        progressLog = gson.fromJson(progressLogJson, ProgressLog.class);
+        progressLog = ProgressLogFormatter.format(gson.fromJson(progressLogJson, ProgressLog.class));
         progressLogDetailViewModel = new ProgressLogDetailViewModel(this);
     }
 

@@ -25,6 +25,7 @@ import com.example.testui.interfaces.OnClickItem;
 import com.example.testui.model.ProgressLog;
 import com.example.testui.model.ProjectTerm;
 import com.example.testui.untilities.Constants;
+import com.example.testui.untilities.formatter.ProjectTermFormatter;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -66,8 +67,9 @@ public class ProgressLogActivity extends AppCompatActivity {
         binding.rvProgressLogs.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         binding.rvProgressLogs.setAdapter(processLogAdapter);
 
-        loadProgressLog(projectId, this);
-        Log.d("assignmentId", projectId);
+        if ( projectId != null && !projectId.isEmpty()) {
+            loadProgressLog(projectId, this);
+        }
     }
 
     void serialize() {
@@ -75,7 +77,7 @@ public class ProgressLogActivity extends AppCompatActivity {
         gson = new Gson();
         getIntent = getIntent();
         strProjectTerm = getIntent.getStringExtra(Constants.KEY_PROJECT_TERM);
-        projectTerm = gson.fromJson(strProjectTerm, ProjectTerm.class);
+        projectTerm = ProjectTermFormatter.format(gson.fromJson(strProjectTerm, ProjectTerm.class));
         projectId = getIntent.getStringExtra(Constants.KEY_PROJECT_ID);
     }
 

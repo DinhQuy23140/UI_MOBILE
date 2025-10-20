@@ -28,11 +28,15 @@ import com.example.testui.adapter.UploadAttachmentAdapter;
 import com.example.testui.databinding.ActivityNopDeCuongBinding;
 import com.example.testui.interfaces.UploadDocumentClick;
 import com.example.testui.model.Assignment;
+import com.example.testui.model.Project;
 import com.example.testui.model.ProjectTerm;
 import com.example.testui.model.ReportFile;
 import com.example.testui.model.UploadFile;
 import com.example.testui.untilities.Constants;
+import com.example.testui.untilities.formatter.AssignmentFormatter;
 import com.example.testui.untilities.formatter.DateFormatter;
+import com.example.testui.untilities.formatter.ProjectFormatter;
+import com.example.testui.untilities.formatter.ProjectTermFormatter;
 import com.google.gson.Gson;
 
 import java.io.File;
@@ -85,7 +89,7 @@ public class NopDeCuongActivity extends AppCompatActivity {
         listReportFile = new ArrayList<>();
         intent = getIntent();
         strProjectTerm = intent.getStringExtra(Constants.KEY_PROJECT_TERM);
-        projectTerm = gson.fromJson(strProjectTerm, ProjectTerm.class);
+        projectTerm = ProjectTermFormatter.format(gson.fromJson(strProjectTerm, ProjectTerm.class));
         studentId = nopDeCuongViewModel.getStudentId();
     }
 
@@ -202,7 +206,7 @@ public class NopDeCuongActivity extends AppCompatActivity {
     void fetchDataRecyclerView() {
         nopDeCuongViewModel.getAssignmentByStudentIdAndTermId(studentId, projectTerm.getId());
         nopDeCuongViewModel.getAssignmentMutableLiveData().observe(this, result -> {
-            assignment = result;
+            assignment = AssignmentFormatter.format(result);
             fetchData();
             Log.d("Assignment", gson.toJson(assignment));
             nopDeCuongViewModel.getListReportFileByProjectId(assignment.getProject_id(), Constants.KEY_TYPE_REPORT_OUTLINE);
@@ -217,8 +221,9 @@ public class NopDeCuongActivity extends AppCompatActivity {
     }
 
     void fetchData() {
-        binding.tvTenDeTai.setText(assignment.getProject().getName());
-        binding.tvMoTaDeTai.setText(assignment.getProject().getDescription());
+        Project project = ProjectFormatter.format(assignment.getProject());
+        binding.tvTenDeTai.setText("Đề tài: " + project.getName());
+        binding.tvMoTaDeTai.setText("Mô tả: " + project.getDescription());
         String startDate = DateFormatter.formatDate(projectTerm.getStage_timelines().get(1).getStart_date());
         String endDate = DateFormatter.formatDate(projectTerm.getStage_timelines().get(1).getEnd_date());
         binding.tvThoiGianNop.setText(startDate + " - " + endDate);
