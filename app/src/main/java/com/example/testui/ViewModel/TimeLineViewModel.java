@@ -66,18 +66,20 @@ public class TimeLineViewModel extends ViewModel {
 
     public Status loadStatusStage(StageTimeline stage) {
         DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
         // Parse chuỗi thành LocalDate
         LocalDate startDate = LocalDate.parse(stage.getStart_date(), inputFormatter);
         LocalDate endDate = LocalDate.parse(stage.getEnd_date(), inputFormatter);
         LocalDate now = LocalDate.now();
 
-        if (startDate.isAfter(now) && endDate.isBefore(now)) {
+        if ((startDate.isBefore(now) || startDate.isEqual(now)) &&
+                (endDate.isAfter(now) || endDate.isEqual(now))) {
+            // Giai đoạn đang diễn ra
             return new Status(R.drawable.bg_circle_inprogress, "Đang diễn ra");
-        } else if(startDate.isBefore(now)) {
+        } else if (endDate.isBefore(now)) {
+            // Đã kết thúc
             return new Status(R.drawable.bg_circle_completed, "Hoàn thành");
         } else {
+            // Chưa bắt đầu
             return new Status(R.drawable.bg_circle_pending, "Chưa diễn ra");
         }
     }

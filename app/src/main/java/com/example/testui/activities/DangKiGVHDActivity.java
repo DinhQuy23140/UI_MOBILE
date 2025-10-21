@@ -105,6 +105,7 @@ public class DangKiGVHDActivity extends AppCompatActivity {
                 assignmentID = assignment.getId();
             }
         });
+
     }
 
     void setupClick() {
@@ -118,6 +119,19 @@ public class DangKiGVHDActivity extends AppCompatActivity {
                 dangKiGVHDViewModel.createAssignmentSupervisor(assignmentSupervisor);
             } else {
                 Toast.makeText(this, "Supervisor null", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        dangKiGVHDViewModel.getIsCreateSuccess().observe(this, isCreateSuccess -> {
+            if (isCreateSuccess) {
+                runOnUiThread(() -> {
+                    Toast.makeText(this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
+                    finish();
+                });
+            } else {
+                runOnUiThread(() -> {
+                    Toast.makeText(this, "Đăng ký thất bại", Toast.LENGTH_SHORT).show();
+                });
             }
         });
 

@@ -85,7 +85,7 @@ public class ChiTietDoAnActivity extends AppCompatActivity {
 
     void setupClick() {
         binding.btnDetailProgress.setOnClickListener(detailProgress -> {
-            if (project != null) {
+            if (project.getId() != null) {
                 Intent intent = new Intent(this, ProgressLogActivity.class);
                 intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
                 intent.putExtra(Constants.KEY_PROJECT_ID, assignment.getProject_id());
@@ -96,7 +96,7 @@ public class ChiTietDoAnActivity extends AppCompatActivity {
         });
 
         binding.btnNopDeCuong.setOnClickListener(nopedcuong -> {
-            if(project != null) {
+            if(project.getId() != null) {
                 Intent intent = new Intent(ChiTietDoAnActivity.this, NopDeCuongActivity.class);
                 intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
                 startActivity(intent);
@@ -108,7 +108,7 @@ public class ChiTietDoAnActivity extends AppCompatActivity {
         Log.d("Chitietdoan", gson.toJson(gson.toJson(project)));
 
         binding.btnNopBaoCao.setOnClickListener(nopbaocao -> {
-            if (project != null) {
+            if (project.getId() != null) {
                 Intent intent = new Intent(ChiTietDoAnActivity.this, NopBaoCaoActivity.class);
                 intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
                 startActivity(intent);
@@ -118,7 +118,7 @@ public class ChiTietDoAnActivity extends AppCompatActivity {
         });
 
         binding.btnTraCuuDiem.setOnClickListener(tracuudiem -> {
-            if (project != null) {
+            if (project.getId() != null) {
                 Intent intent = new Intent(ChiTietDoAnActivity.this, TraCuuDiemActivity.class);
                 startActivity(intent);
             } else {

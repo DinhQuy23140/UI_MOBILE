@@ -3,6 +3,8 @@ package com.example.testui.activities;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -56,6 +58,7 @@ public class DangKiDetaiActivity extends AppCompatActivity {
         init();
         setupClick();
         loadData();
+        message();
     }
 
     void init() {
@@ -69,7 +72,6 @@ public class DangKiDetaiActivity extends AppCompatActivity {
         binding.btnBack.setOnClickListener(back -> {
             finish();
         });
-
 
         binding.btnDangKyDeTai.setOnClickListener(dangki -> {
             String tendetai = binding.edtTenDeTai.getText().toString();
@@ -108,5 +110,18 @@ public class DangKiDetaiActivity extends AppCompatActivity {
             binding.tvSoDienThoai.setText(user.getPhone());
             binding.tvEmail.setText(user.getEmail());
         });
+
+        dangKiDeTaiViewModel.getIsSuccessCreate().observe(this, success -> {
+            if (success == null) return;
+            if (success) {
+                Toast.makeText(this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
+                finish();
+            } else {
+                Toast.makeText(this, "Đăng ký thất bại", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    void message() {
     }
 }
