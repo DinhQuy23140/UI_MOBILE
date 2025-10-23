@@ -21,11 +21,23 @@ import com.example.testui.interfaces.OnClickItem;
 import com.example.testui.model.Assignment;
 import com.example.testui.model.AssignmentSupervisor;
 import com.example.testui.model.Council;
+import com.example.testui.model.CouncilProject;
 import com.example.testui.model.CouncilsMember;
+import com.example.testui.model.Project;
 import com.example.testui.model.Status;
 import com.example.testui.model.Supervisor;
+import com.example.testui.model.Teacher;
+import com.example.testui.model.User;
 import com.example.testui.untilities.Constants;
+import com.example.testui.untilities.formatter.AssignmentFormatter;
+import com.example.testui.untilities.formatter.CouncilFormatter;
+import com.example.testui.untilities.formatter.CouncilProjectFormatter;
+import com.example.testui.untilities.formatter.CouncilsMemberFormatter;
 import com.example.testui.untilities.formatter.DateFormatter;
+import com.example.testui.untilities.formatter.ProjectFormatter;
+import com.example.testui.untilities.formatter.SupervisorFormatter;
+import com.example.testui.untilities.formatter.TeacherFormatter;
+import com.example.testui.untilities.formatter.UserFormatter;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -39,6 +51,7 @@ public class TraCuuPhanBienActivity extends AppCompatActivity {
     BaseGVHDAdapter baseGVHDAdapter;
     CouncilsMemberAdapter councilsMemberAdapter;
     Gson gson;
+    Project project;
     TraCuuPhanBienViewModel traCuuPhanBienViewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,27 +75,32 @@ public class TraCuuPhanBienActivity extends AppCompatActivity {
         intent = getIntent();
         gson = new Gson();
         strAssignemnt = intent.getStringExtra(Constants.KEY_ASSIGNMENT);
-        assignment = gson.fromJson(strAssignemnt, Assignment.class);
+        assignment = AssignmentFormatter.format(gson.fromJson(strAssignemnt, Assignment.class));
         traCuuPhanBienViewModel = new TraCuuPhanBienViewModelFactory(this).create(TraCuuPhanBienViewModel.class);
     }
 
     @SuppressLint("SetTextI18n")
     void loadData() {
-        binding.tvProjectName.setText(assignment.getProject().getName());
+        project = ProjectFormatter.format(assignment.getProject());
+        binding.tvProjectName.setText(project.getName());
         List<Supervisor> listAssignmentSupervisor = traCuuPhanBienViewModel.convertListBaseSupervisor(assignment.getAssignment_supervisors());
         baseGVHDAdapter.updateData(listAssignmentSupervisor);
-        binding.txtProjectDescription.setText(assignment.getProject().getDescription());
+        binding.txtProjectDescription.setText(project.getDescription());
 
-        CouncilsMember counterArgumentMember = assignment.getCouncil_project().getCouncil_member();
-        binding.tvPbName.setText(counterArgumentMember.getSupervisor().getTeacher().getUser().getFullname());
+        CouncilProject councilProject = CouncilProjectFormatter.format(assignment.getCouncil_project());
+        CouncilsMember counterArgumentMember = CouncilsMemberFormatter.format(councilProject.getCouncil_member());
+        Supervisor supervisor = SupervisorFormatter.format(counterArgumentMember.getSupervisor());
+        Teacher teacher = TeacherFormatter.format(supervisor.getTeacher());
+        User user = UserFormatter.format(teacher.getUser());
+        binding.tvPbName.setText(user.getFullname());
         Status status = traCuuPhanBienViewModel.getRole(counterArgumentMember.getRole());
         binding.tvPbRole.setText(status.getStrStatus());
 //        binding.txtReviewScore.setText(assignment.getCouncil_project().getReview_score());
 
-        binding.txtReviewScore.setText(assignment.getCouncil_project().getReview_score());
-        binding.txtReviewScoreDate.setText(DateFormatter.formatDate(assignment.getCouncil_project().getUpdated_at()));
+        binding.txtReviewScore.setText(councilProject.getReview_score());
+        binding.txtReviewScoreDate.setText(DateFormatter.formatDate(councilProject.getUpdated_at()));
 
-        Council council = assignment.getCouncil_project().getCouncil();
+        Council council = CouncilFormatter.format(councilProject.getCouncil());
         binding.txtCouncilName.setText(council.getName());
         binding.txtCouncilId.setText(council.getId());
         binding.txtMajor.setText(council.getDepartment().getName());

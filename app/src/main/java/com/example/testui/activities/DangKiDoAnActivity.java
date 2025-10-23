@@ -31,6 +31,7 @@ import com.example.testui.untilities.formatter.AssignmentFormatter;
 import com.example.testui.untilities.formatter.FacultiesFormatter;
 import com.example.testui.untilities.formatter.MarjorFormatter;
 import com.example.testui.untilities.formatter.ProjectFormatter;
+import com.example.testui.untilities.formatter.ProjectTermFormatter;
 import com.example.testui.untilities.formatter.StudentFormatter;
 import com.example.testui.untilities.formatter.UserFormatter;
 import com.google.gson.Gson;
@@ -76,7 +77,7 @@ public class DangKiDoAnActivity extends AppCompatActivity {
         dangKiDoAnViewModel = new DangKiDoAnViewModelFactory(this).create(DangKiDoAnViewModel.class);
         projectTermIntent = getIntent();
         strProjectTerm = projectTermIntent.getStringExtra(Constants.KEY_PROJECT_TERM);
-        projectTerm = gson.fromJson(strProjectTerm, ProjectTerm.class);
+        projectTerm = ProjectTermFormatter.format(gson.fromJson(strProjectTerm, ProjectTerm.class));
     }
 
     void setupClick() {

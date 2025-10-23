@@ -7,7 +7,7 @@ import java.util.List;
 
 public class ProgressLog {
     private String id;                         // ID của log
-    private String process_id;                  // ID tiến trình mà log này thuộc về
+    private String project_id;                  // ID tiến trình mà log này thuộc về
     private String title;                      // Tiêu đề log
     private String description;                // Mô tả công việc
 
@@ -24,9 +24,17 @@ public class ProgressLog {
     public ProgressLog() {
     }
 
-    public ProgressLog(String id, String process_id, String title, String description, String start_date_time, String end_date_time, List<Attachment> attachments, String instructor_comment, String student_status, String instructor_status) {
+    public ProgressLog(String project_id, String title, String description, String start_date_time, String end_date_time) {
+        this.project_id = project_id;
+        this.title = title;
+        this.description = description;
+        this.start_date_time = start_date_time;
+        this.end_date_time = end_date_time;
+    }
+
+    public ProgressLog(String id, String project_id, String title, String description, String start_date_time, String end_date_time, List<Attachment> attachments, String instructor_comment, String student_status, String instructor_status) {
         this.id = id;
-        this.process_id = process_id;
+        this.project_id = project_id;
         this.title = title;
         this.description = description;
         this.start_date_time = start_date_time;
@@ -89,12 +97,12 @@ public class ProgressLog {
         this.instructor_status = instructor_status;
     }
 
-    public String getProcess_id() {
-        return process_id;
+    public String getProject_id() {
+        return project_id;
     }
 
-    public void setProcess_id(String process_id) {
-        this.process_id = process_id;
+    public void setProject_id(String project_id) {
+        this.project_id = project_id;
     }
 
     public String getStart_date_time() {

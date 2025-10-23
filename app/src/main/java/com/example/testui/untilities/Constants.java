@@ -32,4 +32,9 @@ public class Constants {
     public static final String KEY_STATUS_REPORT_APPROVED = "approved";
 
     public static final String KEY_TEACHER_ID = "teacher_id";
+
+    public static final String KEY_TASK_NAME = "title";
+    public static final String KEY_DESCRIPTION = "description";
+    public static final String KEY_START_DATE = "start_date_time";
+    public static final String KEY_END_DATE = "end_date_time";
 }

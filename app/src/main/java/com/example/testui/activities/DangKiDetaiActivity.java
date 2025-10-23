@@ -3,6 +3,8 @@ package com.example.testui.activities;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +19,7 @@ import com.example.testui.ViewModelFactory.DangKiDeTaiViewModelFactory;
 import com.example.testui.databinding.ActivityDangKiDetaiBinding;
 import com.example.testui.model.AcademyYear;
 import com.example.testui.model.Assignment;
+import com.example.testui.model.Project;
 import com.example.testui.model.ProjectTerm;
 import com.example.testui.model.Status;
 import com.example.testui.model.Student;
@@ -24,6 +27,7 @@ import com.example.testui.model.User;
 import com.example.testui.untilities.Constants;
 import com.example.testui.untilities.formatter.AcademyYearFormatter;
 import com.example.testui.untilities.formatter.AssignmentFormatter;
+import com.example.testui.untilities.formatter.ProjectFormatter;
 import com.example.testui.untilities.formatter.ProjectTermFormatter;
 import com.example.testui.untilities.formatter.StudentFormatter;
 import com.example.testui.untilities.formatter.UserFormatter;
@@ -56,6 +60,7 @@ public class DangKiDetaiActivity extends AppCompatActivity {
         init();
         setupClick();
         loadData();
+        message();
     }
 
     void init() {
@@ -70,20 +75,19 @@ public class DangKiDetaiActivity extends AppCompatActivity {
             finish();
         });
 
-
         binding.btnDangKyDeTai.setOnClickListener(dangki -> {
             String tendetai = binding.edtTenDeTai.getText().toString();
             String mota = binding.edtDescription.getText().toString();
             Map<String, String> projectBody = new HashMap<>();
             projectBody.put("name", tendetai);
             projectBody.put("description", mota);
-            dangKiDeTaiViewModel.createProject(projectBody);
+            dangKiDeTaiViewModel.createProject(assignment.getId(), projectBody);
         });
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
     void loadData() {
-        ProjectTerm projectTerm = assignment.getProject_term();
+        ProjectTerm projectTerm = ProjectTermFormatter.format(assignment.getProject_term());
         binding.tvDotDoAn.setText(projectTerm.getStage());
         binding.tvStartDate.setText(projectTerm.getStart_date());
         binding.tvEndDate.setText(projectTerm.getEnd_date());
@@ -93,10 +97,13 @@ public class DangKiDetaiActivity extends AppCompatActivity {
         Status status = ProjectTermFormatter.getStatus(projectTerm);
         binding.tvTrangThai.setText(status.getStrStatus());
         binding.tvTrangThai.setBackground(getDrawable(status.getBackgroundColor()));
+        Project project = ProjectFormatter.format(assignment.getProject());
+        binding.edtTenDeTai.setText(project.getName());
+        binding.edtDescription.setText(project.getDescription());
 
-        dangKiDeTaiViewModel.getResponseCreateProject().observe(this, result -> {
-            dangKiDeTaiViewModel.updateProjectIdAssignmentByAssIdAndProId(assignment.getId(), result.getId());
-        });
+//        dangKiDeTaiViewModel.getResponseCreateProject().observe(this, result -> {
+//            dangKiDeTaiViewModel.updateProjectIdAssignmentByAssIdAndProId(assignment.getId(), result.getId());
+//        });
 
         dangKiDeTaiViewModel.loadStudentByStudentId();
         dangKiDeTaiViewModel.getStudent().observe(this, result -> {
@@ -108,5 +115,18 @@ public class DangKiDetaiActivity extends AppCompatActivity {
             binding.tvSoDienThoai.setText(user.getPhone());
             binding.tvEmail.setText(user.getEmail());
         });
+
+        dangKiDeTaiViewModel.getIsSuccessCreate().observe(this, success -> {
+            if (success == null) return;
+            if (success) {
+                Toast.makeText(this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
+                finish();
+            } else {
+                Toast.makeText(this, "Đăng ký thất bại", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    void message() {
     }
 }

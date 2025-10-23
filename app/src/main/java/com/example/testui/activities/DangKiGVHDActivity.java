@@ -25,9 +25,13 @@ import com.example.testui.model.AssignmentSupervisor;
 import com.example.testui.model.ProjectTerm;
 import com.example.testui.model.Status;
 import com.example.testui.model.Supervisor;
+import com.example.testui.model.Teacher;
+import com.example.testui.model.User;
 import com.example.testui.untilities.Constants;
 import com.example.testui.untilities.formatter.AcademyYearFormatter;
 import com.example.testui.untilities.formatter.ProjectTermFormatter;
+import com.example.testui.untilities.formatter.TeacherFormatter;
+import com.example.testui.untilities.formatter.UserFormatter;
 import com.google.gson.Gson;
 
 import java.util.List;
@@ -105,6 +109,7 @@ public class DangKiGVHDActivity extends AppCompatActivity {
                 assignmentID = assignment.getId();
             }
         });
+
     }
 
     void setupClick() {
@@ -118,6 +123,19 @@ public class DangKiGVHDActivity extends AppCompatActivity {
                 dangKiGVHDViewModel.createAssignmentSupervisor(assignmentSupervisor);
             } else {
                 Toast.makeText(this, "Supervisor null", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        dangKiGVHDViewModel.getIsCreateSuccess().observe(this, isCreateSuccess -> {
+            if (isCreateSuccess) {
+                runOnUiThread(() -> {
+                    Toast.makeText(this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
+                    finish();
+                });
+            } else {
+                runOnUiThread(() -> {
+                    Toast.makeText(this, "Đăng ký thất bại", Toast.LENGTH_SHORT).show();
+                });
             }
         });
 
@@ -136,7 +154,9 @@ public class DangKiGVHDActivity extends AppCompatActivity {
                     selected.getTeacher() != null &&
                     selected.getTeacher().getUser() != null) {
                 supervisor = selected;
-                String name = selected.getTeacher().getUser().getFullname();
+                Teacher teacher = TeacherFormatter.format(supervisor.getTeacher());
+                User user = UserFormatter.format(teacher.getUser());
+                String name = user.getFullname();
                 binding.autoCompleteGiangVien.setText(name, false);  // hiển thị text mà không kích hoạt filter lại
                 binding.autoCompleteGiangVien.dismissDropDown();     // đóng dropdown thủ công
             }

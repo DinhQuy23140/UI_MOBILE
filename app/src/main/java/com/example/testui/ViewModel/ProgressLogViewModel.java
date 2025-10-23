@@ -7,11 +7,14 @@ import com.example.testui.model.ProgressLog;
 import com.example.testui.repository.ProgressLogRepository;
 
 import java.util.List;
+import java.util.Map;
 
 public class ProgressLogViewModel extends ViewModel {
     ProgressLogRepository progressLogRepository;
     MutableLiveData<List<ProgressLog>> progressLog = new MutableLiveData<>();
     MutableLiveData<List<ProgressLog>> progressLogByProjectId = new MutableLiveData<>();
+    MutableLiveData<Boolean> isCreateSuccess = new MutableLiveData<>();
+    MutableLiveData<ProgressLog> progressLogMutableLiveData = new MutableLiveData<>();
 
     public ProgressLogViewModel() {
         this.progressLogRepository = new ProgressLogRepository();
@@ -49,5 +52,14 @@ public class ProgressLogViewModel extends ViewModel {
             if (progressLog.getStudent_status().equals("completed")) count ++;
         }
         return  count;
+    }
+
+    public void createProgressLog(Map<String, String> progressLog) {
+        progressLogRepository.createProgressLog(progressLog);
+        progressLogMutableLiveData = progressLogRepository.getResponseProgressLog();
+    }
+
+    public MutableLiveData<ProgressLog> getProgressLogMutableLiveData() {
+        return progressLogMutableLiveData;
     }
 }

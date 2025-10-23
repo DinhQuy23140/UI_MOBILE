@@ -22,11 +22,19 @@ import com.example.testui.databinding.ActivityTraCuuBaoVeBinding;
 import com.example.testui.interfaces.OnClickItem;
 import com.example.testui.model.Assignment;
 import com.example.testui.model.Council;
+import com.example.testui.model.CouncilProject;
 import com.example.testui.model.CouncilProjectDefence;
 import com.example.testui.model.CouncilsMember;
+import com.example.testui.model.Department;
+import com.example.testui.model.Project;
 import com.example.testui.model.Supervisor;
 import com.example.testui.untilities.Constants;
+import com.example.testui.untilities.formatter.AssignmentFormatter;
+import com.example.testui.untilities.formatter.CouncilFormatter;
+import com.example.testui.untilities.formatter.CouncilProjectFormatter;
 import com.example.testui.untilities.formatter.DateFormatter;
+import com.example.testui.untilities.formatter.DepartmentFormatter;
+import com.example.testui.untilities.formatter.ProjectFormatter;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -63,7 +71,7 @@ public class TraCuuBaoVeActivity extends AppCompatActivity {
         gson = new Gson();
         intent = getIntent();
         strAssignment = intent.getStringExtra(Constants.KEY_ASSIGNMENT);
-        assignment = gson.fromJson(strAssignment, Assignment.class);
+        assignment = AssignmentFormatter.format(gson.fromJson(strAssignment, Assignment.class));
         traCuuBaoVeViewModel = new TraCuuBaoVeViewModelFactory(this).create(TraCuuBaoVeViewModel.class);
     }
 
@@ -95,35 +103,41 @@ public class TraCuuBaoVeActivity extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     void loadData() {
-        binding.tvProjectName.setText(assignment.getProject().getName());
-        Council council = traCuuBaoVeViewModel.getCouncilSafe(assignment);
+        Project project = ProjectFormatter.format(assignment.getProject());
+        binding.tvProjectName.setText(project.getName());
+        binding.txtProjectDescription.setText(project.getDescription());
+        CouncilProject councilProject = CouncilProjectFormatter.format(assignment.getCouncil_project());
+        Council council = CouncilFormatter.format(councilProject.getCouncil());
         binding.txtCouncilName.setText(council.getName());
         binding.txtCouncilId.setText(council.getId());
-        binding.txtMajor.setText(council.getDepartment().getName());
+        Department department = DepartmentFormatter.format(council.getDepartment());
+        binding.txtMajor.setText(department.getName());
         binding.txtCouncilDescription.setText(council.getDescription());
         binding.tvBvRoom.setText(council.getAddress());
         binding.tvBvTime.setText(DateFormatter.formatDate(council.getDate()));
         traCuuBaoVeViewModel.councilDisplay.observe(this, model -> {
-            binding.txtCouncilName.setText(model.getName());
-            binding.txtCouncilId.setText(model.getId());
-            binding.txtMajor.setText(model.getDepartment().getName());
-            binding.txtCouncilDescription.setText(model.getDescription());
-            binding.tvBvRoom.setText(model.getAddress());
-            binding.tvBvTime.setText(model.getDate());
+            Council resultCouncil = CouncilFormatter.format(model);
+            binding.txtCouncilName.setText(resultCouncil.getName());
+            binding.txtCouncilId.setText(resultCouncil.getId());
+            Department departmentResult = DepartmentFormatter.format(resultCouncil.getDepartment());
+            binding.txtMajor.setText(departmentResult.getName());
+            binding.txtCouncilDescription.setText(resultCouncil.getDescription());
+            binding.tvBvRoom.setText(resultCouncil.getAddress());
+            binding.tvBvTime.setText(resultCouncil.getDate());
         });
 
         List<Supervisor> listBaseSupervisor = traCuuBaoVeViewModel.convertListBaseSupervisor(assignment.getAssignment_supervisors());
         baseGVHDAdapter.updateData(listBaseSupervisor);
 
-        List<CouncilProjectDefence> listCouncilProjectDefence = assignment.getCouncil_project().getCouncil_project_defences() != null ?
-                assignment.getCouncil_project().getCouncil_project_defences() : new ArrayList<>();
+        List<CouncilProjectDefence> listCouncilProjectDefence = councilProject.getCouncil_project_defences() != null ?
+                councilProject.getCouncil_project_defences() : new ArrayList<>();
         if (listCouncilProjectDefence.isEmpty()) {
             binding.tvEmptyCouncilProjectDefences.setVisibility(View.VISIBLE);
         } else {
             councilMemberScoreAdapter.updateData(listCouncilProjectDefence);
         }
 
-        List<CouncilsMember> listCouncilMember = assignment.getCouncil_project().getCouncil().getCouncil_members();
+        List<CouncilsMember> listCouncilMember = council.getCouncil_members();
         binding.tvMemberCount.setText(listCouncilMember.size() + " thành viên");
         if (listCouncilMember.isEmpty()) {
             binding.tvEmptyCouncilMember.setVisibility(View.VISIBLE);

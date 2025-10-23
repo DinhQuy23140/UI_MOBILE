@@ -20,16 +20,22 @@ public class DangKiDeTaiViewModel extends ViewModel {
     AssignmentRepository assignmentRepository;
     SinhVienRepository sinhVienRepository;
     MutableLiveData<Student> studentMutableLiveData = new MutableLiveData<>();
+    MutableLiveData<Boolean> isSuccessCreate;
 
     public DangKiDeTaiViewModel(Context context) {
         this.context = context;
         projectRepository = new ProjectRepository();
         assignmentRepository = new AssignmentRepository();
         sinhVienRepository = new SinhVienRepository(context);
+        isSuccessCreate = projectRepository.getIsSuccessCreate();
     }
 
-    public void createProject(Map<String, String> projectBody) {
-        projectRepository.createProject(projectBody);
+    public void createProject(String assignmentId, Map<String, String> projectBody) {
+        projectRepository.createProject(assignmentId, projectBody);
+    }
+
+    public MutableLiveData<Boolean> getIsSuccessCreate() {
+        return isSuccessCreate;
     }
 
     public MutableLiveData<Project> getResponseCreateProject() {

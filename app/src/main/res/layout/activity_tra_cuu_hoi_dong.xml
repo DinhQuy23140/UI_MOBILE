@@ -853,6 +853,14 @@
                                     android:layout_height="match_parent"
                                     android:layout_weight="2"
                                     tools:listitem="@layout/item_base_supervisor" />
+
+                                <TextView
+                                    android:id="@+id/tv_empty_supervisor"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="2"
+                                    android:text="TextView"
+                                    android:visibility="gone" />
                             </LinearLayout>
                         </LinearLayout>
 

@@ -17,9 +17,15 @@ import com.example.testui.R;
 import com.example.testui.ViewModel.HomeViewModel;
 import com.example.testui.ViewModelFactory.HomeViewModelFactory;
 import com.example.testui.databinding.ActivityCapNhapThongTinBinding;
+import com.example.testui.model.Faculties;
+import com.example.testui.model.Marjor;
 import com.example.testui.model.Student;
+import com.example.testui.model.User;
 import com.example.testui.untilities.Constants;
+import com.example.testui.untilities.formatter.FacultiesFormatter;
+import com.example.testui.untilities.formatter.MarjorFormatter;
 import com.example.testui.untilities.formatter.StudentFormatter;
+import com.example.testui.untilities.formatter.UserFormatter;
 import com.google.gson.Gson;
 
 public class CapNhapThongTinActivity extends AppCompatActivity {
@@ -39,10 +45,22 @@ public class CapNhapThongTinActivity extends AppCompatActivity {
             return insets;
         });
 
-        homeViewModel = new ViewModelProvider(this, new HomeViewModelFactory(this)).get(HomeViewModel.class);
+        init();
+        setupClick();
+        fetchData();
+    }
 
-        Intent intent = getIntent();
-        String studentId = intent.getStringExtra(Constants.KEY_ID_STUDENT);
+    void init() {
+        homeViewModel = new ViewModelProvider(this, new HomeViewModelFactory(this)).get(HomeViewModel.class);
+    }
+
+    void setupClick() {
+        binding.btnBack.setOnClickListener(back -> {
+            finish();
+        });
+    }
+
+    void fetchData(){
         homeViewModel.getStudentById();
         homeViewModel.getGetStudent().observe(this, result -> {
             Log.d("Student", new Gson().toJson(result));
@@ -50,21 +68,20 @@ public class CapNhapThongTinActivity extends AppCompatActivity {
                 Student student = StudentFormatter.format(result);
                 Toast.makeText(this, student.getUser().getFullname(), Toast.LENGTH_SHORT).show();
                 binding.tvSvMsv.setText(student.getStudent_code());
-                binding.tvSvFullname.setText(student.getUser().getFullname());
-                binding.tvSvDob.setText(student.getUser().getDob());
-                binding.tvSvEmail.setText(student.getUser().getEmail());
-                binding.tvSvPhone.setText(student.getUser().getPhone());
-                String address = student.getUser().getAddress();
+                User user = UserFormatter.format(student.getUser());
+                binding.tvSvFullname.setText(user.getFullname());
+                binding.tvSvDob.setText(user.getDob());
+                binding.tvSvEmail.setText(user.getEmail());
+                binding.tvSvPhone.setText(user.getPhone());
+                String address = user.getAddress();
                 binding.tvSvAddress.setText(address);
                 binding.tvSvCourse.setText(student.getCourse_year());
                 binding.tvSvClass.setText(student.getClass_code() );
-                binding.tvSvMajor.setText(student.getMarjor().getCode() + " - " + student.getMarjor().getName());
-                binding.tvSvDepartment.setText(student.getMarjor().getFaculties().getCode() + " - " + student.getMarjor().getFaculties().getName());
+                Marjor marjor = MarjorFormatter.format(student.getMarjor());
+                binding.tvSvMajor.setText(marjor.getCode() + " - " + marjor.getName());
+                Faculties faculties = FacultiesFormatter.format(marjor.getFaculties());
+                binding.tvSvDepartment.setText(faculties.getCode() + " - " + faculties.getName());
             }
-        });
-
-        binding.btnBack.setOnClickListener(back -> {
-            finish();
         });
     }
 }

@@ -1,11 +1,13 @@
 package com.example.testui.Supabase;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.example.testui.client.SupabaseClient;
 import com.example.testui.model.Document;
 import com.example.testui.model.ReportFile;
 import com.example.testui.model.UploadFile;
+import com.example.testui.repository.SinhVienRepository;
 import com.example.testui.service.SupabaseService;
 
 import java.util.List;
@@ -24,9 +26,11 @@ public class UploadManage {
     private String url = "https://wxvjcevcyelpobqleeti.supabase.co";
     private String apikey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind4dmpjZXZjeWVscG9icWxlZXRpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ2OTkyMzgsImV4cCI6MjA3MDI3NTIzOH0.T9pxOQqLz0LOBGXer1zT8nTAHRHzwRUTBwTh_N7KYN0";
     private String bearerToken = "Bearer " + apikey;
+    private SinhVienRepository sinhVienRepository;
 
-    public UploadManage() {
+    public UploadManage(Context context) {
         this.supabaseService = SupabaseClient.getInstance(url).create(SupabaseService.class);
+        sinhVienRepository = new SinhVienRepository(context);
     }
 
     public void uploadDocuments(List<UploadFile> listUploadFile, UploadCallback uploadCallback) {
@@ -38,12 +42,15 @@ public class UploadManage {
     private void uploadDocument(UploadFile uploadFile, UploadCallback uploadCallback) {
         RequestBody requestBody = RequestBody.create(MediaType.parse("application/octet-stream"), uploadFile.getFile());
         MultipartBody.Part multipartBody = MultipartBody.Part.createFormData("file", uploadFile.getReportFile().getFile_name(), requestBody);
-        
+        String studentId = sinhVienRepository.getStudentId();
+        String timestamp = java.time.LocalDateTime.now()
+                .format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH-mm-ss"));
+        String storagePath = studentId + "/" + uploadFile.getReportFile().getType_report() + "/" + timestamp + "/" + uploadFile.getReportFile().getFile_name();
         Call<ResponseBody> call = supabaseService.uploadDocument(
                 bearerToken,
                 apikey,
                 bucket,
-                uploadFile.getReportFile().getFile_name(),
+                storagePath, // 👈 thay vì chỉ là file_name
                 multipartBody
         );
 
@@ -51,7 +58,7 @@ public class UploadManage {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful()) {
-                    String publicUrl = url + "/storage/v1/object/public/" + bucket + "/" + uploadFile.getReportFile().getFile_name();
+                    String publicUrl = url + "/storage/v1/object/public/" + bucket + "/" + storagePath;
                     ReportFile reportFile = uploadFile.getReportFile();
                     reportFile.setFile_url(publicUrl);
                     uploadFile.setReportFile(reportFile);

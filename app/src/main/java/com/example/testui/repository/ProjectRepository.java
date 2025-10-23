@@ -19,20 +19,23 @@ import retrofit2.Response;
 public class ProjectRepository {
     ProjectService projectService;
     MutableLiveData<Project> projectMutableLiveData = new MutableLiveData<>();
+    MutableLiveData<Boolean> isSuccessCreate = new MutableLiveData<>();
 
     public ProjectRepository() {
         projectService = Client.getInstance().create(ProjectService.class);
     }
 
-    public void createProject(Map<String, String> projectBody) {
-        Call<Project> call = projectService.createProject(projectBody);
+    public void createProject(String assignmentId, Map<String, String> projectBody) {
+        Call<Project> call = projectService.createProject(assignmentId, projectBody);
         call.enqueue(new Callback<Project>() {
             @Override
             public void onResponse(Call<Project> call, Response<Project> response) {
                 if (response.isSuccessful()) {
                     projectMutableLiveData.setValue(response.body());
+                    isSuccessCreate.setValue(true);
                     Log.d("Success", new Gson().toJson(response.body()));
                 } else {
+                    isSuccessCreate.setValue(false);
                     try {
                         if (response.errorBody() != null) {
                             Log.e("Failure", "onFailure: " + response.errorBody().string());
@@ -45,6 +48,7 @@ public class ProjectRepository {
 
             @Override
             public void onFailure(Call<Project> call, Throwable throwable) {
+                isSuccessCreate.setValue(false);
                 Log.e("Error", throwable.toString());
             }
         });
@@ -52,5 +56,9 @@ public class ProjectRepository {
 
     public MutableLiveData<Project> getProjectMutableLiveData() {
         return projectMutableLiveData;
+    }
+
+    public MutableLiveData<Boolean> getIsSuccessCreate() {
+        return isSuccessCreate;
     }
 }

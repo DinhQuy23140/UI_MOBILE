@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -47,6 +48,7 @@ public class TimeLineActivity extends AppCompatActivity {
     List<Supervisor> listSupervisor;
     Assignment assignment;
     Gson gson;
+    Project project;
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +83,7 @@ public class TimeLineActivity extends AppCompatActivity {
         timeLineViewModel.getAssignmentByStudentIdAndTermId().observe(this, result -> {
             if (result != null) {
                 assignment = AssignmentFormatter.format(result);
+                project = ProjectFormatter.format(assignment.getProject());
                 Log.d("timeline", new Gson().toJson(result));
                 Project project = ProjectFormatter.format(assignment.getProject());
                 binding.tvCurrentTopic.setText(project.getName());
@@ -190,50 +193,78 @@ public class TimeLineActivity extends AppCompatActivity {
         });
 
         binding.timeLineNopDeCuong.setOnClickListener(v -> {
-            Intent intent = new Intent(this, NopDeCuongActivity.class);
-            intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
-            startActivity(intent);
+            if (project.getId() != null) {
+                Intent intent = new Intent(this, NopDeCuongActivity.class);
+                intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
+                startActivity(intent);
+            } else {
+                Toast.makeText(this, "Vui lòng đăng kí đề tài", Toast.LENGTH_SHORT).show();
+            }
         });
 
         binding.timeLineThucHienHP.setOnClickListener(v -> {
-            Intent intent = new Intent(this, ProgressLogActivity.class);
-            intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
-            intent.putExtra(Constants.KEY_PROJECT_ID, assignment.getProject_id());
-            startActivity(intent);
+            if (project.getId() != null) {
+                Intent intent = new Intent(this, ProgressLogActivity.class);
+                intent.putExtra(Constants.KEY_ASSIGNMENT, gson.toJson(assignment));
+                intent.putExtra(Constants.KEY_PROJECT_ID, assignment.getProject_id());
+                startActivity(intent);
+            } else {
+                Toast.makeText(this, "Vui lòng đăng kí đề tài", Toast.LENGTH_SHORT).show();
+            }
         });
 
         binding.timeLineNopBaoCao.setOnClickListener(v -> {
-            Intent intent = new Intent(this, NopBaoCaoActivity.class);
-            intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
-            startActivity(intent);
+            if (project.getId() != null) {
+                Intent intent = new Intent(this, NopBaoCaoActivity.class);
+                intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
+                startActivity(intent);
+            } else {
+                Toast.makeText(this, "Vui lòng đăng kí đề tài", Toast.LENGTH_SHORT).show();
+            }
         });
 
         binding.timelineTraCuuHoiDong.setOnClickListener(timeline5 -> {
-            Intent intent = new Intent(this, TraCuuHoiDongActivity.class);
-            intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
-            intent.putExtra(Constants.KEY_ASSIGNMENT, gson.toJson(assignment));
-            startActivity(intent);
+            if (project.getId() != null) {
+                Intent intent = new Intent(this, TraCuuHoiDongActivity.class);
+                intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
+                intent.putExtra(Constants.KEY_ASSIGNMENT, gson.toJson(assignment));
+                startActivity(intent);
+            } else {
+                Toast.makeText(this, "Vui lòng đăng kí đề tài", Toast.LENGTH_SHORT).show();
+            }
         });
 
         binding.timelinePhanBien.setOnClickListener(timeline6 -> {
-            Intent intent = new Intent(this, TraCuuHoiDongActivity.class);
-            intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
-            intent.putExtra(Constants.KEY_ASSIGNMENT, gson.toJson(assignment));
-            startActivity(intent);
+            if (project.getId() != null) {
+                Intent intent = new Intent(this, TraCuuHoiDongActivity.class);
+                intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
+                intent.putExtra(Constants.KEY_ASSIGNMENT, gson.toJson(assignment));
+                startActivity(intent);
+            } else {
+                Toast.makeText(this, "Vui lòng đăng kí đề tài", Toast.LENGTH_SHORT).show();
+            }
         });
 
         binding.timelineTraCuuPhanBien.setOnClickListener(timeline7 -> {
-            Intent intent = new Intent(this, TraCuuPhanBienActivity.class);
-            intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
-            intent.putExtra(Constants.KEY_ASSIGNMENT, gson.toJson(assignment));
-            startActivity(intent);
+            if (project.getId() != null) {
+                Intent intent = new Intent(this, TraCuuPhanBienActivity.class);
+                intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
+                intent.putExtra(Constants.KEY_ASSIGNMENT, gson.toJson(assignment));
+                startActivity(intent);
+            } else {
+                Toast.makeText(this, "Vui lòng đăng kí đề tài", Toast.LENGTH_SHORT).show();
+            }
         });
 
         binding.timelineBaoVe.setOnClickListener(timeline8 -> {
-            Intent intent = new Intent(this, TraCuuBaoVeActivity.class);
-            intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
-            intent.putExtra(Constants.KEY_ASSIGNMENT, gson.toJson(assignment));
-            startActivity(intent);
+            if (project.getId() != null) {
+                Intent intent = new Intent(this, TraCuuBaoVeActivity.class);
+                intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
+                intent.putExtra(Constants.KEY_ASSIGNMENT, gson.toJson(assignment));
+                startActivity(intent);
+            } else {
+                Toast.makeText(this, "Vui lòng đăng kí đề tài", Toast.LENGTH_SHORT).show();
+            }
         });
 
         binding.btnViewTopicDetail.setOnClickListener(v -> {

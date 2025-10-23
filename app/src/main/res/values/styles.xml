@@ -109,18 +109,27 @@
         <item name="boxBackgroundColor">#FFFFFF</item>
     </style>
 
-    <style name="FullScreenDialogTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="FullScreenDialogTheme" parent="Theme.MaterialComponents.DayNight.Dialog">
         <!-- Không tiêu đề -->
         <item name="windowNoTitle">true</item>
 
-        <!-- Chiếm toàn màn hình -->
-        <item name="android:windowFullscreen">true</item>
+        <!-- Không cần full screen -->
+        <item name="android:windowFullscreen">false</item>
 
-        <!-- Cho phép nền tùy chỉnh -->
-        <item name="android:windowIsTranslucent">false</item>
+        <!-- Nền bán trong suốt (để thấy activity bên dưới) -->
+        <item name="android:windowIsTranslucent">true</item>
 
-        <!-- Nền trắng (hoặc trong suốt nếu bạn muốn) -->
-        <item name="android:windowBackground">@android:color/white</item>
+        <!-- Nền của dialog (mờ nhẹ) -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+
+        <!-- Bo góc + đổ bóng -->
+        <item name="shapeAppearanceOverlay">@style/DialogCornerStyle</item>
+    </style>
+
+    <!-- Thêm style bo góc -->
+    <style name="DialogCornerStyle">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
     </style>
 
     <style name="ResearchChip" parent="Widget.Material3.Chip.Assist">

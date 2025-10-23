@@ -8,8 +8,12 @@ import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 public interface ProjectService {
-    @POST("create_project")
-    Call<Project> createProject(@Body Map<String, String> projectBody);
+    @POST("assignments/{assignmentId}/project")
+    Call<Project> createProject(
+            @Path("assignmentId") String assignmentId,
+            @Body Map<String, String> projectBody
+    );
 }

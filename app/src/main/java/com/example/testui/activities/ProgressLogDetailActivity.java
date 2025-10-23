@@ -3,9 +3,11 @@ package com.example.testui.activities;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -33,6 +35,9 @@ public class ProgressLogDetailActivity extends AppCompatActivity {
     String progressLogJson = "";
     ProgressLog progressLog;
     Gson gson;
+    AlertDialog dialog;
+    View view;
+    AlertDialog.Builder builder;
     ProgressLogDetailViewModel progressLogDetailViewModel;
 
     @SuppressLint({"SetTextI18n", "UseCompatLoadingForDrawables"})
@@ -77,6 +82,11 @@ public class ProgressLogDetailActivity extends AppCompatActivity {
         binding.btnBack.setOnClickListener(back -> {
             finish();
         });
+
+        binding.btnUploadAttachment.setOnClickListener(upload -> {
+            createDialog();
+            builder.show();
+        });
     }
 
     @SuppressLint({"SetTextI18n", "UseCompatLoadingForDrawables"})
@@ -102,4 +112,13 @@ public class ProgressLogDetailActivity extends AppCompatActivity {
             binding.tvEmptyAttachment.setVisibility(View.VISIBLE);
         }
     }
+
+    void createDialog() {
+        builder = new AlertDialog.Builder(ProgressLogDetailActivity.this, R.style.FullScreenDialogTheme);
+        view = LayoutInflater.from(this).inflate(R.layout.layout_dialog_upload, null);
+        builder.setView(view);
+        dialog = builder.create();
+        dialog.setCanceledOnTouchOutside(true);
+    }
+
 }
