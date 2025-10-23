@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -42,6 +43,7 @@ import com.example.testui.untilities.formatter.TeacherFormatter;
 import com.example.testui.untilities.formatter.UserFormatter;
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TraCuuHoiDongActivity extends AppCompatActivity {
@@ -55,6 +57,7 @@ public class TraCuuHoiDongActivity extends AppCompatActivity {
     TraCuuHoiDongViewModel traCuuHoiDongViewModel;
     Council council;
     List<CouncilsMember> listCouncilMember;
+    List<Supervisor> listBaseSupervisor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +73,7 @@ public class TraCuuHoiDongActivity extends AppCompatActivity {
         init();
         loadData();
         setupRecyclerView();
+        loadDataRecyclerView();
     }
 
     void init() {
@@ -115,20 +119,36 @@ public class TraCuuHoiDongActivity extends AppCompatActivity {
 
     void setupRecyclerView() {
         binding.rvCouncilMembers.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        List<Supervisor> listSupervisor = traCuuHoiDongViewModel.convertListSupervisor(council.getCouncil_members());
-        councilsMemberAdapter = new CouncilsMemberAdapter(this, listCouncilMember, position -> {
+        councilsMemberAdapter = new CouncilsMemberAdapter(this, new ArrayList<>(), position -> {
 
         });
         binding.rvCouncilMembers.setAdapter(councilsMemberAdapter);
 
-        List<Supervisor> listBaseSupervisor = traCuuHoiDongViewModel.convertListBaseSupervisor(assignment.getAssignment_supervisors());
+        listBaseSupervisor = traCuuHoiDongViewModel.convertListBaseSupervisor(assignment.getAssignment_supervisors());
         binding.rvSupervisor.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        baseGVHDAdapter = new BaseGVHDAdapter(this, listBaseSupervisor, new OnClickItem() {
-            @Override
-            public void onClickItem(int position) {
+        baseGVHDAdapter = new BaseGVHDAdapter(this, listBaseSupervisor, position -> {
 
-            }
         });
         binding.rvSupervisor.setAdapter(baseGVHDAdapter);
+    }
+
+    void loadDataRecyclerView() {
+        if (!listCouncilMember.isEmpty()) {
+            councilsMemberAdapter.updateData(listCouncilMember);
+            binding.rvCouncilMembers.setVisibility(View.VISIBLE);
+            binding.tvEmptyCouncilMember.setVisibility(View.GONE);
+        } else {
+            binding.rvCouncilMembers.setVisibility(View.GONE);
+            binding.tvEmptyCouncilMember.setVisibility(View.VISIBLE);
+        }
+
+        if (!listBaseSupervisor.isEmpty()) {
+            baseGVHDAdapter.updateData(listBaseSupervisor);
+            binding.rvSupervisor.setVisibility(View.VISIBLE);
+            binding.tvEmptySupervisor.setVisibility(View.GONE);
+        } else {
+            binding.rvSupervisor.setVisibility(View.GONE);
+            binding.tvEmptySupervisor.setVisibility(View.VISIBLE);
+        }
     }
 }

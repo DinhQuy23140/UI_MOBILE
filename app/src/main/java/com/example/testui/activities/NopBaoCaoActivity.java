@@ -31,12 +31,14 @@ import com.example.testui.model.Assignment;
 import com.example.testui.model.Project;
 import com.example.testui.model.ProjectTerm;
 import com.example.testui.model.ReportFile;
+import com.example.testui.model.StageTimeline;
 import com.example.testui.model.UploadFile;
 import com.example.testui.untilities.Constants;
 import com.example.testui.untilities.formatter.AssignmentFormatter;
 import com.example.testui.untilities.formatter.DateFormatter;
 import com.example.testui.untilities.formatter.ProjectFormatter;
 import com.example.testui.untilities.formatter.ProjectTermFormatter;
+import com.example.testui.untilities.formatter.StageTimelineFormatter;
 import com.google.gson.Gson;
 
 import java.io.File;
@@ -84,7 +86,7 @@ public class NopBaoCaoActivity extends AppCompatActivity {
     void init() {
         context = this;
         listUploadFile = new ArrayList<>();
-        uploadManage = new UploadManage();
+        uploadManage = new UploadManage(this);
         listReportFile = new ArrayList<>();
         nopBaoCaoViewModel = new ViewModelProvider(this, new NopBaoCaoViewModelFactory(this)).get(NopBaoCaoViewModel.class);
         intent = getIntent();
@@ -94,7 +96,7 @@ public class NopBaoCaoActivity extends AppCompatActivity {
     }
 
     void setupClick() {
-        binding.btnNopBaoCao.setOnClickListener(selectFile -> openFilePicker());
+        binding.dragDropArea.setOnClickListener(selectFile -> openFilePicker());
 
         binding.btnNopBaoCao.setOnClickListener(nopbaocao -> {
             if (!listUploadFile.isEmpty()) {
@@ -216,6 +218,7 @@ public class NopBaoCaoActivity extends AppCompatActivity {
             listReportFile = result;
             Log.d("ReportFileSize", String.valueOf(listReportFile.size()));
             reportFileAdapter.updateData(listReportFile);
+            binding.tvSubmissionCount.setText(String.valueOf(listReportFile.size()));
         });
     }
 
@@ -223,8 +226,10 @@ public class NopBaoCaoActivity extends AppCompatActivity {
         Project project = ProjectFormatter.format(assignment.getProject());
         binding.tvTenDeTai.setText("Đề tài: " + project.getName());
         binding.tvMoTaDeTai.setText("Mô tả: " + project.getDescription());
-        String startDate = DateFormatter.formatDate(projectTerm.getStage_timelines().get(1).getStart_date());
-        String endDate = DateFormatter.formatDate(projectTerm.getStage_timelines().get(1).getEnd_date());
+        List<StageTimeline> listStage = projectTerm.getStage_timelines();
+        StageTimeline stageTimeline = StageTimelineFormatter.format(listStage.get(1));
+        String startDate = DateFormatter.formatDate(stageTimeline.getStart_date());
+        String endDate = DateFormatter.formatDate(stageTimeline.getEnd_date());
         binding.tvThoiGianNop.setText(startDate + " - " + endDate);
     }
 }

@@ -25,8 +25,8 @@ public class ProjectRepository {
         projectService = Client.getInstance().create(ProjectService.class);
     }
 
-    public void createProject(Map<String, String> projectBody) {
-        Call<Project> call = projectService.createProject(projectBody);
+    public void createProject(String assignmentId, Map<String, String> projectBody) {
+        Call<Project> call = projectService.createProject(assignmentId, projectBody);
         call.enqueue(new Callback<Project>() {
             @Override
             public void onResponse(Call<Project> call, Response<Project> response) {

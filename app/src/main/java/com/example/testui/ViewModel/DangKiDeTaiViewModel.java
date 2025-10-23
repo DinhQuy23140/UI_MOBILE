@@ -30,8 +30,8 @@ public class DangKiDeTaiViewModel extends ViewModel {
         isSuccessCreate = projectRepository.getIsSuccessCreate();
     }
 
-    public void createProject(Map<String, String> projectBody) {
-        projectRepository.createProject(projectBody);
+    public void createProject(String assignmentId, Map<String, String> projectBody) {
+        projectRepository.createProject(assignmentId, projectBody);
     }
 
     public MutableLiveData<Boolean> getIsSuccessCreate() {

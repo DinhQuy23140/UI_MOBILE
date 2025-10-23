@@ -21,7 +21,12 @@ import com.example.testui.databinding.ActivityGvhdactivityBinding;
 import com.example.testui.interfaces.OnClickItem;
 import com.example.testui.model.Assignment;
 import com.example.testui.model.Supervisor;
+import com.example.testui.model.Teacher;
+import com.example.testui.model.User;
 import com.example.testui.untilities.Constants;
+import com.example.testui.untilities.formatter.SupervisorFormatter;
+import com.example.testui.untilities.formatter.TeacherFormatter;
+import com.example.testui.untilities.formatter.UserFormatter;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -38,6 +43,7 @@ public class GVHDActivity extends AppCompatActivity {
     GVHDViewModel gvhdViewModel;
     List<Assignment> listAssignment;
     String teacherId;
+    Teacher teacher;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -63,20 +69,22 @@ public class GVHDActivity extends AppCompatActivity {
         intent = getIntent();
         strSupervisor = intent.getStringExtra(Constants.KEY_SUPERVISOR);
         gson = new Gson();
-        supervisor = gson.fromJson(strSupervisor, Supervisor.class);
+        supervisor = SupervisorFormatter.format(gson.fromJson(strSupervisor, Supervisor.class));
         gvhdViewModel = new ViewModelProvider(this, new GVHDViewModelFactory(this)).get(GVHDViewModel.class);
-        teacherId = supervisor.getTeacher().getId();
+        teacher = TeacherFormatter.format(supervisor.getTeacher());
+        teacherId = teacher.getId();
     }
 
     @SuppressLint("SetTextI18n")
     void loadData() {
-        binding.tvGiangVienName.setText(supervisor.getTeacher().getDegree() + " " + supervisor.getTeacher().getUser().getFullname());
-        binding.tvHocVi.setText(supervisor.getTeacher().getDegree());
-        binding.tvChucVu.setText("Chức vụ: " + supervisor.getTeacher().getPosition());
-        binding.tvEmail.setText("Email: " + supervisor.getTeacher().getUser().getEmail());
-        binding.tvPhone.setText("Số điện thoại: " + supervisor.getTeacher().getUser().getPhone());
+        User user = UserFormatter.format(teacher.getUser());
+        binding.tvGiangVienName.setText(teacher + " " + user.getFullname());
+        binding.tvHocVi.setText(teacher.getDegree());
+        binding.tvChucVu.setText("Chức vụ: " + teacher.getPosition());
+        binding.tvEmail.setText("Email: " + user.getEmail());
+        binding.tvPhone.setText("Số điện thoại: " + user.getPhone());
 
-        binding.tvGiangVienNameMain.setText(supervisor.getTeacher().getDegree() + " " + supervisor.getTeacher().getUser().getFullname());
+        binding.tvGiangVienNameMain.setText(teacher.getDegree() + " " + user.getFullname());
     }
 
     void setupRecycler() {

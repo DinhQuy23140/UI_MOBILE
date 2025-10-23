@@ -41,6 +41,9 @@ import com.google.gson.Gson;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -85,7 +88,7 @@ public class NopDeCuongActivity extends AppCompatActivity {
         context = this;
         nopDeCuongViewModel = new ViewModelProvider(this, new NopDeCuongViewModelFactory(this)).get(NopDeCuongViewModel.class);
         listUploadFile = new ArrayList<>();
-        uploadManage = new UploadManage();
+        uploadManage = new UploadManage(this);
         listReportFile = new ArrayList<>();
         intent = getIntent();
         strProjectTerm = intent.getStringExtra(Constants.KEY_PROJECT_TERM);
@@ -217,6 +220,7 @@ public class NopDeCuongActivity extends AppCompatActivity {
             listReportFile = result;
             Log.d("ReportFileSize", String.valueOf(listReportFile.size()));
             reportFileAdapter.updateData(listReportFile);
+            binding.tvSubmissionCount.setText(String.valueOf(listReportFile.size()));
         });
     }
 

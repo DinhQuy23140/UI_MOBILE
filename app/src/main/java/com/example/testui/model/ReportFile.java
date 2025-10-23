@@ -3,14 +3,14 @@ package com.example.testui.model;
 public class ReportFile {
     String id, project_id, file_name, file_url, file_type, type_report, created_at, updated_at, status;
 
-    public ReportFile(String id, String file_name, String file_type, String file_url, String project_id, String type_report, String status) {
-        this.id = id;
+    public ReportFile(String file_name, String file_type, String file_url, String type_report, String project_id, String status, String created_at) {
         this.file_name = file_name;
         this.file_type = file_type;
         this.file_url = file_url;
-        this.project_id = project_id;
         this.type_report = type_report;
+        this.project_id = project_id;
         this.status = status;
+        this.created_at = created_at;
     }
 
     public ReportFile(String file_name, String file_type, String file_url, String project_id, String type_report, String status) {
