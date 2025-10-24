@@ -1,12 +1,19 @@
 package com.example.testui.activities;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -17,15 +24,24 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.example.testui.R;
 import com.example.testui.ViewModel.ProgressLogDetailViewModel;
 import com.example.testui.adapter.AttachmentAdapter;
+import com.example.testui.adapter.UploadAttachmentAdapter;
 import com.example.testui.databinding.ActivityProgressLogDetailBinding;
+import com.example.testui.databinding.LayoutDialogUploadBinding;
 import com.example.testui.interfaces.OnClickItem;
+import com.example.testui.interfaces.UploadDocumentClick;
+import com.example.testui.model.Assignment;
 import com.example.testui.model.ProgressLog;
+import com.example.testui.model.ReportFile;
 import com.example.testui.model.Status;
+import com.example.testui.model.UploadFile;
 import com.example.testui.untilities.Constants;
+import com.example.testui.untilities.formatter.AssignmentFormatter;
 import com.example.testui.untilities.formatter.DateFormatter;
 import com.example.testui.untilities.formatter.ProgressLogFormatter;
 import com.google.gson.Gson;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class ProgressLogDetailActivity extends AppCompatActivity {
@@ -36,9 +52,17 @@ public class ProgressLogDetailActivity extends AppCompatActivity {
     ProgressLog progressLog;
     Gson gson;
     AlertDialog dialog;
-    View view;
     AlertDialog.Builder builder;
     ProgressLogDetailViewModel progressLogDetailViewModel;
+    private static final int PICK_FILE_REQUEST = 1;
+    private static final int PERMISSION_REQUEST_CODE = 100;
+    ArrayList<UploadFile> listUploadFile;
+    Uri fileUri;
+    Context context;
+    UploadAttachmentAdapter uploadAttachmentAdapter;
+    Assignment assignment;
+    String strAssignment = "";
+    LayoutDialogUploadBinding dialogUploadBinding;
 
     @SuppressLint({"SetTextI18n", "UseCompatLoadingForDrawables"})
     @Override
@@ -60,8 +84,12 @@ public class ProgressLogDetailActivity extends AppCompatActivity {
     }
 
     void init() {
+        context = this;
+        listUploadFile = new ArrayList<>();
         intent = getIntent();
         gson = new Gson();
+        strAssignment = intent.getStringExtra(Constants.KEY_ASSIGNMENT);
+        assignment = AssignmentFormatter.format(gson.fromJson(strAssignment, Assignment.class));
         progressLogJson = intent.getStringExtra(Constants.KEY_PROGRESS_LOG);
         progressLog = ProgressLogFormatter.format(gson.fromJson(progressLogJson, ProgressLog.class));
         progressLogDetailViewModel = new ProgressLogDetailViewModel(this);
@@ -115,10 +143,91 @@ public class ProgressLogDetailActivity extends AppCompatActivity {
 
     void createDialog() {
         builder = new AlertDialog.Builder(ProgressLogDetailActivity.this, R.style.FullScreenDialogTheme);
-        view = LayoutInflater.from(this).inflate(R.layout.layout_dialog_upload, null);
-        builder.setView(view);
+        dialogUploadBinding = LayoutDialogUploadBinding.inflate(getLayoutInflater());
+        builder.setView(dialogUploadBinding.getRoot());
         dialog = builder.create();
         dialog.setCanceledOnTouchOutside(true);
+        dialogUploadBinding.rvFileList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        uploadAttachmentAdapter = new UploadAttachmentAdapter(this, new ArrayList<>(), new UploadDocumentClick() {
+            @Override
+            public void onClick(int position) {
+
+            }
+
+            @Override
+            public void onDelete(int position) {
+
+            }
+
+            @Override
+            public void onDownload(int position) {
+
+            }
+        });
+        dialogUploadBinding.rvFileList.setAdapter(uploadAttachmentAdapter);
+
+        dialogUploadBinding.btnChooseFile.setOnClickListener(choose -> {
+            openFilePicker();
+        });
+
+        dialogUploadBinding.btnCancel.setOnClickListener(cancel -> {
+            dialog.dismiss();
+        });
+
+        dialogUploadBinding.btnSubmit.setOnClickListener(submit -> {
+            dialog.dismiss();
+        });
     }
 
+
+    private void openFilePicker() {
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("*/*");
+        startActivityForResult(intent, PICK_FILE_REQUEST);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PICK_FILE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            fileUri = data.getData();
+            String fileName = progressLogDetailViewModel.safeFileName(progressLogDetailViewModel.getFileName(fileUri));
+            String fileType = context.getContentResolver().getType(fileUri);
+            File file = null;
+            try {
+                file = progressLogDetailViewModel.getFileFromUri(fileUri);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            ReportFile reportFile = new ReportFile(fileName, fileType, "", assignment.getProject_id(), "outline", Constants.KEY_STATUS_REPORT_SUBMITTED);
+            UploadFile uploadFile = new UploadFile(file, reportFile);
+            listUploadFile.add(uploadFile);
+            Log.d("UploadFile", gson.toJson(uploadFile));
+            uploadAttachmentAdapter.updateData(listUploadFile);
+            Log.d("SizeAdapter", String.valueOf(uploadAttachmentAdapter.getListDocument().size()));
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == PERMISSION_REQUEST_CODE) {
+            boolean allPermissionsGranted = true;
+            for (int result : grantResults) {
+                if (result != PackageManager.PERMISSION_GRANTED) {
+                    allPermissionsGranted = false;
+                    break;
+                }
+            }
+
+            if (allPermissionsGranted) {
+                // All permissions granted
+                openFilePicker();
+            } else {
+                // Permission denied
+                Toast.makeText(this, "Quyền truy cập bị từ chối.", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 }
