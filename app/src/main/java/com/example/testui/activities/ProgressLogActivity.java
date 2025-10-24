@@ -1,14 +1,10 @@
 package com.example.testui.activities;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.pdf.LoadParams;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
@@ -25,26 +21,18 @@ import com.example.testui.ViewModelFactory.ProgressLogViewModelFactory;
 import com.example.testui.adapter.ProcessLogAdapter;
 import com.example.testui.databinding.ActivityProgressLogBinding;
 import com.example.testui.databinding.AddItemLogBinding;
-import com.example.testui.interfaces.OnClickItem;
 import com.example.testui.model.Assignment;
-import com.example.testui.model.ProgressLog;
 import com.example.testui.model.Project;
-import com.example.testui.model.ProjectTerm;
 import com.example.testui.untilities.Constants;
-import com.example.testui.untilities.formatter.DateFormatter;
+import com.example.testui.untilities.formatter.AssignmentFormatter;
 import com.example.testui.untilities.formatter.ProjectFormatter;
-import com.example.testui.untilities.formatter.ProjectTermFormatter;
 import com.google.android.material.datepicker.MaterialDatePicker;
-import com.google.android.material.timepicker.MaterialTimePicker;
-import com.google.android.material.timepicker.TimeFormat;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -55,7 +43,6 @@ public class ProgressLogActivity extends AppCompatActivity {
     Gson gson;
     Intent getIntent;
     AlertDialog dialog;
-    View view;
     AlertDialog.Builder builder;
     String projectId = "", strAssignment = "";
     String startDate = "", endDate = "";
@@ -89,7 +76,7 @@ public class ProgressLogActivity extends AppCompatActivity {
         getIntent = getIntent();
         projectId = getIntent.getStringExtra(Constants.KEY_PROJECT_ID);
         strAssignment = getIntent.getStringExtra(Constants.KEY_ASSIGNMENT);
-        assignment = gson.fromJson(strAssignment, Assignment.class);
+        assignment = AssignmentFormatter.format(gson.fromJson(strAssignment, Assignment.class));
     }
 
     void createDialog() {
@@ -181,6 +168,7 @@ public class ProgressLogActivity extends AppCompatActivity {
         processLogAdapter = new ProcessLogAdapter(this, new ArrayList<>(), position -> {
             Intent intent = new Intent(this, ProgressLogDetailActivity.class);
             intent.putExtra(Constants.KEY_PROGRESS_LOG, gson.toJson(processLogAdapter.getItem(position)));
+            intent.putExtra(Constants.KEY_ASSIGNMENT, gson.toJson(assignment));
             startActivity(intent);
         });
         binding.rvProgressLogs.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
