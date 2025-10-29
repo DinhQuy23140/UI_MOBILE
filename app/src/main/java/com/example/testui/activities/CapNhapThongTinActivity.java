@@ -17,11 +17,13 @@ import com.example.testui.R;
 import com.example.testui.ViewModel.HomeViewModel;
 import com.example.testui.ViewModelFactory.HomeViewModelFactory;
 import com.example.testui.databinding.ActivityCapNhapThongTinBinding;
+import com.example.testui.model.Department;
 import com.example.testui.model.Faculties;
 import com.example.testui.model.Marjor;
 import com.example.testui.model.Student;
 import com.example.testui.model.User;
 import com.example.testui.untilities.Constants;
+import com.example.testui.untilities.formatter.DepartmentFormatter;
 import com.example.testui.untilities.formatter.FacultiesFormatter;
 import com.example.testui.untilities.formatter.MarjorFormatter;
 import com.example.testui.untilities.formatter.StudentFormatter;
@@ -79,7 +81,8 @@ public class CapNhapThongTinActivity extends AppCompatActivity {
                 binding.tvSvClass.setText(student.getClass_code() );
                 Marjor marjor = MarjorFormatter.format(student.getMarjor());
                 binding.tvSvMajor.setText(marjor.getCode() + " - " + marjor.getName());
-                Faculties faculties = FacultiesFormatter.format(marjor.getFaculties());
+                Department department = DepartmentFormatter.format(marjor.getDepartment());
+                Faculties faculties = FacultiesFormatter.format(department.getFaculties());
                 binding.tvSvDepartment.setText(faculties.getCode() + " - " + faculties.getName());
             }
         });

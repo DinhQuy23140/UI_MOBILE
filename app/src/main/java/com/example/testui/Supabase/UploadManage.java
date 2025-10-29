@@ -4,8 +4,10 @@ import android.content.Context;
 import android.util.Log;
 
 import com.example.testui.client.SupabaseClient;
+import com.example.testui.model.Attachment;
 import com.example.testui.model.Document;
 import com.example.testui.model.ReportFile;
+import com.example.testui.model.UploadAttachment;
 import com.example.testui.model.UploadFile;
 import com.example.testui.repository.SinhVienRepository;
 import com.example.testui.service.SupabaseService;
@@ -84,17 +86,19 @@ public class UploadManage {
         });
     }
 
-    public void uploadProgressLogAttachments(List<UploadFile> listUploadFile, UploadCallback uploadCallback) {
-
+    public void uploadProgressLogAttachments(List<UploadAttachment> listUploadAttachment, UploadAttachmentCallback uploadAttachmentCallback) {
+        for (UploadAttachment uploadAttachment : listUploadAttachment) {
+            uploadProgressLogAttachment(uploadAttachment, uploadAttachmentCallback);
+        }
     }
 
-    private void uploadProgressLogAttachment(UploadFile uploadFile, UploadCallback uploadCallback) {
-        RequestBody requestBody = RequestBody.create(MediaType.parse("application/octet-stream"), uploadFile.getFile());
-        MultipartBody.Part multipartBody = MultipartBody.Part.createFormData("file", uploadFile.getReportFile().getFile_name(), requestBody);
+    private void uploadProgressLogAttachment(UploadAttachment uploadAttachment, UploadAttachmentCallback uploadAttachmentCallback) {
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/octet-stream"), uploadAttachment.getFile());
+        MultipartBody.Part multipartBody = MultipartBody.Part.createFormData("file", uploadAttachment.getAttachment().getFile_name(), requestBody);
         String studentId = sinhVienRepository.getStudentId();
         String timestamp = java.time.LocalDateTime.now()
                 .format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH-mm-ss"));
-        String storagePath = studentId + "/" + uploadFile.getReportFile().getType_report() + "/" + timestamp + "/" + uploadFile.getReportFile().getFile_name();
+        String storagePath = studentId + "/" + uploadAttachment.getAttachment().getProgress_log_id() + "/" + timestamp + "/" + uploadAttachment.getAttachment().getFile_name();
         Call<ResponseBody> call = supabaseService.uploadDocument(
                 bearerToken,
                 apikey,
@@ -108,16 +112,16 @@ public class UploadManage {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful()) {
                     String publicUrl = url + "/storage/v1/object/public/" + bucket + "/" + storagePath;
-                    ReportFile reportFile = uploadFile.getReportFile();
-                    reportFile.setFile_url(publicUrl);
-                    uploadFile.setReportFile(reportFile);
+                    Attachment attachment = uploadAttachment.getAttachment();
+                    attachment.setFile_url(publicUrl);
+                    uploadAttachment.setAttachment(attachment);
 
                     // Gọi callback
-                    uploadCallback.onUploadSuccess(uploadFile);
+                    uploadAttachmentCallback.onUploadSuccess(uploadAttachment);
 
                     Log.d("UPLOAD", "Uploaded: " + publicUrl);
                 } else {
-                    uploadCallback.onUploadError(uploadFile, new Exception("Upload failed: " + response.message()));
+                    uploadAttachmentCallback.onUploadError(uploadAttachment, new Exception("Upload failed: " + response.message()));
                     try {
                         Log.e("UPLOAD", "Failed to upload: " + response.errorBody().string());
                     } catch (Exception e) {
@@ -128,7 +132,7 @@ public class UploadManage {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable throwable) {
-                uploadCallback.onUploadError(uploadFile, throwable);
+                uploadAttachmentCallback.onUploadError(uploadAttachment, throwable);
             }
         });
     }
@@ -136,5 +140,10 @@ public class UploadManage {
     public interface UploadCallback {
         void onUploadSuccess(UploadFile uploadFile);
         void onUploadError(UploadFile uploadFile, Throwable t);
+    }
+
+    public interface UploadAttachmentCallback {
+        void onUploadSuccess(UploadAttachment uploadAttachment);
+        void onUploadError(UploadAttachment uploadAttachment, Throwable t);
     }
 }

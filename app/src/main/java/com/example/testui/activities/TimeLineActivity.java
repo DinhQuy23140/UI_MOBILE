@@ -67,7 +67,6 @@ public class TimeLineActivity extends AppCompatActivity {
         loadProjectTerm();
         loadAssignment();
         setupClick();
-
     }
 
     void init() {

@@ -16,6 +16,9 @@ public interface AttachmentService {
     @POST("attachments")
     Call<Attachment> createAttachment(@Body Attachment attachment);
 
+    @POST("attachment/create-general")
+    Call<Attachment> createAttachmentGeneral(@Body Attachment attachment);
+
     @GET("attachments/{attachmentId}")
     Call<Attachment> getAttachmentById(@Path("attachmentId") String attachmentId);
 
