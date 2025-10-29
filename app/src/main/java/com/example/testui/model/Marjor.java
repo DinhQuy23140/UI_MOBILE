@@ -2,17 +2,17 @@ package com.example.testui.model;
 
 public class Marjor {
     String id, code, name, description;
-    Faculties faculties;
+    Department department;
 
     public Marjor() {
     }
 
-    public Marjor(String id, String name, String code, String description, Faculties faculties) {
+    public Marjor(String id, String name, String code, String description, Department department) {
         this.id = id;
         this.name = name;
         this.code = code;
         this.description = description;
-        this.faculties = faculties;
+        this.department = department;
     }
 
     public String getCode() {
@@ -31,12 +31,12 @@ public class Marjor {
         this.description = description;
     }
 
-    public Faculties getFaculties() {
-        return faculties;
+    public Department getDepartment() {
+        return department;
     }
 
-    public void setFaculties(Faculties faculties) {
-        this.faculties = faculties;
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 
     public String getId() {

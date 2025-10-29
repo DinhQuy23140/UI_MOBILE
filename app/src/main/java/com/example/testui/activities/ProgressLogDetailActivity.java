@@ -22,6 +22,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.testui.R;
+import com.example.testui.Supabase.UploadManage;
 import com.example.testui.ViewModel.ProgressLogDetailViewModel;
 import com.example.testui.adapter.AttachmentAdapter;
 import com.example.testui.adapter.UploadAttachmentAdapter;
@@ -30,9 +31,11 @@ import com.example.testui.databinding.LayoutDialogUploadBinding;
 import com.example.testui.interfaces.OnClickItem;
 import com.example.testui.interfaces.UploadDocumentClick;
 import com.example.testui.model.Assignment;
+import com.example.testui.model.Attachment;
 import com.example.testui.model.ProgressLog;
 import com.example.testui.model.ReportFile;
 import com.example.testui.model.Status;
+import com.example.testui.model.UploadAttachment;
 import com.example.testui.model.UploadFile;
 import com.example.testui.untilities.Constants;
 import com.example.testui.untilities.formatter.AssignmentFormatter;
@@ -43,6 +46,7 @@ import com.google.gson.Gson;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ProgressLogDetailActivity extends AppCompatActivity {
     ActivityProgressLogDetailBinding binding;
@@ -63,6 +67,8 @@ public class ProgressLogDetailActivity extends AppCompatActivity {
     Assignment assignment;
     String strAssignment = "";
     LayoutDialogUploadBinding dialogUploadBinding;
+    UploadManage uploadManage;
+    List<UploadAttachment> uploadAttachmentList = new ArrayList<>();
 
     @SuppressLint({"SetTextI18n", "UseCompatLoadingForDrawables"})
     @Override
@@ -88,6 +94,7 @@ public class ProgressLogDetailActivity extends AppCompatActivity {
         listUploadFile = new ArrayList<>();
         intent = getIntent();
         gson = new Gson();
+        uploadManage = new UploadManage(this);
         strAssignment = intent.getStringExtra(Constants.KEY_ASSIGNMENT);
         assignment = AssignmentFormatter.format(gson.fromJson(strAssignment, Assignment.class));
         progressLogJson = intent.getStringExtra(Constants.KEY_PROGRESS_LOG);
@@ -113,7 +120,7 @@ public class ProgressLogDetailActivity extends AppCompatActivity {
 
         binding.btnUploadAttachment.setOnClickListener(upload -> {
             createDialog();
-            builder.show();
+            dialog.show();
         });
     }
 
@@ -175,7 +182,24 @@ public class ProgressLogDetailActivity extends AppCompatActivity {
         });
 
         dialogUploadBinding.btnSubmit.setOnClickListener(submit -> {
-            dialog.dismiss();
+            if (!uploadAttachmentList.isEmpty()) {
+                dialog.dismiss();
+                uploadManage.uploadProgressLogAttachments(uploadAttachmentList, new UploadManage.UploadAttachmentCallback() {
+                    @Override
+                    public void onUploadSuccess(UploadAttachment uploadAttachment) {
+                        Attachment attachment = uploadAttachment.getAttachment();
+                        progressLogDetailViewModel.uploadProgressLogAttachment(attachment);
+                        uploadAttachmentList.remove(0);
+                    }
+
+                    @Override
+                    public void onUploadError(UploadAttachment uploadAttachment, Throwable t) {
+
+                    }
+                });
+            } else {
+                Toast.makeText(this, "Vui lòng chọn file", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 
@@ -199,10 +223,10 @@ public class ProgressLogDetailActivity extends AppCompatActivity {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            ReportFile reportFile = new ReportFile(fileName, fileType, "", assignment.getProject_id(), "outline", Constants.KEY_STATUS_REPORT_SUBMITTED);
-            UploadFile uploadFile = new UploadFile(file, reportFile);
-            listUploadFile.add(uploadFile);
-            Log.d("UploadFile", gson.toJson(uploadFile));
+            Attachment attachment = new Attachment(fileName, fileType, "", progressLog.getId());
+            UploadAttachment uploadAttachment = new UploadAttachment(file, attachment);
+            uploadAttachmentList.add(uploadAttachment);
+            Log.d("UploadFile", gson.toJson(uploadAttachment));
             uploadAttachmentAdapter.updateData(listUploadFile);
             Log.d("SizeAdapter", String.valueOf(uploadAttachmentAdapter.getListDocument().size()));
         }

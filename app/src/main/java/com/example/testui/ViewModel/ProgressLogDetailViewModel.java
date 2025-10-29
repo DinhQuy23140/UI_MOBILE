@@ -8,18 +8,25 @@ import android.provider.OpenableColumns;
 import androidx.lifecycle.ViewModel;
 
 import com.example.testui.R;
+import com.example.testui.Supabase.UploadManage;
+import com.example.testui.model.Attachment;
 import com.example.testui.model.Status;
+import com.example.testui.model.UploadAttachment;
+import com.example.testui.repository.AttrachmentRepository;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 public class ProgressLogDetailViewModel extends ViewModel {
     Context context;
+    AttrachmentRepository attrachmentRepository;
 
     public ProgressLogDetailViewModel(Context context) {
         this.context = context;
+        attrachmentRepository = new AttrachmentRepository(context);
     }
 
     public Status loadStatusProgress(String status) {
@@ -92,5 +99,9 @@ public class ProgressLogDetailViewModel extends ViewModel {
 
     public String safeFileName(String fileName) {
         return fileName.replaceAll("\\s+", "_").toLowerCase().replaceAll("[^a-zA-Z0-9._-]", "");
+    }
+
+    public void uploadProgressLogAttachment(Attachment attachment) {
+        attrachmentRepository.uploadAttachment(attachment);
     }
 }
