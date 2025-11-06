@@ -133,7 +133,7 @@ public class TraCuuHoiDongActivity extends AppCompatActivity {
     }
 
     void loadDataRecyclerView() {
-        if (!listCouncilMember.isEmpty()) {
+        if (listCouncilMember != null && !listCouncilMember.isEmpty()) {
             councilsMemberAdapter.updateData(listCouncilMember);
             binding.rvCouncilMembers.setVisibility(View.VISIBLE);
             binding.tvEmptyCouncilMember.setVisibility(View.GONE);

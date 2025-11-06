@@ -110,6 +110,19 @@ public class DangKiGVHDActivity extends AppCompatActivity {
             }
         });
 
+        dangKiGVHDViewModel.getIsCreateSuccess().observe(this, result -> {
+            Log.d("isCreateSuccess", result.toString());
+            if (result) {
+                runOnUiThread(() -> {
+                    Toast.makeText(this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
+                    finish();
+                });
+            } else {
+                runOnUiThread(() -> {
+                    Toast.makeText(this, "Đăng ký thất bại", Toast.LENGTH_SHORT).show();
+                });
+            }
+        });
     }
 
     void setupClick() {
@@ -123,19 +136,6 @@ public class DangKiGVHDActivity extends AppCompatActivity {
                 dangKiGVHDViewModel.createAssignmentSupervisor(assignmentSupervisor);
             } else {
                 Toast.makeText(this, "Supervisor null", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        dangKiGVHDViewModel.getIsCreateSuccess().observe(this, isCreateSuccess -> {
-            if (isCreateSuccess) {
-                runOnUiThread(() -> {
-                    Toast.makeText(this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
-                    finish();
-                });
-            } else {
-                runOnUiThread(() -> {
-                    Toast.makeText(this, "Đăng ký thất bại", Toast.LENGTH_SHORT).show();
-                });
             }
         });
 

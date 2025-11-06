@@ -78,10 +78,11 @@ public class NopDeCuongActivity extends AppCompatActivity {
         });
 
         init();
-        setupClick();
+        observerData();
         setupUploadRecyclerview();
         setupReportFileRecyclerview();
         fetchDataRecyclerView();
+        setupClick();
     }
 
     void init() {
@@ -231,5 +232,15 @@ public class NopDeCuongActivity extends AppCompatActivity {
         String startDate = DateFormatter.formatDate(projectTerm.getStage_timelines().get(1).getStart_date());
         String endDate = DateFormatter.formatDate(projectTerm.getStage_timelines().get(1).getEnd_date());
         binding.tvThoiGianNop.setText(startDate + " - " + endDate);
+    }
+
+    void observerData() {
+        nopDeCuongViewModel.getIsCreateSuccess().observe(this, result -> {
+            if (result) {
+                Toast.makeText(context, "Upload thành công", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(context, "Upload thất bại", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

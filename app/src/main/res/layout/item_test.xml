@@ -4,11 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    android:padding="4dp"
+    app:cardBackgroundColor="#FFFFFF"
     app:cardCornerRadius="16dp"
     app:cardElevation="2dp"
-    app:cardBackgroundColor="@android:color/white"
-    app:strokeColor="#E3F2FD"
+    app:strokeColor="#E0E0E0"
     app:strokeWidth="1dp">
 
     <LinearLayout
@@ -17,76 +16,98 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <!-- Header với thông tin sinh viên -->
-
-
-        <!-- Thông tin đề tài -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginBottom="12dp"
-            android:padding="12dp"
-            android:background="@drawable/bg_info_light">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Đề tài đồ án"
-                android:textColor="#2196F3"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="4dp" />
-
-            <TextView
-                android:id="@+id/tvTenDeTai"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Xây dựng hệ thống quản lý học tập sử dụng AI"
-                android:textColor="#333333"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                android:lineSpacingExtra="2dp" />
-
-        </LinearLayout>
-
-        <!-- Thông tin chi tiết dạng grid -->
+        <!-- Header với avatar và tên -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginBottom="12dp">
 
-            <!-- Cột 1: Loại đồ án -->
+            <!-- Avatar -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="1dp">
+
+                <ImageView
+                    android:id="@+id/ivAvatar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/ic_user_placeholder"
+                    android:scaleType="centerCrop"/>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Tên và thời gian -->
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_marginStart="12dp">
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:id="@+id/tvUserName"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Loại đồ án"
-                    android:textColor="#666666"
-                    android:textSize="10sp"
-                    android:layout_marginBottom="2dp" />
-
-                <TextView
-                    android:id="@+id/tvLoaiDoAn"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Đồ án tốt nghiệp"
-                    android:textColor="#333333"
-                    android:textSize="12sp"
+                    android:text="Nguyễn Văn A"
+                    android:textColor="#1A237E"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="2dp">
+
+                    <ImageView
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:layout_marginEnd="4dp"
+                        android:src="@drawable/ic_clock"
+                        app:tint="#9E9E9E" />
+
+                    <TextView
+                        android:id="@+id/tvTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2 giờ trước"
+                        android:textColor="#9E9E9E"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
             </LinearLayout>
 
-
+            <!-- Menu option (3 chấm) -->
+            <ImageView
+                android:id="@+id/ivMenu"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_more_vertical"
+                app:tint="#666666"
+                android:padding="4dp"
+                android:clickable="true"
+                android:focusable="true" />
 
         </LinearLayout>
 
+        <!-- Nội dung nhận xét -->
+        <TextView
+            android:id="@+id/tvCommentContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Đây là nội dung nhận xét về công việc. Nhận xét này có thể dài hoặc ngắn tùy theo người dùng nhập vào."
+            android:textColor="#333333"
+            android:textSize="14sp"
+            android:lineSpacingExtra="4dp"
+            android:layout_marginBottom="12dp" />
 
+        <!-- Footer với các action -->
 
     </LinearLayout>
 

@@ -138,8 +138,9 @@ public class TraCuuBaoVeActivity extends AppCompatActivity {
         }
 
         List<CouncilsMember> listCouncilMember = council.getCouncil_members();
-        binding.tvMemberCount.setText(listCouncilMember.size() + " thành viên");
-        if (listCouncilMember.isEmpty()) {
+        int count = listCouncilMember != null ? listCouncilMember.size() : 0;
+        binding.tvMemberCount.setText(count + " thành viên");
+        if (count == 0) {
             binding.tvEmptyCouncilMember.setVisibility(View.VISIBLE);
         } else {
             councilsMemberAdapter.updateData(listCouncilMember);
