@@ -21,7 +21,7 @@ public class ProjectTermFormatter {
         }
 
         if (projectTerm.getStage() == null) projectTerm.setStage("-");
-        if (projectTerm.getStatus() == null) projectTerm.setStatus("pending");
+//        if (projectTerm.getStatus() == null) projectTerm.setStatus("pending");
         if (projectTerm.getDescription() == null) projectTerm.setDescription("Chưa có");
         if (projectTerm.getStart_date() == null) projectTerm.setStart_date("-");
         if (projectTerm.getEnd_date() == null) projectTerm.setEnd_date("-");

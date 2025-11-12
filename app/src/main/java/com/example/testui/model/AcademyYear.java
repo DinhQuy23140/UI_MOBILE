@@ -1,8 +1,11 @@
 package com.example.testui.model;
 
+import java.util.List;
+
 public class AcademyYear {
     private String id;
     private String year_name;
+    List<ProjectTerm> project_terms;
 
     public AcademyYear() {
     }

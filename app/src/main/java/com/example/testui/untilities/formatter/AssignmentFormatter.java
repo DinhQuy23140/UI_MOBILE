@@ -18,7 +18,6 @@ public class AssignmentFormatter {
         }
 
         if (assignment.getStatus() == null) assignment.setStatus("pending");
-        if (assignment.getRole() == null) assignment.setRole("main");
         return assignment;
     }
 

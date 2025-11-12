@@ -1,7 +1,7 @@
 package com.example.testui.model;
 
 public class Faculties {
-    String id, code, name, description;
+    String id, code, name, short_name, description, assistant_id,  phone, email, address;
 
     public Faculties() {
     }
@@ -11,6 +11,46 @@ public class Faculties {
         this.code = code;
         this.name = name;
         this.description = description;
+    }
+
+    public String getAssistant_id() {
+        return assistant_id;
+    }
+
+    public void setAssistant_id(String assistant_id) {
+        this.assistant_id = assistant_id;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getShort_name() {
+        return short_name;
+    }
+
+    public void setShort_name(String short_name) {
+        this.short_name = short_name;
     }
 
     public String getCode() {

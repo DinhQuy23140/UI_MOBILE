@@ -23,6 +23,7 @@ import com.example.testui.ViewModelFactory.HomeViewModelFactory;
 import com.example.testui.activities.CapNhapThongTinActivity;
 import com.example.testui.activities.ChiTietDoAnActivity;
 import com.example.testui.activities.DanhSachDotDoAnActivity;
+import com.example.testui.activities.RegisterProjectTermActivity;
 import com.example.testui.activities.TimeLineActivity;
 import com.example.testui.databinding.ActivityHomeBinding;
 import com.example.testui.databinding.FragmentHomeBinding;
@@ -150,6 +151,12 @@ public class HomeFragment extends Fragment {
             Intent intent = new Intent(getContext(), TimeLineActivity.class);
             intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
             intent.putExtra(Constants.KEY_ASSIGNMENT, gson.toJson(assignment));
+            startActivity(intent);
+        });
+
+        fragmentHomeBinding.layoutDangKiDoAn.setOnClickListener(dangKiDoAn -> {
+            Intent intent = new Intent(getContext(), RegisterProjectTermActivity.class);
+            intent.putExtra(Constants.KEY_ID_STUDENT, studentId);
             startActivity(intent);
         });
     }

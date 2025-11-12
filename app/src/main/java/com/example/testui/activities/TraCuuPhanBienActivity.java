@@ -100,7 +100,7 @@ public class TraCuuPhanBienActivity extends AppCompatActivity {
 //        binding.txtReviewScore.setText(assignment.getCouncil_project().getReview_score());
 
         binding.txtReviewScore.setText(councilProject.getReview_score());
-        binding.txtReviewScoreDate.setText(DateFormatter.formatDate(councilProject.getUpdated_at()));
+        binding.txtReviewScoreDate.setText(councilProject.getReview_score() == "-" ? "" : DateFormatter.formatDate(councilProject.getUpdated_at()));
 
         Council council = CouncilFormatter.format(councilProject.getCouncil());
         binding.txtCouncilName.setText(council.getName());

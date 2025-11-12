@@ -118,10 +118,10 @@ public class TimeLineActivity extends AppCompatActivity {
         binding.tvProjectName.setText("Đợt đồ án: Đợt " + projectTerm.getStage() + " năm " + projectTerm.getAcademy_year().getYear_name());
         binding.tvStartDate.setText("Bắt đầu: " + DateFormatter.formatDate(projectTerm.getStart_date()));
         binding.tvEndDate.setText("Kết thúc: " + DateFormatter.formatDate(projectTerm.getEnd_date()));
-        Status status = timeLineViewModel.loadStatusAssignment(projectTerm.getStatus());
-        binding.tvStatus.setText("Trạng thái: " + status.getStrStatus());
-        binding.tvStatus.setBackground(getDrawable(status.getBackgroundColor()));
-        binding.tvStatus.setTextColor(getColor(status.getTextColor()));
+//        Status status = timeLineViewModel.loadStatusAssignment(projectTerm.getStatus());
+//        binding.tvStatus.setText("Trạng thái: " + status.getStrStatus());
+//        binding.tvStatus.setBackground(getDrawable(status.getBackgroundColor()));
+//        binding.tvStatus.setTextColor(getColor(status.getTextColor()));
         binding.tvDescription.setText(projectTerm.getDescription());
 
         List<StageTimeline> listStage = projectTerm.getStage_timelines();

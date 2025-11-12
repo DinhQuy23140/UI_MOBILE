@@ -109,8 +109,10 @@ public class ProgressLogActivity extends AppCompatActivity {
             progressLogBody.put("student_status", "in_progress");
             progressLogBody.put("instructor_status", "pending");
             progressLogBody.put("project_id", projectId);
+            progressLogBody.put("content", addItemLogBinding.etContent.getText().toString());
 
             progressLogViewModel.createProgressLog(progressLogBody);
+            Log.d("progress", gson.toJson(progressLogBody));
             dialog.dismiss();
         });
 

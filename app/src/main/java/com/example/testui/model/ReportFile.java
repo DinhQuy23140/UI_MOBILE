@@ -3,6 +3,16 @@ package com.example.testui.model;
 public class  ReportFile {
     String id, project_id, file_name, file_url, file_type, type_report, created_at, updated_at, status;
 
+    Project project;
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
     public ReportFile(String file_name, String file_type, String file_url, String type_report, String project_id, String status, String created_at) {
         this.file_name = file_name;
         this.file_type = file_type;

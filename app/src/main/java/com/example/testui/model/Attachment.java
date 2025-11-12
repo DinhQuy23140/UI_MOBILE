@@ -7,21 +7,20 @@ public class Attachment {
     private String file_url;       // Đường dẫn đến file (URL hoặc Firebase path)
     private String file_type;      // Loại file: pdf, image, doc, etc.
     private String upload_time;      // Thời gian upload (timestamp)
-    private String uploader_id;    // ID người upload (sinh viên hoặc giảng viên)
     private String created_at;
     private String updated_at;
+    private ProgressLog progressLog;
 
     public Attachment() {
     }
 
-    public Attachment(String id, String progress_log_id, String file_name, String file_url, String file_type, String upload_time, String uploader_id) {
+    public Attachment(String id, String progress_log_id, String file_name, String file_url, String file_type, String upload_time) {
         this.id = id;
         this.progress_log_id = progress_log_id;
         this.file_name = file_name;
         this.file_url = file_url;
         this.file_type = file_type;
         this.upload_time = upload_time;
-        this.uploader_id = uploader_id;
     }
 
     public Attachment(String file_name, String file_type, String file_url, String progress_log_id) {
@@ -29,6 +28,14 @@ public class Attachment {
         this.file_type = file_type;
         this.file_url = file_url;
         this.progress_log_id = progress_log_id;
+    }
+
+    public ProgressLog getProgressLog() {
+        return progressLog;
+    }
+
+    public void setProgressLog(ProgressLog progressLog) {
+        this.progressLog = progressLog;
     }
 
     public String getCreated_at() {
@@ -95,12 +102,5 @@ public class Attachment {
         this.upload_time = upload_time;
     }
 
-    public String getUploader_id() {
-        return uploader_id;
-    }
-
-    public void setUploader_id(String uploader_id) {
-        this.uploader_id = uploader_id;
-    }
 }
     

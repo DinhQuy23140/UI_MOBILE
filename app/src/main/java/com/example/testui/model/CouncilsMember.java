@@ -5,6 +5,24 @@ public class CouncilsMember {
     String role;
     Supervisor supervisor;
     Council council;
+    CouncilProject council_project;
+    CouncilProjectDefence council_project_defences;
+
+    public CouncilProject getCouncil_project() {
+        return council_project;
+    }
+
+    public void setCouncil_project(CouncilProject council_project) {
+        this.council_project = council_project;
+    }
+
+    public CouncilProjectDefence getCouncil_project_defences() {
+        return council_project_defences;
+    }
+
+    public void setCouncil_project_defences(CouncilProjectDefence council_project_defences) {
+        this.council_project_defences = council_project_defences;
+    }
 
     public Council getCouncil() {
         return council;

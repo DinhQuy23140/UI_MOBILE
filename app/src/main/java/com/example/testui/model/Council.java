@@ -3,9 +3,11 @@ package com.example.testui.model;
 import java.util.List;
 
 public class Council {
-    String id, name, project_term_id, description, date, address, status, code, department_id, created_at, updated_at;
+    String id, name, project_term_id, description, date, address, status, code, department_id, time, created_at, updated_at;
     Department department;
     List<CouncilsMember> council_members;
+    ProjectTerm project_term;
+    List<CouncilProject> council_projects;
 
     public Council() {
     }
@@ -18,6 +20,30 @@ public class Council {
         this.name = name;
         this.project_term_id = project_term_id;
         this.status = status;
+    }
+
+    public List<CouncilProject> getCouncil_projects() {
+        return council_projects;
+    }
+
+    public void setCouncil_projects(List<CouncilProject> council_projects) {
+        this.council_projects = council_projects;
+    }
+
+    public ProjectTerm getProject_term() {
+        return project_term;
+    }
+
+    public void setProject_term(ProjectTerm project_term) {
+        this.project_term = project_term;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public List<CouncilsMember> getCouncil_members() {

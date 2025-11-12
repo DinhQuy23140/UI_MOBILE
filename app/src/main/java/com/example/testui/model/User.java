@@ -1,5 +1,7 @@
 package com.example.testui.model;
 
+import java.util.List;
+
 public class    User {
     String id;
     String fullname;
@@ -11,6 +13,7 @@ public class    User {
     String image;
     String role;
     String address;
+    List<UserResearch> user_researches;
 
     public User() {
     }
@@ -31,6 +34,14 @@ public class    User {
         this.phone = phone;
         this.image = image;
         this.role = role;
+    }
+
+    public List<UserResearch> getUser_researches() {
+        return user_researches;
+    }
+
+    public void setUser_researches(List<UserResearch> user_researches) {
+        this.user_researches = user_researches;
     }
 
     public String getPassword() {
