@@ -20,6 +20,7 @@ public class DangKiGVHDViewModel extends ViewModel {
     SinhVienRepository sinhVienRepository;
     AssignmentSupervisorRepository assignmentSupervisorRepository;
     MutableLiveData<Assignment> assignmentMutableLiveData = new MutableLiveData<>();
+    MutableLiveData<Boolean> isCreateSuccess = new MutableLiveData<>();
 
     public DangKiGVHDViewModel(Context context) {
         giangVienRepository = new GiangVienRepository();
@@ -49,6 +50,7 @@ public class DangKiGVHDViewModel extends ViewModel {
 
     public void createAssignmentSupervisor(AssignmentSupervisor assignmentSupervisor){
         assignmentSupervisorRepository.createAssignmentSupervisor(assignmentSupervisor);
+        isCreateSuccess.setValue(assignmentSupervisorRepository.getIsCreateSuccess().getValue());
     }
 
     public MutableLiveData<Boolean> getIsCreateSuccess() {

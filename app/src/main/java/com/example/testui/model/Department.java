@@ -1,8 +1,18 @@
 package com.example.testui.model;
 
+import java.util.List;
+
+import javax.security.auth.Subject;
+
 public class Department {
     String id, code, name, description, faculty_id;
     Faculties faculties;
+    List<Teacher> teacher;
+    List<Council> councils;
+    List<DepartmentRole> departmentRoles;
+    List<Subject> subjects;
+    List<Marjor> marjors;
+
     public Department() {
     }
 

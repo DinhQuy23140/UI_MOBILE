@@ -1,5 +1,7 @@
 package com.example.testui.model;
 
+import java.util.List;
+
 public class Teacher {
     private String id;
     private String user_id;
@@ -8,6 +10,10 @@ public class Teacher {
     private String department_id;
     private String position;
     private User user;
+    private Department department;
+    List<Supervisor> supervisor;
+    List<DepartmentRole> departmentRoles;
+    List<LecturerSubjects> lecturerSubjects;
 
     public Teacher() {
     }
@@ -20,6 +26,38 @@ public class Teacher {
         this.teacher_code = teacher_code;
         this.user = user;
         this.user_id = user_id;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    public List<DepartmentRole> getDepartmentRoles() {
+        return departmentRoles;
+    }
+
+    public void setDepartmentRoles(List<DepartmentRole> departmentRoles) {
+        this.departmentRoles = departmentRoles;
+    }
+
+    public List<LecturerSubjects> getLecturerSubjects() {
+        return lecturerSubjects;
+    }
+
+    public void setLecturerSubjects(List<LecturerSubjects> lecturerSubjects) {
+        this.lecturerSubjects = lecturerSubjects;
+    }
+
+    public List<Supervisor> getSupervisor() {
+        return supervisor;
+    }
+
+    public void setSupervisor(List<Supervisor> supervisor) {
+        this.supervisor = supervisor;
     }
 
     public String getDegree() {

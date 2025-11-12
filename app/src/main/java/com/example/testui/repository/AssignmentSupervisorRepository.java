@@ -20,7 +20,7 @@ import retrofit2.Response;
 public class AssignmentSupervisorRepository {
 
     MutableLiveData<Assignment> assignmentMutableLiveData = new MutableLiveData<>();
-    MutableLiveData<Boolean> isCreateSuccess = new MutableLiveData<>(false);
+    MutableLiveData<Boolean> isCreateSuccess = new MutableLiveData<>();
     AssignmentService assignmentService;
     AssignmentSupervisorService assignmentSupervisorService;
 
@@ -53,29 +53,39 @@ public class AssignmentSupervisorRepository {
         return assignmentMutableLiveData;
     }
 
-    public void createAssignmentSupervisor(AssignmentSupervisor assignmentSupervisor){
+    public void createAssignmentSupervisor(AssignmentSupervisor assignmentSupervisor) {
         Call<AssignmentSupervisor> call = assignmentSupervisorService.createAssignmentSupervisor(assignmentSupervisor);
+
         call.enqueue(new Callback<AssignmentSupervisor>() {
             @Override
             public void onResponse(Call<AssignmentSupervisor> call, Response<AssignmentSupervisor> response) {
-                if (response.isSuccessful()){
-                    isCreateSuccess.setValue(true);
+                if (response.isSuccessful()) {
+                    isCreateSuccess.postValue(true);
+                    Log.i("AssignmentSupervisor", "Create success: " + new Gson().toJson(response.body()));
                 } else {
-                    isCreateSuccess.setValue(false);
+                    isCreateSuccess.postValue(false);
+
+                    String errorMsg = "Unknown error";
                     try {
                         if (response.errorBody() != null) {
-                            Log.e("AssignmentSupervisor", "onFailure: " + response.errorBody().string());
+                            errorMsg = response.errorBody().string();
                         }
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        Log.e("AssignmentSupervisor", "Error reading errorBody", e);
                     }
+
+                    Log.e("AssignmentSupervisor",
+                            "Create failed - Code: " + response.code()
+                                    + " | Message: " + response.message()
+                                    + " | Error: " + errorMsg);
                 }
             }
 
             @Override
             public void onFailure(Call<AssignmentSupervisor> call, Throwable throwable) {
-                isCreateSuccess.setValue(false);
-                Log.e("AssignmentSupervisor", "onFailure: " + throwable.getMessage());
+                isCreateSuccess.postValue(false);
+                Log.e("AssignmentSupervisor", "Request failed: " + throwable.getClass().getSimpleName()
+                        + " | Message: " + throwable.getMessage(), throwable);
             }
         });
     }

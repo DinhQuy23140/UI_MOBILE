@@ -646,6 +646,7 @@
                     app:cardElevation="2dp">
 
                     <LinearLayout
+                        android:id="@+id/layout_dang_ki_do_an"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="#F2F5F6"
@@ -675,7 +676,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:gravity="center"
-                            android:text="Thực tập tốt nghiệp"
+                            android:text="Đăng kí đồ án tốt nghiệp"
                             android:textColor="#333333"
                             android:textSize="12sp"
                             android:textStyle="bold" />

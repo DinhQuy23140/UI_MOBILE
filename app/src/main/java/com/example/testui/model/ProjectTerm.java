@@ -16,15 +16,17 @@ public class ProjectTerm {
     private String description;
     private String start_date;
     private String end_date;
-    private String status;
     private AcademyYear academy_year;
     private List<StageTimeline> stage_timelines;
+    private List<Assignment> assignments;
+    private List<Supervisor> supervisors;
+    private List<Council> councils;
     private int backgroundColor;
 
     public ProjectTerm() {
     }
 
-    public ProjectTerm(AcademyYear academy_year, String academy_year_id, String description, String end_date, String id, String stage, List<StageTimeline> stage_timelines, String start_date, String status) {
+    public ProjectTerm(AcademyYear academy_year, String academy_year_id, String description, String end_date, String id, String stage, List<StageTimeline> stage_timelines, String start_date) {
         this.academy_year = academy_year;
         this.academy_year_id = academy_year_id;
         this.description = description;
@@ -33,7 +35,30 @@ public class ProjectTerm {
         this.stage = stage;
         this.stage_timelines = stage_timelines;
         this.start_date = start_date;
-        this.status = status;
+    }
+
+    public List<Assignment> getAssignments() {
+        return assignments;
+    }
+
+    public void setAssignments(List<Assignment> assignments) {
+        this.assignments = assignments;
+    }
+
+    public List<Council> getCouncils() {
+        return councils;
+    }
+
+    public void setCouncils(List<Council> councils) {
+        this.councils = councils;
+    }
+
+    public List<Supervisor> getSupervisors() {
+        return supervisors;
+    }
+
+    public void setSupervisors(List<Supervisor> supervisors) {
+        this.supervisors = supervisors;
     }
 
     public List<StageTimeline> getStage_timelines() {
@@ -98,14 +123,6 @@ public class ProjectTerm {
 
     public void setStart_date(String start_date) {
         this.start_date = start_date;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     public int getBackgroundColor() {

@@ -6,7 +6,10 @@ public class AssignmentSupervisor {
     String supervisor_id;
     String role;
     String status;
+    String score_report;
+    String comments;
     Supervisor supervisor;
+    Assignment assignment;
 
     public AssignmentSupervisor() {
     }
@@ -25,6 +28,30 @@ public class AssignmentSupervisor {
         this.supervisor_id = supervisor_id;
         this.role = role;
         this.status = status;
+    }
+
+    public Assignment getAssignment() {
+        return assignment;
+    }
+
+    public void setAssignment(Assignment assignment) {
+        this.assignment = assignment;
+    }
+
+    public String getComments() {
+        return comments;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
+    }
+
+    public String getScore_report() {
+        return score_report;
+    }
+
+    public void setScore_report(String score_report) {
+        this.score_report = score_report;
     }
 
     public String getAssignment_id() {

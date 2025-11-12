@@ -25,6 +25,7 @@ public class NopBaoCaoViewModel extends ViewModel {
     AssignmentRepository assignmentRepository;
     SinhVienRepository sinhVienRepository;
     ReportFileRepository reportFileRepository;
+    MutableLiveData<Boolean> isCreateSuccess = new MutableLiveData<>();
 
     public NopBaoCaoViewModel(Context context) {
         this.context = context;
@@ -47,6 +48,10 @@ public class NopBaoCaoViewModel extends ViewModel {
 
     public void uploadReportFile(ReportFile reportFile) {
         reportFileRepository.uploadReportFile(reportFile);
+    }
+
+    public MutableLiveData<Boolean> getIsCreateSuccess() {
+        return reportFileRepository.getIsCreateSuccess();
     }
 
     public MutableLiveData<ReportFile> getReportFileMutableLiveData() {

@@ -9,11 +9,11 @@ public class StageTimelineFormatter {
         }
 
         if (stageTimeline.getDescription() == null) stageTimeline.setDescription("Chưa có mô tả");
-        if (stageTimeline.getStatus() == null) stageTimeline.setStatus("pending");
+//        if (stageTimeline.getStatus() == null) stageTimeline.setStatus("pending");
         if (stageTimeline.getNumber_of_rounds() == null) stageTimeline.setNumber_of_rounds("-");
         if (stageTimeline.getStart_date() == null) stageTimeline.setStart_date("-");
         if (stageTimeline.getEnd_date() == null) stageTimeline.setEnd_date("-");
-        if (stageTimeline.getProject_id() == null) stageTimeline.setProject_id("-");
+//        if (stageTimeline.getProject_id() == null) stageTimeline.setProject_id("-");
         return stageTimeline;
     }
 }

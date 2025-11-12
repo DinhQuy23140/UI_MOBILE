@@ -26,6 +26,7 @@ import com.example.testui.Supabase.UploadManage;
 import com.example.testui.ViewModel.ProgressLogDetailViewModel;
 import com.example.testui.adapter.AttachmentAdapter;
 import com.example.testui.adapter.UploadAttachmentAdapter;
+import com.example.testui.adapter.UploadReportLogAdapter;
 import com.example.testui.databinding.ActivityProgressLogDetailBinding;
 import com.example.testui.databinding.LayoutDialogUploadBinding;
 import com.example.testui.interfaces.OnClickItem;
@@ -63,7 +64,7 @@ public class ProgressLogDetailActivity extends AppCompatActivity {
     ArrayList<UploadFile> listUploadFile;
     Uri fileUri;
     Context context;
-    UploadAttachmentAdapter uploadAttachmentAdapter;
+    UploadReportLogAdapter uploadAttachmentAdapter;
     Assignment assignment;
     String strAssignment = "";
     LayoutDialogUploadBinding dialogUploadBinding;
@@ -146,6 +147,8 @@ public class ProgressLogDetailActivity extends AppCompatActivity {
         } else {
             binding.tvEmptyAttachment.setVisibility(View.VISIBLE);
         }
+
+        adapter.updateData(progressLog.getAttachments());
     }
 
     void createDialog() {
@@ -155,7 +158,7 @@ public class ProgressLogDetailActivity extends AppCompatActivity {
         dialog = builder.create();
         dialog.setCanceledOnTouchOutside(true);
         dialogUploadBinding.rvFileList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        uploadAttachmentAdapter = new UploadAttachmentAdapter(this, new ArrayList<>(), new UploadDocumentClick() {
+        uploadAttachmentAdapter = new UploadReportLogAdapter(this, new ArrayList<>(), new UploadDocumentClick() {
             @Override
             public void onClick(int position) {
 
@@ -171,6 +174,7 @@ public class ProgressLogDetailActivity extends AppCompatActivity {
 
             }
         });
+
         dialogUploadBinding.rvFileList.setAdapter(uploadAttachmentAdapter);
 
         dialogUploadBinding.btnChooseFile.setOnClickListener(choose -> {
@@ -227,8 +231,8 @@ public class ProgressLogDetailActivity extends AppCompatActivity {
             UploadAttachment uploadAttachment = new UploadAttachment(file, attachment);
             uploadAttachmentList.add(uploadAttachment);
             Log.d("UploadFile", gson.toJson(uploadAttachment));
-            uploadAttachmentAdapter.updateData(listUploadFile);
-            Log.d("SizeAdapter", String.valueOf(uploadAttachmentAdapter.getListDocument().size()));
+            uploadAttachmentAdapter.updateData(uploadAttachmentList);
+            Log.d("SizeAdapter", String.valueOf(uploadAttachmentList.size()));
         }
     }
 

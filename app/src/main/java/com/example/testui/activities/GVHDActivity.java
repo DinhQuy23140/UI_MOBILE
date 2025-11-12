@@ -17,13 +17,17 @@ import com.example.testui.R;
 import com.example.testui.ViewModel.GVHDViewModel;
 import com.example.testui.ViewModelFactory.GVHDViewModelFactory;
 import com.example.testui.adapter.AssignmentAdapter;
+import com.example.testui.adapter.ResearchAdapter;
 import com.example.testui.databinding.ActivityGvhdactivityBinding;
 import com.example.testui.interfaces.OnClickItem;
 import com.example.testui.model.Assignment;
+import com.example.testui.model.Research;
 import com.example.testui.model.Supervisor;
 import com.example.testui.model.Teacher;
 import com.example.testui.model.User;
+import com.example.testui.model.UserResearch;
 import com.example.testui.untilities.Constants;
+import com.example.testui.untilities.formatter.ResearchFormatter;
 import com.example.testui.untilities.formatter.SupervisorFormatter;
 import com.example.testui.untilities.formatter.TeacherFormatter;
 import com.example.testui.untilities.formatter.UserFormatter;
@@ -44,6 +48,7 @@ public class GVHDActivity extends AppCompatActivity {
     List<Assignment> listAssignment;
     String teacherId;
     Teacher teacher;
+    ResearchAdapter researchAdapter;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -59,8 +64,8 @@ public class GVHDActivity extends AppCompatActivity {
         });
 
         init();
-        loadData();
         setupRecycler();
+        loadData();
         loadDataRecyclerView();
         setupClick();
     }
@@ -73,18 +78,28 @@ public class GVHDActivity extends AppCompatActivity {
         gvhdViewModel = new ViewModelProvider(this, new GVHDViewModelFactory(this)).get(GVHDViewModel.class);
         teacher = TeacherFormatter.format(supervisor.getTeacher());
         teacherId = teacher.getId();
+        Log.d("Research", gson.toJson(teacher));
     }
 
     @SuppressLint("SetTextI18n")
     void loadData() {
         User user = UserFormatter.format(teacher.getUser());
-        binding.tvGiangVienName.setText(teacher + " " + user.getFullname());
+        binding.tvGiangVienName.setText(teacher.getDegree() + " " + user.getFullname());
         binding.tvHocVi.setText(teacher.getDegree());
         binding.tvChucVu.setText("Chức vụ: " + teacher.getPosition());
         binding.tvEmail.setText("Email: " + user.getEmail());
         binding.tvPhone.setText("Số điện thoại: " + user.getPhone());
 
         binding.tvGiangVienNameMain.setText(teacher.getDegree() + " " + user.getFullname());
+
+        List<UserResearch> listUserReseach = supervisor.getTeacher().getUser().getUser_researches();
+        if (listUserReseach != null && !listUserReseach.isEmpty()) {
+            List<Research> listResearch = new ArrayList<>();
+            for (UserResearch userResearch : listUserReseach) {
+                listResearch.add(ResearchFormatter.format(userResearch.getResearch()));
+            }
+            researchAdapter.updateData(listResearch);
+        }
     }
 
     void setupRecycler() {
@@ -96,6 +111,15 @@ public class GVHDActivity extends AppCompatActivity {
             }
         });
         binding.rvAssignments.setAdapter(assignmentAdapter);
+
+        binding.rvResearch.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        researchAdapter = new ResearchAdapter(this, new ArrayList<>(), new OnClickItem() {
+            @Override
+            public void onClickItem(int position) {
+
+            }
+        });
+        binding.rvResearch.setAdapter(researchAdapter);
     }
 
     @SuppressLint("SetTextI18n")

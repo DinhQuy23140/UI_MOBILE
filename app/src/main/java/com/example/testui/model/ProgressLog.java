@@ -10,16 +10,16 @@ public class ProgressLog {
     private String project_id;                  // ID tiến trình mà log này thuộc về
     private String title;                      // Tiêu đề log
     private String description;                // Mô tả công việc
-
+    private String content;
     private String start_date_time;                // Ngày giờ bắt đầu
     private String end_date_time;                  // Ngày giờ kết thúc
-
     private List<Attachment> attachments;      // Danh sách tệp đính kèm
-
     private String instructor_comment;          // Nhận xét của giảng viên
     private String student_status;    // Trạng thái từ sinh viên
     private String instructor_status; // Trạng thái đánh giá từ giảng viên
     private int backgroundInstructor, backgroundStudent;
+    Project project;
+    private  List<CommentLog> commentLogs;
 
     public ProgressLog() {
     }
@@ -43,6 +43,30 @@ public class ProgressLog {
         this.instructor_comment = instructor_comment;
         this.student_status = student_status;
         this.instructor_status = instructor_status;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public List<CommentLog> getCommentLogs() {
+        return commentLogs;
+    }
+
+    public void setCommentLogs(List<CommentLog> commentLogs) {
+        this.commentLogs = commentLogs;
     }
 
     public List<Attachment> getAttachments() {

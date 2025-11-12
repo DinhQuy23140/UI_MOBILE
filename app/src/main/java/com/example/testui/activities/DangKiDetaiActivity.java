@@ -12,11 +12,14 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.testui.R;
 import com.example.testui.ViewModel.DangKiDeTaiViewModel;
 import com.example.testui.ViewModelFactory.DangKiDeTaiViewModelFactory;
+import com.example.testui.adapter.ProposedTopicAdapter;
 import com.example.testui.databinding.ActivityDangKiDetaiBinding;
+import com.example.testui.interfaces.OnClickItem;
 import com.example.testui.model.AcademyYear;
 import com.example.testui.model.Assignment;
 import com.example.testui.model.Project;
@@ -33,6 +36,7 @@ import com.example.testui.untilities.formatter.StudentFormatter;
 import com.example.testui.untilities.formatter.UserFormatter;
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -44,6 +48,7 @@ public class DangKiDetaiActivity extends AppCompatActivity {
     String strAssignment;
     Intent intent;
     Student student;
+    ProposedTopicAdapter proposedTopicAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +63,7 @@ public class DangKiDetaiActivity extends AppCompatActivity {
         });
 
         init();
+        observerData();
         setupClick();
         loadData();
         message();
@@ -104,6 +110,7 @@ public class DangKiDetaiActivity extends AppCompatActivity {
 //        dangKiDeTaiViewModel.getResponseCreateProject().observe(this, result -> {
 //            dangKiDeTaiViewModel.updateProjectIdAssignmentByAssIdAndProId(assignment.getId(), result.getId());
 //        });
+        dangKiDeTaiViewModel.loadProposedTopicByAssignmentId(assignment.getId());
 
         dangKiDeTaiViewModel.loadStudentByStudentId();
         dangKiDeTaiViewModel.getStudent().observe(this, result -> {
@@ -125,8 +132,25 @@ public class DangKiDetaiActivity extends AppCompatActivity {
                 Toast.makeText(this, "Đăng ký thất bại", Toast.LENGTH_SHORT).show();
             }
         });
+
+        binding.rvProposedTopic.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        proposedTopicAdapter = new ProposedTopicAdapter(this, new ArrayList<>(), new OnClickItem() {
+            @Override
+            public void onClickItem(int position) {
+
+            }
+        });
+        binding.rvProposedTopic.setAdapter(proposedTopicAdapter);
     }
 
     void message() {
+    }
+
+    void observerData() {
+        dangKiDeTaiViewModel.getListProposedTopic().observe(this, result -> {
+            if (result == null) return;
+            proposedTopicAdapter.updateData(result);
+            Log.d("ProposedTopic", new Gson().toJson(result));
+        });
     }
 }

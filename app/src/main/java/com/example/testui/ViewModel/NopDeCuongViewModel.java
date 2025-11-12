@@ -25,6 +25,7 @@ public class NopDeCuongViewModel extends ViewModel {
     AssignmentRepository assignmentRepository;
     SinhVienRepository sinhVienRepository;
     ReportFileRepository reportFileRepository;
+    MutableLiveData<Boolean> isCreateSuccess = new MutableLiveData<>();
     public NopDeCuongViewModel(Context context) {
         this.context = context;
         assignmentRepository = new AssignmentRepository();
@@ -46,6 +47,10 @@ public class NopDeCuongViewModel extends ViewModel {
 
     public void uploadReportFile(ReportFile reportFile) {
         reportFileRepository.uploadReportFile(reportFile);
+    }
+
+    public MutableLiveData<Boolean> getIsCreateSuccess() {
+        return reportFileRepository.getIsCreateSuccess();
     }
 
     public MutableLiveData<ReportFile> getReportFileMutableLiveData() {

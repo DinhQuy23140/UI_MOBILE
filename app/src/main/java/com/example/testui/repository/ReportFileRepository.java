@@ -20,6 +20,7 @@ public class ReportFileRepository {
     private ReportFileService reportFileService;
     private MutableLiveData<ReportFile> reportFileMutableLiveData = new MutableLiveData<>();
     private MutableLiveData<List<ReportFile>> listReportFileByProjectId = new MutableLiveData<>();
+    private MutableLiveData<Boolean> isCreateSuccess = new MutableLiveData<>();
 
     public ReportFileRepository(Context context) {
         this.context = context;
@@ -32,7 +33,7 @@ public class ReportFileRepository {
             @Override
             public void onResponse(Call<ReportFile> call, Response<ReportFile> response) {
                 if (response.isSuccessful()) {
-
+                    isCreateSuccess.setValue(true);
                 }else {
                     try{
                         if (response.errorBody() != null) {
@@ -41,14 +42,20 @@ public class ReportFileRepository {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+                    isCreateSuccess.setValue(false);
                 }
             }
 
             @Override
             public void onFailure(Call<ReportFile> call, Throwable throwable) {
                 Log.e("Error_reportfile", throwable.toString());
+                isCreateSuccess.setValue(false);
             }
         });
+    }
+
+    public MutableLiveData<Boolean> getIsCreateSuccess() {
+        return isCreateSuccess;
     }
 
     public MutableLiveData<ReportFile> getReportFileMutableLiveData() {

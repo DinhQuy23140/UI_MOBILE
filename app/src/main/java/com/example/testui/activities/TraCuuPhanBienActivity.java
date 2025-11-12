@@ -23,6 +23,7 @@ import com.example.testui.model.AssignmentSupervisor;
 import com.example.testui.model.Council;
 import com.example.testui.model.CouncilProject;
 import com.example.testui.model.CouncilsMember;
+import com.example.testui.model.Department;
 import com.example.testui.model.Project;
 import com.example.testui.model.Status;
 import com.example.testui.model.Supervisor;
@@ -34,6 +35,7 @@ import com.example.testui.untilities.formatter.CouncilFormatter;
 import com.example.testui.untilities.formatter.CouncilProjectFormatter;
 import com.example.testui.untilities.formatter.CouncilsMemberFormatter;
 import com.example.testui.untilities.formatter.DateFormatter;
+import com.example.testui.untilities.formatter.DepartmentFormatter;
 import com.example.testui.untilities.formatter.ProjectFormatter;
 import com.example.testui.untilities.formatter.SupervisorFormatter;
 import com.example.testui.untilities.formatter.TeacherFormatter;
@@ -98,17 +100,21 @@ public class TraCuuPhanBienActivity extends AppCompatActivity {
 //        binding.txtReviewScore.setText(assignment.getCouncil_project().getReview_score());
 
         binding.txtReviewScore.setText(councilProject.getReview_score());
-        binding.txtReviewScoreDate.setText(DateFormatter.formatDate(councilProject.getUpdated_at()));
+        binding.txtReviewScoreDate.setText(councilProject.getReview_score() == "-" ? "" : DateFormatter.formatDate(councilProject.getUpdated_at()));
 
         Council council = CouncilFormatter.format(councilProject.getCouncil());
         binding.txtCouncilName.setText(council.getName());
         binding.txtCouncilId.setText(council.getId());
-        binding.txtMajor.setText(council.getDepartment().getName());
+        Department department = DepartmentFormatter.format(council.getDepartment());
+        binding.txtMajor.setText(department.getName());
         binding.txtCouncilDescription.setText(council.getDescription());
 
-        binding.tvMemberCount.setText(council.getCouncil_members().size() + " thành viên");
         List<CouncilsMember> listCouncilMember = council.getCouncil_members();
-        councilsMemberAdapter.updateData(listCouncilMember);
+        int count = listCouncilMember != null ? listCouncilMember.size() : 0;
+        binding.tvMemberCount.setText(count + " thành viên");
+        if (count > 0 ) {
+            councilsMemberAdapter.updateData(listCouncilMember);
+        }
     }
 
     void setupRecyclerView() {

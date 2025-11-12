@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.testui.R;
 import com.example.testui.interfaces.OnClickItem;
 import com.example.testui.model.Assignment;
+import com.example.testui.model.Project;
+import com.example.testui.untilities.formatter.ProjectFormatter;
 
 import java.util.List;
 
@@ -46,7 +48,8 @@ public class AssignmentAdapter extends RecyclerView.Adapter<AssignmentAdapter.As
         holder.tvName.setText(assignment.getStudent().getUser().getFullname());
         holder.tvStudentId.setText(assignment.getStudent().getStudent_code());
         holder.tvProjectTerm.setText("Đợt " + assignment.getProject_term().getStage() + "/" + assignment.getProject_term().getAcademy_year().getYear_name());
-        holder.tvTopic.setText(assignment.getProject().getName());
+        Project project = ProjectFormatter.format(assignment.getProject());
+        holder.tvTopic.setText(project.getName());
         holder.tvScore.setText("9");
     }
 

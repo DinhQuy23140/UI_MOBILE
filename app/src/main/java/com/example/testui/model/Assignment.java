@@ -12,10 +12,9 @@ public class Assignment {
     String project_id;
     String project_term_id;
     String status;
-    String role;
     String counter_argument_id;
     String counter_argument_status;
-    String council_id;
+    String counter_argument_comment;
     Student student;
     List<AssignmentSupervisor> assignment_supervisors;
     Project project;
@@ -26,9 +25,8 @@ public class Assignment {
     public Assignment() {
     }
 
-    public Assignment(List<AssignmentSupervisor> assignment_supervisors, String council_id, String counter_argument_id, String counter_argument_status, String created_at, String id, Project project, String project_id, ProjectTerm project_term, String project_term_id, String role, String status, Student student, String student_id, String updated_at) {
+    public Assignment(List<AssignmentSupervisor> assignment_supervisors, String counter_argument_id, String counter_argument_status, String created_at, String id, Project project, String project_id, ProjectTerm project_term, String project_term_id, String status, Student student, String student_id, String updated_at) {
         this.assignment_supervisors = assignment_supervisors;
-        this.council_id = council_id;
         this.counter_argument_id = counter_argument_id;
         this.counter_argument_status = counter_argument_status;
         this.created_at = created_at;
@@ -37,11 +35,18 @@ public class Assignment {
         this.project_id = project_id;
         this.project_term = project_term;
         this.project_term_id = project_term_id;
-        this.role = role;
         this.status = status;
         this.student = student;
         this.student_id = student_id;
         this.updated_at = updated_at;
+    }
+
+    public String getCounter_argument_comment() {
+        return counter_argument_comment;
+    }
+
+    public void setCounter_argument_comment(String counter_argument_comment) {
+        this.counter_argument_comment = counter_argument_comment;
     }
 
     public CouncilProject getCouncil_project() {
@@ -66,14 +71,6 @@ public class Assignment {
 
     public void setUpdated_at(String updated_at) {
         this.updated_at = updated_at;
-    }
-
-    public String getCouncil_id() {
-        return council_id;
-    }
-
-    public void setCouncil_id(String council_id) {
-        this.council_id = council_id;
     }
 
     public String getCounter_argument_id() {
@@ -138,14 +135,6 @@ public class Assignment {
 
     public void setProject_term_id(String project_term_id) {
         this.project_term_id = project_term_id;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
     }
 
     public String getStatus() {

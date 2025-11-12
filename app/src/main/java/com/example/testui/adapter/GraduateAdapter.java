@@ -42,7 +42,7 @@ public class GraduateAdapter extends RecyclerView.Adapter<GraduateAdapter.Gradua
         holder.tvTgKetThuc.setText(projectTerm.getEnd_date());
         holder.tvNamHoc.setText(projectTerm.getAcademy_year().getYear_name());
         holder.tvMoTa.setText(projectTerm.getDescription());
-        holder.tvTrangThai.setText(projectTerm.getStatus());
+//        holder.tvTrangThai.setText(projectTerm.getStatus());
         holder.itemView.setOnClickListener(click -> {
             onClickItem.onClickItem(position);
         });

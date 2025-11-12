@@ -8,7 +8,9 @@ public class Student {
     private String major_id;
     private String course_year;
     private User user;
+    private int graduation_project;
     private Marjor marjor;
+    private Assignment assignment;
 
     public Student() {
     }
@@ -22,6 +24,22 @@ public class Student {
         this.student_code = student_code;
         this.user = user;
         this.user_id = user_id;
+    }
+
+    public Assignment getAssignment() {
+        return assignment;
+    }
+
+    public void setAssignment(Assignment assignment) {
+        this.assignment = assignment;
+    }
+
+    public int isGraduation_project() {
+        return graduation_project;
+    }
+
+    public void setGraduation_project(int graduation_project) {
+        this.graduation_project = graduation_project;
     }
 
     public String getClass_code() {
