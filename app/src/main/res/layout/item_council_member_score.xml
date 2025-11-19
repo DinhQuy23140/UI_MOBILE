@@ -162,7 +162,7 @@
                         android:layout_height="wrap_content"
                         android:ellipsize="end"
                         android:maxLines="1"
-                        android:text="Bài làm tốt, có tính ứng dụng cao"
+                        android:text="-"
                         android:textColor="#666666"
                         android:textSize="12sp" />
                 </LinearLayout>

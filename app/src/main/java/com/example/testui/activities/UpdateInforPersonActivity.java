@@ -1,7 +1,6 @@
 package com.example.testui.activities;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -22,7 +21,6 @@ import com.example.testui.model.Faculties;
 import com.example.testui.model.Marjor;
 import com.example.testui.model.Student;
 import com.example.testui.model.User;
-import com.example.testui.untilities.Constants;
 import com.example.testui.untilities.formatter.DepartmentFormatter;
 import com.example.testui.untilities.formatter.FacultiesFormatter;
 import com.example.testui.untilities.formatter.MarjorFormatter;
@@ -30,7 +28,7 @@ import com.example.testui.untilities.formatter.StudentFormatter;
 import com.example.testui.untilities.formatter.UserFormatter;
 import com.google.gson.Gson;
 
-public class CapNhapThongTinActivity extends AppCompatActivity {
+public class UpdateInforPersonActivity extends AppCompatActivity {
 
     HomeViewModel homeViewModel;
     ActivityCapNhapThongTinBinding binding;

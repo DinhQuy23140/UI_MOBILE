@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -36,7 +34,7 @@ import com.google.gson.Gson;
 
 import java.util.List;
 
-public class DangKiGVHDActivity extends AppCompatActivity {
+public class RegisterSupervisorActivity extends AppCompatActivity {
     ActivityDangKiGvhdactivityBinding binding;
     SupervisorAutoAdapter supervisorAutoAdapter;
     List<Supervisor> supervisors;

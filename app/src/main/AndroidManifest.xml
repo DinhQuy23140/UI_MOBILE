@@ -16,6 +16,12 @@
         android:theme="@style/Theme.TestUI"
         tools:targetApi="31">
         <activity
+            android:name=".activities.TraCuuPhanBienActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.RegisterProjectTermDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.CancelProjectTermActivity"
             android:exported="false" />
         <activity
@@ -34,10 +40,10 @@
             android:name=".activities.RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.DangKiDetaiActivity"
+            android:name=".activities.RegisterTopicActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.DangKiGVHDActivity"
+            android:name=".activities.RegisterSupervisorActivity"
             android:exported="false" />
         <activity
             android:name=".activities.DanhSachDotDoAnActivity"
@@ -83,10 +89,10 @@
             android:name=".activities.HoanDoAnActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.GVHDActivity"
+            android:name=".activities.SupervisorActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.TraCuuPhanBienActivity"
+            android:name=".activities.TraCuuKetQuaPhanBienActivity"
             android:exported="false" />
         <activity
             android:name=".activities.ThongTinBaoCaoActivity"
@@ -104,7 +110,7 @@
             android:name=".activities.DangKiDoAnActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.CapNhapThongTinActivity"
+            android:name=".activities.UpdateInforPersonActivity"
             android:exported="false" />
         <activity
             android:name=".activities.ProgressLogDetailActivity"

@@ -18,8 +18,7 @@ import android.view.ViewGroup;
 
 import com.example.testui.ViewModel.GVHDViewModel;
 import com.example.testui.ViewModelFactory.GVHDViewModelFactory;
-import com.example.testui.activities.GVHDActivity;
-import com.example.testui.interfaces.OnClickItem;
+import com.example.testui.activities.SupervisorActivity;
 import com.example.testui.adapter.GVHDAdapter;
 import com.example.testui.databinding.FragmentGiangVienHuongDanBinding;
 import com.example.testui.model.Supervisor;
@@ -96,7 +95,7 @@ public class GiangVienHuongDanFragment extends Fragment {
             binding.tvCountSupervisor.setText(String.valueOf(listSupervisor.size()));
             Log.d("Supervisor", result.size() + "");
             GVHDAdapter gvhdAdapter = new GVHDAdapter(requireContext(), listSupervisor, position -> {
-                Intent intent = new Intent(getContext(), GVHDActivity.class);
+                Intent intent = new Intent(getContext(), SupervisorActivity.class);
                 Gson gson = new Gson();
                 Supervisor supervisor = listSupervisor.get(position);
                 String strGVHD = gson.toJson(supervisor);

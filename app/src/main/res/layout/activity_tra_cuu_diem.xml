@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:letterSpacing="0.02"
-                android:text="Tra cứu điểm"
+                android:text="Tra cứu điểm tổng hợp"
                 android:textColor="@android:color/white"
                 android:textSize="22sp"
                 android:textStyle="bold"
@@ -62,7 +62,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <!-- Thông tin đề tài -->
@@ -170,23 +170,19 @@
                                 app:tint="#667EEA" />
 
                             <TextView
-                                android:layout_width="0dp"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
                                 android:text="Giảng viên hướng dẫn"
                                 android:textColor="#666666"
                                 android:textSize="12sp" />
 
-                            <TextView
-                                android:id="@+id/tvAdvisor"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="2"
-                                android:gravity="end"
-                                android:text="ThS. Trần Thị B"
-                                android:textColor="#1A1A1A"
-                                android:textSize="12sp"
-                                android:textStyle="bold" />
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/rv_supevisor"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="10dp"
+                                android:layout_weight="1" />
+
                         </LinearLayout>
 
                         <!-- Mô tả đề tài -->
@@ -238,8 +234,9 @@
             <!-- Điểm thành phần -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginBottom="16dp"
+                android:layout_weight="1"
                 app:cardBackgroundColor="@android:color/transparent"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="2dp">
@@ -276,225 +273,320 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="12dp"
                             android:layout_weight="1"
-                            android:text="Điểm thành phần"
+                            android:text="Điểm GVHD và phản biện"
                             android:textColor="#1A1A1A"
                             android:textSize="18sp"
                             android:textStyle="bold" />
                     </LinearLayout>
 
                     <!-- Giảng viên phản biện -->
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="16dp"
-                        app:cardCornerRadius="12dp"
-                        app:cardElevation="1dp"
-                        app:strokeColor="#FFE4D1"
-                        app:strokeWidth="1dp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal"
-                            android:padding="16dp">
-
-                            <ImageView
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                android:layout_marginEnd="12dp"
-                                android:src="@drawable/ic_teacher"
-                                app:tint="#FF6B35" />
-
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:id="@+id/tv_pb_name"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="Nguyễn Văn A"
-                                    android:textColor="#1A1A1A"
-                                    android:textSize="16sp"
-                                    android:textStyle="bold" />
-
-                                <TextView
-                                    android:id="@+id/tv_pb_role"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="Chủ tịch hội đồng"
-                                    android:textColor="#666666"
-                                    android:textSize="12sp" />
-                            </LinearLayout>
-
-                            <com.google.android.material.button.MaterialButton
-                                android:id="@+id/btn_teacher_detail"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:backgroundTint="#FF6B35"
-                                android:text="Xem chi tiết"
-                                android:textColor="@android:color/white"
-                                android:textSize="10sp"
-                                app:cornerRadius="8dp"
-                                app:icon="@drawable/ic_visibility"
-                                app:iconSize="14dp" />
-                        </LinearLayout>
-                    </com.google.android.material.card.MaterialCardView>
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@drawable/bg_info_light_orange"
                         android:orientation="vertical"
                         android:padding="16dp">
 
                         <!-- Điểm GV hướng dẫn -->
-                        <LinearLayout
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_score_supervisor"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="16dp"
-                            android:background="@drawable/bg_edittext"
-                            android:orientation="vertical"
-                            android:padding="12dp">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="8dp"
-                                android:gravity="center_vertical"
-                                android:orientation="horizontal">
-
-                                <ImageView
-                                    android:layout_width="20dp"
-                                    android:layout_height="20dp"
-                                    android:layout_marginEnd="12dp"
-                                    android:src="@drawable/ic_person"
-                                    app:tint="#FF6B35" />
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:text="Điểm GV hướng dẫn"
-                                    android:textColor="#666666"
-                                    android:textSize="12sp" />
-
-                                <TextView
-                                    android:id="@+id/txtAdvisorScore"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="8.5"
-                                    android:textColor="#FF6B35"
-                                    android:textSize="16sp"
-                                    android:textStyle="bold" />
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center_vertical"
-                                android:orientation="horizontal">
-
-                                <ImageView
-                                    android:layout_width="16dp"
-                                    android:layout_height="16dp"
-                                    android:layout_marginEnd="8dp"
-                                    android:src="@drawable/ic_date_range"
-                                    app:tint="#999999" />
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:text="Ngày chấm"
-                                    android:textColor="#999999"
-                                    android:textSize="10sp" />
-
-                                <TextView
-                                    android:id="@+id/txtAdvisorScoreDate"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="15/08/2025"
-                                    android:textColor="#999999"
-                                    android:textSize="10sp"
-                                    android:textStyle="bold" />
-                            </LinearLayout>
-                        </LinearLayout>
+                            android:layout_height="match_parent"
+                            tools:itemCount="2"
+                            tools:listitem="@layout/item_score_supervisor" />
 
                         <!-- Điểm phản biện -->
-                        <LinearLayout
+                        <com.google.android.material.card.MaterialCardView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/bg_edittext"
-                            android:orientation="vertical"
-                            android:padding="12dp">
+                            android:layout_marginBottom="12dp"
+                            app:cardBackgroundColor="#FFFFFF"
+                            app:cardCornerRadius="16dp"
+                            app:cardElevation="2dp"
+                            app:strokeColor="#FFF3E0"
+                            app:strokeWidth="1dp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginBottom="8dp"
-                                android:gravity="center_vertical"
-                                android:orientation="horizontal">
+                                android:orientation="vertical"
+                                android:padding="16dp">
 
-                                <ImageView
-                                    android:layout_width="20dp"
-                                    android:layout_height="20dp"
-                                    android:layout_marginEnd="12dp"
-                                    android:src="@drawable/ic_person"
-                                    app:tint="#FF6B35" />
-
-                                <TextView
-                                    android:layout_width="0dp"
+                                <!-- Header với thông tin giảng viên -->
+                                <LinearLayout
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:text="Điểm phản biện"
-                                    android:textColor="#666666"
-                                    android:textSize="12sp" />
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal"
+                                    android:layout_marginBottom="12dp">
 
-                                <TextView
-                                    android:id="@+id/txtReviewScore"
-                                    android:layout_width="wrap_content"
+                                    <!-- Avatar giảng viên -->
+                                    <com.google.android.material.card.MaterialCardView
+                                        android:layout_width="40dp"
+                                        android:layout_height="40dp"
+                                        android:layout_marginEnd="12dp"
+                                        app:cardBackgroundColor="#FFF3E0"
+                                        app:cardCornerRadius="20dp"
+                                        app:cardElevation="0dp">
+
+                                        <ImageView
+                                            android:layout_width="20dp"
+                                            android:layout_height="20dp"
+                                            android:layout_gravity="center"
+                                            android:src="@drawable/ic_teacher"
+                                            app:tint="#FF6B35" />
+
+                                    </com.google.android.material.card.MaterialCardView>
+
+                                    <!-- Thông tin giảng viên -->
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:id="@+id/txtAdvisorName"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:text="TS. Nguyễn Văn A"
+                                            android:textColor="#333333"
+                                            android:textSize="14sp"
+                                            android:textStyle="bold"
+                                            android:maxLines="1"
+                                            android:ellipsize="end" />
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:text="Giảng viên phản biện"
+                                            android:textColor="#666666"
+                                            android:textSize="11sp"
+                                            android:layout_marginTop="2dp" />
+
+                                    </LinearLayout>
+
+                                    <!-- Badge điểm số -->
+                                    <com.google.android.material.card.MaterialCardView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        app:cardBackgroundColor="#FF6B35"
+                                        app:cardCornerRadius="12dp"
+                                        app:cardElevation="2dp">
+
+                                        <LinearLayout
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:gravity="center|center_vertical"
+                                            android:orientation="horizontal"
+                                            android:paddingHorizontal="12dp"
+                                            android:paddingVertical="6dp">
+
+                                            <TextView
+                                                android:id="@+id/txtAdvisorScore"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:text="8.5"
+                                                android:textColor="#FFFFFF"
+                                                android:textSize="14sp"
+                                                android:textStyle="bold" />
+
+                                        </LinearLayout>
+
+                                    </com.google.android.material.card.MaterialCardView>
+
+                                </LinearLayout>
+
+                                <!-- Thông tin chi tiết điểm -->
+                                <LinearLayout
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="8.0"
-                                    android:textColor="#FF6B35"
-                                    android:textSize="16sp"
-                                    android:textStyle="bold" />
+                                    android:orientation="horizontal"
+                                    android:gravity="center_vertical"
+                                    android:layout_marginBottom="8dp">
+
+                                    <!-- Ngày chấm -->
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:orientation="horizontal"
+                                        android:gravity="center_vertical">
+
+                                        <ImageView
+                                            android:layout_width="14dp"
+                                            android:layout_height="14dp"
+                                            android:layout_marginEnd="6dp"
+                                            android:src="@drawable/ic_calendar_start"
+                                            app:tint="#999999" />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Ngày chấm:"
+                                            android:textColor="#666666"
+                                            android:textSize="11sp" />
+
+                                        <TextView
+                                            android:id="@+id/txtAdvisorScoreDate"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginStart="4dp"
+                                            android:text="15/08/2024"
+                                            android:textColor="#333333"
+                                            android:textSize="11sp"
+                                            android:textStyle="bold" />
+
+                                    </LinearLayout>
+
+                                    <!-- Trạng thái -->
+
+                                </LinearLayout>
+
+                                <!-- Nhận xét (nếu có) -->
+                                <LinearLayout
+                                    android:id="@+id/llComment"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="#F8F9FA"
+                                    android:orientation="vertical"
+                                    android:padding="12dp"
+                                    android:visibility="visible">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="4dp"
+                                        android:gravity="center_vertical"
+                                        android:orientation="horizontal">
+
+                                        <ImageView
+                                            android:layout_width="12dp"
+                                            android:layout_height="12dp"
+                                            android:layout_marginEnd="6dp"
+                                            android:src="@drawable/ic_comment"
+                                            app:tint="#666666" />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Nhận xét"
+                                            android:textColor="#666666"
+                                            android:textSize="10sp"
+                                            android:textStyle="bold" />
+
+                                    </LinearLayout>
+
+                                    <TextView
+                                        android:id="@+id/txtAdvisorComment"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:lineSpacingExtra="2dp"
+                                        android:text="Sinh viên có sự tiến bộ tốt, báo cáo chi tiết và đầy đủ."
+                                        android:textColor="#333333"
+                                        android:textSize="11sp" />
+
+                                </LinearLayout>
+
+                                <!-- Chi tiết điểm thành phần (nếu có) -->
+                                <LinearLayout
+                                    android:id="@+id/llScoreDetails"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:visibility="gone">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="6dp"
+                                        android:text="Chi tiết điểm:"
+                                        android:textColor="#666666"
+                                        android:textSize="10sp"
+                                        android:textStyle="bold" />
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="4dp"
+                                        android:orientation="horizontal">
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1"
+                                            android:text="• Nội dung"
+                                            android:textColor="#666666"
+                                            android:textSize="10sp" />
+
+                                        <TextView
+                                            android:id="@+id/txtContentScore"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="3.0/3.0"
+                                            android:textColor="#4CAF50"
+                                            android:textSize="10sp"
+                                            android:textStyle="bold" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="4dp"
+                                        android:orientation="horizontal">
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1"
+                                            android:text="• Hình thức"
+                                            android:textColor="#666666"
+                                            android:textSize="10sp" />
+
+                                        <TextView
+                                            android:id="@+id/txtFormatScore"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="2.5/3.0"
+                                            android:textColor="#FF9800"
+                                            android:textSize="10sp"
+                                            android:textStyle="bold" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1"
+                                            android:text="• Báo cáo"
+                                            android:textColor="#666666"
+                                            android:textSize="10sp" />
+
+                                        <TextView
+                                            android:id="@+id/txtReportScore"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="3.0/3.0"
+                                            android:textColor="#4CAF50"
+                                            android:textSize="10sp"
+                                            android:textStyle="bold" />
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                                <!-- Nút xem chi tiết (nếu có nhiều thông tin) -->
+
                             </LinearLayout>
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center_vertical"
-                                android:orientation="horizontal">
-
-                                <ImageView
-                                    android:layout_width="16dp"
-                                    android:layout_height="16dp"
-                                    android:layout_marginEnd="8dp"
-                                    android:src="@drawable/ic_date_range"
-                                    app:tint="#999999" />
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:text="Ngày chấm"
-                                    android:textColor="#999999"
-                                    android:textSize="10sp" />
-
-                                <TextView
-                                    android:id="@+id/txtReviewScoreDate"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="20/08/2025"
-                                    android:textColor="#999999"
-                                    android:textSize="10sp"
-                                    android:textStyle="bold" />
-                            </LinearLayout>
-                        </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
 
                     </LinearLayout>
 
@@ -542,7 +634,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="12dp"
                             android:layout_weight="1"
-                            android:text="Thành viên hội đồng"
+                            android:text="Điểm bảo vệ đồ án"
                             android:textColor="#1A1A1A"
                             android:textSize="18sp"
                             android:textStyle="bold" />
@@ -565,7 +657,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         tools:itemCount="1"
-                        tools:listitem="@layout/item_gvhd" />
+                        tools:listitem="@layout/item_council_member_score" />
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>

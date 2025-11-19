@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -21,18 +22,25 @@ import com.example.testui.ViewModel.TimeLineViewModel;
 import com.example.testui.ViewModelFactory.TimeLineViewModelFactory;
 import com.example.testui.adapter.BaseGVHDAdapter;
 import com.example.testui.databinding.ActivityTimeLineBinding;
+import com.example.testui.databinding.DialogPostponeConfirmationBinding;
+import com.example.testui.model.AcademyYear;
 import com.example.testui.model.Assignment;
 import com.example.testui.model.Project;
 import com.example.testui.model.ProjectTerm;
 import com.example.testui.model.StageTimeline;
 import com.example.testui.model.Status;
+import com.example.testui.model.Student;
 import com.example.testui.model.Supervisor;
+import com.example.testui.model.User;
 import com.example.testui.untilities.Constants;
+import com.example.testui.untilities.formatter.AcademyYearFormatter;
 import com.example.testui.untilities.formatter.AssignmentFormatter;
 import com.example.testui.untilities.formatter.DateFormatter;
 import com.example.testui.untilities.formatter.ProjectFormatter;
 import com.example.testui.untilities.formatter.ProjectTermFormatter;
 import com.example.testui.untilities.formatter.StageTimelineFormatter;
+import com.example.testui.untilities.formatter.StudentFormatter;
+import com.example.testui.untilities.formatter.UserFormatter;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -40,6 +48,9 @@ import java.util.List;
 
 public class TimeLineActivity extends AppCompatActivity {
     ActivityTimeLineBinding binding;
+    AlertDialog.Builder alertDialog;
+    AlertDialog confirmDialog;
+    DialogPostponeConfirmationBinding dialogPostponeConfirmationBinding;
     String strProjectTerm = "";
     Intent intent;
     TimeLineViewModel timeLineViewModel;
@@ -66,6 +77,7 @@ public class TimeLineActivity extends AppCompatActivity {
         setUpRecyclerView();
         loadProjectTerm();
         loadAssignment();
+        createDialogPostpone();
         setupClick();
     }
 
@@ -102,7 +114,7 @@ public class TimeLineActivity extends AppCompatActivity {
     void setUpRecyclerView() {
         binding.rvSupervisor.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         baseGVHDAdapter = new BaseGVHDAdapter(this, new ArrayList<>(), position -> {
-            Intent intent1 = new Intent(TimeLineActivity.this, GVHDActivity.class);
+            Intent intent1 = new Intent(TimeLineActivity.this, SupervisorActivity.class);
             intent1.putExtra(Constants.KEY_SUPERVISOR, new Gson().toJson(listSupervisor.get(position)));
             startActivity(intent1);
         });
@@ -235,7 +247,7 @@ public class TimeLineActivity extends AppCompatActivity {
 
         binding.timelinePhanBien.setOnClickListener(timeline6 -> {
             if (project.getId() != null) {
-                Intent intent = new Intent(this, TraCuuHoiDongActivity.class);
+                Intent intent = new Intent(this, TraCuuPhanBienActivity.class);
                 intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
                 intent.putExtra(Constants.KEY_ASSIGNMENT, gson.toJson(assignment));
                 startActivity(intent);
@@ -246,7 +258,7 @@ public class TimeLineActivity extends AppCompatActivity {
 
         binding.timelineTraCuuPhanBien.setOnClickListener(timeline7 -> {
             if (project.getId() != null) {
-                Intent intent = new Intent(this, TraCuuPhanBienActivity.class);
+                Intent intent = new Intent(this, TraCuuKetQuaPhanBienActivity.class);
                 intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
                 intent.putExtra(Constants.KEY_ASSIGNMENT, gson.toJson(assignment));
                 startActivity(intent);
@@ -272,5 +284,50 @@ public class TimeLineActivity extends AppCompatActivity {
             intent.putExtra(Constants.KEY_ASSIGNMENT, gson.toJson(assignment));
             startActivity(intent);
         });
+
+
+        binding.btnPostpone.setOnClickListener(v -> {
+            confirmDialog.show();
+            loadDataDialogPostpone();
+            if (confirmDialog.getWindow() != null) {
+                confirmDialog.getWindow().setLayout(
+                        (int) (getResources().getDisplayMetrics().widthPixels * 0.95),
+                        (int) (getResources().getDisplayMetrics().heightPixels * 0.9)
+                );
+                confirmDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+            }
+        });
+
+        dialogPostponeConfirmationBinding.btnCancel.setOnClickListener(v -> confirmDialog.dismiss());
+
+        dialogPostponeConfirmationBinding.btnConfirm.setOnClickListener(v -> {
+            confirmDialog.dismiss();
+        });
+
+        binding.btnAllResult.setOnClickListener(v -> {
+            Intent intent = new Intent(this, TraCuuDiemActivity.class);
+            intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
+            intent.putExtra(Constants.KEY_ASSIGNMENT, gson.toJson(assignment));
+            startActivity(intent);
+        });
+    }
+
+    void createDialogPostpone() {
+        alertDialog = new AlertDialog.Builder(this, R.style.FullScreenDialogTheme);
+        dialogPostponeConfirmationBinding = DialogPostponeConfirmationBinding.inflate(getLayoutInflater());
+        alertDialog.setView(dialogPostponeConfirmationBinding.getRoot());
+        confirmDialog = alertDialog.create();
+        confirmDialog.setCanceledOnTouchOutside(true);
+    }
+
+    void loadDataDialogPostpone(){
+        ProjectTerm projectTerm = ProjectTermFormatter.format(assignment.getProject_term());
+        AcademyYear academyYear = AcademyYearFormatter.format(projectTerm.getAcademy_year());
+        Student student = StudentFormatter.format(assignment.getStudent());
+        User user = UserFormatter.format(student.getUser());
+        dialogPostponeConfirmationBinding.tvProjectPeriod.setText(DateFormatter.formatDate(projectTerm.getStart_date()) + " - " + DateFormatter.formatDate(projectTerm.getEnd_date()));
+        dialogPostponeConfirmationBinding.tvProjectName.setText("Đợt " + projectTerm.getStage() + " - Năm học " + academyYear.getYear_name());
+        dialogPostponeConfirmationBinding.tvStudentName.setText(user.getFullname());
+        dialogPostponeConfirmationBinding.tvStudentId.setText(student.getStudent_code());
     }
 }

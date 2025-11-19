@@ -3,7 +3,7 @@ package com.example.testui.model;
 import java.util.List;
 
 public class CouncilProject {
-    String id, council_id, assignment_id, council_member_id, room, date, time, review_score, created_at, updated_at;
+    String id, council_id, assignment_id, council_member_id, room, date, time, review_score, comments, created_at, updated_at;
     Council council;
     Assignment assignment;
     CouncilsMember council_member;
@@ -15,6 +15,14 @@ public class CouncilProject {
 
     public void setCouncil_project_defences(List<CouncilProjectDefence> council_project_defences) {
         this.council_project_defences = council_project_defences;
+    }
+
+    public String getComments() {
+        return comments;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
     }
 
     public Assignment getAssignment() {

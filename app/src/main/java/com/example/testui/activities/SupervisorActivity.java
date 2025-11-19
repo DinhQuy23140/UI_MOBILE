@@ -36,7 +36,7 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GVHDActivity extends AppCompatActivity {
+public class SupervisorActivity extends AppCompatActivity {
 
     ActivityGvhdactivityBinding binding;
     Intent intent;

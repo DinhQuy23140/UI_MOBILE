@@ -142,7 +142,7 @@ public class ChiTietDoAnActivity extends AppCompatActivity {
         gvhdAdapter = new GVHDAdapter(this, new ArrayList<>(), new OnClickItem() {
             @Override
             public void onClickItem(int position) {
-                Intent intent = new Intent(ChiTietDoAnActivity.this, GVHDActivity.class);
+                Intent intent = new Intent(ChiTietDoAnActivity.this, SupervisorActivity.class);
                 intent.putExtra(Constants.KEY_SUPERVISOR, new Gson().toJson(assignment.getAssignment_supervisors().get(position).getSupervisor()));
                 startActivity(intent);
             }

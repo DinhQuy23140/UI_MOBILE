@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -19,6 +20,8 @@ import com.example.testui.adapter.BaseGVHDAdapter;
 import com.example.testui.adapter.CouncilMemberScoreAdapter;
 import com.example.testui.adapter.CouncilsMemberAdapter;
 import com.example.testui.databinding.ActivityTraCuuBaoVeBinding;
+import com.example.testui.databinding.AddItemLogBinding;
+import com.example.testui.databinding.DialogNopBaoCaoBinding;
 import com.example.testui.interfaces.OnClickItem;
 import com.example.testui.model.Assignment;
 import com.example.testui.model.Council;
@@ -43,9 +46,12 @@ import java.util.List;
 public class TraCuuBaoVeActivity extends AppCompatActivity {
     ActivityTraCuuBaoVeBinding binding;
     Gson gson;
+    AlertDialog dialog;
+    AlertDialog.Builder builder;
     Assignment assignment;
     String strAssignment;
     Intent intent;
+    DialogNopBaoCaoBinding dialogNopBaoCaoBinding;
     CouncilMemberScoreAdapter councilMemberScoreAdapter;
     CouncilsMemberAdapter councilsMemberAdapter;
     BaseGVHDAdapter baseGVHDAdapter;
@@ -63,8 +69,10 @@ public class TraCuuBaoVeActivity extends AppCompatActivity {
         });
 
         init();
+        createDialog();
         setupRecyclerView();
         loadData();
+        setupClick();
     }
 
     void init() {
@@ -145,5 +153,34 @@ public class TraCuuBaoVeActivity extends AppCompatActivity {
         } else {
             councilsMemberAdapter.updateData(listCouncilMember);
         }
+    }
+
+    void createDialog() {
+        builder = new AlertDialog.Builder(TraCuuBaoVeActivity.this, R.style.FullScreenDialogTheme);
+        dialogNopBaoCaoBinding = DialogNopBaoCaoBinding.inflate(getLayoutInflater());
+        builder.setView(dialogNopBaoCaoBinding.getRoot());
+        dialog = builder.create();
+        dialog.setCanceledOnTouchOutside(true);
+    }
+
+    void setupClick() {
+        binding.btnSubmitReportCard.setOnClickListener(v -> {
+            dialog.show();
+            if (dialog.getWindow() != null) {
+                dialog.getWindow().setLayout(
+                        (int) (getResources().getDisplayMetrics().widthPixels * 0.95),
+                        (int) (getResources().getDisplayMetrics().heightPixels * 0.9)
+                );
+                dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+            }
+        });
+
+        dialogNopBaoCaoBinding.btnSubmit.setOnClickListener(v -> {
+            dialog.dismiss();
+        });
+
+        dialogNopBaoCaoBinding.btnCancel.setOnClickListener(v -> {
+            dialog.dismiss();
+        });
     }
 }

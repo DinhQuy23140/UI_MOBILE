@@ -22,6 +22,10 @@ public class ProjectTerm {
     private List<Supervisor> supervisors;
     private List<Council> councils;
     private int backgroundColor;
+    private String created_at;
+    private String updated_at;
+    private Boolean isRegistered;
+    private String registeredStatus;
 
     public ProjectTerm() {
     }
@@ -35,6 +39,38 @@ public class ProjectTerm {
         this.stage = stage;
         this.stage_timelines = stage_timelines;
         this.start_date = start_date;
+    }
+
+    public Boolean getRegistered() {
+        return isRegistered;
+    }
+
+    public void setRegistered(Boolean registered) {
+        isRegistered = registered;
+    }
+
+    public String getRegisteredStatus() {
+        return registeredStatus;
+    }
+
+    public void setRegisteredStatus(String registeredStatus) {
+        this.registeredStatus = registeredStatus;
+    }
+
+    public String getCreated_at() {
+        return created_at;
+    }
+
+    public void setCreated_at(String created_at) {
+        this.created_at = created_at;
+    }
+
+    public String getUpdated_at() {
+        return updated_at;
+    }
+
+    public void setUpdated_at(String updated_at) {
+        this.updated_at = updated_at;
     }
 
     public List<Assignment> getAssignments() {

@@ -154,7 +154,7 @@
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/layout_dot_do_an"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:visibility="gone"
             app:cardBackgroundColor="#FFFFFF"
             app:cardCornerRadius="16dp"
@@ -163,25 +163,25 @@
             <!-- FrameLayout để chứa cả RecyclerView và empty state -->
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
                 <!-- RecyclerView -->
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rcvDotDoAn"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:clipToPadding="false"
                     android:padding="8dp"
                     android:scrollbars="vertical"
                     android:visibility="gone"
                     tools:itemCount="1"
-                    tools:listitem="@layout/item_dot_do_an" />
+                    tools:listitem="@layout/item_register_project_term" />
 
                 <!-- Empty state view - hiển thị khi không có dữ liệu -->
                 <LinearLayout
                     android:id="@+id/emptyStateView"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:gravity="center"
                     android:orientation="vertical"
                     android:padding="40dp"
@@ -238,7 +238,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="100dp"
-            android:visibility="visible" />
+            android:visibility="gone" />
 
     </LinearLayout>
 
