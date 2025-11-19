@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AlertDialogLayout;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -27,7 +28,9 @@ import com.example.testui.ViewModel.ProgressLogDetailViewModel;
 import com.example.testui.adapter.AttachmentAdapter;
 import com.example.testui.adapter.UploadAttachmentAdapter;
 import com.example.testui.adapter.UploadReportLogAdapter;
+import com.example.testui.adapter.WorkLogAdapter;
 import com.example.testui.databinding.ActivityProgressLogDetailBinding;
+import com.example.testui.databinding.AddItemLogBinding;
 import com.example.testui.databinding.LayoutDialogUploadBinding;
 import com.example.testui.interfaces.OnClickItem;
 import com.example.testui.interfaces.UploadDocumentClick;
@@ -47,6 +50,7 @@ import com.google.gson.Gson;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ProgressLogDetailActivity extends AppCompatActivity {
@@ -56,8 +60,8 @@ public class ProgressLogDetailActivity extends AppCompatActivity {
     String progressLogJson = "";
     ProgressLog progressLog;
     Gson gson;
-    AlertDialog dialog;
-    AlertDialog.Builder builder;
+    AlertDialog dialog, dialogEdit;
+    AlertDialog.Builder builder, alertBuilder;
     ProgressLogDetailViewModel progressLogDetailViewModel;
     private static final int PICK_FILE_REQUEST = 1;
     private static final int PERMISSION_REQUEST_CODE = 100;
@@ -70,6 +74,9 @@ public class ProgressLogDetailActivity extends AppCompatActivity {
     LayoutDialogUploadBinding dialogUploadBinding;
     UploadManage uploadManage;
     List<UploadAttachment> uploadAttachmentList = new ArrayList<>();
+    List<String> listWork = new ArrayList<>();
+    WorkLogAdapter workLogAdapter;
+    AddItemLogBinding addItemLogBinding;
 
     @SuppressLint({"SetTextI18n", "UseCompatLoadingForDrawables"})
     @Override
@@ -85,6 +92,7 @@ public class ProgressLogDetailActivity extends AppCompatActivity {
         });
 
         init();
+        createDialogEdit();
         setupClick();
         setupRecyclerView();
         loadData();
@@ -112,6 +120,10 @@ public class ProgressLogDetailActivity extends AppCompatActivity {
             }
         });
         binding.rvAttachments.setAdapter(adapter);
+
+        binding.rvWeeklyTasks.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        workLogAdapter = new WorkLogAdapter(this, new ArrayList<>());
+        binding.rvWeeklyTasks.setAdapter(workLogAdapter);
     }
 
     void setupClick() {
@@ -122,6 +134,22 @@ public class ProgressLogDetailActivity extends AppCompatActivity {
         binding.btnUploadAttachment.setOnClickListener(upload -> {
             createDialog();
             dialog.show();
+        });
+
+        addItemLogBinding.btnSave.setOnClickListener(save -> {
+            dialogEdit.dismiss();
+        });
+
+        binding.tvEditProgress.setOnClickListener(edit -> {
+            dialogEdit.show();
+            if (dialogEdit.getWindow() != null) {
+                dialogEdit.getWindow().setLayout(
+                        (int) (getResources().getDisplayMetrics().widthPixels * 0.95),
+                        (int) (getResources().getDisplayMetrics().heightPixels * 0.9)
+                );
+                dialogEdit.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+            }
+            loadDataDialogEdit();
         });
     }
 
@@ -136,6 +164,13 @@ public class ProgressLogDetailActivity extends AppCompatActivity {
         binding.tvStudentStatus.setText("Trạng thái: " + status.getStrStatus());
         binding.tvStudentStatus.setBackground(getDrawable(status.getBackgroundColor()));
 
+        if (progressLog.getContent() != null && !progressLog.getContent().isEmpty()) {
+            listWork = Arrays.asList(progressLog.getContent().split("\n"));
+            binding.tvTaskCount.setText(listWork.size() + " nhiệm vụ");
+            Toast.makeText(this, String.valueOf(listWork.size()), Toast.LENGTH_SHORT).show();
+            workLogAdapter.updateData(listWork);
+        }
+
         Status instructorStatus = progressLogDetailViewModel.loadInstructorStatus(progressLog.getInstructor_status());
         binding.tvInstructorStatus.setText("Trạng thái: " + instructorStatus.getStrStatus());
         binding.tvInstructorStatus.setBackground(getDrawable(instructorStatus.getBackgroundColor()));
@@ -149,6 +184,14 @@ public class ProgressLogDetailActivity extends AppCompatActivity {
         }
 
         adapter.updateData(progressLog.getAttachments());
+    }
+
+    void loadDataDialogEdit(){
+        addItemLogBinding.etTaskName.setText(progressLog.getTitle());
+        addItemLogBinding.etDescription.setText(progressLog.getDescription());
+        addItemLogBinding.etContent.setText(progressLog.getContent());
+        addItemLogBinding.etStartDate.setText(DateFormatter.formatDate(progressLog.getStart_date_time()));
+        addItemLogBinding.etEndDate.setText(DateFormatter.formatDate(progressLog.getEnd_date_time()));
     }
 
     void createDialog() {
@@ -207,6 +250,13 @@ public class ProgressLogDetailActivity extends AppCompatActivity {
         });
     }
 
+    void createDialogEdit() {
+        alertBuilder = new AlertDialog.Builder(this, R.style.FullScreenDialogTheme);
+        addItemLogBinding = AddItemLogBinding.inflate(getLayoutInflater());
+        alertBuilder.setView(addItemLogBinding.getRoot());
+        dialogEdit = alertBuilder.create();
+        dialogEdit.setCanceledOnTouchOutside(true);
+    }
 
     private void openFilePicker() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);

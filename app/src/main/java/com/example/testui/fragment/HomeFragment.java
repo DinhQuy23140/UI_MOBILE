@@ -20,7 +20,7 @@ import android.view.ViewGroup;
 import com.example.testui.R;
 import com.example.testui.ViewModel.HomeViewModel;
 import com.example.testui.ViewModelFactory.HomeViewModelFactory;
-import com.example.testui.activities.CapNhapThongTinActivity;
+import com.example.testui.activities.UpdateInforPersonActivity;
 import com.example.testui.activities.ChiTietDoAnActivity;
 import com.example.testui.activities.DanhSachDotDoAnActivity;
 import com.example.testui.activities.RegisterProjectTermActivity;
@@ -121,7 +121,7 @@ public class HomeFragment extends Fragment {
 
     void setupClick() {
         fragmentHomeBinding.layoutSinhVien.setOnClickListener(click -> {
-            Intent intent = new Intent(getContext(), CapNhapThongTinActivity.class);
+            Intent intent = new Intent(getContext(), UpdateInforPersonActivity.class);
             intent.putExtra(Constants.KEY_ID_STUDENT, studentId);
             startActivity(intent);
         });

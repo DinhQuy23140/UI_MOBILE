@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/bg_gradient"
-    tools:context=".activities.TraCuuPhanBienActivity">
+    tools:context=".activities.TraCuuKetQuaPhanBienActivity">
     <!-- Header với gradient -->
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
@@ -27,8 +27,8 @@
 
             <ImageButton
                 android:id="@+id/btnBack"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="Back"
                 android:src="@drawable/ic_back_white"
@@ -39,9 +39,11 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="25dp"
                 android:gravity="center"
                 android:letterSpacing="0.02"
-                android:text="Phản biện đồ án"
+                android:text="Tra cứu kết quả phản biện đồ án"
                 android:textColor="@android:color/white"
                 android:textSize="22sp"
                 android:textStyle="bold"

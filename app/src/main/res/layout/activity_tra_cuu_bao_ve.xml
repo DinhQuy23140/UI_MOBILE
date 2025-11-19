@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -53,6 +53,8 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
+
+    <!-- Button Nộp báo cáo cố định -->
 
     <ScrollView
         android:layout_width="match_parent"
@@ -111,6 +113,23 @@
                             android:textColor="#1A1A1A"
                             android:textSize="18sp"
                             android:textStyle="bold" />
+
+                        <!-- Button Nộp báo cáo (trong card) -->
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnSubmitReportCard"
+                            android:layout_width="wrap_content"
+                            android:layout_height="36dp"
+                            android:text="Nộp báo cáo"
+                            android:textColor="#FFFFFF"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            app:backgroundTint="#FF6B35"
+                            app:cornerRadius="18dp"
+                            app:icon="@drawable/ic_upload_modern"
+                            app:iconGravity="textStart"
+                            app:iconPadding="4dp"
+                            app:iconSize="16dp"
+                            app:iconTint="#FFFFFF" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -759,4 +778,5 @@
 
         </LinearLayout>
     </ScrollView>
+
 </LinearLayout>

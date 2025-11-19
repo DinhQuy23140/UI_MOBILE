@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_gradient"
     android:nestedScrollingEnabled="false"
-    tools:context=".activities.DangKiGVHDActivity">
+    tools:context=".activities.RegisterSupervisorActivity">
 
     <!-- Header với btn_back + tiêu đề -->
     <LinearLayout

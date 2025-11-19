@@ -40,7 +40,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DangKiDetaiActivity extends AppCompatActivity {
+public class RegisterTopicActivity extends AppCompatActivity {
 
     ActivityDangKiDetaiBinding binding;
     DangKiDeTaiViewModel dangKiDeTaiViewModel;

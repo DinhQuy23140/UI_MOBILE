@@ -10,6 +10,7 @@ public class AssignmentSupervisor {
     String comments;
     Supervisor supervisor;
     Assignment assignment;
+    String updated_at;
 
     public AssignmentSupervisor() {
     }
@@ -28,6 +29,14 @@ public class AssignmentSupervisor {
         this.supervisor_id = supervisor_id;
         this.role = role;
         this.status = status;
+    }
+
+    public String getUpdated_at() {
+        return updated_at;
+    }
+
+    public void setUpdated_at(String updated_at) {
+        this.updated_at = updated_at;
     }
 
     public Assignment getAssignment() {

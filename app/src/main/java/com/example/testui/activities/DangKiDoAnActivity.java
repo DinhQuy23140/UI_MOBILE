@@ -86,13 +86,13 @@ public class DangKiDoAnActivity extends AppCompatActivity {
         binding.btnBack.setOnClickListener(back -> finish());
 
         binding.btnDangKyGVHD.setOnClickListener(gvhd -> {
-            Intent intent = new Intent(this, DangKiGVHDActivity.class);
+            Intent intent = new Intent(this, RegisterSupervisorActivity.class);
             intent.putExtra(Constants.KEY_PROJECT_TERM, strProjectTerm);
             startActivity(intent);
         });
 
         binding.btnDangKyDeTai.setOnClickListener(dkdt -> {
-            Intent intent = new Intent(this, DangKiDetaiActivity.class);
+            Intent intent = new Intent(this, RegisterTopicActivity.class);
             intent.putExtra(Constants.KEY_ASSIGNMENT, new Gson().toJson(assignmentResult));
             startActivity(intent);
         });

@@ -19,47 +19,88 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="4dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="6dp"
         app:cardBackgroundColor="#FFFFFF"
-        android:layout_marginBottom="20dp">
+        android:layout_marginBottom="20dp"
+        app:strokeColor="#F0F4FF"
+        app:strokeWidth="1dp">
 
       <LinearLayout
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:orientation="vertical"
-          android:padding="20dp">
+          android:padding="24dp">
 
-        <!-- Tiêu đề -->
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Chi tiết đợt đồ án"
-            android:textColor="#1A237E"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="16dp" />
-
-        <!-- Thông tin đợt đồ án -->
-        <TextView
-            android:id="@+id/tv_project_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Đợt đồ án: -"
-            android:textColor="#333333"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="12dp" />
-
-        <!-- Thời gian -->
+        <!-- Header Section -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginBottom="12dp">
+            android:gravity="center_vertical"
+            android:layout_marginBottom="20dp">
 
+          <!-- Icon Container -->
+          <com.google.android.material.card.MaterialCardView
+              android:layout_width="48dp"
+              android:layout_height="48dp"
+              app:cardBackgroundColor="#E8F5E9"
+              app:cardCornerRadius="12dp"
+              app:cardElevation="0dp"
+              android:layout_marginEnd="16dp">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="21dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_info"
+                app:tint="#4CAF50" />
+
+          </com.google.android.material.card.MaterialCardView>
+
+          <!-- Title and Status -->
+          <LinearLayout
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Chi tiết đợt đồ án"
+                android:textColor="#1A237E"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.02" />
+
+            <TextView
+                android:id="@+id/tv_project_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Đợt đồ án: -"
+                android:textColor="#666666"
+                android:textSize="14sp"
+                android:maxLines="1"
+                android:ellipsize="end" />
+
+          </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Timeline Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/bg_timeline"
+            android:padding="16dp"
+            android:gravity="center_vertical">
+
+          <!-- Start Date -->
           <LinearLayout
               android:layout_width="0dp"
               android:layout_height="wrap_content"
@@ -67,16 +108,25 @@
               android:orientation="horizontal"
               android:gravity="center_vertical">
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/ic_calendar_start"
-                android:layout_marginEnd="8dp"
-                app:tint="#2196F3" />
+            <LinearLayout
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:background="@drawable/bg_badge_blue"
+                android:gravity="center"
+                android:layout_marginEnd="12dp">
+
+              <ImageView
+                  android:layout_width="18dp"
+                  android:layout_height="18dp"
+                  android:src="@drawable/ic_calendar_start"
+                  app:tint="#FFFFFF" />
+
+            </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:orientation="vertical">
 
               <TextView
@@ -84,19 +134,31 @@
                   android:layout_height="wrap_content"
                   android:text="Bắt đầu"
                   android:textColor="#666666"
-                  android:textSize="12sp" />
+                  android:textSize="11sp"
+                  android:textStyle="bold" />
 
               <TextView
                   android:id="@+id/tv_start_date"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
+                  android:layout_marginTop="2dp"
                   android:text="-"
-                  android:textColor="#333333"
-                  android:textSize="14sp"
+                  android:textColor="#2196F3"
+                  android:textSize="13sp"
                   android:textStyle="bold" />
+
             </LinearLayout>
+
           </LinearLayout>
 
+          <!-- Timeline Divider -->
+          <View
+              android:layout_width="1dp"
+              android:layout_height="20dp"
+              android:background="#E0E0E0"
+              android:layout_marginHorizontal="8dp" />
+
+          <!-- End Date -->
           <LinearLayout
               android:layout_width="0dp"
               android:layout_height="wrap_content"
@@ -104,16 +166,25 @@
               android:orientation="horizontal"
               android:gravity="center_vertical">
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/ic_calendar_end"
-                android:layout_marginEnd="8dp"
-                app:tint="#FF9800" />
+            <LinearLayout
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:background="@drawable/bg_badge_hoc_vi_thac_si"
+                android:gravity="center"
+                android:layout_marginEnd="12dp">
+
+              <ImageView
+                  android:layout_width="18dp"
+                  android:layout_height="18dp"
+                  android:src="@drawable/ic_calendar_end"
+                  app:tint="#FFFFFF" />
+
+            </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:orientation="vertical">
 
               <TextView
@@ -121,79 +192,159 @@
                   android:layout_height="wrap_content"
                   android:text="Kết thúc"
                   android:textColor="#666666"
-                  android:textSize="12sp" />
+                  android:textSize="11sp"
+                  android:textStyle="bold" />
 
               <TextView
                   android:id="@+id/tv_end_date"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
+                  android:layout_marginTop="2dp"
                   android:text="-"
-                  android:textColor="#333333"
-                  android:textSize="14sp"
+                  android:textColor="#FF9800"
+                  android:textSize="13sp"
                   android:textStyle="bold" />
+
             </LinearLayout>
+
           </LinearLayout>
+
         </LinearLayout>
 
-        <!-- Trạng thái -->
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="12dp"
-            app:cardBackgroundColor="#E8F5E9"
-            app:cardElevation="0dp"
-            android:layout_marginBottom="12dp">
-
-          <TextView
-              android:id="@+id/tv_status"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:paddingHorizontal="12dp"
-              android:paddingVertical="6dp"
-              android:text="Đang diễn ra"
-              android:textColor="#4CAF50"
-              android:textSize="12sp"
-              android:textStyle="bold" />
-        </com.google.android.material.card.MaterialCardView>
-
-        <!-- Mô tả -->
+        <!-- Action Buttons Section -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:layout_marginBottom="8dp">
-
-          <ImageView
-              android:layout_width="20dp"
-              android:layout_height="20dp"
-              android:src="@drawable/ic_description"
-              android:layout_marginEnd="8dp"
-              app:tint="#666666" />
-
-          <TextView
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:text="Mô tả"
-              android:textColor="#333333"
-              android:textSize="14sp"
-              android:textStyle="bold" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_marginBottom="20dp"
             android:gravity="center_vertical">
 
+          <!-- Status Badge -->
+          <com.google.android.material.card.MaterialCardView
+              android:id="@+id/card_status"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              app:cardBackgroundColor="#E8F5E9"
+              app:cardCornerRadius="10dp"
+              app:cardElevation="0dp"
+              android:layout_marginEnd="12dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="6dp">
+
+              <TextView
+                  android:id="@+id/tv_status"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="Đang diễn ra"
+                  android:textColor="#4CAF50"
+                  android:textSize="10sp"
+                  android:textStyle="bold" />
+
+            </LinearLayout>
+
+          </com.google.android.material.card.MaterialCardView>
+
+          <!-- Action Buttons -->
+          <LinearLayout
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal">
+
+            <!-- Postpone Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_postpone"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_marginEnd="8dp"
+                android:text="Hoãn đồ án"
+                android:textColor="#FF9800"
+                android:textSize="10sp"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                app:iconSize="14dp"
+                app:iconTint="#FF9800"
+                app:strokeColor="#FF9800"
+                app:strokeWidth="1dp"
+                app:cornerRadius="8dp" />
+
+            <!-- Result Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_all_result"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:text="Điểm tổng hợp"
+                android:textColor="#FFFFFF"
+                android:textSize="11sp"
+                app:backgroundTint="#2196F3"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                app:iconSize="14dp"
+                app:iconTint="#FFFFFF"
+                app:cornerRadius="8dp" />
+
+          </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Description Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_description"
+            android:padding="16dp">
+
+          <!-- Description Header -->
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
+              android:gravity="center_vertical"
+              android:layout_marginBottom="12dp">
+
+            <LinearLayout
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/bg_badge_hoc_vi_tien_si"
+                android:gravity="center"
+                android:layout_marginEnd="8dp">
+
+              <ImageView
+                  android:layout_width="14dp"
+                  android:layout_height="14dp"
+                  android:src="@drawable/ic_description"
+                  app:tint="@color/white" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mô tả đợt đồ án"
+                android:textColor="#333333"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+          </LinearLayout>
+
+          <!-- Description Content -->
           <TextView
               android:id="@+id/tv_description"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:lineSpacingExtra="4dp"
+              android:lineSpacingExtra="6dp"
               android:text="-"
               android:textColor="#666666"
-              android:textSize="14sp" />
+              android:textSize="13sp"
+              android:textAlignment="viewStart" />
+
         </LinearLayout>
 
       </LinearLayout>

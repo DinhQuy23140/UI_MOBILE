@@ -5,6 +5,7 @@ import com.example.testui.model.ProjectTerm;
 
 import java.util.List;
 
+import io.reactivex.Observable;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -34,4 +35,7 @@ public interface ProjectTermService {
 
     @GET("assignments/student/{studentId}/project-term/{projectTermId}")
     Call<Assignment> getAssignmentByStudentIdAndTermId(@Path("studentId") String studentId, @Path("projectTermId") String projectTermId);
+
+    @GET("project_terms/new_terms")
+    Observable<List<ProjectTerm>> getNewTerms();
 }
