@@ -1,8 +1,11 @@
 package com.example.testui.client;
 
+import android.util.Log;
+
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -13,6 +16,11 @@ public class Client {
     public static Retrofit getInstance() {
         if (retrofit == null) {
             OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                    .addInterceptor(chain -> {
+                        Request request = chain.request();
+                        Log.d("HTTP_URL", "URL: " + request.url() + " METHOD: " + request.method());
+                        return chain.proceed(request);
+                    })
                     .connectTimeout(30, TimeUnit.SECONDS) // timeout kết nối
                     .readTimeout(30, TimeUnit.SECONDS)    // timeout đọc dữ liệu
                     .writeTimeout(30, TimeUnit.SECONDS)   // timeout ghi dữ liệu

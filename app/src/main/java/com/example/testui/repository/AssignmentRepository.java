@@ -6,7 +6,11 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.testui.client.Client;
 import com.example.testui.model.Assignment;
+import com.example.testui.model.PostponeProjectTerm;
+import com.example.testui.model.PostponeProjectTermFile;
 import com.example.testui.service.AssignmentService;
+import com.example.testui.service.PostponeProjectTermFileService;
+import com.example.testui.service.PostponeProjectTermService;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -15,15 +19,24 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.http.Body;
+import retrofit2.http.Path;
 
 public class AssignmentRepository {
     AssignmentService assignmentService;
     MutableLiveData<Assignment> assignmenUpdatetMutableLiveData = new MutableLiveData<>();
     MutableLiveData<Assignment> assignmentByStudentIdAndTermIdMutableLiveData = new MutableLiveData<>();
     MutableLiveData<List<Assignment>> listAssignment = new MutableLiveData<>();
+    MutableLiveData<PostponeProjectTerm> postponeProjectTermMutableLiveData = new MutableLiveData<>();
+    MutableLiveData<PostponeProjectTermFile> postponeProjectTermFileMutableLiveData = new MutableLiveData<>();
+    PostponeProjectTermService postponeProjectTermService;
+    PostponeProjectTermFileService postponeProjectTermFileService;
+    MutableLiveData<Boolean> isCancelPostponeProjectTerm = new MutableLiveData<>();
 
     public AssignmentRepository() {
         assignmentService = Client.getInstance().create(AssignmentService.class);
+        postponeProjectTermService = Client.getInstance().create(PostponeProjectTermService.class);
+        postponeProjectTermFileService = Client.getInstance().create(PostponeProjectTermFileService.class);
     }
 
     public void loadAssignmentByStudentIdAndTermId(String studentId, String termId){
@@ -108,5 +121,94 @@ public class AssignmentRepository {
 
     public MutableLiveData<List<Assignment>> getListAssignment() {
         return listAssignment;
+    }
+
+    public void submitPostponeProjectTerm(PostponeProjectTerm postponeProjectTerm){
+        Call<PostponeProjectTerm> call = postponeProjectTermService.createPostponeProjectTerm(postponeProjectTerm);
+        call.enqueue(new Callback<PostponeProjectTerm>() {
+            @Override
+            public void onResponse(Call<PostponeProjectTerm> call, Response<PostponeProjectTerm> response) {
+                if (response.isSuccessful()) {
+                    postponeProjectTermMutableLiveData.setValue(response.body());
+                } else {
+                    try{
+                        if (response.errorBody() != null){
+                            Log.e("Failure_submit_postpone_projectTerm", "onFailure: " + response.errorBody().string());
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PostponeProjectTerm> call, Throwable throwable) {
+                Log.e("Failure", "onFailure: " + throwable.getMessage());
+            }
+        });
+    }
+
+    public MutableLiveData<PostponeProjectTerm> getPostponeProjectTermMutableLiveData() {
+        return postponeProjectTermMutableLiveData;
+    }
+
+    public void uploadPostponeFile(PostponeProjectTermFile postponeProjectTermFile) {
+        Call<PostponeProjectTermFile> call =  postponeProjectTermFileService.createPostponeProjectTermFile(postponeProjectTermFile);
+        call.enqueue(new Callback<PostponeProjectTermFile>() {
+            @Override
+            public void onResponse(Call<PostponeProjectTermFile> call, Response<PostponeProjectTermFile> response) {
+                if (response.isSuccessful()) {
+                    postponeProjectTermFileMutableLiveData.setValue(response.body());
+                } else {
+                    try{
+                        if (response.errorBody() != null){
+                            Log.e("Failure_Upload_PostponeFile", "onFailure: " + response.errorBody().string());
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PostponeProjectTermFile> call, Throwable throwable) {
+
+            }
+        });
+    }
+
+    public MutableLiveData<PostponeProjectTermFile> getPostponeProjectTermFileMutableLiveData() {
+        return postponeProjectTermFileMutableLiveData;
+    }
+
+    public void cancelPostponeProjectTerm(String postpone_project_term) {
+        Call<PostponeProjectTerm> call = postponeProjectTermService.cancelPostponeProjectTerm(postpone_project_term);
+        call.enqueue(new Callback<>() {
+            @Override
+            public void onResponse(Call<PostponeProjectTerm> call, Response<PostponeProjectTerm> response) {
+                if (response.isSuccessful()) {
+                    isCancelPostponeProjectTerm.setValue(true);
+                } else {
+                    try{
+                        if (response.errorBody() != null){
+                            isCancelPostponeProjectTerm.setValue(false);
+                            Log.e("Failure_cancel_postpone_projectTerm", "onFailure: " + response.errorBody().string());
+                        }
+                    } catch (Exception e) {
+                        isCancelPostponeProjectTerm.setValue(false);
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PostponeProjectTerm> call, Throwable throwable) {
+                isCancelPostponeProjectTerm.setValue(false);
+            }
+        });
+    }
+
+    public MutableLiveData<Boolean> getIsCancelPostponeProjectTerm() {
+        return isCancelPostponeProjectTerm;
     }
 }

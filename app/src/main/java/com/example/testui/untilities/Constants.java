@@ -37,4 +37,8 @@ public class Constants {
     public static final String KEY_DESCRIPTION = "description";
     public static final String KEY_START_DATE = "start_date_time";
     public static final String KEY_END_DATE = "end_date_time";
+
+    public static final String STATUS_PENDING = "pending";
+    public static final String STATUS_APPROVED = "approved";
+    public static final String STATUS_REJECTED = "rejected";
 }

@@ -5,10 +5,11 @@ import android.util.Log;
 
 import com.example.testui.client.SupabaseClient;
 import com.example.testui.model.Attachment;
-import com.example.testui.model.Document;
+import com.example.testui.model.PostponeProjectTermFile;
 import com.example.testui.model.ReportFile;
 import com.example.testui.model.UploadAttachment;
 import com.example.testui.model.UploadFile;
+import com.example.testui.model.UploadPostponeFile;
 import com.example.testui.repository.SinhVienRepository;
 import com.example.testui.service.SupabaseService;
 
@@ -24,10 +25,10 @@ import retrofit2.Response;
 
 public class UploadManage {
     private SupabaseService supabaseService;
-    private String bucket = "document";
-    private String url = "https://wxvjcevcyelpobqleeti.supabase.co";
-    private String apikey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind4dmpjZXZjeWVscG9icWxlZXRpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ2OTkyMzgsImV4cCI6MjA3MDI3NTIzOH0.T9pxOQqLz0LOBGXer1zT8nTAHRHzwRUTBwTh_N7KYN0";
-    private String bearerToken = "Bearer " + apikey;
+    private final String bucket = "document";
+    private final String url = "https://wxvjcevcyelpobqleeti.supabase.co";
+    private final String apikey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind4dmpjZXZjeWVscG9icWxlZXRpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ2OTkyMzgsImV4cCI6MjA3MDI3NTIzOH0.T9pxOQqLz0LOBGXer1zT8nTAHRHzwRUTBwTh_N7KYN0";
+    private final String bearerToken = "Bearer " + apikey;
     private SinhVienRepository sinhVienRepository;
 
     public UploadManage(Context context) {
@@ -56,7 +57,7 @@ public class UploadManage {
                 multipartBody
         );
 
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful()) {
@@ -98,7 +99,7 @@ public class UploadManage {
         String studentId = sinhVienRepository.getStudentId();
         String timestamp = java.time.LocalDateTime.now()
                 .format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH-mm-ss"));
-        String storagePath = studentId + "/" + uploadAttachment.getAttachment().getProgress_log_id() + "/" + timestamp + "/" + uploadAttachment.getAttachment().getFile_name();
+        String storagePath = studentId + "/progressLogFIle/" + uploadAttachment.getAttachment().getProgress_log_id() + "/" + timestamp + "/" + uploadAttachment.getAttachment().getFile_name();
         Call<ResponseBody> call = supabaseService.uploadDocument(
                 bearerToken,
                 apikey,
@@ -107,7 +108,7 @@ public class UploadManage {
                 multipartBody
         );
 
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful()) {
@@ -137,6 +138,57 @@ public class UploadManage {
         });
     }
 
+    public void uploadPostponeFiles(List<UploadPostponeFile> listUpload, UploadPostponeFileCallBack uploadPostponeFileCallBack) {
+        for (UploadPostponeFile uploadPostponeFile: listUpload) {
+            uploadPostponeFile(uploadPostponeFile, uploadPostponeFileCallBack);
+        }
+    }
+
+    private void uploadPostponeFile(UploadPostponeFile uploadPostponeFile, UploadPostponeFileCallBack uploadPostponeFileCallBack) {
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/octet-stream"), uploadPostponeFile.getFile());
+        MultipartBody.Part multipartBody = MultipartBody.Part.createFormData("file", uploadPostponeFile.getFile().getName(), requestBody);
+        String studentId = sinhVienRepository.getStudentId();
+        String timestamp = java.time.LocalDateTime.now()
+                .format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH-mm-ss"));
+        String storagePath = studentId + "/postponeFile/" + uploadPostponeFile.getPostponeProjectTermFile().getPostpone_project_term_id() + "/" + timestamp + "/" + uploadPostponeFile.getFile().getName();
+        Call<ResponseBody> call = supabaseService.uploadDocument(
+                bearerToken,
+                apikey,
+                bucket,
+                storagePath,
+                multipartBody
+        );
+
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.isSuccessful()) {
+                    String publicUrl = url + "/storage/v1/object/public/" + bucket + "/" + storagePath;
+                    PostponeProjectTermFile postponeProjectTermFile = uploadPostponeFile.getPostponeProjectTermFile();
+                    postponeProjectTermFile.setFile_path(publicUrl);
+                    uploadPostponeFile.setPostponeProjectTermFile(postponeProjectTermFile);
+
+                    // Gọi callback
+                    uploadPostponeFileCallBack.onUploadSuccess(uploadPostponeFile);
+
+                    Log.d("UPLOAD", "Uploaded: " + publicUrl);
+                } else {
+                    uploadPostponeFileCallBack.onUploadError(uploadPostponeFile, new Exception("Upload failed: " + response.message()));
+                    try {
+                        Log.e("UPLOAD", "Failed to upload: " + response.errorBody().string());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable throwable) {
+
+            }
+        });
+    }
+
     public interface UploadCallback {
         void onUploadSuccess(UploadFile uploadFile);
         void onUploadError(UploadFile uploadFile, Throwable t);
@@ -145,5 +197,10 @@ public class UploadManage {
     public interface UploadAttachmentCallback {
         void onUploadSuccess(UploadAttachment uploadAttachment);
         void onUploadError(UploadAttachment uploadAttachment, Throwable t);
+    }
+
+    public interface UploadPostponeFileCallBack {
+        void onUploadSuccess(UploadPostponeFile uploadPostponeFile);
+        void onUploadError(UploadPostponeFile uploadPostponeFile, Throwable t);
     }
 }

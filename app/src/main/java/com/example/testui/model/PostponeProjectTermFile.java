@@ -4,6 +4,13 @@ public class PostponeProjectTermFile {
     String id, postpone_project_term_id, file_name, file_path, file_type;
     PostponeProjectTerm postponeProjectTerm;
 
+    public PostponeProjectTermFile(String file_name, String file_path, String file_type, String postpone_project_term_id) {
+        this.file_name = file_name;
+        this.file_path = file_path;
+        this.file_type = file_type;
+        this.postpone_project_term_id = postpone_project_term_id;
+    }
+
     public String getFile_name() {
         return file_name;
     }
