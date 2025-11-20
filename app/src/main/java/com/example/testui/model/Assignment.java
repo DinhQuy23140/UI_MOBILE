@@ -19,6 +19,7 @@ public class Assignment {
     List<AssignmentSupervisor> assignment_supervisors;
     Project project;
     ProjectTerm project_term;
+    PostponeProjectTerm postpone_project_term;
     CouncilProject council_project;
     String created_at, updated_at;
 
@@ -39,6 +40,14 @@ public class Assignment {
         this.student = student;
         this.student_id = student_id;
         this.updated_at = updated_at;
+    }
+
+    public PostponeProjectTerm getPostpone_project_term() {
+        return postpone_project_term;
+    }
+
+    public void setPostpone_project_term(PostponeProjectTerm postpone_project_term) {
+        this.postpone_project_term = postpone_project_term;
     }
 
     public String getCounter_argument_comment() {

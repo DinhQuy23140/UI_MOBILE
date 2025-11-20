@@ -230,10 +230,11 @@
               android:layout_marginEnd="12dp">
 
             <LinearLayout
+                android:id="@+id/bg_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:gravity="center_vertical"
+                android:orientation="horizontal"
                 android:paddingHorizontal="12dp"
                 android:paddingVertical="6dp">
 
@@ -242,7 +243,7 @@
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:text="Đang diễn ra"
-                  android:textColor="#4CAF50"
+                  android:textColor="@color/white"
                   android:textSize="10sp"
                   android:textStyle="bold" />
 
@@ -273,6 +274,42 @@
                 app:strokeColor="#FF9800"
                 app:strokeWidth="1dp"
                 app:cornerRadius="8dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_pending_postpone"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_marginEnd="8dp"
+                android:text="Huỷ hoãn đồ án"
+                android:textColor="#FF9800"
+                android:textSize="10sp"
+                android:visibility="gone"
+                app:cornerRadius="8dp"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                app:iconSize="14dp"
+                app:iconTint="#FF9800"
+                app:strokeColor="#FF9800"
+                app:strokeWidth="1dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_accept_postpone"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_marginEnd="8dp"
+                android:text="Đã hoãn đồ án"
+                android:textColor="#F44336"
+                android:textSize="10sp"
+                android:visibility="gone"
+                app:cornerRadius="8dp"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                app:iconSize="14dp"
+                app:iconTint="#F44336"
+                app:strokeColor="#F44336"
+                app:strokeWidth="1dp" />
 
             <!-- Result Button -->
             <com.google.android.material.button.MaterialButton
