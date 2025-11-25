@@ -175,7 +175,7 @@ public class ProjectTerm {
         LocalDate startDate = LocalDate.parse(start_date);
         LocalDate endDate = LocalDate.parse(end_date);
         LocalDate now = LocalDate.now();
-        if (now.isAfter(startDate) && now.isBefore(endDate)) {
+        if (!now.isBefore(startDate) && !now.isAfter(endDate)) {
             backgroundColor = R.drawable.bg_circle_completed;
             return "Đang diễn ra";
         } else if (now.isBefore(startDate)) {

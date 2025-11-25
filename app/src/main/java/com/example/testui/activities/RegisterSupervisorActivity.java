@@ -42,14 +42,6 @@ public class RegisterSupervisorActivity extends AppCompatActivity {
     String assignmentID, role = "main";
     DangKiGVHDViewModel dangKiGVHDViewModel;
     ProjectTerm projectTerm;
-    String[] testdata = {
-            "Nguyễn Văn An",
-            "Trần Thị Bình",
-            "Lê Quang Huy",
-            "Phạm Minh Tuấn",
-            "Ngô Thị Hoa",
-            "Vũ Thanh Sơn"
-    };
     String studentId = "";
 
     @Override

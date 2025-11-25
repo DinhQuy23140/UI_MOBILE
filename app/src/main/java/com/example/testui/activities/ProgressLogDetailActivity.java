@@ -37,6 +37,7 @@ import com.example.testui.interfaces.UploadDocumentClick;
 import com.example.testui.model.Assignment;
 import com.example.testui.model.Attachment;
 import com.example.testui.model.ProgressLog;
+import com.example.testui.model.Project;
 import com.example.testui.model.ReportFile;
 import com.example.testui.model.Status;
 import com.example.testui.model.UploadAttachment;
@@ -45,6 +46,7 @@ import com.example.testui.untilities.Constants;
 import com.example.testui.untilities.formatter.AssignmentFormatter;
 import com.example.testui.untilities.formatter.DateFormatter;
 import com.example.testui.untilities.formatter.ProgressLogFormatter;
+import com.example.testui.untilities.formatter.ProjectFormatter;
 import com.google.gson.Gson;
 
 import java.io.File;
@@ -133,6 +135,13 @@ public class ProgressLogDetailActivity extends AppCompatActivity {
 
         binding.btnUploadAttachment.setOnClickListener(upload -> {
             createDialog();
+            if (dialog.getWindow() != null) {
+                dialog.getWindow().setLayout(
+                        (int) (getResources().getDisplayMetrics().widthPixels * 0.95),
+                        (int) (getResources().getDisplayMetrics().heightPixels * 0.9)
+                );
+                dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+            }
             dialog.show();
         });
 
@@ -200,6 +209,9 @@ public class ProgressLogDetailActivity extends AppCompatActivity {
         builder.setView(dialogUploadBinding.getRoot());
         dialog = builder.create();
         dialog.setCanceledOnTouchOutside(true);
+        Project project = ProjectFormatter.format(assignment.getProject());
+        dialogUploadBinding.etTenDeTai.setText(project.getName());
+        dialogUploadBinding.etMoTa.setText(project.getDescription());
         dialogUploadBinding.rvFileList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         uploadAttachmentAdapter = new UploadReportLogAdapter(this, new ArrayList<>(), new UploadDocumentClick() {
             @Override
