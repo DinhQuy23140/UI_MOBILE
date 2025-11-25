@@ -18,15 +18,17 @@ import com.example.testui.adapter.AssignmentAdapter;
 import com.example.testui.databinding.ActivityViewAllAssignmentBinding;
 import com.example.testui.interfaces.OnClickItem;
 import com.example.testui.model.Supervisor;
+import com.example.testui.model.Teacher;
 import com.example.testui.untilities.Constants;
+import com.example.testui.untilities.formatter.TeacherFormatter;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
 public class ViewAllAssignmentActivity extends AppCompatActivity {
     Intent intent;
-    String strSupervisor = "";
-    Supervisor supervisor;
+    String strTeacher = "";
+    Teacher teacher;
     String teacherId = "";
     Gson gson;
     AssignmentAdapter assignmentAdapter;
@@ -53,9 +55,9 @@ public class ViewAllAssignmentActivity extends AppCompatActivity {
         viewAllAssignmentViewModel = new ViewModelProvider(this, new ViewAllAssignmentViewModelFactory(this)).get(ViewAllAssignmentViewModel.class);
         gson = new Gson();
         intent = getIntent();
-        strSupervisor = intent.getStringExtra(Constants.KEY_SUPERVISOR);
-        supervisor = gson.fromJson(strSupervisor, Supervisor.class);
-        teacherId = supervisor.getTeacher().getId();
+        strTeacher = intent.getStringExtra(Constants.KEY_TEACHER);
+        teacher = TeacherFormatter.format(gson.fromJson(strTeacher, Teacher.class));
+        teacherId = teacher.getId();
     }
 
     void setupRecyclerView() {
@@ -70,9 +72,9 @@ public class ViewAllAssignmentActivity extends AppCompatActivity {
     }
 
     void loadData() {
-        binding.tvGiangVienName.setText(supervisor.getTeacher().getDegree() + "." + supervisor.getTeacher().getUser().getFullname());
-        binding.tvChucVu.setText("Chức vụ: " + supervisor.getTeacher().getPosition());
-        binding.tvGiangVienNameMain.setText(supervisor.getTeacher().getDegree() + "." + supervisor.getTeacher().getUser().getFullname());
+        binding.tvGiangVienName.setText(teacher.getDegree() + "." + teacher.getUser().getFullname());
+        binding.tvChucVu.setText("Chức vụ: " + teacher.getPosition());
+        binding.tvGiangVienNameMain.setText(teacher.getDegree() + "." + teacher.getUser().getFullname());
         viewAllAssignmentViewModel.loadAssignments(teacherId);
         viewAllAssignmentViewModel.getListAssignment().observe(this, result ->{
             binding.tvSoLuongSinhVien.setText(result.size() + " sinh viên");
