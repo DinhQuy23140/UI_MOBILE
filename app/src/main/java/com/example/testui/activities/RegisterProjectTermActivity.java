@@ -1,6 +1,8 @@
 package com.example.testui.activities;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Toast;
 
@@ -32,6 +34,7 @@ public class RegisterProjectTermActivity extends AppCompatActivity {
     RegisterProjectTermAdapter adapter;
     String studentId = "";
     List<ProjectTerm> listProjectTerm = new ArrayList<>();
+    List<ProjectTerm> displayListProjectTerm = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +50,7 @@ public class RegisterProjectTermActivity extends AppCompatActivity {
         setupRecyclerView();
         observerData();
         loadData();
+        event();
     }
 
     void init() {
@@ -98,4 +102,40 @@ public class RegisterProjectTermActivity extends AppCompatActivity {
             }
         });
     }
+
+     void event() {
+        binding.edtSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                filterList(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+     }
+
+     private void filterList(String keyWord) {
+        List<ProjectTerm> filterList = new ArrayList<>();
+        if (keyWord.isEmpty()) {
+            filterList.addAll(listProjectTerm);
+        } else {
+            for (ProjectTerm projectTerm : listProjectTerm) {
+                if (projectTerm.keySearch().toLowerCase().contains(keyWord.toLowerCase())) {
+                    filterList.add(projectTerm);
+                }
+            }
+        }
+        displayListProjectTerm.clear();
+        displayListProjectTerm.addAll(filterList);
+        adapter.updateData(displayListProjectTerm);
+        binding.tvCount.setText(String.valueOf(displayListProjectTerm.size()));
+     }
 }

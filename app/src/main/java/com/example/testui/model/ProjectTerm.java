@@ -186,4 +186,8 @@ public class ProjectTerm {
             return "Đã kết thúc";
         }
     }
+
+    public String keySearch(){
+        return "Đợt " + this.stage + " " + this.description + " " + this.academy_year.getYear_name();
+    }
 }

@@ -14,9 +14,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.testui.R;
 import com.example.testui.interfaces.OnClickItem;
 import com.example.testui.model.ProjectTerm;
+import com.example.testui.untilities.formatter.DateFormatter;
 
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class RegisterProjectTermAdapter extends RecyclerView.Adapter<RegisterProjectTermAdapter.RegisterProjectTermViewHolder> {
@@ -60,16 +62,16 @@ public class RegisterProjectTermAdapter extends RecyclerView.Adapter<RegisterPro
     @Override
     public void onBindViewHolder(@NonNull RegisterProjectTermViewHolder holder, int position) {
         ProjectTerm projectTerm = listProjectTerm.get(position);
-        holder.tvStage.setText(projectTerm.getStage());
-        holder.tvAcademyYear.setText(projectTerm.getAcademy_year().getYear_name());
-        holder.tvDescription.setText(projectTerm.getDescription());
-        holder.tvStart.setText(projectTerm.getStart_date());
-        holder.tvEnd.setText(projectTerm.getEnd_date());
-        holder.tvCountStudent.setText(String.valueOf(projectTerm.getCreated_at()));
         LocalDate localDate = LocalDate.now();
         OffsetDateTime dateTime = OffsetDateTime.parse(projectTerm.getCreated_at());
         LocalDate startDate = dateTime.toLocalDate();
         LocalDate endDate = LocalDate.parse(projectTerm.getStart_date());
+        holder.tvStage.setText(projectTerm.getStage());
+        holder.tvAcademyYear.setText(projectTerm.getAcademy_year().getYear_name());
+        holder.tvDescription.setText(projectTerm.getDescription());
+        holder.tvStart.setText(startDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")).toString());
+        holder.tvEnd.setText(DateFormatter.formatDate(projectTerm.getEnd_date()));
+        holder.tvCountStudent.setText(String.valueOf(startDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))));
         if (localDate.isAfter(endDate)) {
             holder.tvStatus.setText("Đã hết hạn");
         } else if (localDate.isBefore(endDate) && localDate.isAfter(startDate)) {
