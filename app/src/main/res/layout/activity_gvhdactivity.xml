@@ -78,7 +78,7 @@
     </com.google.android.material.card.MaterialCardView>
 
     <!-- Content Area -->
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginHorizontal="16dp"
@@ -457,54 +457,54 @@
                 app:cardCornerRadius="16dp"
                 app:cardElevation="2dp">
 
-<!--                <LinearLayout-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:background="@drawable/bg_info_group"-->
-<!--                    android:orientation="vertical"-->
-<!--                    android:padding="20dp">-->
+                <!--                <LinearLayout-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:background="@drawable/bg_info_group"-->
+                <!--                    android:orientation="vertical"-->
+                <!--                    android:padding="20dp">-->
 
-<!--                    <TextView-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginBottom="12dp"-->
-<!--                        android:text="Môn Học Giảng Dạy"-->
-<!--                        android:textColor="#2196F3"-->
-<!--                        android:textSize="16sp"-->
-<!--                        android:textStyle="bold" />-->
+                <!--                    <TextView-->
+                <!--                        android:layout_width="match_parent"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_marginBottom="12dp"-->
+                <!--                        android:text="Môn Học Giảng Dạy"-->
+                <!--                        android:textColor="#2196F3"-->
+                <!--                        android:textSize="16sp"-->
+                <!--                        android:textStyle="bold" />-->
 
-<!--                    <com.google.android.material.chip.ChipGroup-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:padding="4dp">-->
+                <!--                    <com.google.android.material.chip.ChipGroup-->
+                <!--                        android:layout_width="match_parent"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:padding="4dp">-->
 
-<!--                        <com.google.android.material.chip.Chip-->
-<!--                            style="@style/SubjectChip"-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:text="Lập trình Java" />-->
+                <!--                        <com.google.android.material.chip.Chip-->
+                <!--                            style="@style/SubjectChip"-->
+                <!--                            android:layout_width="wrap_content"-->
+                <!--                            android:layout_height="wrap_content"-->
+                <!--                            android:text="Lập trình Java" />-->
 
-<!--                        <com.google.android.material.chip.Chip-->
-<!--                            style="@style/SubjectChip"-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:text="Cơ sở dữ liệu" />-->
+                <!--                        <com.google.android.material.chip.Chip-->
+                <!--                            style="@style/SubjectChip"-->
+                <!--                            android:layout_width="wrap_content"-->
+                <!--                            android:layout_height="wrap_content"-->
+                <!--                            android:text="Cơ sở dữ liệu" />-->
 
-<!--                        <com.google.android.material.chip.Chip-->
-<!--                            style="@style/SubjectChip"-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:text="Phân tích thiết kế hệ thống" />-->
+                <!--                        <com.google.android.material.chip.Chip-->
+                <!--                            style="@style/SubjectChip"-->
+                <!--                            android:layout_width="wrap_content"-->
+                <!--                            android:layout_height="wrap_content"-->
+                <!--                            android:text="Phân tích thiết kế hệ thống" />-->
 
-<!--                        <com.google.android.material.chip.Chip-->
-<!--                            style="@style/SubjectChip"-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:text="Trí tuệ nhân tạo" />-->
+                <!--                        <com.google.android.material.chip.Chip-->
+                <!--                            style="@style/SubjectChip"-->
+                <!--                            android:layout_width="wrap_content"-->
+                <!--                            android:layout_height="wrap_content"-->
+                <!--                            android:text="Trí tuệ nhân tạo" />-->
 
-<!--                    </com.google.android.material.chip.ChipGroup>-->
+                <!--                    </com.google.android.material.chip.ChipGroup>-->
 
-<!--                </LinearLayout>-->
+                <!--                </LinearLayout>-->
 
             </com.google.android.material.card.MaterialCardView>
 
@@ -552,7 +552,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         tools:itemCount="2"
-                        tools:listitem="@layout/item_research"/>
+                        tools:listitem="@layout/item_research" />
 
                 </LinearLayout>
 
@@ -652,6 +652,6 @@
 
         </LinearLayout>
 
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 </LinearLayout>

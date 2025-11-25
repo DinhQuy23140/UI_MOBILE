@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import com.example.testui.R;
 import com.example.testui.ViewModel.HomeViewModel;
 import com.example.testui.ViewModelFactory.HomeViewModelFactory;
+import com.example.testui.activities.SupervisorsActivity;
 import com.example.testui.activities.UpdateInforPersonActivity;
 import com.example.testui.activities.ChiTietDoAnActivity;
 import com.example.testui.activities.DanhSachDotDoAnActivity;
@@ -127,11 +128,8 @@ public class HomeFragment extends Fragment {
         });
 
         fragmentHomeBinding.layoutGvhd.setOnClickListener(gvhd -> {
-            FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_container, new GiangVienHuongDanFragment());
-            fragmentTransaction.addToBackStack(null);
-            fragmentTransaction.commit();
+            Intent intent = new Intent(getContext(), SupervisorsActivity.class);
+            startActivity(intent);
         });
 
         fragmentHomeBinding.layoutDoan.setOnClickListener(click -> {

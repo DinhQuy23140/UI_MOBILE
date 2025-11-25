@@ -26,6 +26,7 @@ import com.example.testui.model.CouncilProject;
 import com.example.testui.model.CouncilProjectDefence;
 import com.example.testui.model.CouncilsMember;
 import com.example.testui.model.Project;
+import com.example.testui.model.Status;
 import com.example.testui.model.Supervisor;
 import com.example.testui.model.Teacher;
 import com.example.testui.model.User;
@@ -132,5 +133,11 @@ public class TraCuuDiemActivity extends AppCompatActivity {
         if (listCouncilMember != null && !listCouncilMember.isEmpty()) {
             councilMemberScoreAdapter.updateData(listCouncilMember);
         }
+
+        double totalScore = traCuuDiemViewModel.totalScore(assignment);
+        Status status = traCuuDiemViewModel.statusScore(assignment);
+        binding.txtTotalScore.setText(String.valueOf(totalScore));
+        binding.txtStatus.setText(status.getStrStatus());
+        binding.txtStatus.setBackground(getDrawable(status.getBackgroundColor()));
     }
 }

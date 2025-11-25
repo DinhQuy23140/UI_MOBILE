@@ -18,6 +18,7 @@ public class GVHDViewModel extends ViewModel {
     MutableLiveData<List<Teacher>> listTeacher = new MutableLiveData<>();
     MutableLiveData<List<Supervisor>> listSupervisor = new MutableLiveData<>();
     MutableLiveData<List<Assignment>> listAssignment = new MutableLiveData<>();
+    MutableLiveData<List<Teacher>> teachers = new MutableLiveData<>();
     AssignmentRepository assignmentRepository;
     public GVHDViewModel(Context context) {
         loginRepository = new SinhVienRepository(context);
@@ -44,5 +45,14 @@ public class GVHDViewModel extends ViewModel {
 
     public MutableLiveData<List<Assignment>> getListAssignment() {
         return listAssignment;
+    }
+
+    public void loadTeacher() {
+        loginRepository.loadAllTeacher();
+        teachers = loginRepository.getListTeacher();
+    }
+
+    public MutableLiveData<List<Teacher>> getTeachers() {
+        return teachers;
     }
 }

@@ -2,6 +2,8 @@ package com.example.testui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -30,7 +32,8 @@ public class DanhSachDotDoAnActivity extends AppCompatActivity {
     ActivityDanhSachDotDoAnBinding binding;
     DotDoAnViewModel dotDoAnViewModel;
     ProjectTermAdapter projectTermAdapter;
-    List<ProjectTerm> listProjectTerm;
+    List<ProjectTerm> listProjectTerm = new ArrayList<>();
+    List<ProjectTerm> listDisplayProjectTerm = new ArrayList<>();
     Intent intent;
     String studentId = "";
     Gson gson;
@@ -50,6 +53,7 @@ public class DanhSachDotDoAnActivity extends AppCompatActivity {
         setupClick();
         createRecyclerView();
         fetchDataRecyclerView();
+        event();
     }
 
     void init(){
@@ -102,5 +106,39 @@ public class DanhSachDotDoAnActivity extends AppCompatActivity {
             binding.emptyStateView.setVisibility(View.VISIBLE);
             binding.progressBarIc.setVisibility(View.GONE);
         }
+    }
+
+    void event() {
+        binding.edtSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                filter(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+    }
+
+    void filter(String keyWord) {
+        listDisplayProjectTerm.clear();
+        if (keyWord.isEmpty()) {
+            listDisplayProjectTerm.addAll(listProjectTerm);
+        } else {
+            for (ProjectTerm projectTerm : listProjectTerm) {
+                if (projectTerm.keySearch().toLowerCase().contains(keyWord.toLowerCase())) {
+                    listDisplayProjectTerm.add(projectTerm);
+                }
+            }
+        }
+        binding.tvCount.setText(String.valueOf(listDisplayProjectTerm.size()));
+        projectTermAdapter.updateData(listDisplayProjectTerm);
     }
 }

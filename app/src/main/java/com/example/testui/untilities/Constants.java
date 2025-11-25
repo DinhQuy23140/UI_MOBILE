@@ -18,6 +18,7 @@ public class Constants {
     public static final String KEY_GENDER = "gender";
     public static final String KEY_IMAGE = "image";
     public static final String KEY_SUPERVISOR = "supervisor";
+    public static final String KEY_TEACHER = "teacher";
     public static final String KEY_ID_STUDENT = "id_student";
     public static final String KEY_PROGRESS_LOG = "progress_log";
     public static final String KEY_PROJECT_ID = "project_id";

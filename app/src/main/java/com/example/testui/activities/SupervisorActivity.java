@@ -40,9 +40,8 @@ public class SupervisorActivity extends AppCompatActivity {
 
     ActivityGvhdactivityBinding binding;
     Intent intent;
-    String strSupervisor;
+    String strTeacher;
     Gson gson;
-    Supervisor supervisor;
     AssignmentAdapter assignmentAdapter;
     GVHDViewModel gvhdViewModel;
     List<Assignment> listAssignment;
@@ -72,11 +71,10 @@ public class SupervisorActivity extends AppCompatActivity {
 
     void init() {
         intent = getIntent();
-        strSupervisor = intent.getStringExtra(Constants.KEY_SUPERVISOR);
+        strTeacher = intent.getStringExtra(Constants.KEY_TEACHER);
         gson = new Gson();
-        supervisor = SupervisorFormatter.format(gson.fromJson(strSupervisor, Supervisor.class));
         gvhdViewModel = new ViewModelProvider(this, new GVHDViewModelFactory(this)).get(GVHDViewModel.class);
-        teacher = TeacherFormatter.format(supervisor.getTeacher());
+        teacher = TeacherFormatter.format(gson.fromJson(strTeacher, Teacher.class));
         teacherId = teacher.getId();
         Log.d("Research", gson.toJson(teacher));
     }
@@ -92,7 +90,7 @@ public class SupervisorActivity extends AppCompatActivity {
 
         binding.tvGiangVienNameMain.setText(teacher.getDegree() + " " + user.getFullname());
 
-        List<UserResearch> listUserReseach = supervisor.getTeacher().getUser().getUser_researches();
+        List<UserResearch> listUserReseach = teacher.getUser().getUser_researches();
         if (listUserReseach != null && !listUserReseach.isEmpty()) {
             List<Research> listResearch = new ArrayList<>();
             for (UserResearch userResearch : listUserReseach) {
@@ -136,7 +134,7 @@ public class SupervisorActivity extends AppCompatActivity {
     void setupClick() {
         binding.tvViewAllAsignment.setOnClickListener(assignments -> {
             Intent intent = new Intent(this, ViewAllAssignmentActivity.class);
-            intent.putExtra(Constants.KEY_SUPERVISOR, strSupervisor);
+                    intent.putExtra(Constants.KEY_TEACHER, strTeacher);
             startActivity(intent);
         });
     }

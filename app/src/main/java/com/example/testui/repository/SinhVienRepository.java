@@ -9,10 +9,12 @@ import com.example.testui.model.Assignment;
 import com.example.testui.model.LoginResponse;
 import com.example.testui.model.Student;
 import com.example.testui.model.Supervisor;
+import com.example.testui.model.Teacher;
 import com.example.testui.model.User;
 import com.example.testui.service.ApiService;
 import com.example.testui.service.AssignmentService;
 import com.example.testui.service.AuthService;
+import com.example.testui.service.TeacherService;
 import com.example.testui.service.UserService;
 import com.example.testui.sharepreference.SharePreferenceManage;
 import com.google.gson.Gson;
@@ -34,6 +36,7 @@ public class SinhVienRepository {
     AuthService authService;
     AssignmentService assignmentService;
     UserService userService;
+    TeacherService teacherService;
     private static volatile SinhVienRepository instance;
     MutableLiveData<Boolean> loginResult = new MutableLiveData<>(false);
     MutableLiveData<Student> student = new MutableLiveData<>();
@@ -41,6 +44,7 @@ public class SinhVienRepository {
     MutableLiveData<Assignment> assignmentByIdStudent = new MutableLiveData<>();
     MutableLiveData<Assignment> recentAssignment = new MutableLiveData<>();
     MutableLiveData<Boolean> registerResult = new MutableLiveData<Boolean>(false);
+    MutableLiveData<List<Teacher>> listTeacher = new MutableLiveData<>();
     SharePreferenceManage sharePreferenceManage;
     // private constructor : singleton access
     public SinhVienRepository(Context context) {
@@ -48,6 +52,7 @@ public class SinhVienRepository {
         authService = Client.getInstance().create(AuthService.class);
         assignmentService = Client.getInstance().create(AssignmentService.class);
         userService = Client.getInstance().create(UserService.class);
+        teacherService = Client.getInstance().create(TeacherService.class);
         sharePreferenceManage = new SharePreferenceManage(context);
     }
 
@@ -264,5 +269,28 @@ public class SinhVienRepository {
 
     public void setRegisterResult(MutableLiveData<Boolean> registerResult) {
         this.registerResult = registerResult;
+    }
+
+    public void loadAllTeacher() {
+        Call<List<Teacher>> call = teacherService.getAllTeacher();
+        call.enqueue(new Callback<List<Teacher>>() {
+            @Override
+            public void onResponse(Call<List<Teacher>> call, Response<List<Teacher>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    listTeacher.setValue(response.body());
+                } else {
+                    Log.e("API_ERROR", "Response not successful: " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Teacher>> call, Throwable throwable) {
+                Log.e("API_ERROR", "Failed to get teacher", throwable);
+            }
+        });
+    }
+
+    public MutableLiveData<List<Teacher>> getListTeacher() {
+        return listTeacher;
     }
 }
