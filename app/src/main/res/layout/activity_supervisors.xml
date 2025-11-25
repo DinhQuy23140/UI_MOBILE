@@ -103,6 +103,7 @@
                     android:id="@+id/etSearch"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
                     android:hint="🔍 Tìm kiếm giảng viên..."
@@ -110,22 +111,6 @@
                     android:textSize="15sp" />
 
                 <!-- Filter button với hiệu ứng -->
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnAdvancedFilter"
-                    style="@style/Widget.Material3.Button.Icon"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginEnd="8dp"
-                    android:insetTop="0dp"
-                    android:insetBottom="0dp"
-                    android:text=""
-                    app:backgroundTint="#2196F3"
-                    app:cornerRadius="20dp"
-                    app:elevation="6dp"
-                    app:icon="@drawable/ic_search"
-                    app:iconGravity="textStart"
-                    app:iconPadding="0dp"
-                    app:iconTint="@android:color/white" />
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
