@@ -23,7 +23,9 @@ import com.example.testui.adapter.TeacherAdapter;
 import com.example.testui.databinding.ActivitySupervisorsBinding;
 import com.example.testui.model.Supervisor;
 import com.example.testui.model.Teacher;
+import com.example.testui.model.User;
 import com.example.testui.untilities.Constants;
+import com.example.testui.untilities.formatter.UserFormatter;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -109,7 +111,8 @@ public class SupervisorsActivity extends AppCompatActivity {
             listTeacherDisplay.addAll(listTeacher);
         } else {
             for (Teacher teacher : listTeacher) {
-                if (teacher.getUser().getFullname().toLowerCase().contains(keyWord.toLowerCase())) {
+                User user = UserFormatter.format(teacher.getUser());
+                if (user.getFullname().toLowerCase().contains(keyWord.toLowerCase())) {
                     listTeacherDisplay.add(teacher);
                 }
             }

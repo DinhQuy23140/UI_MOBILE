@@ -1,7 +1,10 @@
 package com.example.testui.activities;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,13 +20,19 @@ import com.example.testui.ViewModelFactory.ViewAllAssignmentViewModelFactory;
 import com.example.testui.adapter.AssignmentAdapter;
 import com.example.testui.databinding.ActivityViewAllAssignmentBinding;
 import com.example.testui.interfaces.OnClickItem;
+import com.example.testui.model.Assignment;
+import com.example.testui.model.Student;
 import com.example.testui.model.Supervisor;
 import com.example.testui.model.Teacher;
+import com.example.testui.model.User;
 import com.example.testui.untilities.Constants;
+import com.example.testui.untilities.formatter.StudentFormatter;
 import com.example.testui.untilities.formatter.TeacherFormatter;
+import com.example.testui.untilities.formatter.UserFormatter;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ViewAllAssignmentActivity extends AppCompatActivity {
     Intent intent;
@@ -31,6 +40,8 @@ public class ViewAllAssignmentActivity extends AppCompatActivity {
     Teacher teacher;
     String teacherId = "";
     Gson gson;
+    List<Assignment> listAssignment = new ArrayList<>();
+    List<Assignment> listAssignmentDisplay = new ArrayList<>();
     AssignmentAdapter assignmentAdapter;
     ActivityViewAllAssignmentBinding binding;
     ViewAllAssignmentViewModel viewAllAssignmentViewModel;
@@ -49,6 +60,7 @@ public class ViewAllAssignmentActivity extends AppCompatActivity {
         init();
         setupRecyclerView();
         loadData();
+        event();
     }
 
     void init(){
@@ -71,14 +83,53 @@ public class ViewAllAssignmentActivity extends AppCompatActivity {
         binding.rvSinhVienList.setAdapter(assignmentAdapter);
     }
 
+    @SuppressLint("SetTextI18n")
     void loadData() {
         binding.tvGiangVienName.setText(teacher.getDegree() + "." + teacher.getUser().getFullname());
         binding.tvChucVu.setText("Chức vụ: " + teacher.getPosition());
         binding.tvGiangVienNameMain.setText(teacher.getDegree() + "." + teacher.getUser().getFullname());
         viewAllAssignmentViewModel.loadAssignments(teacherId);
         viewAllAssignmentViewModel.getListAssignment().observe(this, result ->{
-            binding.tvSoLuongSinhVien.setText(result.size() + " sinh viên");
-            assignmentAdapter.updateDate(result);
+            listAssignment = result;
+            binding.tvSoLuongSinhVien.setText(listAssignment.size() + " sinh viên");
+            assignmentAdapter.updateDate(listAssignment);
         });
+    }
+
+    void event() {
+        binding.etSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                filter(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+    }
+
+    @SuppressLint("SetTextI18n")
+    void filter(String keyWord) {
+        listAssignmentDisplay.clear();
+        if (keyWord.isEmpty()) {
+            listAssignmentDisplay.addAll(listAssignment);
+        } else {
+            for (Assignment assignment : listAssignment) {
+                Student student = StudentFormatter.format(assignment.getStudent());
+                User user = UserFormatter.format(student.getUser());
+                if (user.getFullname().toLowerCase().contains(keyWord.toLowerCase())) {
+                    listAssignmentDisplay.add(assignment);
+                }
+            }
+        }
+        binding.tvSoLuongSinhVien.setText(listAssignmentDisplay.size() + " sinh viên");
+        assignmentAdapter.updateDate(listAssignmentDisplay);
     }
 }
