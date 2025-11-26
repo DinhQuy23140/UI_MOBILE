@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
+    android:layout_marginVertical="8dp"
     app:cardBackgroundColor="#FFFFFF"
     app:cardCornerRadius="20dp"
     app:cardElevation="4dp"
@@ -20,8 +20,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="12px">
+            android:layout_marginBottom="12px"
+            android:orientation="horizontal">
 
             <!-- Icon hướng nghiên cứu -->
             <com.google.android.material.card.MaterialCardView
@@ -67,7 +67,7 @@
             android:lineSpacingExtra="4dp"
             android:textColor="#666666"
             android:textSize="14sp"
-            android:visibility="gone" />
+            android:visibility="visible" />
 
     </LinearLayout>
 

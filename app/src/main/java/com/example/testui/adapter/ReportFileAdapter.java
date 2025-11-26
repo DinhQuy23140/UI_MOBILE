@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.testui.R;
 import com.example.testui.interfaces.OnClickItem;
 import com.example.testui.model.ReportFile;
+import com.example.testui.model.Status;
 import com.example.testui.model.UploadFile;
 
 import java.time.OffsetDateTime;
@@ -38,7 +39,7 @@ public class ReportFileAdapter extends RecyclerView.Adapter<ReportFileAdapter.Re
     @NonNull
     @Override
     public ReportFileViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_report_file, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_report_file_ver2, parent, false);
         return new ReportFileViewHolder(view);
     }
 
@@ -49,11 +50,37 @@ public class ReportFileAdapter extends RecyclerView.Adapter<ReportFileAdapter.Re
         OffsetDateTime odt = OffsetDateTime.parse(reportFile.getCreated_at());
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss dd-MM-yyyy");
         String formatted = odt.format(formatter);
-        holder.tvFileUrl.setText(reportFile.getFile_url());
+        Status status = getStatus(reportFile.getStatus());
+        holder.tvStatus.setBackground(context.getDrawable(status.getBackgroundColor()));
+        holder.tvStatus.setText(status.getStrStatus());
         holder.tvUploadTime.setText(formatted);
         holder.btnDownload.setOnClickListener(click -> {
             onClickItem.onClickItem(position);
         });
+    }
+
+    Status getStatus(String strStatus) {
+        switch (strStatus) {
+            case "pending":
+            case "submitted": {
+                return new Status(R.drawable.bg_task_icon, "Đã nộp");
+            }
+            case "rejected": {
+                return new Status(R.drawable.bg_submit_button, "Chưa đạt");
+            }
+            case "approved": {
+                return new Status(R.drawable.bg_status_completed, "Đạt");
+            }
+            case "passed": {
+                return new Status(R.drawable.bg_status_completed, "Đã duyệt phản biện");
+            }
+            case "failured": {
+                return new Status(R.drawable.bg_badge_chu_tich, "Bị từ chối phản biện");
+            }
+            default: {
+                return new Status(R.drawable.bg_task_icon, "Đã nộp");
+            }
+        }
     }
 
     @Override
@@ -77,16 +104,16 @@ public class ReportFileAdapter extends RecyclerView.Adapter<ReportFileAdapter.Re
     }
 
     public class ReportFileViewHolder extends RecyclerView.ViewHolder {
-        TextView tvFileName, tvUploadTime, tvFileUrl;
+        TextView tvFileName, tvUploadTime, tvStatus;
         ImageView ivFileType;
         CardView btnDownload;
         public ReportFileViewHolder(@NonNull View itemView) {
             super(itemView);
             ivFileType = itemView.findViewById(R.id.imgFileType);
             tvFileName = itemView.findViewById(R.id.tvFileName);
-            tvFileUrl = itemView.findViewById(R.id.tvFileUrl);
             tvUploadTime = itemView.findViewById(R.id.tvUploadTime);
             btnDownload = itemView.findViewById(R.id.btn_download);
+            tvStatus = itemView.findViewById(R.id.tvStatus);
         }
     }
 }

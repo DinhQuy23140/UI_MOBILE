@@ -8,7 +8,7 @@ public class Project {
     String description;
     List<ProgressLog> progress_logs;
     Assignment assignment;
-    List<ReportFile> reportFiles;
+    List<ReportFile> report_files;
 
     public Project() {
     }
@@ -28,12 +28,12 @@ public class Project {
         this.assignment = assignment;
     }
 
-    public List<ReportFile> getReportFiles() {
-        return reportFiles;
+    public List<ReportFile> getReport_files() {
+        return report_files;
     }
 
-    public void setReportFiles(List<ReportFile> reportFiles) {
-        this.reportFiles = reportFiles;
+    public void setReport_files(List<ReportFile> report_files) {
+        this.report_files = report_files;
     }
 
     public String getId() {

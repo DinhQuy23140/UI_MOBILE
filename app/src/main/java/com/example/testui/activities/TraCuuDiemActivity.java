@@ -1,5 +1,6 @@
 package com.example.testui.activities;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -107,6 +108,7 @@ public class TraCuuDiemActivity extends AppCompatActivity {
         binding.rvMemberCouncils.setAdapter(councilMemberScoreAdapter);
     }
 
+    @SuppressLint("SetTextI18n")
     void loadData() {
         binding.tvProjectName.setText(project.getName());
         List<AssignmentSupervisor> listAssignmentSupervisor = assignment.getAssignment_supervisors();
@@ -129,14 +131,15 @@ public class TraCuuDiemActivity extends AppCompatActivity {
         binding.txtAdvisorScoreDate.setText(councilProject.getUpdated_at());
 
         List<CouncilProjectDefence> listCouncilMember = councilProject.getCouncil_project_defences();
-        binding.tvCouncilCount.setText(listCouncilMember.size() + " thành viên");
+        int count = (listCouncilMember == null) ? 0 : listCouncilMember.size();
+        binding.tvCouncilCount.setText(String.format("%d thành viên", count));
         if (listCouncilMember != null && !listCouncilMember.isEmpty()) {
             councilMemberScoreAdapter.updateData(listCouncilMember);
         }
 
         double totalScore = traCuuDiemViewModel.totalScore(assignment);
         Status status = traCuuDiemViewModel.statusScore(assignment);
-        binding.txtTotalScore.setText(String.valueOf(totalScore));
+        binding.txtTotalScore.setText(totalScore >= 0 ? String.valueOf(totalScore) : "-");
         binding.txtStatus.setText(status.getStrStatus());
         binding.txtStatus.setBackground(getDrawable(status.getBackgroundColor()));
     }

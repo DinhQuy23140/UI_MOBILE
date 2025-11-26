@@ -29,6 +29,8 @@ public class AssignmentRepository {
     MutableLiveData<List<Assignment>> listAssignment = new MutableLiveData<>();
     MutableLiveData<PostponeProjectTerm> postponeProjectTermMutableLiveData = new MutableLiveData<>();
     MutableLiveData<PostponeProjectTermFile> postponeProjectTermFileMutableLiveData = new MutableLiveData<>();
+    MutableLiveData<Assignment> assignmentWithOutline = new MutableLiveData<>();
+    MutableLiveData<Assignment> assignmentWithReportFile = new MutableLiveData<>();
     PostponeProjectTermService postponeProjectTermService;
     PostponeProjectTermFileService postponeProjectTermFileService;
     MutableLiveData<Boolean> isCancelPostponeProjectTerm = new MutableLiveData<>();
@@ -210,5 +212,63 @@ public class AssignmentRepository {
 
     public MutableLiveData<Boolean> getIsCancelPostponeProjectTerm() {
         return isCancelPostponeProjectTerm;
+    }
+
+    public void loadAssignmentWithOutlineFileByStudentIdAndProjectTermId(String studentId, String termId) {
+        Call<Assignment> call = assignmentService.getAssignmentWithOutlineFileByStudentIdAndProjectTermId(studentId, termId);
+        call.enqueue(new Callback<Assignment>() {
+            @Override
+            public void onResponse(Call<Assignment> call, Response<Assignment> response) {
+                if (response.isSuccessful()) {
+                    assignmentWithOutline.setValue(response.body());
+                } else {
+                    try{
+                        if (response.errorBody() != null){
+                            Log.e("Failure_loadAssignmentWithOutlineFileById", "onFailure: " + response.errorBody().string());
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Assignment> call, Throwable throwable) {
+
+            }
+        });
+    }
+
+    public MutableLiveData<Assignment> getAssignmentWithOutline() {
+        return assignmentWithOutline;
+    }
+
+    public void loadAssignmentWithReportFileByStudentIdAndProjectTermId(String studentId, String termId) {
+        Call<Assignment> call = assignmentService.getAssignmentWithReportFileByStudentIdAndProjectTermId(studentId, termId);
+        call.enqueue(new Callback<Assignment>() {
+            @Override
+            public void onResponse(Call<Assignment> call, Response<Assignment> response) {
+                if (response.isSuccessful()) {
+                    assignmentWithReportFile.setValue(response.body());
+                } else {
+                    try{
+                        if (response.errorBody() != null){
+                            Log.e("Failure_loadAssignmentWithReportFileById", "onFailure: " + response.errorBody().string());
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Assignment> call, Throwable throwable) {
+
+            }
+        });
+    }
+
+    public MutableLiveData<Assignment> getAssignmentWithReportFile() {
+        return assignmentWithReportFile;
     }
 }

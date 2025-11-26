@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -31,6 +32,7 @@ import com.example.testui.model.Assignment;
 import com.example.testui.model.Project;
 import com.example.testui.model.ProjectTerm;
 import com.example.testui.model.ReportFile;
+import com.example.testui.model.Status;
 import com.example.testui.model.UploadFile;
 import com.example.testui.untilities.Constants;
 import com.example.testui.untilities.formatter.AssignmentFormatter;
@@ -61,6 +63,7 @@ public class NopDeCuongActivity extends AppCompatActivity {
     String strProjectTerm;
     ProjectTerm projectTerm;
     Assignment assignment;
+    Assignment loadAssignment;
     NopDeCuongViewModel nopDeCuongViewModel;
     String studentId;
     ActivityNopDeCuongBinding binding;
@@ -208,14 +211,13 @@ public class NopDeCuongActivity extends AppCompatActivity {
     }
 
     void fetchDataRecyclerView() {
-        nopDeCuongViewModel.getAssignmentByStudentIdAndTermId(studentId, projectTerm.getId());
-        nopDeCuongViewModel.getAssignmentMutableLiveData().observe(this, result -> {
+        nopDeCuongViewModel.loadAssignmentWithOutlineFile(studentId, projectTerm.getId());
+        nopDeCuongViewModel.getAssignmentWithOutlineFileMutableLiveData().observe(this, result -> {
             assignment = AssignmentFormatter.format(result);
             fetchData();
-            Log.d("Assignment", gson.toJson(assignment));
+            Log.d("StudentID and ProjectTermId", studentId + " " + projectTerm.getId());
             nopDeCuongViewModel.getListReportFileByProjectId(assignment.getProject_id(), Constants.KEY_TYPE_REPORT_OUTLINE);
         });
-
 
         nopDeCuongViewModel.getListReportFileByProjectIdMutableLiveData().observe(this, result -> {
             listReportFile = result;
@@ -225,6 +227,7 @@ public class NopDeCuongActivity extends AppCompatActivity {
         });
     }
 
+    @SuppressLint("SetTextI18n")
     void fetchData() {
         Project project = ProjectFormatter.format(assignment.getProject());
         binding.tvTenDeTai.setText("Đề tài: " + project.getName());
@@ -232,6 +235,27 @@ public class NopDeCuongActivity extends AppCompatActivity {
         String startDate = DateFormatter.formatDate(projectTerm.getStage_timelines().get(1).getStart_date());
         String endDate = DateFormatter.formatDate(projectTerm.getStage_timelines().get(1).getEnd_date());
         binding.tvThoiGianNop.setText(startDate + " - " + endDate);
+        Status status = nopDeCuongViewModel.loadStatusOutline(assignment);
+        binding.tvTrangThaiDeCuong.setText(status.getStrStatus());
+        binding.tvTrangThaiDeCuong.setBackground(getDrawable(status.getBackgroundColor()));
+        if (assignment.getCounter_argument_status() != null) {
+            switch (assignment.getCounter_argument_status()) {
+                case "rejected": {
+                    binding.layoutRevisionNotice.setVisibility(View.VISIBLE);
+                    break;
+                }
+                case "approved": {
+                    binding.layoutApprovedNotice.setVisibility(View.VISIBLE);
+                    break;
+                }
+                default: {
+                    binding.layoutEmptyNotice.setVisibility(View.VISIBLE);
+                    break;
+                }
+            }
+        } else {
+            binding.layoutEmptyNotice.setVisibility(View.VISIBLE);
+        }
     }
 
     void observerData() {

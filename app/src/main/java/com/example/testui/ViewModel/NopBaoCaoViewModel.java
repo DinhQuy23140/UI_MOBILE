@@ -4,15 +4,21 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.OpenableColumns;
+import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.testui.R;
 import com.example.testui.model.Assignment;
+import com.example.testui.model.Project;
 import com.example.testui.model.ReportFile;
+import com.example.testui.model.Status;
 import com.example.testui.repository.AssignmentRepository;
 import com.example.testui.repository.ReportFileRepository;
 import com.example.testui.repository.SinhVienRepository;
+import com.example.testui.untilities.formatter.ProjectFormatter;
+import com.google.gson.Gson;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -25,6 +31,7 @@ public class NopBaoCaoViewModel extends ViewModel {
     AssignmentRepository assignmentRepository;
     SinhVienRepository sinhVienRepository;
     ReportFileRepository reportFileRepository;
+    MutableLiveData<Assignment> assignmentWithReportFile = new MutableLiveData<>();
     MutableLiveData<Boolean> isCreateSuccess = new MutableLiveData<>();
 
     public NopBaoCaoViewModel(Context context) {
@@ -32,6 +39,7 @@ public class NopBaoCaoViewModel extends ViewModel {
         assignmentRepository = new AssignmentRepository();
         sinhVienRepository = new SinhVienRepository(context);
         reportFileRepository = new ReportFileRepository(context);
+        assignmentWithReportFile = assignmentRepository.getAssignmentWithReportFile();
     }
 
     public void getAssignmentByStudentIdAndTermId(String studentId, String termId) {
@@ -105,5 +113,24 @@ public class NopBaoCaoViewModel extends ViewModel {
         out.close();
         inputStream.close();
         return tempFile;
+    }
+
+    public void loadAssignmentWithReportFileByStudentIdAndProjectTermId(String studentId, String termId) {
+        assignmentRepository.loadAssignmentWithReportFileByStudentIdAndProjectTermId(studentId, termId);
+    }
+
+    public MutableLiveData<Assignment> getAssignmentWithReportFile() {
+        return assignmentWithReportFile;
+    }
+
+    public Status loadStatusOutline(Assignment assignment) {
+        Project project = ProjectFormatter.format(assignment.getProject());
+        List<ReportFile> reportFileList = project.getReport_files();
+        Log.d("ListReportFIle", new Gson().toJson(assignment.getProject()));
+        if (reportFileList != null && !reportFileList.isEmpty()) {
+            return new Status(R.drawable.rounded_button_green, "Đã nộp");
+        } else {
+            return new Status(R.drawable.bg_status_pending, "Chưa nộp");
+        }
     }
 }
