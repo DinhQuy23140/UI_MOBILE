@@ -3,6 +3,7 @@ package com.example.testui.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -54,6 +55,7 @@ public class RegisterActivity extends AppCompatActivity {
     void observer() {
         registerViewModel.getRegisterResult().observe(this, result -> {
             if (result) {
+                Toast.makeText(this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(this, LoginActivity.class);
                 startActivity(intent);
                 finish();
@@ -71,7 +73,29 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
         binding.registerBtnRegister.setOnClickListener(register -> {
-            register();
+            if (validate()) {
+                register();
+            }
         });
+    }
+
+    boolean validate() {
+        String fullname = Objects.requireNonNull(binding.registerEtFullname.getText()).toString();
+        String email = binding.registerEtEmail.getText().toString();
+        String password = binding.registerEtPassword.getText().toString();
+        String confirmPassword = binding.registerEtConfirmPassword.getText().toString();
+        if (fullname.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+            Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            Toast.makeText(this, "Email không hợp lệ", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (!password.equals(confirmPassword)) {
+            Toast.makeText(this, "Mật khẩu không khớp", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
     }
 }

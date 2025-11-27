@@ -32,6 +32,7 @@ import com.example.testui.model.Project;
 import com.example.testui.model.ProjectTerm;
 import com.example.testui.model.ReportFile;
 import com.example.testui.model.StageTimeline;
+import com.example.testui.model.Status;
 import com.example.testui.model.UploadFile;
 import com.example.testui.untilities.Constants;
 import com.example.testui.untilities.formatter.AssignmentFormatter;
@@ -207,8 +208,8 @@ public class NopBaoCaoActivity extends AppCompatActivity {
     }
 
     void fetchDataRecyclerView() {
-        nopBaoCaoViewModel.getAssignmentByStudentIdAndTermId(studentId, projectTerm.getId());
-        nopBaoCaoViewModel.getAssignmentMutableLiveData().observe(this, result -> {
+        nopBaoCaoViewModel.loadAssignmentWithReportFileByStudentIdAndProjectTermId(studentId, projectTerm.getId());
+        nopBaoCaoViewModel.getAssignmentWithReportFile().observe(this, result -> {
             assignment = AssignmentFormatter.format(result);
             nopBaoCaoViewModel.getListReportFileByProjectId(assignment.getProject_id(), "report");
             Log.d("Assignment", gson.toJson(assignment));
@@ -223,6 +224,7 @@ public class NopBaoCaoActivity extends AppCompatActivity {
         });
     }
 
+    @SuppressLint("SetTextI18n")
     void loadData() {
         Project project = ProjectFormatter.format(assignment.getProject());
         binding.tvTenDeTai.setText("Đề tài: " + project.getName());
@@ -232,6 +234,9 @@ public class NopBaoCaoActivity extends AppCompatActivity {
         String startDate = DateFormatter.formatDate(stageTimeline.getStart_date());
         String endDate = DateFormatter.formatDate(stageTimeline.getEnd_date());
         binding.tvThoiGianNop.setText(startDate + " - " + endDate);
+        Status status = nopBaoCaoViewModel.loadStatusOutline(assignment);
+        binding.tvTrangThaiBaoCao.setText(status.getStrStatus());
+        binding.tvTrangThaiBaoCao.setBackground(getDrawable(status.getBackgroundColor()));
     }
 
     void observerData() {

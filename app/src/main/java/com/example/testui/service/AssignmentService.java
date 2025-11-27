@@ -40,4 +40,10 @@ public interface AssignmentService {
 
     @GET("assignments/teacher/{teacherId}")
     Call<List<Assignment>> getAssignmentsByTeacherId(@Path("teacherId") String teacherId);
+
+    @GET("assignments/with-outline-file/student/{studentId}/project-term/{projectTermId}")
+    Call<Assignment> getAssignmentWithOutlineFileByStudentIdAndProjectTermId(@Path("studentId") String studentId, @Path("projectTermId") String projectTermId);
+
+    @GET("assignments/with-report-file/student/{studentId}/project-term/{projectTermId}")
+    Call<Assignment> getAssignmentWithReportFileByStudentIdAndProjectTermId(@Path("studentId") String studentId, @Path("projectTermId") String projectTermId);
 }
