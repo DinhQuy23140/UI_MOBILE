@@ -17,11 +17,11 @@ public class RegisterViewModel extends ViewModel {
     public RegisterViewModel(Context context) {
         this.context = context;
         sinhVienRepository = new SinhVienRepository(context);
+        registerResult = sinhVienRepository.getRegisterResult();
     }
 
     public void register(User user) {
         sinhVienRepository.register(user);
-        registerResult = sinhVienRepository.getRegisterResult();
     }
 
     public MutableLiveData<Boolean> getRegisterResult() {

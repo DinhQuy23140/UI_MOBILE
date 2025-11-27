@@ -43,7 +43,7 @@ public class SinhVienRepository {
     MutableLiveData<List<Supervisor>> listSupervisor = new MutableLiveData<>();
     MutableLiveData<Assignment> assignmentByIdStudent = new MutableLiveData<>();
     MutableLiveData<Assignment> recentAssignment = new MutableLiveData<>();
-    MutableLiveData<Boolean> registerResult = new MutableLiveData<Boolean>(false);
+    MutableLiveData<Boolean> registerResult = new MutableLiveData<Boolean>();
     MutableLiveData<List<Teacher>> listTeacher = new MutableLiveData<>();
     SharePreferenceManage sharePreferenceManage;
     // private constructor : singleton access
