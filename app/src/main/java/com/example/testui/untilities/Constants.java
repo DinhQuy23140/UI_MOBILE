@@ -44,4 +44,5 @@ public class Constants {
     public static final String STATUS_REJECTED = "rejected";
     public static final String KEY_CONFIRM_PASSWORD = "password_confirmation";
     public static final String KEY_TOKEN = "token";
+    public static final String KEY_CURRENT_PASSWORD = "current_password";
 }

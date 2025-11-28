@@ -1,6 +1,7 @@
 package com.example.testui.activities;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -59,7 +60,10 @@ public class UpdateInforPersonActivity extends AppCompatActivity {
             finish();
         });
 
-        binding
+        binding.btnChangePassword.setOnClickListener(change -> {
+            Intent intent = new Intent(this, ChangePasswordActivity.class);
+            startActivity(intent);
+        });
     }
 
     void fetchData(){
@@ -84,6 +88,7 @@ public class UpdateInforPersonActivity extends AppCompatActivity {
                 Department department = DepartmentFormatter.format(marjor.getDepartment());
                 Faculties faculties = FacultiesFormatter.format(department.getFaculties());
                 binding.tvSvDepartment.setText(faculties.getCode() + " - " + faculties.getName());
+                binding.tvAccountEmail.setText(user.getEmail());
             }
         });
     }

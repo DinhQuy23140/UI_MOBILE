@@ -46,6 +46,7 @@ public class SinhVienRepository {
     MutableLiveData<List<Teacher>> listTeacher = new MutableLiveData<>();
     MutableLiveData<Boolean> isSendSuccess = new MutableLiveData<>();
     MutableLiveData<Boolean> isResetPasswordSuccess = new MutableLiveData<>();
+    MutableLiveData<Boolean> isChangePasswordSuccess = new MutableLiveData<>();
     SharePreferenceManage sharePreferenceManage;
     // private constructor : singleton access
     public SinhVienRepository(Context context) {
@@ -344,5 +345,34 @@ public class SinhVienRepository {
 
     public MutableLiveData<Boolean> getIsResetPasswordSuccess() {
         return isResetPasswordSuccess;
+    }
+
+    public void changePassword(String token, Map<String, String> body) {
+        Call<ResponseBody> call = resetPasswordService.changePassword(token, body);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.isSuccessful()) {
+                    isChangePasswordSuccess.setValue(true);
+                    Log.d("Change Password Success", response.toString());
+                } else {
+                    isChangePasswordSuccess.setValue(false);
+                    Log.e("Change Password Failure", "Response failure" + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable throwable) {
+                Log.e("Change Password Failure", "Throwable " + throwable);
+            }
+        });
+    }
+
+    public MutableLiveData<Boolean> getIsChangePasswordSuccess() {
+        return isChangePasswordSuccess;
+    }
+
+    public String getAccessToken() {
+        return sharePreferenceManage.getAccessToken();
     }
 }
