@@ -42,4 +42,6 @@ public class Constants {
     public static final String STATUS_PENDING = "pending";
     public static final String STATUS_APPROVED = "approved";
     public static final String STATUS_REJECTED = "rejected";
+    public static final String KEY_CONFIRM_PASSWORD = "password_confirmation";
+    public static final String KEY_TOKEN = "token";
 }
