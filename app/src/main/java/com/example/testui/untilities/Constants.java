@@ -45,4 +45,9 @@ public class Constants {
     public static final String KEY_CONFIRM_PASSWORD = "password_confirmation";
     public static final String KEY_TOKEN = "token";
     public static final String KEY_CURRENT_PASSWORD = "current_password";
+    public static final String KEY_STUDENT_ID = "student_id";
+    public static final String KEY_STUDENT_CODE = "student_code";
+    public static final String KEY_ADDRESS = "address";
+    public static final String KEY_CLASS_CODE = "class_code";
+    public static final String KEY_MAJOR_ID = "major_id";
 }
