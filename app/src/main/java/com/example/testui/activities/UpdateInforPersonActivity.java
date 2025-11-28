@@ -58,6 +58,8 @@ public class UpdateInforPersonActivity extends AppCompatActivity {
         binding.btnBack.setOnClickListener(back -> {
             finish();
         });
+
+        binding
     }
 
     void fetchData(){

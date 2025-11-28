@@ -70,5 +70,7 @@ public class LoginActivity extends AppCompatActivity {
             Intent intent = new Intent(this, ForgotPassActivity.class);
             startActivity(intent);
         });
+
+
     }
 }

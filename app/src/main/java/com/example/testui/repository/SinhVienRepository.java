@@ -14,6 +14,7 @@ import com.example.testui.model.User;
 import com.example.testui.service.ApiService;
 import com.example.testui.service.AssignmentService;
 import com.example.testui.service.AuthService;
+import com.example.testui.service.ResetPasswordService;
 import com.example.testui.service.TeacherService;
 import com.example.testui.service.UserService;
 import com.example.testui.sharepreference.SharePreferenceManage;
@@ -23,20 +24,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-/**
- * Class that requests authentication and user information from the remote data source and
- * maintains an in-memory cache of login status and user credentials information.
- */
 public class SinhVienRepository {
     ApiService apiService;
     AuthService authService;
     AssignmentService assignmentService;
     UserService userService;
     TeacherService teacherService;
+    ResetPasswordService resetPasswordService;
     private static volatile SinhVienRepository instance;
     MutableLiveData<Boolean> loginResult = new MutableLiveData<>(false);
     MutableLiveData<Student> student = new MutableLiveData<>();
@@ -45,6 +44,8 @@ public class SinhVienRepository {
     MutableLiveData<Assignment> recentAssignment = new MutableLiveData<>();
     MutableLiveData<Boolean> registerResult = new MutableLiveData<Boolean>();
     MutableLiveData<List<Teacher>> listTeacher = new MutableLiveData<>();
+    MutableLiveData<Boolean> isSendSuccess = new MutableLiveData<>();
+    MutableLiveData<Boolean> isResetPasswordSuccess = new MutableLiveData<>();
     SharePreferenceManage sharePreferenceManage;
     // private constructor : singleton access
     public SinhVienRepository(Context context) {
@@ -53,6 +54,7 @@ public class SinhVienRepository {
         assignmentService = Client.getInstance().create(AssignmentService.class);
         userService = Client.getInstance().create(UserService.class);
         teacherService = Client.getInstance().create(TeacherService.class);
+        resetPasswordService = Client.getInstance().create(ResetPasswordService.class);
         sharePreferenceManage = new SharePreferenceManage(context);
     }
 
@@ -292,5 +294,55 @@ public class SinhVienRepository {
 
     public MutableLiveData<List<Teacher>> getListTeacher() {
         return listTeacher;
+    }
+
+    public void sendResetPassword(Map<String, String> body) {
+        Call<ResponseBody> call = resetPasswordService.sendResetPassword(body);
+        call.enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) {
+                if (response.isSuccessful()) {
+                    isSendSuccess.setValue(true);
+                    Log.d("Send-success", response.body().toString());
+                } else {
+                    isSendSuccess.setValue(false);
+                    Log.e("Send-fail", "Response not successful: " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable throwable) {
+                Log.e("Send-error", "Failed " + throwable);
+            }
+        });
+    }
+
+    public MutableLiveData<Boolean> getIsSendSuccess() {
+        return isSendSuccess;
+    }
+
+    public void resetPassword(Map<String, String> body) {
+        Call<ResponseBody> call = resetPasswordService.resetPassword(body);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.isSuccessful()) {
+                    isResetPasswordSuccess.setValue(true);
+                    Log.d("Reset Success", response.toString());
+                } else {
+                    isResetPasswordSuccess.setValue(false);
+                    Log.e("Reset Failured", "Response failure" + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable throwable) {
+                Log.e("Reset Failure", "Throwable " + throwable);
+            }
+        });
+    }
+
+    public MutableLiveData<Boolean> getIsResetPasswordSuccess() {
+        return isResetPasswordSuccess;
     }
 }
