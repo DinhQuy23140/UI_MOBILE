@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/bg_info_group"
     android:orientation="vertical"
     android:padding="4dp">
@@ -70,6 +71,50 @@
         app:cardCornerRadius="12dp"
         app:cardElevation="0dp"/>
 
+    <!-- Trạng thái đề cương -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="12dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="Trạng thái:"
+            android:textColor="#666666"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvTrangThaiBaoCao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_status_pending"
+            android:gravity="center"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="4dp"
+            android:textColor="@android:color/white"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <!-- Hiển thị ngày cập nhật trạng thái -->
+        <TextView
+            android:id="@+id/tvNgayCapNhatTrangThai"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:text=""
+            android:textColor="#999999"
+            android:textSize="12sp" />
+    </LinearLayout>
+
     <!-- Chọn file -->
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardFileSelection"
@@ -130,62 +175,6 @@
             </LinearLayout>
 
             <!-- Thông tin file đã chọn -->
-            <LinearLayout
-                android:id="@+id/llFileInfo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:background="#E8F5E9"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:padding="12dp"
-                android:visibility="gone">
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_marginEnd="8dp"
-                    android:src="@drawable/ic_file"
-                    app:tint="#4CAF50" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/tvFileName"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:ellipsize="end"
-                        android:maxLines="1"
-                        android:text="BaoCaoDoAn.pdf"
-                        android:textColor="#333333"
-                        android:textSize="13sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/tvFileSize"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:text="2.5 MB"
-                        android:textColor="#666666"
-                        android:textSize="11sp" />
-
-                </LinearLayout>
-
-                <ImageButton
-                    android:id="@+id/ibRemoveFile"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:padding="4dp"
-                    android:src="@drawable/ic_close_circle"
-                    app:tint="#F44336" />
-
-            </LinearLayout>
 
             <!-- Yêu cầu định dạng -->
             <LinearLayout
@@ -216,100 +205,14 @@
 
     </com.google.android.material.card.MaterialCardView>
 
-    <!-- Ghi chú (tùy chọn) -->
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tilNote"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        app:boxBackgroundMode="outline"
-        app:boxCornerRadiusBottomEnd="12dp"
-        app:boxCornerRadiusBottomStart="12dp"
-        app:boxCornerRadiusTopEnd="12dp"
-        app:boxCornerRadiusTopStart="12dp"
-        app:counterEnabled="true"
-        app:counterMaxLength="200"
-        app:hintTextColor="#666666">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etNote"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:gravity="top"
-            android:hint="Ghi chú (tùy chọn)"
-            android:inputType="textMultiLine"
-            android:maxLines="3"
-            android:padding="16dp"
-            android:textColor="#333333"
-            android:textSize="14sp" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <!-- Progress bar (khi đang upload) -->
-    <LinearLayout
-        android:id="@+id/llUploadProgress"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:orientation="vertical"
-        android:visibility="gone">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Đang tải lên..."
-                android:textColor="#666666"
-                android:textSize="12sp" />
-
-            <TextView
-                android:id="@+id/tvProgressPercent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0%"
-                android:textColor="#2196F3"
-                android:textSize="12sp"
-                android:textStyle="bold" />
-
-        </LinearLayout>
-
-        <com.google.android.material.progressindicator.LinearProgressIndicator
-            android:id="@+id/progressBar"
-            android:layout_width="match_parent"
-            android:layout_height="4dp"
-            app:indicatorColor="#2196F3"
-            app:trackColor="#E0E0E0"
-            app:trackCornerRadius="2dp" />
-
-    </LinearLayout>
-
-    <!-- Thông báo lỗi -->
-    <TextView
-        android:id="@+id/tvError"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:background="#FFEBEE"
-        android:gravity="center"
-        android:padding="12dp"
-        android:textColor="#F44336"
-        android:textSize="12sp"
-        android:visibility="gone" />
-
     <!-- Nút hành động -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_report"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="10dp"
+        tools:listitem="@layout/item_upload_attachment" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
