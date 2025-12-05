@@ -1,6 +1,8 @@
 package com.example.testui.activities;
 
 import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -21,12 +23,17 @@ import com.example.testui.model.Faculties;
 import com.example.testui.model.Marjor;
 import com.example.testui.model.Student;
 import com.example.testui.model.User;
+import com.example.testui.untilities.Constants;
 import com.example.testui.untilities.formatter.DepartmentFormatter;
 import com.example.testui.untilities.formatter.FacultiesFormatter;
 import com.example.testui.untilities.formatter.MarjorFormatter;
 import com.example.testui.untilities.formatter.StudentFormatter;
 import com.example.testui.untilities.formatter.UserFormatter;
 import com.google.gson.Gson;
+
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 public class UpdateInforPersonActivity extends AppCompatActivity {
 
@@ -46,6 +53,7 @@ public class UpdateInforPersonActivity extends AppCompatActivity {
         });
 
         init();
+        observed();
         setupClick();
         fetchData();
     }
@@ -59,7 +67,55 @@ public class UpdateInforPersonActivity extends AppCompatActivity {
             finish();
         });
 
-        binding
+        binding.btnChangePassword.setOnClickListener(change -> {
+            Intent intent = new Intent(this, ChangePasswordActivity.class);
+            startActivity(intent);
+        });
+
+        binding.tvSvDob.setOnClickListener(date -> {
+            Calendar calendar = Calendar.getInstance();
+
+            int year = calendar.get(Calendar.YEAR);
+            int month = calendar.get(Calendar.MONTH);
+            int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+            DatePickerDialog datePickerDialog = new DatePickerDialog(
+                    this,
+                    (view, year1, monthOfYear, dayOfMonth) -> {
+                        // Format dd/MM/yyyy
+                        String selectedDate = String.format("%02d/%02d/%04d",
+                                dayOfMonth, (monthOfYear + 1), year1);
+
+                        binding.tvSvDob.setText(selectedDate);
+                    },
+                    year, month, day
+            );
+            datePickerDialog.show();
+        });
+
+        binding.btnSave.setOnClickListener(save -> {
+            String user_Id = homeViewModel.getUserId();
+            String student_id = homeViewModel.getStudentId();
+            String student_code = binding.tvSvMsv.getText().toString();
+            String fullname = binding.tvSvFullname.getText().toString();
+            String[] dob = binding.tvSvDob.getText().toString().split("/");
+            String converDob = dob[2] + "-" + dob[1] + "-" + dob[0];
+            String phone = binding.tvSvPhone.getText().toString();
+            String address = binding.tvSvAddress.getText().toString();
+            String class_code = binding.tvSvClass.getText().toString();
+            String marjor_id = binding.tvSvMajor.getText().toString();
+            Map<String, String> body = new HashMap<>();
+            body.put(Constants.KEY_USER_ID, user_Id);
+            body.put(Constants.KEY_STUDENT_ID, student_id);
+            body.put(Constants.KEY_STUDENT_CODE, student_code);
+            body.put(Constants.KEY_FULL_NAME, fullname);
+            body.put(Constants.KEY_DOB, converDob);
+            body.put(Constants.KEY_PHONE, phone);
+            body.put(Constants.KEY_ADDRESS, address);
+            body.put(Constants.KEY_CLASS_CODE, class_code);
+            body.put(Constants.KEY_MAJOR_ID, marjor_id);
+            homeViewModel.updateInfStudent(student_id, body);
+        });
     }
 
     void fetchData(){
@@ -72,7 +128,9 @@ public class UpdateInforPersonActivity extends AppCompatActivity {
                 binding.tvSvMsv.setText(student.getStudent_code());
                 User user = UserFormatter.format(student.getUser());
                 binding.tvSvFullname.setText(user.getFullname());
-                binding.tvSvDob.setText(user.getDob());
+                String[] dob = user.getDob().split("-");
+                String displayDob = dob[2] + "/" + dob[1] + "/" + dob[0];
+                binding.tvSvDob.setText(displayDob);
                 binding.tvSvEmail.setText(user.getEmail());
                 binding.tvSvPhone.setText(user.getPhone());
                 String address = user.getAddress();
@@ -84,6 +142,17 @@ public class UpdateInforPersonActivity extends AppCompatActivity {
                 Department department = DepartmentFormatter.format(marjor.getDepartment());
                 Faculties faculties = FacultiesFormatter.format(department.getFaculties());
                 binding.tvSvDepartment.setText(faculties.getCode() + " - " + faculties.getName());
+                binding.tvAccountEmail.setText(user.getEmail());
+            }
+        });
+    }
+
+    void observed() {
+        homeViewModel.getIsUpdateSuccess().observe(this, result -> {
+            if (result) {
+                Toast.makeText(this, "Cập nhập thông tin thành công", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Có lỗi xảy ra", Toast.LENGTH_SHORT).show();
             }
         });
     }

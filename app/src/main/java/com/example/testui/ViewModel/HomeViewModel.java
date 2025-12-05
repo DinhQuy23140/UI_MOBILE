@@ -25,9 +25,11 @@ public class HomeViewModel extends ViewModel {
     MutableLiveData<Student> getStudent = new MutableLiveData<>();
     MutableLiveData<String> studentId = new MutableLiveData<>();
     MutableLiveData<Assignment> recentAssignment;
+    MutableLiveData<Boolean> isUpdateSuccess = new MutableLiveData<>();
     private SinhVienRepository sinhVienRepository;
     public HomeViewModel(Context context) {
         this.sinhVienRepository = new SinhVienRepository(context);
+        isUpdateSuccess = sinhVienRepository.getIsUpdateSuccess();
     }
 
     public MutableLiveData<Student> getGetStudent() {
@@ -117,5 +119,17 @@ public class HomeViewModel extends ViewModel {
 
     public void logout() {
         sinhVienRepository.logout();
+    }
+
+    public String getUserId() {
+        return sinhVienRepository.getUserId();
+    }
+
+    public void updateInfStudent(String studentId, Map<String, String> body) {
+        sinhVienRepository.updateInfStudent(studentId, body);
+    }
+
+    public MutableLiveData<Boolean> getIsUpdateSuccess() {
+        return isUpdateSuccess;
     }
 }

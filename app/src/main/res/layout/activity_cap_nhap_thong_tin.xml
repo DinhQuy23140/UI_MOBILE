@@ -297,7 +297,7 @@
                                 android:src="@drawable/ic_date_range"
                                 app:tint="#667EEA" />
 
-                            <EditText
+                            <TextView
                                 android:id="@+id/tv_sv_dob"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
@@ -389,7 +389,7 @@
                                 android:src="@drawable/ic_email"
                                 app:tint="#667EEA" />
 
-                            <EditText
+                            <TextView
                                 android:id="@+id/tv_sv_email"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"

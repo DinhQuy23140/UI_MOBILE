@@ -51,52 +51,52 @@
                 android:textStyle="bold" />
 
             <!-- Thời gian upload -->
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+<!--            <LinearLayout-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="4dp"-->
+<!--                android:gravity="center_vertical"-->
+<!--                android:orientation="horizontal">-->
 
-                <ImageView
-                    android:layout_width="14dp"
-                    android:layout_height="14dp"
-                    android:layout_marginEnd="4dp"
-                    android:src="@drawable/ic_calendar_start"
-                    android:tint="#757575" />
+<!--                <ImageView-->
+<!--                    android:layout_width="14dp"-->
+<!--                    android:layout_height="14dp"-->
+<!--                    android:layout_marginEnd="4dp"-->
+<!--                    android:src="@drawable/ic_calendar_start"-->
+<!--                    app:tint="#757575" />-->
 
-                <TextView
-                    android:id="@+id/tvUploadTime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="2 giờ trước"
-                    android:textColor="#757575"
-                    android:textSize="12sp" />
-            </LinearLayout>
+<!--                <TextView-->
+<!--                    android:id="@+id/tvUploadTime"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="2 giờ trước"-->
+<!--                    android:textColor="#757575"-->
+<!--                    android:textSize="12sp" />-->
+<!--            </LinearLayout>-->
 
             <!-- Kích thước file -->
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+<!--            <LinearLayout-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="2dp"-->
+<!--                android:gravity="center_vertical"-->
+<!--                android:orientation="horizontal">-->
 
-                <ImageView
-                    android:layout_width="14dp"
-                    android:layout_height="14dp"
-                    android:layout_marginEnd="4dp"
-                    android:src="@drawable/ic_file_size"
-                    android:tint="#757575" />
+<!--                <ImageView-->
+<!--                    android:layout_width="14dp"-->
+<!--                    android:layout_height="14dp"-->
+<!--                    android:layout_marginEnd="4dp"-->
+<!--                    android:src="@drawable/ic_file_size"-->
+<!--                    app:tint="#757575" />-->
 
-                <TextView
-                    android:id="@+id/tvFileSize"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="2.5 MB"
-                    android:textColor="#757575"
-                    android:textSize="12sp" />
-            </LinearLayout>
+<!--                <TextView-->
+<!--                    android:id="@+id/tvFileSize"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="2.5 MB"-->
+<!--                    android:textColor="#757575"-->
+<!--                    android:textSize="12sp" />-->
+<!--            </LinearLayout>-->
         </LinearLayout>
 
         <!-- Action buttons -->

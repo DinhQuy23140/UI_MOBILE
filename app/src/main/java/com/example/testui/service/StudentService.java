@@ -3,7 +3,9 @@ package com.example.testui.service;
 import com.example.testui.model.Student;
 
 import java.util.List;
+import java.util.Map;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -24,8 +26,9 @@ public interface StudentService {
     Call<Student> getStudentById(@Path("studentId") String studentId);
 
     @PUT("students/{studentId}")
-    Call<Student> updateStudent(@Path("studentId") String studentId, @Body Student student);
+    Call<ResponseBody> updateStudent(@Path("studentId") String studentId, @Body Map<String, String> body);
 
     @DELETE("students/{studentId}")
     Call<Student> deleteStudent(@Path("studentId") String studentId);
+
 }
