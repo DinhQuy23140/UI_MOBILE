@@ -26,6 +26,7 @@ import com.example.testui.R;
 import com.example.testui.Supabase.UploadManage;
 import com.example.testui.ViewModel.ProgressLogDetailViewModel;
 import com.example.testui.adapter.AttachmentAdapter;
+import com.example.testui.adapter.CommentLogAdapter;
 import com.example.testui.adapter.UploadAttachmentAdapter;
 import com.example.testui.adapter.UploadReportLogAdapter;
 import com.example.testui.adapter.WorkLogAdapter;
@@ -36,6 +37,7 @@ import com.example.testui.interfaces.OnClickItem;
 import com.example.testui.interfaces.UploadDocumentClick;
 import com.example.testui.model.Assignment;
 import com.example.testui.model.Attachment;
+import com.example.testui.model.CommentLog;
 import com.example.testui.model.ProgressLog;
 import com.example.testui.model.Project;
 import com.example.testui.model.ReportFile;
@@ -79,6 +81,8 @@ public class ProgressLogDetailActivity extends AppCompatActivity {
     List<String> listWork = new ArrayList<>();
     WorkLogAdapter workLogAdapter;
     AddItemLogBinding addItemLogBinding;
+    CommentLogAdapter commentLogAdapter;
+    List<CommentLog> listCommentLog = new ArrayList<>();
 
     @SuppressLint({"SetTextI18n", "UseCompatLoadingForDrawables"})
     @Override
@@ -110,6 +114,7 @@ public class ProgressLogDetailActivity extends AppCompatActivity {
         assignment = AssignmentFormatter.format(gson.fromJson(strAssignment, Assignment.class));
         progressLogJson = intent.getStringExtra(Constants.KEY_PROGRESS_LOG);
         progressLog = ProgressLogFormatter.format(gson.fromJson(progressLogJson, ProgressLog.class));
+        Log.d("ProgressLog", progressLogJson);
         progressLogDetailViewModel = new ProgressLogDetailViewModel(this);
     }
 
@@ -126,6 +131,15 @@ public class ProgressLogDetailActivity extends AppCompatActivity {
         binding.rvWeeklyTasks.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         workLogAdapter = new WorkLogAdapter(this, new ArrayList<>());
         binding.rvWeeklyTasks.setAdapter(workLogAdapter);
+
+        binding.rvCommentLogs.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        commentLogAdapter = new CommentLogAdapter(this, new ArrayList<>(), new OnClickItem() {
+            @Override
+            public void onClickItem(int position) {
+
+            }
+        });
+        binding.rvCommentLogs.setAdapter(commentLogAdapter);
     }
 
     void setupClick() {
@@ -193,6 +207,11 @@ public class ProgressLogDetailActivity extends AppCompatActivity {
         }
 
         adapter.updateData(progressLog.getAttachments());
+
+        listCommentLog = progressLog.getComment_logs();
+        if (listCommentLog != null && !listCommentLog.isEmpty()) {
+            commentLogAdapter.updateData(listCommentLog);
+        }
     }
 
     void loadDataDialogEdit(){

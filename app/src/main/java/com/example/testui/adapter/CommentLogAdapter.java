@@ -1,5 +1,6 @@
 package com.example.testui.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.testui.R;
 import com.example.testui.interfaces.OnClickItem;
 import com.example.testui.model.CommentLog;
+import com.example.testui.untilities.formatter.DateFormatter;
 
 import java.util.List;
 
@@ -37,14 +39,20 @@ public class CommentLogAdapter extends RecyclerView.Adapter<CommentLogAdapter.Co
     @Override
     public void onBindViewHolder(@NonNull CommentLogViewHolder holder, int position) {
         CommentLog commentLog = listCommentLog.get(position);
-        holder.tvUsername.setText(commentLog.getContent());
-        holder.tvTime.setText(commentLog.getCreated_at());
-        holder.tvCommentContent.setText(commentLog.getCreated_at());
+        holder.tvUsername.setText(commentLog.getSupervisor().getTeacher().getUser().getFullname());
+        holder.tvTime.setText(DateFormatter.formatDate(commentLog.getCreated_at()));
+        holder.tvCommentContent.setText(commentLog.getContent());
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    public void updateData(List<CommentLog> listCommentLog) {
+        this.listCommentLog = listCommentLog;
+        notifyDataSetChanged();
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return listCommentLog.size();
     }
 
     public class CommentLogViewHolder extends RecyclerView.ViewHolder {

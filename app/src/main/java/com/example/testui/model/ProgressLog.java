@@ -19,7 +19,7 @@ public class ProgressLog {
     private String instructor_status; // Trạng thái đánh giá từ giảng viên
     private int backgroundInstructor, backgroundStudent;
     Project project;
-    private  List<CommentLog> commentLogs;
+    private  List<CommentLog> comment_logs;
 
     public ProgressLog() {
     }
@@ -61,12 +61,12 @@ public class ProgressLog {
         this.content = content;
     }
 
-    public List<CommentLog> getCommentLogs() {
-        return commentLogs;
+    public List<CommentLog> getComment_logs() {
+        return comment_logs;
     }
 
-    public void setCommentLogs(List<CommentLog> commentLogs) {
-        this.commentLogs = commentLogs;
+    public void setComment_logs(List<CommentLog> comment_logs) {
+        this.comment_logs = comment_logs;
     }
 
     public List<Attachment> getAttachments() {
