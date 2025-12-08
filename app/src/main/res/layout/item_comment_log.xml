@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
+    android:layout_marginVertical="8dp"
     app:cardBackgroundColor="#FFFFFF"
     app:cardCornerRadius="16dp"
     app:cardElevation="2dp"
@@ -20,8 +20,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="12dp">
+            android:layout_marginBottom="12dp"
+            android:orientation="horizontal">
 
             <!-- Avatar -->
             <com.google.android.material.card.MaterialCardView
@@ -36,7 +36,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
                     android:background="@drawable/ic_user_placeholder"
-                    android:scaleType="centerCrop"/>
+                    android:scaleType="centerCrop" />
 
             </com.google.android.material.card.MaterialCardView>
 
@@ -44,9 +44,9 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
                 android:layout_weight="1"
-                android:orientation="vertical"
-                android:layout_marginStart="12dp">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/tvUserName"
@@ -60,9 +60,9 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
+                    android:layout_marginTop="2dp"
                     android:gravity="center_vertical"
-                    android:layout_marginTop="2dp">
+                    android:orientation="horizontal">
 
                     <ImageView
                         android:layout_width="14dp"
@@ -92,11 +92,11 @@
             android:id="@+id/tvCommentContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:lineSpacingExtra="4dp"
             android:text="Đây là nội dung nhận xét về công việc. Nhận xét này có thể dài hoặc ngắn tùy theo người dùng nhập vào."
             android:textColor="#333333"
-            android:textSize="14sp"
-            android:lineSpacingExtra="4dp"
-            android:layout_marginBottom="12dp" />
+            android:textSize="14sp" />
 
         <!-- Footer với các action -->
 

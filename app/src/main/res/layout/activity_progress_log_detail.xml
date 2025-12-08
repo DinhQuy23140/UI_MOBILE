@@ -605,7 +605,15 @@
                                     android:textColor="#333333"
                                     android:textSize="12sp"
                                     android:textStyle="bold" />
+
                             </LinearLayout>
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/rv_comment_logs"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                tools:listitem="@layout/item_comment_log"
+                                tools:itemCount="1"/>
 
                             <TextView
                                 android:id="@+id/tvInstructorComment"

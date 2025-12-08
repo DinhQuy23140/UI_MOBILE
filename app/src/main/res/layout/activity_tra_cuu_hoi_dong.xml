@@ -540,36 +540,6 @@
                                 android:textStyle="bold" />
                         </LinearLayout>
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:layout_width="16dp"
-                                android:layout_height="16dp"
-                                android:layout_marginEnd="8dp"
-                                android:src="@drawable/ic_id_card"
-                                app:tint="#FF6B35" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Số thứ tự"
-                                android:textColor="#666666"
-                                android:textSize="12sp" />
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="end"
-                                android:text="-"
-                                android:textColor="#1A1A1A"
-                                android:textSize="12sp"
-                                android:textStyle="bold" />
-                        </LinearLayout>
                     </LinearLayout>
 
                 </LinearLayout>
@@ -695,36 +665,6 @@
                                 android:textStyle="bold" />
                         </LinearLayout>
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:layout_width="16dp"
-                                android:layout_height="16dp"
-                                android:layout_marginEnd="8dp"
-                                android:src="@drawable/ic_id_card"
-                                app:tint="#4CAF50" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Số thứ tự"
-                                android:textColor="#666666"
-                                android:textSize="12sp" />
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="end"
-                                android:text="-"
-                                android:textColor="#1A1A1A"
-                                android:textSize="12sp"
-                                android:textStyle="bold" />
-                        </LinearLayout>
                     </LinearLayout>
 
                 </LinearLayout>
