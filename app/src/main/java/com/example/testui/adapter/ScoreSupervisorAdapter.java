@@ -15,6 +15,7 @@ import com.example.testui.model.AssignmentSupervisor;
 import com.example.testui.model.Supervisor;
 import com.example.testui.model.Teacher;
 import com.example.testui.model.User;
+import com.example.testui.untilities.formatter.DateFormatter;
 import com.example.testui.untilities.formatter.SupervisorFormatter;
 import com.example.testui.untilities.formatter.TeacherFormatter;
 import com.example.testui.untilities.formatter.UserFormatter;
@@ -47,7 +48,7 @@ public class ScoreSupervisorAdapter extends RecyclerView.Adapter<ScoreSupervisor
         holder.tvSupervisorName.setText(user.getFullname());
         if (assignmentSupervisor.getScore_report() != null) {
             holder.tvScore.setText(String.valueOf(assignmentSupervisor.getScore_report()));
-            holder.tvTime.setText(assignmentSupervisor.getUpdated_at());
+            holder.tvTime.setText(DateFormatter.formatDate(assignmentSupervisor.getUpdated_at()));
         }
         holder.tvComment.setText(assignmentSupervisor.getComments());
     }

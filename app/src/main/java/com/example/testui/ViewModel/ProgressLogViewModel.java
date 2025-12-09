@@ -24,9 +24,13 @@ public class ProgressLogViewModel extends ViewModel {
     MutableLiveData<List<ProgressLog>> progressLogByProjectId = new MutableLiveData<>();
     MutableLiveData<Boolean> isCreateSuccess = new MutableLiveData<>();
     MutableLiveData<ProgressLog> progressLogMutableLiveData = new MutableLiveData<>();
+    MutableLiveData<Boolean> isCreateProgressLog = new MutableLiveData<>();
 
     public ProgressLogViewModel() {
         this.progressLogRepository = new ProgressLogRepository();
+        progressLogByProjectId = progressLogRepository.getProgressLogByProjectId();
+        progressLogMutableLiveData = progressLogRepository.getResponseProgressLog();
+        isCreateProgressLog = progressLogRepository.getIsCreateSuccess();
     }
 
     public void getAllProgressLog() {
@@ -40,7 +44,6 @@ public class ProgressLogViewModel extends ViewModel {
 
     public void getProgressLogByProjectId(String projectId) {
         progressLogRepository.getProgressLogByProjectId(projectId);
-        progressLogByProjectId = progressLogRepository.getProgressLogByProjectId();
     }
 
     public MutableLiveData<List<ProgressLog>> getProgressLogByProjectId() {
@@ -65,10 +68,13 @@ public class ProgressLogViewModel extends ViewModel {
 
     public void createProgressLog(Map<String, String> progressLog) {
         progressLogRepository.createProgressLog(progressLog);
-        progressLogMutableLiveData = progressLogRepository.getResponseProgressLog();
     }
 
     public MutableLiveData<ProgressLog> getProgressLogMutableLiveData() {
         return progressLogMutableLiveData;
+    }
+
+    public MutableLiveData<Boolean> getIsCreateProgressLog() {
+        return isCreateProgressLog;
     }
 }

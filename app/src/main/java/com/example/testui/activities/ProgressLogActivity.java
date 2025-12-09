@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
@@ -62,6 +63,7 @@ public class ProgressLogActivity extends AppCompatActivity {
         });
 
         serialize();
+        observe();
         createDialog();
         datePicket();
         setupClick();
@@ -144,22 +146,6 @@ public class ProgressLogActivity extends AppCompatActivity {
     void loadProgressLog() {
         if ( projectId != null && !projectId.isEmpty()) {
             progressLogViewModel.getProgressLogByProjectId(projectId);
-            progressLogViewModel.getProgressLogByProjectId().observe(this, result -> {
-                if (result != null && !result.isEmpty()) {
-                    Log.d("Progress", gson.toJson(result));
-                    binding.tvLogCount.setText(Integer.toString(result.size()));
-                    processLogAdapter.updateData(result); // thêm hàm update trong adapter
-                    binding.rvProgressLogs.setVisibility(View.VISIBLE);
-                    binding.emptyState.setVisibility(View.GONE);
-                } else {
-                    binding.rvProgressLogs.setVisibility(View.GONE);
-                    binding.emptyState.setVisibility(View.VISIBLE);
-                }
-                int countProcess = progressLogViewModel.countProgressProcess(result);
-                int countComplete = progressLogViewModel.countProgressComplete(result);
-                binding.tvInProgressCount.setText(Integer.toString(countProcess));
-                binding.tvCompletedCount.setText(Integer.toString(countComplete));
-            });
         } else {
             binding.emptyState.setVisibility(View.VISIBLE);
             binding.rvProgressLogs.setVisibility(View.GONE);
@@ -180,8 +166,33 @@ public class ProgressLogActivity extends AppCompatActivity {
     void loadData() {
         Project project = ProjectFormatter.format(assignment.getProject());
         binding.tvHint.setText("Đề tài: " + project.getName());
-        progressLogViewModel.getProgressLogMutableLiveData().observe(this, result -> {
-            Log.d("Result create", gson.toJson(result));
+    }
+
+    void observe(){
+        progressLogViewModel.getProgressLogByProjectId().observe(this, result -> {
+            if (result != null && !result.isEmpty()) {
+                Log.d("Progress", gson.toJson(result));
+                binding.tvLogCount.setText(Integer.toString(result.size()));
+                processLogAdapter.updateData(result); // thêm hàm update trong adapter
+                binding.rvProgressLogs.setVisibility(View.VISIBLE);
+                binding.emptyState.setVisibility(View.GONE);
+            } else {
+                binding.rvProgressLogs.setVisibility(View.GONE);
+                binding.emptyState.setVisibility(View.VISIBLE);
+            }
+            int countProcess = progressLogViewModel.countProgressProcess(result);
+            int countComplete = progressLogViewModel.countProgressComplete(result);
+            binding.tvInProgressCount.setText(Integer.toString(countProcess));
+            binding.tvCompletedCount.setText(Integer.toString(countComplete));
+        });
+
+        progressLogViewModel.getIsCreateProgressLog().observe(this, result -> {
+            if (result) {
+                Toast.makeText(this, "Tạo nhật ký thành công", Toast.LENGTH_SHORT).show();
+                loadProgressLog();
+            } else {
+                Toast.makeText(this, "Tạo nhật ký thất bại", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 
