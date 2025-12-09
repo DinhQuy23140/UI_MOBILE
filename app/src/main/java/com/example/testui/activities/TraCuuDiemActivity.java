@@ -36,6 +36,7 @@ import com.example.testui.untilities.formatter.AssignmentFormatter;
 import com.example.testui.untilities.formatter.CouncilFormatter;
 import com.example.testui.untilities.formatter.CouncilMemberFormatter;
 import com.example.testui.untilities.formatter.CouncilProjectFormatter;
+import com.example.testui.untilities.formatter.DateFormatter;
 import com.example.testui.untilities.formatter.ProjectFormatter;
 import com.example.testui.untilities.formatter.SupervisorFormatter;
 import com.example.testui.untilities.formatter.TeacherFormatter;
@@ -128,7 +129,7 @@ public class TraCuuDiemActivity extends AppCompatActivity {
         binding.txtAdvisorName.setText(user.getFullname());
         binding.txtAdvisorScore.setText(councilProject.getReview_score());
         binding.txtAdvisorComment.setText(councilProject.getComments());
-        binding.txtAdvisorScoreDate.setText(councilProject.getUpdated_at());
+        binding.txtAdvisorScoreDate.setText(DateFormatter.formatDate(councilProject.getUpdated_at()));
 
         List<CouncilProjectDefence> listCouncilMember = councilProject.getCouncil_project_defences();
         int count = (listCouncilMember == null) ? 0 : listCouncilMember.size();
