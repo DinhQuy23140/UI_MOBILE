@@ -300,7 +300,7 @@
                 android:layout_height="48dp"
                 android:layout_marginStart="12dp"
                 android:layout_weight="1"
-                android:text="Nộp đề cương"
+                android:text="Nộp báo cáo"
                 android:textSize="15sp"
                 app:backgroundTint="#2196F3"
                 app:cornerRadius="12dp"

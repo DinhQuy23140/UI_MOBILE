@@ -61,8 +61,8 @@ public class ProgressLogDetailActivity extends AppCompatActivity {
     ActivityProgressLogDetailBinding binding;
     AttachmentAdapter adapter;
     Intent intent;
-    String progressLogJson = "";
-    ProgressLog progressLog;
+    String progressLogJson = "", progressLogId;
+    ProgressLog progressLog, getProgressLog;
     Gson gson;
     AlertDialog dialog, dialogEdit;
     AlertDialog.Builder builder, alertBuilder;
@@ -98,10 +98,10 @@ public class ProgressLogDetailActivity extends AppCompatActivity {
         });
 
         init();
+        observer();
         createDialogEdit();
         setupClick();
         setupRecyclerView();
-        loadData();
     }
 
     void init() {
@@ -113,9 +113,11 @@ public class ProgressLogDetailActivity extends AppCompatActivity {
         strAssignment = intent.getStringExtra(Constants.KEY_ASSIGNMENT);
         assignment = AssignmentFormatter.format(gson.fromJson(strAssignment, Assignment.class));
         progressLogJson = intent.getStringExtra(Constants.KEY_PROGRESS_LOG);
-        progressLog = ProgressLogFormatter.format(gson.fromJson(progressLogJson, ProgressLog.class));
+        getProgressLog = ProgressLogFormatter.format(gson.fromJson(progressLogJson, ProgressLog.class));
+        progressLogId = getProgressLog.getId();
         Log.d("ProgressLog", progressLogJson);
         progressLogDetailViewModel = new ProgressLogDetailViewModel(this);
+        progressLogDetailViewModel.getProgressLogById(progressLogId);
     }
 
     void setupRecyclerView() {
@@ -214,6 +216,22 @@ public class ProgressLogDetailActivity extends AppCompatActivity {
         }
     }
 
+    void observer(){
+        progressLogDetailViewModel.getIsUploadSuccess().observe(this, isUploadSuccess -> {
+            if (isUploadSuccess) {
+                Toast.makeText(this, "Upload thành công", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Upload thất bại", Toast.LENGTH_SHORT).show();
+            }
+        });
+        progressLogDetailViewModel.getGetProgressLogById().observe(this, result -> {
+            if (result != null) {
+                progressLog = ProgressLogFormatter.format(result);
+                loadData();
+            }
+        });
+    }
+
     void loadDataDialogEdit(){
         addItemLogBinding.etTaskName.setText(progressLog.getTitle());
         addItemLogBinding.etDescription.setText(progressLog.getDescription());
@@ -275,6 +293,7 @@ public class ProgressLogDetailActivity extends AppCompatActivity {
 
                     }
                 });
+                progressLogDetailViewModel.getProgressLogById(progressLogId);
             } else {
                 Toast.makeText(this, "Vui lòng chọn file", Toast.LENGTH_SHORT).show();
             }
