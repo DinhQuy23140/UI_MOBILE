@@ -27,6 +27,7 @@ public class ProgressLogRepository {
     MutableLiveData<List<ProgressLog>> progressLogByProjectId = new MutableLiveData<>();
     MutableLiveData<Boolean> isCreateSuccess = new MutableLiveData<>();
     MutableLiveData<ProgressLog> responseProgressLog = new MutableLiveData<>();
+    MutableLiveData<ProgressLog> getProgressLogById = new MutableLiveData<>();
 
     public ProgressLogRepository() {
         this.apiService = Client.getInstance().create(ApiService.class);
@@ -123,5 +124,30 @@ public class ProgressLogRepository {
 
     public MutableLiveData<Boolean> getIsCreateSuccess() {
         return isCreateSuccess;
+    }
+
+    public void getProgressLogById(String logId) {
+        Call<ProgressLog> call = progressLogService.getProgressLogById(logId);
+        call.enqueue(new Callback<ProgressLog>() {
+            @Override
+            public void onResponse(Call<ProgressLog> call, Response<ProgressLog> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    getProgressLogById.setValue(response.body());
+                } else {
+                    Log.e("API_ERROR", "Lỗi khi lấy ProgressLog:");
+                    getProgressLogById.setValue(null);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ProgressLog> call, Throwable t) {
+                Log.e("API_FAILURE", "Không thể gọi API getProgressLogById()", t);
+                getProgressLogById.setValue(null);
+            }
+        });
+    }
+
+    public MutableLiveData<ProgressLog> getGetProgressLogById() {
+        return getProgressLogById;
     }
 }

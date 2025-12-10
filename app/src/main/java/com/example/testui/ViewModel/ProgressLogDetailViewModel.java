@@ -5,14 +5,17 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.OpenableColumns;
 
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.testui.R;
 import com.example.testui.Supabase.UploadManage;
 import com.example.testui.model.Attachment;
+import com.example.testui.model.ProgressLog;
 import com.example.testui.model.Status;
 import com.example.testui.model.UploadAttachment;
 import com.example.testui.repository.AttrachmentRepository;
+import com.example.testui.repository.ProgressLogRepository;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -23,10 +26,16 @@ import java.util.List;
 public class ProgressLogDetailViewModel extends ViewModel {
     Context context;
     AttrachmentRepository attrachmentRepository;
+    MutableLiveData<Boolean> isUploadSuccess;
+    ProgressLogRepository progressLogRepository;
+    MutableLiveData<ProgressLog> getProgressLogById;
 
     public ProgressLogDetailViewModel(Context context) {
         this.context = context;
         attrachmentRepository = new AttrachmentRepository(context);
+        progressLogRepository = new ProgressLogRepository();
+        isUploadSuccess = attrachmentRepository.getIsUploadSuccess();
+        getProgressLogById = progressLogRepository.getGetProgressLogById();
     }
 
     public Status loadStatusProgress(String status) {
@@ -103,5 +112,17 @@ public class ProgressLogDetailViewModel extends ViewModel {
 
     public void uploadProgressLogAttachment(Attachment attachment) {
         attrachmentRepository.uploadAttachment(attachment);
+    }
+
+    public MutableLiveData<Boolean> getIsUploadSuccess() {
+        return isUploadSuccess;
+    }
+
+    public void getProgressLogById(String logId) {
+        progressLogRepository.getProgressLogById(logId);
+    }
+
+    public MutableLiveData<ProgressLog> getGetProgressLogById() {
+        return getProgressLogById;
     }
 }

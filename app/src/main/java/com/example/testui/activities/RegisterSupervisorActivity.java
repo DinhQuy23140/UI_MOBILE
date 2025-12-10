@@ -20,6 +20,7 @@ import com.example.testui.adapter.SupervisorAutoAdapter;
 import com.example.testui.databinding.ActivityDangKiGvhdactivityBinding;
 import com.example.testui.model.AcademyYear;
 import com.example.testui.model.AssignmentSupervisor;
+import com.example.testui.model.Project;
 import com.example.testui.model.ProjectTerm;
 import com.example.testui.model.Status;
 import com.example.testui.model.Supervisor;
@@ -27,6 +28,7 @@ import com.example.testui.model.Teacher;
 import com.example.testui.model.User;
 import com.example.testui.untilities.Constants;
 import com.example.testui.untilities.formatter.AcademyYearFormatter;
+import com.example.testui.untilities.formatter.ProjectFormatter;
 import com.example.testui.untilities.formatter.ProjectTermFormatter;
 import com.example.testui.untilities.formatter.TeacherFormatter;
 import com.example.testui.untilities.formatter.UserFormatter;
@@ -97,6 +99,8 @@ public class RegisterSupervisorActivity extends AppCompatActivity {
             if (assignment != null) {
                 Log.d("Assignment_id", String.valueOf(assignment.getId()));
                 assignmentID = assignment.getId();
+                Project project = ProjectFormatter.format(assignment.getProject());
+                binding.tvTenDeTai.setText(project.getName());
             }
         });
 
