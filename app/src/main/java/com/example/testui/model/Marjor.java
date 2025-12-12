@@ -1,5 +1,7 @@
 package com.example.testui.model;
 
+import androidx.annotation.NonNull;
+
 public class Marjor {
     String id, code, name, description;
     Department department;
@@ -53,5 +55,11 @@ public class Marjor {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return code + " " + name;
     }
 }

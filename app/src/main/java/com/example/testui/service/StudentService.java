@@ -1,5 +1,6 @@
 package com.example.testui.service;
 
+import com.example.testui.model.Marjor;
 import com.example.testui.model.Student;
 
 import java.util.List;
@@ -31,4 +32,6 @@ public interface StudentService {
     @DELETE("students/{studentId}")
     Call<Student> deleteStudent(@Path("studentId") String studentId);
 
+    @GET("marjors")
+    Call<List<Marjor>> loadMarjors();
 }

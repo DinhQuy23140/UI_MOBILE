@@ -5,6 +5,9 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -31,6 +34,7 @@ import com.example.testui.untilities.formatter.StudentFormatter;
 import com.example.testui.untilities.formatter.UserFormatter;
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -39,6 +43,8 @@ public class UpdateInforPersonActivity extends AppCompatActivity {
 
     HomeViewModel homeViewModel;
     ActivityCapNhapThongTinBinding binding;
+    ArrayAdapter<Marjor> marjorAdapter;
+    String marjorId = "";
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +99,15 @@ public class UpdateInforPersonActivity extends AppCompatActivity {
             datePickerDialog.show();
         });
 
+        binding.tvSvMajor.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Marjor marjor = (Marjor) parent.getItemAtPosition(position);
+                binding.tvSvMajor.setText(marjor.toString());
+                marjorId = marjor.getId();
+            }
+        });
+
         binding.btnSave.setOnClickListener(save -> {
             String user_Id = homeViewModel.getUserId();
             String student_id = homeViewModel.getStudentId();
@@ -103,7 +118,6 @@ public class UpdateInforPersonActivity extends AppCompatActivity {
             String phone = binding.tvSvPhone.getText().toString();
             String address = binding.tvSvAddress.getText().toString();
             String class_code = binding.tvSvClass.getText().toString();
-            String marjor_id = binding.tvSvMajor.getText().toString();
             Map<String, String> body = new HashMap<>();
             body.put(Constants.KEY_USER_ID, user_Id);
             body.put(Constants.KEY_STUDENT_ID, student_id);
@@ -113,7 +127,7 @@ public class UpdateInforPersonActivity extends AppCompatActivity {
             body.put(Constants.KEY_PHONE, phone);
             body.put(Constants.KEY_ADDRESS, address);
             body.put(Constants.KEY_CLASS_CODE, class_code);
-            body.put(Constants.KEY_MAJOR_ID, marjor_id);
+            body.put(Constants.KEY_MAJOR_ID, marjorId);
             homeViewModel.updateInfStudent(student_id, body);
         });
     }
@@ -139,12 +153,15 @@ public class UpdateInforPersonActivity extends AppCompatActivity {
                 binding.tvSvClass.setText(student.getClass_code() );
                 Marjor marjor = MarjorFormatter.format(student.getMarjor());
                 binding.tvSvMajor.setText(marjor.getCode() + " - " + marjor.getName());
+                marjorId = marjor.getId();
                 Department department = DepartmentFormatter.format(marjor.getDepartment());
                 Faculties faculties = FacultiesFormatter.format(department.getFaculties());
                 binding.tvSvDepartment.setText(faculties.getCode() + " - " + faculties.getName());
                 binding.tvAccountEmail.setText(user.getEmail());
             }
         });
+
+        homeViewModel.loadAllMarjor();
     }
 
     void observed() {
@@ -154,6 +171,11 @@ public class UpdateInforPersonActivity extends AppCompatActivity {
             } else {
                 Toast.makeText(this, "Có lỗi xảy ra", Toast.LENGTH_SHORT).show();
             }
+        });
+
+        homeViewModel.getListMarjor().observe(this, result -> {
+            marjorAdapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, result);
+            binding.tvSvMajor.setAdapter(marjorAdapter);
         });
     }
 }

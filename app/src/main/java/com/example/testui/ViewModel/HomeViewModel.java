@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.testui.R;
 import com.example.testui.model.Assignment;
+import com.example.testui.model.Marjor;
 import com.example.testui.model.ProgressLog;
 import com.example.testui.model.StageTimeline;
 import com.example.testui.repository.SinhVienRepository;
@@ -26,10 +27,12 @@ public class HomeViewModel extends ViewModel {
     MutableLiveData<String> studentId = new MutableLiveData<>();
     MutableLiveData<Assignment> recentAssignment;
     MutableLiveData<Boolean> isUpdateSuccess = new MutableLiveData<>();
+    MutableLiveData<List<Marjor>> listMarjor = new MutableLiveData<>();
     private SinhVienRepository sinhVienRepository;
     public HomeViewModel(Context context) {
         this.sinhVienRepository = new SinhVienRepository(context);
         isUpdateSuccess = sinhVienRepository.getIsUpdateSuccess();
+        listMarjor = sinhVienRepository.getListMarjors();
     }
 
     public MutableLiveData<Student> getGetStudent() {
@@ -131,5 +134,13 @@ public class HomeViewModel extends ViewModel {
 
     public MutableLiveData<Boolean> getIsUpdateSuccess() {
         return isUpdateSuccess;
+    }
+
+    public void loadAllMarjor() {
+        sinhVienRepository.getAllMajor();
+    }
+
+    public MutableLiveData<List<Marjor>> getListMarjor() {
+        return listMarjor;
     }
 }
