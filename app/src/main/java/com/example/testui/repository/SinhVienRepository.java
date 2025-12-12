@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.testui.client.Client;
 import com.example.testui.model.Assignment;
 import com.example.testui.model.LoginResponse;
+import com.example.testui.model.Marjor;
 import com.example.testui.model.Student;
 import com.example.testui.model.Supervisor;
 import com.example.testui.model.Teacher;
@@ -50,6 +51,7 @@ public class SinhVienRepository {
     MutableLiveData<Boolean> isResetPasswordSuccess = new MutableLiveData<>();
     MutableLiveData<Boolean> isChangePasswordSuccess = new MutableLiveData<>();
     MutableLiveData<Boolean> isUpdateSuccess = new MutableLiveData<>();
+    MutableLiveData<List<Marjor>> listMarjors = new MutableLiveData<>();
     SharePreferenceManage sharePreferenceManage;
     // private constructor : singleton access
     public SinhVienRepository(Context context) {
@@ -403,5 +405,29 @@ public class SinhVienRepository {
 
     public MutableLiveData<Boolean> getIsUpdateSuccess() {
         return isUpdateSuccess;
+    }
+
+    public void getAllMajor() {
+        Call<List<Marjor>> call = studentService.loadMarjors();
+        call.enqueue(new Callback<List<Marjor>>() {
+            @Override
+            public void onResponse(Call<List<Marjor>> call, Response<List<Marjor>> response) {
+                if (response.isSuccessful()) {
+                    listMarjors.setValue(response.body());
+                    Log.d("API_SUCCESS", response.toString());
+                } else {
+                    Log.e("API_ERROR", "Response not successful: " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Marjor>> call, Throwable throwable) {
+                Log.e("API_ERROR", "Throwable " + throwable);
+            }
+        });
+    }
+
+    public MutableLiveData<List<Marjor>> getListMarjors() {
+        return listMarjors;
     }
 }

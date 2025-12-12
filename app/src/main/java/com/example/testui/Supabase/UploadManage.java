@@ -53,7 +53,7 @@ public class UploadManage {
                 bearerToken,
                 apikey,
                 bucket,
-                storagePath, // 👈 thay vì chỉ là file_name
+                storagePath,
                 multipartBody
         );
 

@@ -576,7 +576,7 @@
                                 android:src="@drawable/ic_major"
                                 app:tint="#4ECDC4" />
 
-                            <EditText
+                            <AutoCompleteTextView
                                 android:id="@+id/tv_sv_major"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
