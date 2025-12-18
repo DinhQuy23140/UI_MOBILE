@@ -199,8 +199,8 @@ public class ProgressLogDetailActivity extends AppCompatActivity {
         Status instructorStatus = progressLogDetailViewModel.loadInstructorStatus(progressLog.getInstructor_status());
         binding.tvInstructorStatus.setText("Trạng thái: " + instructorStatus.getStrStatus());
         binding.tvInstructorStatus.setBackground(getDrawable(instructorStatus.getBackgroundColor()));
-        String comment = (progressLog.getInstructor_comment() != null && !progressLog.getInstructor_comment().isEmpty()) ? progressLog.getInstructor_comment() : "Chưa có nhận xét";
-        binding.tvInstructorComment.setText(comment);
+//        String comment = (progressLog.getInstructor_comment() != null && !progressLog.getInstructor_comment().isEmpty()) ? progressLog.getInstructor_comment() : "Chưa có nhận xét";
+//        binding.tvInstructorComment.setText(comment);
         if (!progressLog.getAttachments().isEmpty()) {
             binding.tvAttachmentCount.setText(progressLog.getAttachments().size() + " file");
             adapter.updateData(progressLog.getAttachments());
@@ -219,9 +219,10 @@ public class ProgressLogDetailActivity extends AppCompatActivity {
     void observer(){
         progressLogDetailViewModel.getIsUploadSuccess().observe(this, isUploadSuccess -> {
             if (isUploadSuccess) {
-                Toast.makeText(this, "Upload thành công", Toast.LENGTH_SHORT).show();
+                progressLogDetailViewModel.getProgressLogById(progressLogId);
+                Toast.makeText(this, "Nộp báo cáo thành công", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this, "Upload thất bại", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Có lỗi xảy ra, vui lòng thử lại", Toast.LENGTH_SHORT).show();
             }
         });
         progressLogDetailViewModel.getGetProgressLogById().observe(this, result -> {

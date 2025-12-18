@@ -108,6 +108,21 @@ public class UpdateInforPersonActivity extends AppCompatActivity {
             }
         });
 
+        binding.tvSvMajor.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus && binding.tvSvMajor.getText().toString().isEmpty()) {
+                    binding.tvSvMajor.showDropDown();
+                }
+            }
+        });
+
+        binding.tvSvMajor.setOnClickListener(v -> {
+            binding.tvSvMajor.showDropDown();
+        });
+
+        binding.tvSvMajor.setThreshold(0);
+
         binding.btnSave.setOnClickListener(save -> {
             String user_Id = homeViewModel.getUserId();
             String student_id = homeViewModel.getStudentId();

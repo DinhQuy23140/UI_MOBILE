@@ -1,18 +1,32 @@
 package com.example.testui.ViewModel;
 
+import android.content.Context;
+
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.testui.R;
+import com.example.testui.model.Assignment;
 import com.example.testui.model.AssignmentSupervisor;
 import com.example.testui.model.CouncilsMember;
 import com.example.testui.model.Status;
 import com.example.testui.model.Supervisor;
+import com.example.testui.repository.AssignmentRepository;
+import com.example.testui.repository.SinhVienRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TraCuuHoiDongViewModel extends ViewModel {
-    public TraCuuHoiDongViewModel() {
+    AssignmentRepository assignmentRepository;
+    SinhVienRepository sinhVienRepository;
+    MutableLiveData<Assignment> getAssignmentByStudentIdAndTermIdMutableLiveData;
+    Context context;
+    public TraCuuHoiDongViewModel(Context context) {
+        this.context = context;
+        assignmentRepository = new AssignmentRepository();
+        sinhVienRepository = new SinhVienRepository(context);
+        getAssignmentByStudentIdAndTermIdMutableLiveData = assignmentRepository.getAssignmentByStudentIdAndTermId();
     }
 
     public List<Supervisor> convertListSupervisor(List<CouncilsMember> listCouncilMember) {
@@ -48,5 +62,14 @@ public class TraCuuHoiDongViewModel extends ViewModel {
             default:
                 return new Status(R.drawable.bg_badge_uy_vien, "Ủy viên hội đồng");
         }
+    }
+
+    public void loadAssignment(String termId) {
+        String studenId = sinhVienRepository.getStudentId();
+        assignmentRepository.loadAssignmentByStudentIdAndTermId(studenId, termId);
+    }
+
+    public MutableLiveData<Assignment> getGetAssignmentByStudentIdAndTermIdMutableLiveData() {
+        return getAssignmentByStudentIdAndTermIdMutableLiveData;
     }
 }

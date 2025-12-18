@@ -615,24 +615,6 @@
                                 tools:listitem="@layout/item_comment_log"
                                 tools:itemCount="1"/>
 
-                            <TextView
-                                android:id="@+id/tvInstructorComment"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:lineSpacingExtra="2dp"
-                                android:text="-"
-                                android:textColor="#666666"
-                                android:textSize="11sp" />
-
-                            <TextView
-                                android:id="@+id/tv_supervisor_comment"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="6dp"
-                                android:gravity="end"
-                                android:textColor="#999999"
-                                android:textSize="9sp"
-                                android:textStyle="italic" />
                         </LinearLayout>
                     </LinearLayout>
 
