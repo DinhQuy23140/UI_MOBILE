@@ -26,6 +26,7 @@ import com.example.testui.model.CouncilProject;
 import com.example.testui.model.CouncilsMember;
 import com.example.testui.model.Department;
 import com.example.testui.model.Project;
+import com.example.testui.model.ProjectTerm;
 import com.example.testui.model.Status;
 import com.example.testui.model.Supervisor;
 import com.example.testui.model.Teacher;
@@ -38,6 +39,7 @@ import com.example.testui.untilities.formatter.CouncilsMemberFormatter;
 import com.example.testui.untilities.formatter.DateFormatter;
 import com.example.testui.untilities.formatter.DepartmentFormatter;
 import com.example.testui.untilities.formatter.ProjectFormatter;
+import com.example.testui.untilities.formatter.ProjectTermFormatter;
 import com.example.testui.untilities.formatter.SupervisorFormatter;
 import com.example.testui.untilities.formatter.TeacherFormatter;
 import com.example.testui.untilities.formatter.UserFormatter;
@@ -48,8 +50,9 @@ import java.util.List;
 
 public class TraCuuHoiDongActivity extends AppCompatActivity {
     Intent intent;
-    String strAssignment = "";
+    String strAssignment = "", strProjectTerm = "";
     Assignment assignment;
+    ProjectTerm projectTerm;
     Gson gson;
     ActivityTraCuuHoiDongBinding binding;
     CouncilsMemberAdapter councilsMemberAdapter;
@@ -71,9 +74,9 @@ public class TraCuuHoiDongActivity extends AppCompatActivity {
         });
 
         init();
-        loadData();
-        setupRecyclerView();
-        loadDataRecyclerView();
+//        loadData();
+        callApi();
+        observeData();
     }
 
     void init() {
@@ -81,7 +84,24 @@ public class TraCuuHoiDongActivity extends AppCompatActivity {
         gson = new Gson();
         traCuuHoiDongViewModel = new TraCuuHoiDongViewModelFactory(this).create(TraCuuHoiDongViewModel.class);
         strAssignment = intent.getStringExtra(Constants.KEY_ASSIGNMENT);
-        assignment = AssignmentFormatter.format(gson.fromJson(strAssignment, Assignment.class));
+        strProjectTerm = intent.getStringExtra(Constants.KEY_PROJECT_TERM);
+        projectTerm = ProjectTermFormatter.format(gson.fromJson(strProjectTerm,ProjectTerm.class));
+//        assignment = AssignmentFormatter.format(gson.fromJson(strAssignment, Assignment.class));
+    }
+
+    void callApi() {
+        traCuuHoiDongViewModel.loadAssignment(projectTerm.getId());
+    }
+
+    void observeData() {
+        traCuuHoiDongViewModel.getGetAssignmentByStudentIdAndTermIdMutableLiveData().observe(this, result -> {
+            if (result != null) {
+                assignment = AssignmentFormatter.format(result);
+                loadData();
+                setupRecyclerView();
+                loadDataRecyclerView();
+            }
+        });
     }
 
     @SuppressLint("SetTextI18n")
@@ -124,9 +144,8 @@ public class TraCuuHoiDongActivity extends AppCompatActivity {
         });
         binding.rvCouncilMembers.setAdapter(councilsMemberAdapter);
 
-        listBaseSupervisor = traCuuHoiDongViewModel.convertListBaseSupervisor(assignment.getAssignment_supervisors());
         binding.rvSupervisor.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        baseGVHDAdapter = new BaseGVHDAdapter(this, listBaseSupervisor, position -> {
+        baseGVHDAdapter = new BaseGVHDAdapter(this, new ArrayList<>(), position -> {
 
         });
         binding.rvSupervisor.setAdapter(baseGVHDAdapter);
@@ -142,6 +161,7 @@ public class TraCuuHoiDongActivity extends AppCompatActivity {
             binding.tvEmptyCouncilMember.setVisibility(View.VISIBLE);
         }
 
+        listBaseSupervisor = traCuuHoiDongViewModel.convertListBaseSupervisor(assignment.getAssignment_supervisors());
         if (!listBaseSupervisor.isEmpty()) {
             baseGVHDAdapter.updateData(listBaseSupervisor);
             binding.rvSupervisor.setVisibility(View.VISIBLE);

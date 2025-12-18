@@ -19,7 +19,7 @@ public class TraCuuHoiDongViewModelFactory implements ViewModelProvider.Factory 
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
         if (modelClass.isAssignableFrom(TraCuuHoiDongViewModel.class)) {
-            return (T) new TraCuuHoiDongViewModel();
+            return (T) new TraCuuHoiDongViewModel(context);
         }
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
     }

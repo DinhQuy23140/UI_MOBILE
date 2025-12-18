@@ -261,9 +261,10 @@ public class NopDeCuongActivity extends AppCompatActivity {
     void observerData() {
         nopDeCuongViewModel.getIsCreateSuccess().observe(this, result -> {
             if (result) {
-                Toast.makeText(context, "Upload thành công", Toast.LENGTH_SHORT).show();
+                fetchDataRecyclerView();
+                Toast.makeText(context, "Nộp đề cương thành công", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(context, "Upload thất bại", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Có lỗi xảy ra, vui lòng thử lại", Toast.LENGTH_SHORT).show();
             }
         });
     }

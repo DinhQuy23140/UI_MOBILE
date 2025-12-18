@@ -242,9 +242,10 @@ public class NopBaoCaoActivity extends AppCompatActivity {
     void observerData() {
         nopBaoCaoViewModel.getIsCreateSuccess().observe(this, result -> {
             if (result) {
-                Toast.makeText(context, "Upload thành công", Toast.LENGTH_SHORT).show();
+                fetchDataRecyclerView();
+                Toast.makeText(context, "Nộp báo cáo thành công", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(context, "Upload cáo thất bại", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Có lỗi xảy ra, vui lòng thử lại", Toast.LENGTH_SHORT).show();
             }
         });
     }
