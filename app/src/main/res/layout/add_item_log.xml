@@ -47,7 +47,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_weight="1"
                     android:letterSpacing="0.02"
-                    android:text="Nhật ký #1"
+                    android:text="Tạo nhật ký đồ án"
                     android:textColor="#1A237E"
                     android:textSize="20sp"
                     android:textStyle="bold" />
